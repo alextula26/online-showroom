@@ -4,8 +4,8 @@ import modelsRedusers from './modelsReduser';
 import brandsReduser from './brandsReduser';
 
 const redusers = combineReducers({
-    brands: brandsReduser,
-    models: modelsRedusers,
+  brands: brandsReduser,
+  models: modelsRedusers,
 });
 
 export default createStore(redusers, applyMiddleware(thunkMiddleware));
