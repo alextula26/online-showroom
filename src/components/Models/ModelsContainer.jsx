@@ -4,14 +4,12 @@ import Models from './Models';
 import { fetchModels } from '../../redusers/modelsReduser';
 import { fetchBrands } from '../../redusers/brandsReduser';
 
-class ModelsContainer extends React.Component {    
+class ModelsContainer extends React.Component {
     componentDidMount() {
-        this.props.fetchBrands();      
-
-
+        this.props.fetchBrands();
         this.props.fetchModels();
-    }    
-    
+    }
+
     render() {
         const { models, brands } = this.props;
         console.log('brands', brands);
@@ -22,12 +20,9 @@ class ModelsContainer extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-
-    return {
+const mapStateToProps = (state) => ({
     brands: state.brands,
     models: state.models,
-}};
+});
 
 export default connect(mapStateToProps, { fetchModels, fetchBrands })(ModelsContainer);
-

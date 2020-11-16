@@ -10,7 +10,9 @@ const modelsReduser = handleActions({
 }, []);
 
 export const fetchModels = () => async (dispatch) => {
-    const models = await API.getModels();
+    const [brands] = await API.getBrands();
+    const { id } = brands;    
+    const models = await API.getModels(id);
     dispatch(fetchModelsSuccess({ models }));
 }
 

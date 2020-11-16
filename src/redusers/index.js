@@ -8,5 +8,4 @@ const redusers = combineReducers({
     models: modelsRedusers,
 });
 
-
 export default createStore(redusers, applyMiddleware(thunkMiddleware));

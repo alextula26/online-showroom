@@ -12,8 +12,8 @@ const API = {
     getBrands: () => (
         instance.get('/brands').then((responce) => responce.data.items)
     ),
-    getModels: () => (
-        instance.get(`/brands/${119}/models`).then((responce) => responce.data.items)
+    getModels: (brandId) => (
+        instance.get(`/brands/${brandId}/models`).then((responce) => responce.data.items)
     ),
 };
 
