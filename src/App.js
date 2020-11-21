@@ -1,9 +1,10 @@
 import React from 'react';
-import './App.css';
 import ModelsContainer from './components/Models/ModelsContainer';
 
 const App = () => (
-  <ModelsContainer />
+  <div className="container">
+    <ModelsContainer />
+  </div>
 );
 
 export default App;

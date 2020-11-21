@@ -1,0 +1,41 @@
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.model-list {
+
+  .model-list-item-outer {
+    margin-bottom: 35px;
+  }
+}
+
+.filter-footer-action {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .btn--show {
+    border: none;
+    font-size: .875rem;
+    text-transform: none;
+  }  
+
+  .btn--show-counter {
+    font-size: 2.25rem;
+    padding: 0 10px;
+    vertical-align: middle;
+  }   
+}
