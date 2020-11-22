@@ -5,6 +5,7 @@ import { isEqual } from '../../utils';
 import { fetchModels } from '../../redusers/modelsReduser';
 import { fetchBrands } from '../../redusers/brandsReduser';
 import { fetchDealers } from '../../redusers/dealersReduser';
+import { filteredModelsSelector } from '../../selectors';
 
 class ModelsContainer extends React.Component {
   componentDidMount() {
@@ -34,7 +35,7 @@ class ModelsContainer extends React.Component {
 const mapStateToProps = (state) => ({
   dealers: state.dealers,
   brands: state.brands,
-  models: state.models,
+  models: filteredModelsSelector(state),
 });
 
 export default connect(
