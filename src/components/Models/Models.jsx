@@ -29,10 +29,6 @@ class Models extends React.Component {
   render() {
     const { brands, models } = this.props;
 
-    if (brands.length === 0) {
-      return null;
-    }
-
     if (models.length === 0) {
       return null;
     }

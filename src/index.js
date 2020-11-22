@@ -1,22 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import OnlineShowroomApp from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './redusers';
 import './index.scss';
-import App from './App';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>,
+  <OnlineShowroomApp />,
   document.getElementById('root'),
 );
-
-window.store = store;
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

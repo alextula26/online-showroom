@@ -3,24 +3,15 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Models from './Models';
-import { isEqual } from '../../utils';
 import { fetchModels } from '../../redusers/modelsReduser';
-import { fetchBrands } from '../../redusers/brandsReduser';
 import { fetchDealers } from '../../redusers/dealersReduser';
 import { filteredModelsSelector } from '../../selectors';
 
 class ModelsContainer extends React.Component {
   componentDidMount() {
-    // this.props.fetchDealers();
-    this.props.fetchBrands();
-  }
-
-  componentDidUpdate(prevProps) {
     const { brands } = this.props;
-    if (!isEqual(brands, prevProps.brands)) {
-      const [{ id }] = brands;
-      this.props.fetchModels(id);
-    }
+    const [{ id }] = brands;
+    this.props.fetchModels(id);
   }
 
   render() {
@@ -42,7 +33,7 @@ const mapStateToProps = (state) => ({
 
 export default compose(
   connect(mapStateToProps, {
-    fetchModels, fetchBrands, fetchDealers,
+    fetchModels, fetchDealers,
   }),
   withRouter,
 )(ModelsContainer);

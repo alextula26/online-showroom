@@ -1,30 +1,61 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import {
+  withRouter, BrowserRouter, Switch, Route,
+} from 'react-router-dom';
+import { compose } from 'redux';
+import { Provider, connect } from 'react-redux';
+import store from './redusers';
 import ModelsContainer from './components/Models/ModelsContainer';
+import { fetchBrands } from './redusers/brandsReduser';
 import ListNewCarsContainer from './components/ListNewCars/ListNewCarsContainer';
 
-const getMainPageType = (type) => {
-  const MainPageType = {
-    listModelsForBrand: <ModelsContainer />,
-    listNewCars: <ListNewCarsContainer />,
-  };
+class App extends React.Component {
+  getMainPageComponent = (type) => {
+    const MainPageType = {
+      listModelsForBrand: <ModelsContainer />,
+      listNewCars: <ListNewCarsContainer />,
+    };
 
-  return MainPageType[type];
-};
+    return MainPageType[type];
+  }
 
-const App = () => {
-  const type = 'listModelsForBrand';
+  componentDidMount() {
+    this.props.fetchBrands();
+  }
 
-  return (
-    <div className="container">
-      <Switch>
-        {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
-        <Route exact path='/' render={() => getMainPageType(type)} />
-        <Route path='/models/:modelId?' render={() => <ModelsContainer />} />
-        <Route path='*' render={() => <div>404 Filenot found</div>} />
-      </Switch>
-    </div>
-  );
-};
+  render() {
+    const { mainPageType, brands } = this.props;
 
-export default App;
+    if (brands.length === 0) {
+      return null;
+    }
+
+    return (
+      <div className="container">
+        <Switch>
+          {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
+          <Route exact path='/' render={() => this.getMainPageComponent(mainPageType)} />
+          <Route path='/models/:brandId?' render={() => <ModelsContainer />} />
+          <Route path='*' render={() => <div>404 Filenot found</div>} />
+        </Switch>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  mainPageType: 'listModelsForBrand',
+  brands: state.brands,
+});
+
+const AppContainer = compose(connect(mapStateToProps, { fetchBrands }), withRouter)(App);
+
+const OnlineShowroomApp = () => (
+  <BrowserRouter>
+    <Provider store={store}>
+      <AppContainer key="app" />
+    </Provider>
+  </BrowserRouter>
+);
+
+export default OnlineShowroomApp;
