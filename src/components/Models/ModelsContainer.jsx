@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Models from './Models';
 import { isEqual } from '../../utils';
@@ -38,7 +40,9 @@ const mapStateToProps = (state) => ({
   models: filteredModelsSelector(state),
 });
 
-export default connect(
-  mapStateToProps,
-  { fetchModels, fetchBrands, fetchDealers },
+export default compose(
+  connect(mapStateToProps, {
+    fetchModels, fetchBrands, fetchDealers,
+  }),
+  withRouter,
 )(ModelsContainer);
