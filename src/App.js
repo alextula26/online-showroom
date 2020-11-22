@@ -7,13 +7,13 @@ import { Provider, connect } from 'react-redux';
 import store from './redusers';
 import ModelsContainer from './components/Models/ModelsContainer';
 import { fetchBrands } from './redusers/brandsReduser';
-import ListNewCarsContainer from './components/ListNewCars/ListNewCarsContainer';
+import ListAllNewCarsContainer from './components/ListAllNewCars/ListAllNewCarsContainer';
 
 class App extends React.Component {
   getMainPageComponent = (type) => {
     const MainPageType = {
-      listModelsForBrand: <ModelsContainer />,
-      listNewCars: <ListNewCarsContainer />,
+      listModelsByBrand: <ModelsContainer />,
+      listAllNewCars: <ListAllNewCarsContainer />,
     };
 
     return MainPageType[type];
@@ -44,7 +44,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  mainPageType: 'listModelsForBrand',
+  mainPageType: 'listModelsByBrand',
   brands: state.brands,
 });
 

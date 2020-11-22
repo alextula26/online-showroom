@@ -8,10 +8,18 @@ import { fetchDealers } from '../../redusers/dealersReduser';
 import { filteredModelsSelector } from '../../selectors';
 
 class ModelsContainer extends React.Component {
-  componentDidMount() {
+  getBrandId() {
     const { brands } = this.props;
     const [{ id }] = brands;
-    this.props.fetchModels(id);
+    return id;
+  }
+
+  componentDidMount() {
+    const brandId = this.props.match.params.brandId
+      ? this.props.match.params.brandId
+      : this.getBrandId();
+
+    this.props.fetchModels(brandId);
   }
 
   render() {
