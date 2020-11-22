@@ -5,8 +5,9 @@ import {
 import { compose } from 'redux';
 import { Provider, connect } from 'react-redux';
 import store from './redusers';
-import ModelsContainer from './components/Models/ModelsContainer';
 import { fetchBrands } from './redusers/brandsReduser';
+import ModelsContainer from './components/Models/ModelsContainer';
+import CarsContainer from './components/Cars/CarsContainer';
 import ListAllNewCarsContainer from './components/ListAllNewCars/ListAllNewCarsContainer';
 
 class App extends React.Component {
@@ -35,7 +36,8 @@ class App extends React.Component {
         <Switch>
           {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
           <Route exact path='/' render={() => this.getMainPageComponent(mainPageType)} />
-          <Route path='/models/:brandId?' render={() => <ModelsContainer />} />
+          <Route exact path='/models/:brandId?' render={() => <ModelsContainer />} />
+          <Route exact path='/models/:brandId/cars/:modelId?' render={() => <CarsContainer />} />
           <Route path='*' render={() => <div>404 Filenot found</div>} />
         </Switch>
       </div>
