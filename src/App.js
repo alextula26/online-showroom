@@ -11,17 +11,16 @@ import CarsContainer from './components/Cars/CarsContainer';
 import ListAllNewCarsContainer from './components/ListAllNewCars/ListAllNewCarsContainer';
 
 class App extends React.Component {
+  componentDidMount() {
+    fetchBrands();
+  }
+
   getMainPageComponent = (type) => {
-    const MainPageType = {
+    const mainPageType = {
       listModelsByBrand: <ModelsContainer />,
       listAllNewCars: <ListAllNewCarsContainer />,
     };
-
-    return MainPageType[type];
-  }
-
-  componentDidMount() {
-    this.props.fetchBrands();
+    return mainPageType[type];
   }
 
   render() {
@@ -35,10 +34,10 @@ class App extends React.Component {
       <div className="container">
         <Switch>
           {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
-          <Route exact path='/' render={() => this.getMainPageComponent(mainPageType)} />
-          <Route exact path='/models/:brandId?' render={() => <ModelsContainer />} />
-          <Route exact path='/models/:brandId/cars/:modelId?' render={() => <CarsContainer />} />
-          <Route path='*' render={() => <div>404 Filenot found</div>} />
+          <Route exact path="/" render={() => this.getMainPageComponent(mainPageType)} />
+          <Route exact path="/models/:brandId?" render={() => <ModelsContainer />} />
+          <Route exact path="/models/:brandId/cars/:modelId?" render={() => <CarsContainer />} />
+          <Route path="*" render={() => <div>404 Filenot found</div>} />
         </Switch>
       </div>
     );
@@ -50,7 +49,7 @@ const mapStateToProps = (state) => ({
   brands: state.brands,
 });
 
-const AppContainer = compose(connect(mapStateToProps, { fetchBrands }), withRouter)(App);
+const AppContainer = compose(connect(mapStateToProps), withRouter)(App);
 
 const OnlineShowroomApp = () => (
   <BrowserRouter>
