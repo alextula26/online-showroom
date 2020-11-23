@@ -21,6 +21,9 @@ const API = {
   getModels: (brandId) => (
     instance.get(`/brands/${brandId}/models`).then((responce) => responce.data.items)
   ),
+  getCars: (modelId) => (
+    instance.get(`/models/${modelId}/vehicles`).then((responce) => responce.data.items)
+  ),
 };
 
 export default API;

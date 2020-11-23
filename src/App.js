@@ -35,8 +35,8 @@ class App extends React.Component {
         <Switch>
           {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
           <Route exact path="/" render={() => this.getMainPageComponent(mainPageType)} />
-          <Route exact path="/models/:brandId?" render={() => <ModelsContainer />} />
-          <Route exact path="/models/:brandId/cars/:modelId?" render={() => <CarsContainer />} />
+          <Route exact path="/catalog/:brandId?" render={() => <ModelsContainer />} />
+          <Route exact path="/catalog/:brandId/model/:modelId?" render={() => <CarsContainer />} />
           <Route path="*" render={() => <div>404 Filenot found</div>} />
         </Switch>
       </div>

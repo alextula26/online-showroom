@@ -1,22 +1,29 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Cars from './Cars';
+import { fetchCars } from '../../redusers/carsReducer';
 
 class CarsContainer extends React.Component {
+  componentDidMount() {
+    const { modelId } = this.props.match.params;
+    this.props.fetchCars(modelId);
+  }
+
   render() {
-    console.log(this.props);
+    const { cars } = this.props;
     return (
-      <Cars cars={this.props.cars} />
+      <Cars cars={cars} />
     );
   }
 }
 
-const mapStateToProps = () => ({
-  cars: [
-    { id: 1, modification_name: '1.6 T5 Drive-E MT AWD (5 мест) (150 л.с.)', vin: 'YV1LC08ACM1452344' },
-    { id: 2, modification_name: '2.0 T5 Drive-E AT AWD (7 мест) (249 л.с.)', vin: 'YV1LC08ACM1642363' },
-    { id: 3, modification_name: '3.2 T5 Drive-E MT AWD (5 мест) (320 л.с.)', vin: 'YV1LC08ACM1257841' },
-  ],
+const mapStateToProps = (state) => ({
+  cars: state.cars,
 });
 
-export default connect(mapStateToProps)(CarsContainer);
+export default compose(
+  connect(mapStateToProps, { fetchCars }),
+  withRouter,
+)(CarsContainer);

@@ -19,7 +19,7 @@ class Models extends React.Component {
               <div className="card-body">
                 <h5 className="card-title">{name}</h5>
                 <p className="card-text">{minPrice} руб.</p>
-                <NavLink to="#" className="btn btn-primary">Подробнее</NavLink>
+                <NavLink to={`/catalog/119/model/${id}`} className="btn btn-primary">Подробнее</NavLink>
               </div>
             </div>
           </div>
