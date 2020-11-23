@@ -18,8 +18,10 @@ module.exports = {
     'react',
   ],
   rules: {
-    camelcase: ['error', { ignoreDestructuring: true }],
+    camelcase: ['error', { properties: 'never', ignoreDestructuring: true }],
     'react/prop-types': 0,
     'no-console': 0,
+    'import/no-unresolved': 0,
+    'import/extensions': 0,
   },
 };
