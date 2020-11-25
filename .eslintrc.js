@@ -62,7 +62,9 @@ module.exports = {
     'import/no-unresolved': 0,
     'import/extensions': 0,
     'react/prop-types': 0,
-    camelcase: ['error', { properties: 'never', ignoreDestructuring: true }],
+    camelcase: ['error', {
+      properties: 'never', ignoreDestructuring: true,
+    }],
     'react/prefer-stateless-function': 0,
   },
 };

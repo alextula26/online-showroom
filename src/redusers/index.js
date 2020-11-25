@@ -3,13 +3,13 @@ import thunkMiddleware from 'redux-thunk';
 import modelsRedusers from './modelsReduser';
 import brandsReduser from './brandsReduser';
 import dealersReduser from './dealersReduser';
-import carsReducer from './carsReducer';
+import vehiclesReducer from './vehiclesReducer';
 
 const redusers = combineReducers({
   dealers: dealersReduser,
   brands: brandsReduser,
   models: modelsRedusers,
-  cars: carsReducer,
+  vehicles: vehiclesReducer,
 });
 
 export default createStore(redusers, applyMiddleware(thunkMiddleware));

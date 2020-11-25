@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { getPrice } from '../../utils';
+import { getPriceCurrencyFormat } from '../../utils';
 
 class Models extends React.Component {
   renderModels() {
@@ -11,14 +11,13 @@ class Models extends React.Component {
         const {
           id, name, image, min_price,
         } = model;
-        const minPrice = getPrice(min_price);
         return (
           <div key={id} className="col-lg-6 col-xl-4">
             <div className="card model-list-item-outer">
               <img src={image} className="card-img-top" alt={name} />
               <div className="card-body">
                 <h5 className="card-title">{name}</h5>
-                <p className="card-text">{minPrice} руб.</p>
+                <p className="card-text">{getPriceCurrencyFormat(min_price)} руб.</p>
                 <NavLink to={`/catalog/119/model/${id}`} className="btn btn-primary">Подробнее</NavLink>
               </div>
             </div>
