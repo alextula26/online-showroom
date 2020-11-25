@@ -4,22 +4,21 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Models from './Models';
 import { fetchModels } from '../../redusers/modelsReduser';
-import { fetchDealers } from '../../redusers/dealersReduser';
 import { filteredModelsSelector } from '../../selectors';
 
 class ModelsContainer extends React.Component {
+  componentDidMount() {
+    const { match: { params: { brandId } }, setModels } = this.props;
+
+    const currentBrandId = brandId || this.getBrandId();
+
+    setModels(currentBrandId);
+  }
+
   getBrandId() {
     const { brands } = this.props;
     const [{ id }] = brands;
     return id;
-  }
-
-  componentDidMount() {
-    const brandId = this.props.match.params.brandId
-      ? this.props.match.params.brandId
-      : this.getBrandId();
-
-    this.props.fetchModels(brandId);
   }
 
   render() {
@@ -39,9 +38,11 @@ const mapStateToProps = (state) => ({
   models: filteredModelsSelector(state),
 });
 
+const actionCreators = {
+  setModels: fetchModels,
+};
+
 export default compose(
-  connect(mapStateToProps, {
-    fetchModels, fetchDealers,
-  }),
+  connect(mapStateToProps, actionCreators),
   withRouter,
 )(ModelsContainer);

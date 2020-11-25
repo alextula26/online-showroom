@@ -3,12 +3,12 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Vehicles from './Vehicles';
-import { fetchCars } from '../../redusers/vehiclesReducer';
+import { fetchVehicles } from '../../redusers/vehiclesReducer';
 
 class VehiclesContainer extends React.Component {
   componentDidMount() {
-    const { modelId } = this.props.match.params;
-    this.props.fetchCars(modelId);
+    const { match: { params: { modelId } }, setVehicles } = this.props;
+    setVehicles(modelId);
   }
 
   render() {
@@ -23,7 +23,11 @@ const mapStateToProps = (state) => ({
   vehicles: state.vehicles,
 });
 
+const actionCreators = {
+  setVehicles: fetchVehicles,
+};
+
 export default compose(
-  connect(mapStateToProps, { fetchCars }),
+  connect(mapStateToProps, actionCreators),
   withRouter,
 )(VehiclesContainer);

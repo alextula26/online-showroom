@@ -39,7 +39,8 @@ class Vehicles extends React.Component {
                 <div className="clearfix">
                   <div className="instock-block">
                     <div className="instock-block--button instock-block--button--shipping">
-                      <span className="svg--icon svg--auto" data-grunticon-embed></span>{status.name}
+                      <span className="svg--icon svg--auto" data-grunticon-embed />
+                      {status.name}
                     </div>
                   </div>
                 </div>
@@ -52,10 +53,11 @@ class Vehicles extends React.Component {
                     style={{ width: '100%' }}
                   />
                   {isSpecialPrice(price, specialPrice)
-                    && <div className="vehicle-list-item--discount">
+                    && (
+                    <div className="vehicle-list-item--discount">
                       Цена ниже на {price - specialPrice} руб.
-                  </div>
-                  }
+                    </div>
+                    )}
                 </div>
 
                 <div className="vehicle-list-item--information">
@@ -65,18 +67,23 @@ class Vehicles extends React.Component {
                         ? (
                           <>
                             <span className="vehicle-list-item--price vehicle-list-item--price--action">
-                              {getPriceCurrencyFormat(specialPrice)} руб.
+                              {getPriceCurrencyFormat(specialPrice)}
+                              {' '}
+                              руб.
                             </span>
                             <span className="vehicle-list-item--oldprice">
-                              {getPriceCurrencyFormat(price)} руб.
+                              {getPriceCurrencyFormat(price)}
+                              {' '}
+                              руб.
                             </span>
                           </>
                         ) : (
                           <span className="vehicle-list-item--price">
-                            {getPriceCurrencyFormat(price)} руб.
+                            {getPriceCurrencyFormat(price)}
+                            {' '}
+                            руб.
                           </span>
-                        )
-                      }
+                        )}
                     </div>
                   </div>
 

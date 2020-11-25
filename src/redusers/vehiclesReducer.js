@@ -3,15 +3,15 @@ import API from '../api';
 
 const fetchCarsSuccess = createAction('FETCH_CARS');
 
-const carsReducer = handleActions({
+const vehiclesReducer = handleActions({
   [fetchCarsSuccess](state, { payload }) {
     return [...state, ...payload.vehicles];
   },
 }, []);
 
-export const fetchCars = (modelId) => async (dispatch) => {
+export const fetchVehicles = (modelId) => async (dispatch) => {
   const vehicles = await API.getCars(modelId);
   dispatch(fetchCarsSuccess({ vehicles }));
 };
 
-export default carsReducer;
+export default vehiclesReducer;

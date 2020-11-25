@@ -12,7 +12,8 @@ import ListAllNewCarsContainer from './components/ListAllNewCars/ListAllNewCarsC
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.fetchBrands();
+    const { setBrands } = this.props;
+    setBrands();
   }
 
   getMainPageComponent = (type) => {
@@ -49,7 +50,11 @@ const mapStateToProps = (state) => ({
   brands: state.brands,
 });
 
-const AppContainer = compose(connect(mapStateToProps, { fetchBrands }), withRouter)(App);
+const actionCreators = {
+  setBrands: fetchBrands,
+};
+
+const AppContainer = compose(connect(mapStateToProps, actionCreators), withRouter)(App);
 
 const OnlineShowroomApp = () => (
   <BrowserRouter>
