@@ -4,7 +4,6 @@ import { getPriceCurrencyFormat, isSpecialPrice } from '../../utils';
 
 class Vehicles extends React.Component {
   renderCars() {
-    console.log(this.props);
     const { vehicles } = this.props;
 
     return (

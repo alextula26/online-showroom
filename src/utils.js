@@ -5,3 +5,5 @@ export const getPriceCurrencyFormat = (price) => Math.round(price).toLocaleStrin
 export const isSpecialPrice = (price, specialPrice) => price - specialPrice !== 0;
 
 export const isEqual = (value, other) => _.isEqual(value, other);
+
+export const getUnionElements = (array) => _.union(array);
