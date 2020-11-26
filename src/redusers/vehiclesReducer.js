@@ -5,9 +5,9 @@ const fetchCarsSuccess = createAction('FETCH_CARS');
 
 const vehiclesReducer = handleActions({
   [fetchCarsSuccess](state, { payload }) {
-    return [...state, ...payload.vehicles];
+    return { ...state, vehicles: payload.vehicles };
   },
-}, []);
+}, { vehicles: [], modifications: [] });
 
 export const fetchVehicles = (modelId) => async (dispatch) => {
   const vehicles = await API.getCars(modelId);

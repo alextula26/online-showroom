@@ -12,15 +12,16 @@ class VehiclesContainer extends React.Component {
   }
 
   render() {
-    const { vehicles } = this.props;
+    const { vehicles, modifications } = this.props;
     return (
-      <Vehicles vehicles={vehicles} />
+      <Vehicles vehicles={vehicles} modification={modifications} />
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  vehicles: state.vehicles,
+  vehicles: state.vehiclesPage.vehicles,
+  modifications: state.vehiclesPage.modifications,
 });
 
 const actionCreators = {

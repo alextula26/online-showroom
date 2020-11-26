@@ -9,7 +9,7 @@ const redusers = combineReducers({
   dealers: dealersReduser,
   brands: brandsReduser,
   models: modelsRedusers,
-  vehicles: vehiclesReducer,
+  vehiclesPage: vehiclesReducer,
 });
 
 export default createStore(redusers, applyMiddleware(thunkMiddleware));

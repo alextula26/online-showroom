@@ -4,9 +4,9 @@ import ListAllNewCars from './ListAllNewCars';
 
 class ListAllNewCarsContainer extends React.Component {
   render() {
-    console.log(this.props);
+    const { listAllNewCars } = this.props;
     return (
-      <ListAllNewCars listAllNewCars={this.props.listAllNewCars} />
+      <ListAllNewCars listAllNewCars={listAllNewCars} />
     );
   }
 }
