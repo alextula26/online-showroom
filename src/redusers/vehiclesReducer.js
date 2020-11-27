@@ -28,10 +28,12 @@ export const fetchVehicles = (modelId) => async (dispatch) => {
   return vehicles;
 };
 
-export const fetchCharacteristic = (modificationId) => async (dispatch) => {
-  const characteristics = await API.getCharacteristics(modificationId);
+export const fetchCharacteristic = (modificationIds) => async () => {
+  const promises = modificationIds.map((modificationId) => API.getCharacteristics(modificationId));
+  const characteristics = await Promise.allSettled(promises);
+  // const characteristics = await API.getCharacteristics(modificationId);
   console.log('characteristics', characteristics);
-  dispatch(fetchCharacteristicSuccess({ modificationId, characteristics }));
+  // dispatch(fetchCharacteristicSuccess({ modificationId, characteristics }));
 };
 
 export default vehiclesReducer;

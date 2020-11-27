@@ -17,7 +17,7 @@ class VehiclesContainer extends React.Component {
       const modifications = vehicles.map(({ modification }) => modification);
       const unionModifications = getUnionElements(modifications);
       console.log(unionModifications);
-      setCharacteristic(243145);
+      setCharacteristic(unionModifications);
     });
   }
 
