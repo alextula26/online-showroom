@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Vehicles from './Vehicles';
 import { fetchVehicles } from '../../redusers/vehiclesReducer';
+import { isEmpty } from '../../utils';
 
 class VehiclesContainer extends React.Component {
   componentDidMount() {
@@ -16,6 +17,11 @@ class VehiclesContainer extends React.Component {
 
   render() {
     const { vehicles, characteristics } = this.props;
+
+    if (isEmpty(vehicles) || isEmpty(characteristics)) {
+      return null;
+    }
+
     return (
       <Vehicles vehicles={vehicles} characteristics={characteristics} />
     );

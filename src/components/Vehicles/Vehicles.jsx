@@ -4,22 +4,29 @@ import { getPriceCurrencyFormat, isSpecialPrice } from '../../utils';
 
 class Vehicles extends React.Component {
   renderCars() {
-    const { vehicles } = this.props;
+    const { vehicles, characteristics } = this.props;
 
     return (
       vehicles.map((vehicle) => {
         const {
           id,
+          modification,
           brand_name: brandName,
           model_name: modelname,
+          price,
+          status,
           modification_name: modificationName,
           image_preview: imagePreview,
-          price,
           special_price: specialPrice,
-          status,
         } = vehicle;
 
         const carsFullName = `${brandName} ${modelname} ${modificationName}`;
+
+        const {
+          body, engineType, engine, power, kpp, drive,
+        } = characteristics[modification];
+
+        const characteristicsFullName = `${engine.value} ${engine.unit} / (${power.value} ${power.unit}) /  ${engineType.value}, ${kpp.value}, ${drive.value} / ${body.value}`;
 
         return (
           <div key={id} className="col-lg-12 col-xl-4 col-xxl-3">
@@ -54,9 +61,9 @@ class Vehicles extends React.Component {
                   />
                   {isSpecialPrice(price, specialPrice)
                     && (
-                    <div className="vehicle-list-item--discount">
-                      Цена ниже на {price - specialPrice} руб.
-                    </div>
+                      <div className="vehicle-list-item--discount">
+                        Цена ниже на {price - specialPrice} руб.
+                      </div>
                     )}
                 </div>
 
@@ -67,21 +74,15 @@ class Vehicles extends React.Component {
                         ? (
                           <>
                             <span className="vehicle-list-item--price vehicle-list-item--price--action">
-                              {getPriceCurrencyFormat(specialPrice)}
-                              {' '}
-                              руб.
+                              {getPriceCurrencyFormat(specialPrice)} руб.
                             </span>
                             <span className="vehicle-list-item--oldprice">
-                              {getPriceCurrencyFormat(price)}
-                              {' '}
-                              руб.
+                              {getPriceCurrencyFormat(price)} руб.
                             </span>
                           </>
                         ) : (
                           <span className="vehicle-list-item--price">
-                            {getPriceCurrencyFormat(price)}
-                            {' '}
-                            руб.
+                            {getPriceCurrencyFormat(price)} руб.
                           </span>
                         )}
                     </div>
@@ -90,9 +91,9 @@ class Vehicles extends React.Component {
                   <div
                     className="vehicle-list-item--description"
                     data-toggle="tooltip"
-                    data-original-title="2,0 л / (190 л.с.) / Бензиновый, Автомат, 2019, Передний"
+                    data-original-title={characteristicsFullName}
                   >
-                    2,0 л / (190 л.с.) / Бензиновый, Автомат, 2019, Передний
+                    {characteristicsFullName}
                   </div>
                 </div>
               </div>
@@ -104,12 +105,6 @@ class Vehicles extends React.Component {
   }
 
   render() {
-    const { vehicles } = this.props;
-
-    if (vehicles.length === 0) {
-      return null;
-    }
-
     return (
       <div className="model-list">
         <div className="row model-list-flex items">
