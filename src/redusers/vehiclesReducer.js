@@ -1,39 +1,47 @@
 import { createAction, handleActions } from 'redux-actions';
 import API from '../api';
+import { getUnionElements } from '../utils';
 
 const fetchVehiclesSuccess = createAction('FETCH_CARS');
-const fetchCharacteristicSuccess = createAction('FETCH_CHARACTERISTIC');
+const fetchCharacteristicsSuccess = createAction('FETCH_CHARACTERISTICS');
 
 const vehiclesReducer = handleActions({
   [fetchVehiclesSuccess](state, { payload }) {
-    return { ...state, vehicles: payload.vehicles };
-  },
-  [fetchCharacteristicSuccess](state, { payload }) {
-    console.log('payload', payload);
     return {
       ...state,
-      characteristics: {
-        ...state.characteristics,
-        [payload.modificationId]: payload.characteristics,
-      },
+      vehicles: payload.vehicles,
+    };
+  },
+  [fetchCharacteristicsSuccess](state, { payload }) {
+    return {
+      ...state,
+      characteristics: payload.characteristics,
     };
   },
 }, { vehicles: [], characteristics: {} });
 
 export const fetchVehicles = (modelId) => async (dispatch) => {
   const vehicles = await API.getVehicles(modelId);
-  console.log('vehicles', vehicles);
+  const modificationIds = vehicles.map(({ modification }) => modification);
+  const unionModificationIds = getUnionElements(modificationIds);
+  const promises = unionModificationIds
+    .map(async (modificationId) => {
+      const characteristics = await API.getCharacteristics(modificationId);
+      return { [modificationId]: characteristics };
+    });
+
+  const characteristicsSettled = await Promise.allSettled(promises);
+
+  const characteristics = {
+    ...characteristicsSettled
+      .filter((characteristic) => characteristic.status === 'fulfilled')
+      .map(({ value }) => value),
+  };
+
   dispatch(fetchVehiclesSuccess({ vehicles }));
+  dispatch(fetchCharacteristicsSuccess({ characteristics }));
 
   return vehicles;
-};
-
-export const fetchCharacteristic = (modificationIds) => async () => {
-  const promises = modificationIds.map((modificationId) => API.getCharacteristics(modificationId));
-  const characteristics = await Promise.allSettled(promises);
-  // const characteristics = await API.getCharacteristics(modificationId);
-  console.log('characteristics', characteristics);
-  // dispatch(fetchCharacteristicSuccess({ modificationId, characteristics }));
 };
 
 export default vehiclesReducer;
