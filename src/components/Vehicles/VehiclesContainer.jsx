@@ -26,22 +26,12 @@ class VehiclesContainer extends React.Component {
     }
 
     return (
-      <>
-        <div className="clearfix">
-          <h1 className="page-title">Автомобили {brand.name} {model.name} в наличии</h1>
-        </div>
-
-        <div id="vehicle-list-by-model" className="list-view">
-          <div className="model-list">
-            <div className="row model-list-flex items">
-              <Vehicles
-                vehicles={items}
-                characteristics={characteristics}
-              />
-            </div>
-          </div>
-        </div>
-      </>
+      <Vehicles
+        brand={brand}
+        model={model}
+        vehicles={items}
+        characteristics={characteristics}
+      />
     );
   }
 }
