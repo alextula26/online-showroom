@@ -1,0 +1,131 @@
+/* ============================= */
+/*  Error                        */
+/* ============================= */
+
+.help-block{
+  margin-bottom: 0;
+}
+.has-error{
+  .form-control{
+    border-color: _palette(error-color);
+    @include placeholder(_palette(error-color), 500, 22);
+  }
+  .help-block{
+    color: _palette(error-color);
+    font-size: rem(12);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    .css-form-free &{
+      bottom: auto;
+      line-height: 14px;
+      margin-bottom: 0;
+      margin-top: 5px;
+      position: absolute;
+    }
+  }
+}
+.error-summary{
+  p{
+    margin-bottom: 10px;
+  }
+}
+
+.attention{
+  &--warning{
+    align-items: center;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    // padding: 15px 0;
+    span{
+      display: inline-block;
+    }
+    a{
+      display: inline-block;
+    }
+    .svg--arrow2{
+      margin-left: 10px;
+      height: 10px;
+      left: 0;
+      position: relative;
+      top: -1px;
+      -webkit-transition: left .8s linear;
+      -o-transition: left .8s linear;
+      transition: left .8s linear;
+      width: 7px;
+    }
+    &:hover{
+      .svg--arrow2 {
+        left: 10px;
+      }
+    }
+    svg{
+      height: 10px;
+      width: 7px;
+      @include transition($svg-transition);
+    }
+  }
+}
+
+.site-error{
+  -ms-align-items: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 600px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  min-height: 60vh;
+  position: relative;
+  @include media-breakpoint-down(md){
+    flex-direction: column;
+  }
+  header + &{
+    margin: -30px 0 -60px;
+  }
+  &--title{
+    font-size: rem(32);
+    line-height: 42px;
+    position: relative;
+    @include media-breakpoint-down(md){
+      text-align: center;
+    }
+  }
+  &--code{
+    color: _colors(black);
+    font-size: 164px;
+    line-height: 164px;
+    position: relative;
+    margin-right: 28px;
+    @include media-breakpoint-down(md){
+      margin-right: 0;
+      text-align: center;
+    }
+  }
+  &--message{
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 20px;
+    position: relative;
+    @include media-breakpoint-down(md){
+      text-align: center;
+    }
+  }
+  .btn{
+    position: relative;
+    + .btn{
+      margin-left: 8px;
+    }
+  }
+}

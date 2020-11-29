@@ -8,11 +8,17 @@ import { filteredModelsSelector } from '../../selectors';
 
 class ModelsContainer extends React.Component {
   componentDidMount() {
-    const { match: { params: { brandId } }, setModels } = this.props;
+    const { setModels } = this.props;
 
-    const currentBrandId = brandId || this.getBrandId();
+    const currentBrandId = this.getCurrentBrandId();
 
     setModels(currentBrandId);
+  }
+
+  getCurrentBrandId() {
+    const { match: { params: { brandId } } } = this.props;
+    const currentBrandId = brandId || this.getBrandId();
+    return currentBrandId;
   }
 
   getBrandId() {
@@ -27,6 +33,7 @@ class ModelsContainer extends React.Component {
       <Models
         models={models}
         brands={brands}
+        currentBrandId={this.getCurrentBrandId()}
       />
     );
   }

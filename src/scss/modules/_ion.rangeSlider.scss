@@ -1,0 +1,14 @@
+/* ============================= */
+/*  ion.rangeSlider              */
+/* ============================= */
+
+@import  '~ion-rangeslider/css/ion.rangeSlider';
+@import  '~ion-rangeslider/css/ion.rangeSlider.skinNice';
+.irs-line-mid,
+.irs-line-left,
+.irs-line-right,
+.irs-bar,
+.irs-bar-edge,
+.irs-slider {
+    background-image: image("sprite-skin-nice.png");
+}

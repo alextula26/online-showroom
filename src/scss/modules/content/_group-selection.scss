@@ -1,0 +1,93 @@
+.group-selection{
+  // padding-top: 30px;
+  // padding-bottom: 60px;
+  &-item{
+    cursor: pointer;
+    display: block;
+    .css-group-selection--first-active &{
+      &:before{
+        border-style: solid;
+        border-width: 0 12px 12px 12px;
+        border-color: transparent transparent #ffffff transparent;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: 0;
+        margin-right: -7px;
+        right: 50%;
+        position: absolute;
+        width: 0;
+      }
+      &:after{
+        border-style: solid;
+        border-width: 0 11px 11px 11px;
+        border-color: transparent transparent #e5e5e5 transparent;
+        bottom: -1px;
+        content: '';
+        display: block;
+        height: 0;
+        margin-right: -6px;
+        right: 50%;
+        position: absolute;
+        width: 0;
+      }
+    }
+    &--title{
+      display: block;
+      line-height: 18px;
+    }
+    &--image{
+      &-container{
+        align-items: center;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 16px;
+        height: 130px;
+        overflow: hidden;
+        @include media-breakpoint-up(md){
+          height: 242px;
+        }
+        @include media-breakpoint-up(lg){
+          height: 155px;
+        }
+        @include media-breakpoint-up(xl){
+          height: 126px;
+        }
+        @include media-breakpoint-up(xxl){
+          height: 138px;
+        }
+        @include media-breakpoint-up(qxl){
+          height: 170px;
+        }
+        img{
+          max-width: 100%;
+          opacity: .5;
+          zoom: 1;
+          @include transition(opacity 1s, max-width 1s);
+          .css-group-selection--opacity &,
+          .css-group-selection--first-active &,
+          .group-selection--second &{
+            opacity: 1;
+          }
+          .group-selection-item:hover &,
+          .group-selection-item:focus &{
+            max-width: 110%;
+            opacity: 1;
+            zoom: 1.2;
+          }
+        }
+      }
+    }
+
+    &-price{
+      display: block;
+    }
+  }
+  &--second{
+    border-top: 1px solid _theme-colors(light-grey2);
+  }
+}

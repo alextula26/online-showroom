@@ -1,0 +1,543 @@
+// $carousel-control-prev-icon-bg: url($path-img + 'arrow-left.png') !default;
+// $carousel-control-next-icon-bg: url($path-img + 'arrow-right.png') !default;
+
+// $carousel-control-icon-height: 40px;
+// $carousel-control-width: 10%;
+
+// Notes on the classes:
+//
+// 1. .carousel.pointer-event should ideally be pan-y (to allow for users to scroll vertically)
+//    even when their scroll action started on a carousel, but for compatibility (with Firefox)
+//    we're preventing all actions instead
+// 2. The .carousel-item-left and .carousel-item-right is used to indicate where
+//    the active slide is heading.
+// 3. .active.carousel-item is the current slide.
+// 4. .active.carousel-item-left and .active.carousel-item-right is the current
+//    slide in its in-transition state. Only one of these occurs at a time.
+// 5. .carousel-item-next.carousel-item-left and .carousel-item-prev.carousel-item-right
+//    is the upcoming slide in transition.
+
+.carousel {
+  position: relative;
+}
+
+.carousel.pointer-event {
+  touch-action: pan-y;
+}
+
+.carousel-inner {
+  // margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  @include clearfix();
+  .mainSlider &{
+    margin-bottom: 22px;
+  }
+}
+
+.carousel-item {
+  position: relative;
+  display: none;
+  float: left;
+  width: 100%;
+  margin-right: -100%;
+  backface-visibility: hidden;
+  text-align: center;
+  @include transition($carousel-transition);
+  img{
+    margin: 0 auto;
+    width: 100%;
+  }
+  > a{
+    display: block;
+    width: 100%;
+  }
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item.next,
+.carousel-item-prev,
+.carousel-item.prev {
+  display: block;
+}
+
+.carousel-item-next:not(.carousel-item-left),
+.carousel-item.next:not(.carousel-item.left),
+.active.carousel-item.right,
+.active.carousel-item-right {
+  transform: translateX(100%);
+}
+
+.carousel-item-prev:not(.carousel-item-right),
+.carousel-item.prev:not(.carousel-item.right),
+.active.carousel-item.left,
+.active.carousel-item-left {
+  transform: translateX(-100%);
+}
+
+
+//
+// Alternate transitions
+//
+
+.carousel-fade {
+  .carousel-item {
+    opacity: 0;
+    transition-property: opacity;
+    // transform: none; // баг во время перелистывания
+  }
+
+  .carousel-item.active,
+  // .carousel-item.active.next,
+  .carousel-item.next.left,
+  .carousel-item-next.carousel-item-left,
+  .carousel-item-prev.carousel-item-right{
+    z-index: 1;
+    opacity: 1;
+  }
+
+  .active.carousel-item.left,
+  .active.carousel-item-left,
+  .active.carousel-item-right{
+    z-index: 0;
+    opacity: 0;
+    // @include transition(0s $carousel-transition-duration opacity);
+  }
+}
+
+
+//
+// Left/right controls for nav
+//
+
+.carousel-control-prev,
+.carousel-control.left,
+.carousel-control.right,
+.carousel-control-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  // Use flex for alignment (1-3)
+  display: flex; // 1. allow flex styles
+  align-items: center; // 2. vertically center contents
+  justify-content: center; // 3. horizontally center contents
+  // color: $carousel-control-color;
+  text-align: center;
+  // opacity: $carousel-control-opacity;
+  // width: $carousel-control-width;
+  .nothumbs &{
+    display: none;
+  }
+  @include transition($carousel-control-transition);
+  svg{
+    height: 40px;
+    width: 12px;
+    .stroke{
+      stroke: _palette(carousel-control-svg-stroke);
+    }
+  }
+  // Hover/focus state
+  @include hover-focus {
+    color: $carousel-control-color;
+    text-decoration: none;
+    outline: 0;
+    opacity: $carousel-control-hover-opacity;
+    svg{
+      .stroke{
+        stroke: _palette(carousel-control-hover-svg-stroke);
+      }
+    }
+  }
+}
+.carousel-control-prev,
+.carousel-control.left {
+  left: 10px;
+  .svg--icon{
+    transform: rotate(180deg);
+  }
+  @if $enable-gradients {
+    background: linear-gradient(90deg, rgba($black, .25), rgba($black, .001));
+  }
+}
+.carousel-control-next,
+.carousel-control.right {
+  right: 10px;
+  .svg--icon{
+    transform: rotate(0deg);
+  }
+  @if $enable-gradients {
+    background: linear-gradient(270deg, rgba($black, .25), rgba($black, .001));
+  }
+}
+
+// Icons for within
+// .carousel-control-prev-icon,
+// .carousel-control-next-icon {
+//   display: inline-block;
+//   width: $carousel-control-icon-width;
+//   height: $carousel-control-icon-width;
+//   background: transparent no-repeat center center;
+//   background-size: 100% 100%;
+// }
+// .carousel-control-prev-icon {
+//   background-image: $carousel-control-prev-icon-bg;
+// }
+// .carousel-control-next-icon {
+//   background-image: $carousel-control-next-icon-bg;
+// }
+
+
+// Optional indicator pips
+//
+// Add an ordered list with the following class and add a list item for each
+// slide your carousel holds.
+
+.carousel-indicators {
+  bottom: -40px;
+  display: flex;
+  justify-content: center;
+  padding-left: 0; // override <ol> default
+  position: absolute;
+  left: 0;
+  list-style: none;
+  margin-bottom: 0;
+  margin-right: 0;
+  margin-left: 0;
+  right: 0;
+  z-index: _zindex(carousel-indicators);
+  // Use the .carousel-control's width as margin so we don't overlay those
+  .mainSlider &{
+    bottom: -20px;
+  }
+  .vehicle-view &{
+    bottom: 0px;
+    position: relative;
+    margin: 0;
+    // overflow: hidden; // не выводятся превью в карточке при наведении
+    @include media-breakpoint-up(lg){
+      margin: 10px -8px 0;
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
+  .tradein-view &{
+    bottom: auto;
+    justify-content: flex-start;
+    margin-top: 1px;
+  }
+  &.carousel-indicators-full{
+    .tradein-view &{
+      justify-content: space-between;
+    }
+  }
+  li {
+    background-color: _palette(carousel-indicator-active-bg);
+    background-clip: padding-box;
+    box-sizing: content-box;
+    border-top: 0 solid transparent;
+    // border-bottom: 2px solid _palette(carousel-indicator-borderColor);
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    cursor: pointer;
+    flex: 0 1 auto;
+    height: #{_size(carousel-indicator-height)}px;
+    margin-right: #{_size(carousel-indicator-spacer)}px;
+    margin-left: #{_size(carousel-indicator-spacer)}px;
+    padding-bottom: 4px;
+    .mainSlider &,
+    .vehicle-view &{
+      height: 0px;
+      width: 80px;
+      padding-bottom: 0;
+    }
+    .vehicle-view &{
+      .mobile-view & {
+        height: auto;
+        padding-bottom: 4px;
+      }
+    }
+    .tradein-view &{
+      height: 84px;
+      overflow: hidden;
+      margin-left: 0px;
+      margin-right: 0px;
+      width: 16.66%;
+      @include media-breakpoint-up(qxl){
+        height: 115px;
+      }
+    }
+    + li{
+      .tradein-view &{
+        margin-left: 1px;
+      }
+    }
+    a{
+      .mainSlider &,
+      .vehicle-view &{
+        display: block;
+        position: relative;
+      }
+      .tradein-view &{
+        align-items: center;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        overflow: hidden;
+        height: 100%;
+      }
+    }
+    &:first-child{
+      margin-left: 0;
+    }
+    &:last-child{
+      margin-right: 0;
+    }
+    @include transition($carousel-indicator-transition);
+    img{
+      max-height: 100%;
+      width: auto;
+      .mainSlider &,
+      .vehicle-view &{
+        bottom: 0;
+        opacity: 0;
+        width: 80px;
+        transition: transform 1.5s cubic-bezier(.19,1,.22,1),-webkit-transform 1.5s cubic-bezier(.19,1,.22,1);
+        .mobile-view & {
+          opacity: 1;
+        }
+      }
+      .tradein-view &{
+        bottom: auto;
+        max-height:none;
+        opacity: 1;
+        transition: none;
+        width: 100%;
+      }
+    }
+    &.hidden{
+      display: none;
+    }
+    &.visible{
+      img{
+        // opacity: .2;
+        .tradein-view &{
+          display: block;
+          opacity: 1;
+        }
+      }
+      &:hover{
+        .tradein-view &{
+          img{
+            opacity: 1;
+          }
+        }
+      }
+    }
+    &:hover{
+      // border-bottom-color: _palette(carousel-indicator-active-borderColor);
+      .mainSlider &,
+      .vehicle-view &{
+        img{
+          opacity: 1;
+          transform: translateY(-100%);
+        }
+      }
+      .tradein-view &{
+        img{
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+  .active {
+    // border-bottom-color: _palette(carousel-indicator-active-borderColor);
+    opacity: 1;
+    &.visible{
+      img{
+        // opacity: 1;
+      }
+    }
+    img{
+      opacity: 1;
+      .tradein-view &{
+        opacity: 1;
+      }
+    }
+  }
+  .last{
+    position: relative;
+    &:before{
+      .tradein-view &{
+        align-items: center;
+        background-color: transparentize(_colors(black), 0.5);
+        content: 'Все фото';
+        color: _colors(white);
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        justify-content: center;
+        font-size: 12px;
+        left: 0;
+        line-height: 14px;
+        height: calc(100% - 4px);
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: _zindex(vehicle-view--carousel-indicators-last);
+      }
+    }
+  }
+}
+.carousel-overflow-hidden{
+  overflow: hidden;
+}
+.carousel-counter{
+  background-color: _colors(black);
+  color: _colors(white);
+  font-size: 12px;
+  height: 18px;
+  line-height: 16px;
+  padding: 0 5px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: _zindex(carousel-counter);
+}
+// Optional captions
+//
+//
+
+// .carousel-caption {
+//   $pad: _size(leading-values);
+//   position: absolute;
+//   right: (100% - $carousel-caption-width) / 2;
+//   bottom: rem($pad * 2);
+//   left: (100% - $carousel-caption-width) / 2;
+//   z-index: 10;
+//   // padding-top: 20px;
+//   // padding-bottom: 20px;
+//   color: $carousel-caption-color;
+//   text-align: center;
+//   &:before,
+//   &:after{
+//     background-color: $white;
+//     content: '';
+//     display: block;
+//     height: 2px;
+//     position: absolute;
+//     top: 0;
+//     width: rem(_size(leading-values) / 2);
+//   }
+//   &:before{
+//     right: 0;
+//   }
+//   &:after{
+//     left: 0;
+//   }
+//   &-inner{
+//     border-right: 1px solid $white;
+//     border-left: 1px solid $white;
+//     position: relative;
+//     &:before,
+//     &:after{
+//       background-color: $white;
+//       bottom: 0;
+//       content: '';
+//       display: block;
+//       height: 2px;
+//       position: absolute;
+//       width: rem(_size(leading-values) / 2);
+//     }
+//     &:before{
+//       right: 0;
+//     }
+//     &:after{
+//       left: 0;
+//     }
+//   }
+//   h2{
+//     color: _palette(carousel-capton-color);
+//     font-size: rem(34);
+//     font-weight: 300;
+//     line-height: rem(34);
+//     padding:0 rem($pad / 2);
+//     margin-bottom: rem($pad);
+//   }
+// }
+
+
+// .carousel{
+//   margin-bottom: rem(50);
+//   &-item{
+//     background-color: $orange;
+//     @include clearfix;
+//     &.active{
+//       display: -webkit-flex;
+//       display: -moz-flex;
+//       display: -ms-flex;
+//       display: -o-flex;
+//       display: flex;
+//     }
+//   }
+//   &-caption{
+//     bottom: auto;
+//     color: $white;
+//     float: left;
+//     height: 100%;
+//     padding:0 rem(50);
+//     position: relative;
+//     left: auto;
+//     right: auto;
+//     text-align: left;
+//     top: auto;
+//     width: calc(50% - 36px);
+//     h3{
+//       font-size: rem(36);
+//       font-weight: 500;
+//       line-height: rem(42);
+//       margin-bottom: rem(50);
+//       text-align: left;
+//       text-transform: uppercase;
+//       a{
+//         color: $white;
+//       }
+//     }
+//   }
+//   img{
+//     float: left;
+//     width: calc(50% + 36px);
+//   }
+//   &-control-prev,
+//   &-control-next{
+//     display: none;
+//   }
+//   &-indicators{
+//     bottom: auto;
+//     left: 50px;
+//     margin: 0;
+//     right: auto;
+//     top: 22px;
+//     li{
+//       background-color: transparent;
+//       border: 2px solid $white;
+//       border-radius: rem(15);
+//       height: rem(15);
+//       margin: 0;
+//       padding: 0;
+//       width: rem(15);
+//       &.active{
+//         background-color: $white;
+//       }
+//       + li{
+//         margin-left: rem(10);
+//       }
+//     }
+//   }
+// }

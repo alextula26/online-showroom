@@ -1,0 +1,89 @@
+  // --------------------------------------------------------------- //
+ // -------------------------- VARIABLES -------------------------- //
+// --------------------------------------------------------------- //
+
+@import "../bootstrap/_variables.scss";
+@import "vars/_vars-colors";
+@import "vars/_vars-sizes";
+@import "vars/_vars-fonts";
+@import "vars/_vars-bootstrap";
+@import "vars/_vars-grid";
+@import "vars/_vars-bg";
+
+// ------------------------------------------------------- DURATION //
+/// GETS A DURATION VALUE
+/// @param {string} $keys Key(s).
+/// @return {string} Value.
+@function _duration($keys...) {
+  @return val($duration, $keys...);
+}
+
+$duration: (
+  nav:                  0.5s,
+  transition:           0.2s,
+  img-hover-readmore:   1s,
+  tabs-link-bg:         1s,
+  tabs-link-color:      0.8s,
+);
+
+
+// ----------------------------------------------------------- PATH //
+// GETS A PATH VALUE
+// @param {string} $keys Key(s).
+// @return {string} Value.
+@function _path($keys...) {
+  @return val($path, $keys...);
+}
+
+$asset-base-path:         "/autocrm10";
+$path:(
+  img:                     $asset-base-path + "/img/",
+  svgs:                    $asset-base-path + "/svg/",
+  fonts:                   $asset-base-path + "/"
+);
+
+// ----------------------------------------------------------- MISC //
+// GETS A MISC VALUE
+// @param {string} $keys Key(s).
+// @return {string} Value.
+@function _misc($keys...) {
+  @return val($misc, $keys...);
+}
+
+
+$misc: (
+  placeholder-size:                  14,
+  placeholder-weight:                400,
+  z-index-base:                      1050,
+  tools-display-grid:                false,
+  tools-display-print:               false,
+  tools-flex-grid:                   false,
+  tools-float-grid:                  false,
+  tools-text-align-grid:             false,
+  tools-text-color:                  false,
+);
+
+
+@function _zindex($keys...) {
+  @return val($zindex, $keys...);
+}
+
+$zindex: (
+  specifications-list-group_before:          -1,
+  css-form-free-control-label:               1,
+  dealer-info-map:                           1,
+  vehicle-view--carousel-indicators-last:    1,
+  vehicle-view--sales-list:                  1,
+  vehicle-list-item--discount:               1,
+  vehicle-list--item--image-information:     1,
+  carousel-counter:                          2,
+  vehicle-list--item:                        16,
+  model-list--item:                          16,
+  vehicle-list--item--information:           17,
+  disabled-select_bootstrap-select:          10,
+  carousel-indicators:                       15,
+  instock-block-dropdown:                    16,
+  bootstrap-select-dropdown-menu:            1003,
+  sticky-block:                              1040,
+  loading:                                   2050,
+);

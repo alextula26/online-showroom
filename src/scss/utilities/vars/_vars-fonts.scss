@@ -1,0 +1,41 @@
+// ----------------------------------------------------------- FONT //
+
+// Gets a font value.
+// @param {string} $keys Key(s).
+// @return {string} Value.
+@function _fonts($keys...) {
+  @return val($fonts, $keys...);
+}
+
+$fonts: (
+  family:                           ("Arial", "Helvetica", "Roboto", san-serif),
+  family-heading:                   ("Arial", "Helvetica", "Roboto", san-serif),
+  family-fixed:                     ('Courier New', monospace),
+  weight:                           400,
+  weight-medium:                    500,
+  weight-bold:                      600,
+  weight-heading:                   600,
+  weight-heading-alt:               400,
+  small-font-size:                  80%,
+  kerning-heading:                  0.075em,
+  h1-font-size:                     24,
+  h1-line-height:                   29,
+  h2-font-size:                     20,
+  h2-line-height:                   26,
+  h3-font-size:                     16,
+  h3-line-height:                   19,
+  h4-font-size:                     14,
+  h4-line-height:                   15,
+  h5-font-size:                     12,
+  h5-line-height:                   14,
+  h6-font-size:                     10,
+  h6-line-height:                   12,
+);
+
+$font-family-base:                  _fonts(family);
+$headings-font-family:              $font-family-base;
+$headings-font-weight:              _fonts(weight-bold);
+
+$font-size-base:                    12pt;
+$font-size-body:                    rem(16);
+$font-weight-base:                  400;

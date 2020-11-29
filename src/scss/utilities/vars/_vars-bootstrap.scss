@@ -1,0 +1,108 @@
+// -------------------------------------------- BOOTSTRAP OVERWRITE //
+
+$brand-color:                       _palette(brand-color);
+$body-color:                        _palette(body-color);
+
+$body-bg:                           $body-color;
+$html-bg:                           $body-color;
+
+$base-link:                         _palette(base-link);
+$base-link-hover:                   _palette(base-link-hover);
+
+
+$enable-shadows:                    false;
+$enable-color-sheme:                false;
+$enable-tetcolor-sheme:             false;
+$enable-flex:                       true;
+
+$enable-rounded:                    false;
+
+$form-control-border-color:         _palette(form-control-borderColor);
+$form-control-border-radius:        _size(form-control-borderRadius);
+
+$spacer:                            _size(spacer);
+$spacer-x:                          $spacer !default;
+$spacer-y:                          $spacer !default;
+
+$text-color:                        _palette(text-color);
+
+$line-height-computed:              _size(line-height-base);
+$line-height-base:                  rem($line-height-computed);
+
+$link-color:                        $base-link;
+$link-hover-color:                  $base-link-hover;
+$link-hover-decoration:             none !default;
+$link-decoration:                   none !default;
+
+$cursor-disabled:                   disable !default;
+
+$form-group-mb:                     _size(form-group-mb);
+
+$control-label-mb:                  _size(label-margin-bottom);
+$label-margin-bottom:               _size(label-margin-bottom);
+
+$hr-border:                         $gray-lighter;
+
+$transition-collapse:               height .35s ease !default;
+
+$caret-width-base:                  _size(caret-width-base);
+
+
+$carousel-transition-duration:      .6s;
+$carousel-transition:               transform $carousel-transition-duration ease-in-out;
+
+$paragraph-margin-bottom:           _size(paragraph-margin-bottom);
+
+$headings-margin-bottom:            _size(headings-margin-bottom);
+$headings-font-weight:              300;
+
+//== Modals
+//
+//##
+
+//** Padding applied to the modal body
+$modal-inner-padding:         15px !default;
+
+//** Padding applied to the modal title
+$modal-title-padding:         15px !default;
+//** Modal title line-height
+$modal-title-line-height:     $line-height-base !default;
+
+//** Background color of modal content area
+$modal-content-bg:                             #fff !default;
+//** Modal content border color
+$modal-content-border-color:                   rgba(0,0,0,.2) !default;
+//** Modal content border color **for IE8**
+$modal-content-fallback-border-color:          #999 !default;
+
+//** Modal backdrop background color
+$modal-backdrop-bg:           transparentize($black, .6);
+//** Modal backdrop opacity
+$modal-backdrop-opacity:      .5 !default;
+//** Modal header border color
+$modal-header-border-color:   #e5e5e5 !default;
+//** Modal footer border color
+$modal-footer-border-color:   $modal-header-border-color !default;
+
+$modal-xxl:                   1170px;
+$modal-lg:                    900px !default;
+$modal-md:                    600px !default;
+$modal-mdsm:                  390px;
+$modal-sm:                    340px;
+
+$zindex-navbar:            1000;
+$zindex-dropdown:          1000;
+$zindex-popover:           1060;
+$zindex-tooltip:           1070;
+$zindex-navbar-fixed:      1030;
+$zindex-modal-background:  1040;
+$zindex-modal-backdrop:    1041;
+$zindex-modal:             1050;
+
+$table-border-color:       _palette(table-border-color);
+$table-border-width:       _size(table-border-width);
+$table-cell-padding-x:     _size(table-cell-padding-x);
+$table-cell-padding-y:     _size(table-cell-padding-y);
+$table-font-size:          _size(table-font-size);
+
+$svg-transition:          fill .15s ease-in-out,  stroke .15s ease-in-out;

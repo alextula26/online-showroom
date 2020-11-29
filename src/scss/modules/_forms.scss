@@ -1,0 +1,180 @@
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+/*                                                                  */
+/*                             F O R M S                           */
+/*                                                                */
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+
+$enable-form-inline:                false;
+
+.form-control{
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  border: none;
+  border-style: solid;
+  border-bottom: 1px solid _palette(form-control-borderColor);
+  border-radius: 0;
+  color: _palette(form-control-color);
+  display: block;
+  font-size: rem(14);
+  font-weight: 400;
+  line-height: 45px;
+  outline: none;
+  padding: 0 10px;
+  text-align: left;
+  width: 100%;
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    height: 45px;
+  }
+  &::-ms-expand {
+    background-color: transparent;
+    border: 0;
+  }
+  &:hover,
+  &:focus{
+    outline: none;
+    box-shadow: none;
+  }
+  @include placeholder();
+    &:hover{
+  .form-free &{
+      &::-moz-placeholder {
+        font-size: 0;
+      }
+      &:-moz-placeholder {
+        font-size: 0;
+      }
+      &:-ms-input-placeholder {
+        font-size: 0;
+      }
+      &::-webkit-input-placeholder  {
+        font-size: 0;
+      }
+    }
+  }
+  &:disabled,
+  &[readonly] {
+    opacity: .5;
+  }
+  &.error{
+    border-color: _colors(red);
+  }
+  .double-input &{
+    width: 50%;
+  }
+  + .control-label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: text;
+    -webkit-transition: color .2s ease-out, -webkit-transform .2s ease-out;
+    transition: color .2s ease-out, -webkit-transform .2s ease-out;
+    transition: transform .2s ease-out, color .2s ease-out;
+    transition: transform .2s ease-out, color .2s ease-out, -webkit-transform .2s ease-out;
+    -webkit-transform: translateY(12px);
+    transform: translateY(12px);
+  }
+}
+.input-group-line{
+  margin: 5px 0;
+  width: 1px;
+}
+.double-input {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+textarea.form-control{
+  line-height: 22px;
+  &.textarea-90{
+    height: 90px;
+  }
+}
+
+.form-group{
+  margin-bottom: 25px;
+  .css-form-free &{
+    position: relative;
+  }
+}
+
+.control-label{
+  display: block;
+  font-size: rem(10);
+  font-weight: 400;
+  line-height: 12px;
+  // margin-bottom: -4px;
+  position: relative;
+  z-index: 1;
+  .css-form-free &{
+    position: absolute;
+    left: 0;
+    padding-right: 3px;
+    margin-bottom: 0;
+    -webkit-transition: color .2s ease-out, -webkit-transform .2s ease-out;
+    transition: color .2s ease-out, -webkit-transform .2s ease-out;
+    transition: transform .2s ease-out, color .2s ease-out;
+    transition: transform .2s ease-out, color .2s ease-out, -webkit-transform .2s ease-out;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+    top: 0;
+    z-index: 0;
+    // z-index: _zindex(css-form-free-control-label); // пояявляется не кликабельный участок если больше 0
+  }
+  &:after{
+    .required &{
+      .css-form-free &{
+        content: '*';
+        display: inline-block;
+        position: relative;
+        top: 0;
+      }
+    }
+  }
+  &.active{
+    .css-form-free &{
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      -webkit-transform: translateY(-14px);
+      transform: translateY(-14px);
+      z-index: 1;
+    }
+  }
+}
+
+
+.price-form{
+  position: relative;
+  &.input-group{
+    .mobile-view &{
+      padding: 0 10px;
+      width: calc(100% - 20px);
+    }
+  }
+  .form-control{
+    border: none;
+    z-index: 1;
+    + .form-control{
+      text-align: right;
+    }
+  }
+  .input-group-append{
+    + .form-control{
+      text-align: right;
+    }
+  }
+  .noUi-New-outer{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    .noUi-tooltip{
+      display: none;
+    }
+  }
+}

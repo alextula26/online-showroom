@@ -1,0 +1,32 @@
+.peoplebrowsing{
+  margin-top: 15px;
+  @include media-breakpoint-up(lg){
+    margin-top: 0;
+  }
+  @include media-breakpoint-up(xl){
+    margin-top: 15px;
+  }
+  @include media-breakpoint-up(xxl){
+    margin-top: 20px;
+  }
+  &--text{
+    padding-left: 30px;
+    line-height: rem(17);
+  }
+  .svg--icon{
+    float: left;
+    height: 16px;
+    width: auto;
+  }
+  svg{
+    height: 16px;
+    vertical-align: top;
+    width: auto;
+    .fill{
+      fill: _palette(peoplebrowsing-svg-fill);
+    }
+    .stroke{
+      stroke: _palette(peoplebrowsing-svg-stroke);
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@if _misc(tools-float-grid){
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+      .float#{$infix}-left  { @include float-left; }
+      .float#{$infix}-right { @include float-right; }
+      .float#{$infix}-none  { @include float-none; }
+    }
+  }
+}
+@else{
+  .float-left  { @include float-left; }
+  .float-right { @include float-right; }
+  .float-none  { @include float-none; }
+}

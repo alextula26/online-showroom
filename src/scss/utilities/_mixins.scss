@@ -1,0 +1,218 @@
+  // --------------------------------------------------------------- //
+ // ---------------------------- MIXINS --------------------------- //
+// --------------------------------------------------------------- //
+
+// ---------------------------------------------------------- MIXINS //
+// --------------------------------------------------------------- //
+@import "../bootstrap/_mixins";
+
+// ---------------------------------------------------------- MIXINS //
+// --------------------------------------------------------------- //
+@import "mixins/_animation.scss";
+@import "mixins/_transition.scss";
+@import "mixins/_position.scss";
+@import "mixins/_placeholder.scss";
+@import "mixins/_transform.scss";
+@import "mixins/_gradients.scss";
+
+// ---------------------------------------------------------- MIXINS //
+// ОТКЛЧЮЧИТЬ ВСЕ ТЕНИ ЕСЛИ ИСПОЛЬЗОВАТЬ MIXIN
+// --------------------------------------------------------------- //
+@mixin box-shadow($shadow...) {
+  @if $enable-shadows {
+    box-shadow: $shadow;
+  }
+}
+
+// ---------------------------------------------------------- MIXINS //
+@mixin reset-text() {
+  font-family: $font-family-base;
+  // We deliberately do NOT reset font-size.
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-break: auto;
+  line-height: $line-height-base;
+  text-align: left; // Fallback for where `start` is not supported
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+}
+
+// ---------------------------------------------------------- MIXINS //
+@mixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ---------------------------------------------------------- MIXINS //
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  // IE8 filter
+  $opacity-ie: ($opacity * 100);
+  filter: alpha(opacity=$opacity-ie);
+}
+
+// ---------------------------------------------------------- MIXINS //
+@mixin img-responsive($display: block) {
+  display: $display;
+  max-width: 100%; // Part 1: Set a maximum relative to the parent
+  height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+}
+
+// ---------------------------------------------------------- MIXINS //
+// @mixin keyframes($name){
+//     @-webkit-keyframes #{$name} {@content}
+//     @-moz-keyframes #{$name} {@content}
+//     @-o-keyframes #{$name} {@content}
+//     @keyframes #{$name} {@content}
+// }
+
+// ---------------------------------------------------------- MIXINS //
+//  поддерживает пропорции вложенного блока ".content"/
+// Syntax:
+// .any-class {@include aspect-ratio(16, 9);}
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+// ---------------------------------------------------------- MIXINS //
+// Другой вариант с не пропорциоанльным расширением по высоте
+// вылизающего контента
+// Responsive Aspect-Ratio
+// Syntax:
+// @include aspect-ratio($ratio or $width, $height);
+@mixin aspect-ratio-height($arglist... /*$width/$ratio, $height*/){
+  $map : keywords($arglist);
+  $height: map-get($map, height) or nth-or-null($arglist, 2);
+  $width:  map-get($map, width)  or nth-or-null($arglist, 1);
+  $ratio:  map-get($map, ratio)  or if($width and $height, $width/$height, nth-or-null($arglist, 1)) or 1;
+  $padding: 1/$ratio * 100%;
+  &:before { content: ''; float:left; padding-bottom: $padding; margin-right:-100%; }
+  &:after  { content: ''; display:table; clear: both; }
+}
+
+// ---------------------------------------------------------- MIXINS //
+@mixin linx ($link, $visit, $hover, $active) {
+  a {
+    color: $link;
+    &:visited {
+      color: $visit;
+    }
+    &:hover, &:focus {
+      color: $hover;
+    }
+    &:active {
+      color: $active;
+    }
+  }
+}
+
+// ---------------------------------------------------------- MIXINS //
+// Миксин для создания префиксов для single и multiple
+// Prefixes usage
+// Syntax:
+
+// .selector {
+//   @include prefs((
+//     column-count: 3,
+//     column-gap: 1.5em,
+//     column-rule: 2px solid hotpink
+//   ), $using-vendors);
+// }
+// .class {@include pref(column-count,3,webkit moz ms);}
+
+// $all-vendors: (
+//   'webkit','apple','khtml',
+//   'moz','rim','xv',
+//   'ms','o'
+// );
+
+// $using-vendors: (
+//   'webkit', 'moz', 'ms', 'o'
+// );
+// Mixin for multiple declarations
+// Syntax:
+// selector {
+//   @include prefix((
+//     column-count: 3,
+//     column-gap: 1.5em,
+//     column-rule: 2px solid hotpink
+//   ), webkit moz);
+// }
+// @mixin prefix($declarations, $prefixes: ()) {
+//  @each $property, $value in $declarations {
+//    @each $prefix in $prefixes {
+//      #{'-' + $prefix + '-' + $property}: $value;
+//    }
+//    #{$property}: $value;
+//  }
+// }
+
+// Mixin for single property to be prefixed
+//  Syntax:
+// .selector {@include pref(transform, rotate(45deg), webkit ms);}
+
+// @mixin pref($property, $value, $prefixes){
+//   @each $prefix in $prefixes {
+//     #{'-' + $prefix + '-' + $property}: $value;
+//   }
+//   #{$property}: $value;
+// }
+
+// ---------------------------------------------------------- MIXINS //
+@mixin debug-map($map) {
+    @at-root {
+        @debug-map {
+            __toString__: inspect($map);
+            __length__: length($map);
+            __depth__: depth($map);
+            __keys__: map-keys($map);
+            __properties__ {
+                @each $key, $value in $map {
+                    #{'(' + type-of($value) + ') ' + $key}: inspect($value);
+                }
+            }
+        }
+    }
+}
+// ---------------------------------------------------------- MIXINS //
+@mixin float-left {
+  float: left !important;
+}
+@mixin float-right {
+  float: right !important;
+}
+@mixin float-none {
+  float: none !important;
+}
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

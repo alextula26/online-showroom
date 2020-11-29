@@ -1,0 +1,216 @@
+.dealership-list{
+  @mixin media_height(){
+    height: 340px;
+    @include media-breakpoint-up(md){
+      height: 168px;
+    }
+    @include media-breakpoint-up(lg){
+      height: 230px;
+    }
+    @include media-breakpoint-up(xl){
+      height: 302px;
+    }
+    @include media-breakpoint-up(xxl){
+      height: 180px;
+    }
+    @include media-breakpoint-up(qxl){
+      height: 260px;
+    }
+  }
+  &-item{
+    margin-bottom: 80px;
+    &--title{
+      display: inline-block;
+      height: 15px;
+      white-space: nowrap;
+      &--inner{
+        // color: _palette(model-list-color);
+        // background-color: _palette(body-bg);
+        display: inline-block;
+        // font-size: rem(21);
+        line-height: 24px;
+        padding-right: 10px;
+        position: relative;
+        top: -5px;
+        &:empty{
+          display: none;
+        }
+      }
+      &--outer{
+        // background-color: _palette(model-list-bgColor);
+        height: 16px;
+        margin-bottom: 21px;
+      }
+      &--icon{
+        display: inline-block;
+        max-height: 26px;
+        margin-right: 17px;
+        width: auto;
+      }
+    }
+    &--map{
+      &--inner{
+        @include media_height;
+      }
+      margin-bottom: 20px;
+      @include media-breakpoint-up(md){
+        margin-bottom: 40px;
+      }
+    }
+    &--image{
+      align-items: center;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+      @include media-breakpoint-up(md){
+        margin-bottom: 40px;
+      }
+      overflow: hidden;
+      @include media_height;
+      img{
+        display: block;
+        margin: 0 auto;
+        max-width: none;
+        width: auto;
+        max-height: 100%;
+        min-width: 100%;
+        object-fit: cover;
+      }
+    }
+    &--info{
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      flex-direction: column;
+      padding-left: 20px;
+      &--item{
+        margin-bottom: 20px;
+      }
+      &--phone{}
+      .svg--phone,
+      .svg--map-pointer,
+      .svg--clock{
+        display: block;
+        float: left;
+        height: 16px;
+        text-align: center;
+        margin-right: 30px;
+        width: 16px;
+        svg{
+          .fill{
+            fill: _colors(black);
+          }
+          .stroke{
+            stroke: _colors(black);
+          }
+        }
+      }
+      .svg--map-pointer{
+        svg{
+          height: 16px;
+          width: 12px;
+        }
+      }
+      .svg--phone{
+        svg{
+          height: 16px;
+          width: 16px;
+        }
+      }
+      .svg--clock{
+        svg{
+          height: 16px;
+          width: 16px;
+        }
+      }
+      .opening-hours{
+        .label-sm{
+          display: none;
+        }
+      }
+    }
+    &--brand{
+      overflow: hidden;
+      margin-bottom: 30px;
+      .jspPane{
+        align-items: center;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        // justify-content: space-between;
+        // overflow-y: hidden;
+        // overflow-x: auto;
+        // height: 81px;
+      }
+      &--item{
+        &:hover{
+        }
+        // text-align: center;
+        &-outer{
+          border-color: transparent;
+          border-style: solid;
+          border-width: 1px;
+          padding: 10px;
+          height: 100px;
+          // min-width: calc(100% / 8);
+          min-width: 110px;
+          width: 110px;
+          + .dealership-list-item--brand--item-outer{
+            margin-left: 10px;
+            @include media-breakpoint-up(xl){
+            }
+            @include media-breakpoint-up(xxl){
+              margin-left: 20px;
+            }
+            @include media-breakpoint-up(qxl){
+              margin-left: 25px;
+            }
+          }
+        }
+      // + .dealership-list-item--brand--item{
+      //   margin-left: 90px;
+      // }
+      }
+      &--counter{
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        text-align: center;
+        &-inner{
+          color: _colors(white);
+          // font-size: 12px;
+          display: inline-block;
+          line-height: 16px;
+          padding: 0 4px;
+        }
+      }
+      &--logo{
+        align-items: center;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        justify-content: center;
+        height: 52px;
+        margin: 0 auto;
+        width: 90px;
+        a{
+          display: block;
+        }
+        img{
+          // max-height:64px;
+          max-height:43px;
+        }
+      }
+    }
+  }
+}

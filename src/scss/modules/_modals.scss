@@ -1,0 +1,279 @@
+// .modal-open      - body class for killing the scroll
+// .modal           - container to scroll within
+// .modal-dialog    - positioning shell for the actual modal
+// .modal-content   - actual modal w/ bg and corners and stuff
+
+$modal-backdrop-bg: transparentize(#000,0.3);
+// Kill the scroll on the body
+.modal-open {
+  overflow: hidden;
+}
+
+// Container that the modal scrolls within
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zindex-modal;
+  display: none;
+  overflow: hidden;
+  // Prevent Chrome on Windows from adding a focus outline. For details, see
+  // https://github.com/twbs/bootstrap/pull/10951.
+  outline: 0;
+  // We deliberately don't use `-webkit-overflow-scrolling: touch;` due to a
+  // gnarly iOS Safari bug: https://bugs.webkit.org/show_bug.cgi?id=158342
+  // See also https://github.com/twbs/bootstrap/issues/17695
+
+  // When fading in the modal, animate it to slide down
+  &.fade .modal-dialog {
+    @include transition($modal-transition);
+    transform: translate(0, -25%);
+  }
+  &.show .modal-dialog { transform: translate(0, 0); }
+  .modal-open & {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .mobile-view.modal-open &{
+    // overflow: hidden; // простоя модалка не скролится в мобилке. если выходит за пределы
+  }
+}
+// Shell div to position the modal with bottom padding
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: $modal-dialog-margin;
+  @include media-breakpoint-up(sm) {
+    max-width: $modal-md;
+    margin: $modal-dialog-margin-y-sm-up auto;
+  }
+  @include media-breakpoint-down(md){
+    max-width: #{calc(100% - 20px)};
+  }
+  &.modal-sticky{
+    .mobile-view &{
+      margin: 0;
+    }
+  }
+}
+
+// Actual modal
+.modal-content {
+  position: relative;
+  @if $enable-flex{
+    display: flex;
+    flex-direction: column;
+  }
+  background-color: $modal-content-bg;
+  background-clip: padding-box;
+  border: $modal-content-border-width solid $modal-content-border-color;
+  @include border-radius($border-radius-lg);
+  @include box-shadow($modal-content-box-shadow-xs);
+  // Remove focus outline from opened modal
+  outline: 0;
+  &.modal-sticky{
+    .mobile-view &{
+      height: 100vh;
+    }
+  }
+}
+
+// Modal background
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zindex-modal-backdrop;
+  background-color: $modal-backdrop-bg;
+
+  // Fade for backdrop
+  &.fade { opacity: 0; }
+  &.show { opacity: $modal-backdrop-opacity; }
+}
+
+// Modal header
+// Top section of the modal w/ title and dismiss
+.modal-header {
+  @if $enable-flex{
+    display: flex;
+    align-items: center; // vertically center it
+    justify-content: space-between; // Put modal header elements (title and dismiss) on opposite ends
+  }
+  padding: 30px 30px 0;
+  // border-bottom: $modal-header-border-width solid $modal-header-border-color;
+  h3{
+    margin: 0;
+  }
+  .close {
+    // background: none;
+    background-color: transparent;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEyIDEyIj48cGF0aCBkPSJNMSwxLDExLDExIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTExLDEsMSwxMSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==');
+    background-size: 12px;
+    background-repeat: no-repeat;
+    border: none;
+    font-size: 40px;
+    height: 12px;
+    margin-left: auto; // Force icon to the right even when there's no .modal-title
+    opacity: 1;
+    right: 10px;
+    top: 10px;
+    text-indent: -9999px;
+    // float: right;
+    position: absolute;
+    width: 12px;
+    z-index: 1;
+    &:hover, &:focus{
+      border: none;
+      outline: none;
+    }
+    .modal-video &{
+      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEyIDEyIj48cGF0aCBkPSJNMSwxLDExLDExIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTExLDEsMSwxMSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==');
+      background-size: 10px;
+      height: 10px;
+      top: -15px;
+      right: -15px;
+      width: 10px;
+    }
+  }
+  .modal-video &{
+    padding: 0;
+    margin: 0;
+  }
+}
+
+// Title text within header
+.modal-title {
+  font-size: rem(16);
+  line-height: 20px;
+  margin-bottom: 0;
+  text-align: left;
+  text-transform: uppercase;
+  .modal-nullheader &{
+    font-style: normal;
+    font-size: rem(18);
+    line-height: 24px;
+    margin-bottom: 30px;
+    text-transform: none;
+  }
+}
+
+// Modal body
+// Where all modal content resides (sibling of .modal-header and .modal-footer)
+.modal-body {
+  position: relative;
+  // Enable `flex-grow: 1` so that the body take up as much space as possible
+  // when should there be a fixed height on `.modal-dialog`.
+  @if $enable-flex{
+    flex: 1 1 auto;
+  }
+  padding: 20px 30px 30px;
+  // color: #000;
+  .diclaration{
+    color: #989DA5;
+    font-size: rem(10);
+    line-height: 12px;
+    margin-top: 10px;
+  }
+  h2.title{
+    font-style: normal;
+    font-size: rem(18);
+    line-height: 24px;
+    text-transform: none;
+  }
+  .link-add-comment{
+    display: block;
+    color: _palette(modal-link-add-comment);
+    font-size: rem(14);
+    letter-spacing: 0.05em;
+    line-height: 17px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+  }
+  .modal-nullheader &{
+    padding-top: 0;
+  }
+  .modal-sticky &{
+    .mobile-view &{
+      overflow: scroll;
+      height: calc(100vh - 34px)
+    }
+  }
+  .modal-nopadding &{
+    padding: 0;
+  }
+  .modal-video &{
+    padding: 10px;
+  }
+}
+
+// Footer (for actions)
+.modal-footer {
+  .modal-nofooter &{
+    padding: 0;
+  }
+  .modal-video &{
+    padding: 0;
+  }
+  @if $enable-flex{
+    display: flex;
+    align-items: center; // vertically center
+    justify-content: flex-end; // Right align buttons with flex property because text-align doesn't work on flex items
+  }
+  padding: $modal-inner-padding;
+  // border-top: $modal-footer-border-width solid $modal-footer-border-color;
+
+  // Easily place margin between footer elements
+  > :not(:first-child) { margin-left: .25rem; }
+  > :not(:last-child) { margin-right: .25rem; }
+}
+
+// Measure scrollbar width for padding body during modal show/hide
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+// Scale up the modal
+@include media-breakpoint-up(sm) {
+  // Automatically set modal's width for larger viewports
+  .modal-content {
+    @include box-shadow($modal-content-box-shadow-sm-up);
+  }
+  .modal-sm { max-width: $modal-sm; }
+}
+
+@include media-breakpoint-up(lg) {
+  .modal-lg { max-width: $modal-lg; }
+}
+
+@media (min-width: 400px) {
+  .modal-mdsm {
+    max-width: $modal-mdsm;
+  }
+}
+.modal-video {
+  iframe{
+    width: 100%;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 960px;
+  }
+}
+
+.modal-xxl {
+  max-width: 100%;
+  @include media-breakpoint-up(xxl) {
+    max-width: $modal-xxl;
+  }
+}
+.modal-video-title{
+  font-size: rem(22);
+  margin: 15px 0 25px;
+}

@@ -1,0 +1,388 @@
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+/*                                                                  */
+/*                          B U T T O N S                          */
+/*                                                                */
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+
+.btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  // box-shadow: inset 0px 4px 4px rgba(255, 255, 255, 0.25);
+  border-radius: rem(_size(btn-border-radius));
+  cursor: pointer;
+  display: inline-block;
+  font-size: rem(_size(btn-font-size));
+  // font-weight: _size(btn-font-weight);
+  height: #{_size(btn-height)}px;
+  line-height: #{_size(btn-height) - _size(btn-border-width-y)*2}px;
+  letter-spacing: #{_size(btn-letter-spacing)}em;
+  padding: 0 rem(_size(btn-padding-x));
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  @include transition($btn-transition);
+  @include hover-focus {
+    text-decoration: none;
+  }
+  &:hover,
+  &.hover {
+    .svg--icon {
+      + .btn--text{
+        left: 10px;
+      }
+    }
+    .btn--text{
+      + .svg--icon{
+        left: 10px;
+      }
+    }
+  }
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: none;
+  }
+
+  &.disabled,
+  &:disabled {
+    cursor: $cursor-disabled;
+    opacity: 0.5;
+    @include box-shadow(none);
+  }
+
+  &:active,
+  &.active {
+    background-image: none;
+    @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+  }
+  .svg--icon {
+      height: 19px;
+      -webkit-transition: left .8s linear;
+      -o-transition: left .8s linear;
+      transition: left .8s linear;
+      width: auto;
+      + .btn--text{
+        left: 0;
+        margin-left: 10px;
+        position: relative;
+      }
+  }
+  .btn--text{
+    -webkit-transition: left .8s linear;
+    -o-transition: left .8s linear;
+    transition: left .8s linear;
+    + .svg--icon{
+      left: 0;
+      margin-left: 10px;
+      position: relative;
+    }
+  }
+  svg{
+    @include transition($svg-transition);
+    height: 19px;
+    width: auto;
+  }
+  .svg--arrow{
+    top: -2px;
+  }
+  .svg--lock{
+    top: -2px;
+  }
+  .svg--gift{
+    top: -2px;
+  }
+  .svg--steering-wheel{
+    top: -2px;
+  }
+}
+
+a.btn.disabled,
+fieldset[disabled] a.btn {
+  pointer-events: none;
+}
+
+@each $name, $value in $btn {
+  .btn-#{$name} {
+    background-color: map-deep-get($btn, $name, 'background');
+    background-image: none;
+    border-color: map-deep-get($btn, $name, 'border-color');
+    color: map-deep-get($btn, $name, 'color');
+    &:hover, &:focus{
+      background-color: map-deep-get($btn, $name, 'hover-background');
+      border-color: map-deep-get($btn, $name, 'hover-border-color');
+      color: map-deep-get($btn, $name, 'hover-color');
+    }
+    &.active{
+      background-color: map-deep-get($btn, $name, 'active-background');
+      border-color: map-deep-get($btn, $name, 'active-border-color');
+      color: map-deep-get($btn, $name, 'active-color');
+      svg{
+        fill: map-deep-get($btn, $name, 'active-svg');
+        stroke: map-deep-get($btn, $name, 'active-svg');
+      }
+    }
+  }
+}
+
+.btn--link{
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  display: inline-block;
+  font-size: rem(_size(btn-font-size));
+  // font-weight: _size(btn-font-weight);
+  height: auto;
+  padding: 0;
+  text-align: center;
+  line-height: normal;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  &:hover, &:focus{
+    border: none;
+    box-shadow: none;
+    outline: none;
+  }
+  .btn--text{
+    border: none;
+    display: inline-block;
+  }
+  .btn--text--active{
+    border: none;
+    display: none;
+  }
+  &.active{
+    .btn--text{
+      display: none;
+    }
+    .btn--text--active{
+      display: inline-block;
+    }
+  }
+}
+.btn--link--icon{
+  svg{
+    height: 24px;
+    margin-right: 10px;
+  }
+  .svg--download{
+    svg{
+      height: 24px;
+      width: 18px;
+    }
+  }
+}
+
+.btn--testdrive{
+  svg{
+    height: 19px;
+    width: 19px;
+  }
+}
+.btn--credit{
+  svg{
+    height: 14px;
+    width: 18px;
+  }
+}
+.btn--exchange{
+  svg{
+    height: 18px;
+    width: 18px;
+  }
+}
+.btn--booking{
+  svg{
+    height: 18px;
+    width: 17px;
+  }
+}
+.btn{
+  .svg--arrow2{
+    height: 10px;
+    position: relative;
+    top: -1px;
+    width: 7px;
+    svg{
+      height: 10px;
+      width: 7px;
+    }
+  }
+}
+.btn--reset{
+  border-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  text-transform: none;
+  .svg--icon{
+    margin-left: 8px;
+  }
+  svg{
+    height: 12px;
+    width: 12px;
+  }
+}
+.btn--sorting{
+  & + .btn--sorting{
+    margin-left: 20px;
+  }
+}
+
+
+.btn--alloffers{
+  #con-offer &{
+    margin-top: 17px;
+  }
+}
+.btn--favorite{
+  .check{
+    display: none;
+  }
+  .notcheck{
+    display: block;
+  }
+  &.active{
+    .check{
+      display: block;
+    }
+    .notcheck{
+      display: none;
+    }
+  }
+}
+.btn--favorite,
+.btn--share,
+.btn--comparison {
+  height: 17px;
+  .svg--icon{
+    width: auto;
+    margin: 0 10px 0 0;
+  }
+  svg{
+    height: 17px;
+    vertical-align: top;
+    width: auto;
+  }
+  .tooltip--text,
+  .icontooltip--text{
+    display: block;
+  }
+  .icontooltip--text--active{
+    display: none;
+  }
+  .btn--text--active{
+    display: none;
+    svg{
+      height: 15px;
+      margin-left: 5px;
+      position: relative;
+      top: -1px;
+      vertical-align: middle;
+      width: 15px;
+    }
+  }
+  &.active{
+    .tooltip--text,
+    .icontooltip--text{
+      display: none;
+    }
+    .btn--text--active,
+    .icontooltip--text--active{
+      display: inline-block;
+    }
+  }
+  .wrapperIcontooltip{
+    position: relative;
+  }
+  .icontooltip--text--active,
+  .icontooltip--text{
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    // z-index: -1;
+  }
+}
+.btn--getoffer{
+  .svg--tag{
+    height: 18px;
+    width: 18px;
+    svg{
+      height: 18px;
+      width: 18px;
+    }
+  }
+}
+
+.btn--show{
+  border: none;
+  background-color: transparent;
+  &-counter{
+    font-size: rem(36);
+    padding: 0 10px;
+    vertical-align: middle;
+  }
+  .mobile-view &{
+    padding: 0;
+  }
+}
+//
+// Block button
+//
+
+.btn-block {
+  display: block;
+  padding: 0;
+  width: 100%;
+}
+.mobile-btn-block{
+  .mobile-view &{
+    display: block;
+    padding: 0;
+    width: 100%;
+  }
+}
+// // Vertically space out multiple block buttons
+// .btn-block + .btn-block {
+//   margin-top: $btn-block-spacing-y;
+// }
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  &.btn-block {
+    width: 100%;
+  }
+}
+
+.close {
+  // float: right;
+  color: $close-color;
+  font-size: $close-font-size;
+  // font-weight: $close-font-weight;
+  line-height: 1;
+  opacity: .5;
+  position: absolute;
+  text-shadow: $close-text-shadow;
+  @include hover-focus {
+    color: $close-color;
+    cursor: pointer;
+    opacity: .75;
+    text-decoration: none;
+  }
+}
+
+button.close {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}

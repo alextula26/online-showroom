@@ -1,0 +1,163 @@
+// ------------------------------------------------------- FUNCTIONS //
+$browser-context: 16;
+$font-size-context: $browser-context;
+
+@function rem( $pixels, $context: $font-size-context ) {
+  @return ($pixels/$context)*1rem;
+}
+@function em($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  @return $pixels / $context * 1em;
+}
+
+@function remove-nth($list, $index) {
+  $result: null;
+  @if type-of($index) != number {
+    @warn "$index: #{quote($index)} is not a number for `remove-nth`.";
+  }
+  @else if $index == 0 {
+    @warn "List index 0 must be a non-zero integer for `remove-nth`.";
+  }
+  @else if abs($index) > length($list) {
+    @warn "List index is #{$index} but list is only #{length($list)} item long for `remove-nth`.";
+  }
+  @else {
+    $result: ();
+    $index: if($index < 0, length($list) + $index + 1, $index);
+    @for $i from 1 through length($list) {
+      @if $i != $index {
+        $result: append($result, nth($list, $i));
+      }
+    }
+  }
+  @return $result;
+}
+
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+@function val($map, $keys...) {
+  @if nth($keys, 1) == null {
+    $keys: remove-nth($keys, 1);
+  }
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+@function _theme-colors($keys...) {
+  @return val($theme-colors, $keys...);
+}
+@function _fonts-list($keys...) {
+  @return val($fonts-list, $keys...);
+}
+@function _fonts-weight($keys...) {
+  @return val($fonts-weight, $keys...);
+}
+@function _theme-palette($keys...) {
+  @return val($theme-palette, $keys...);
+}
+@function _theme-size($keys...) {
+  @return val($theme-size, $keys...);
+}
+@function _theme-input($keys...) {
+  @return val($theme-input, $keys...);
+}
+@function _theme-btn($keys...) {
+  @return val($theme-btn, $keys...);
+}
+@function _theme-btn-list($keys...) {
+  @return val($theme-btn-list, $keys...);
+}
+@function _theme-badge($keys...) {
+  @return val($theme-badge, $keys...);
+}
+@function _theme-datetimepicker($keys...) {
+  @return val($theme-datetimepicker, $keys...);
+}
+@function _theme-boolean($keys...) {
+  @return val($theme-boolean, $keys...);
+}
+
+@function theme-deep($theme-btn, $keys...) {
+  @each $key in $keys {
+    @return map-deep-get($theme-btn, $keys...);
+  }
+  @return $theme-btn-list;
+}
+@function _theme-deep-deep($theme-btn-list, $keys...) {
+  @each $key in $keys {
+    @return theme-deep($theme-btn-list, $keys...);
+  }
+  @return $theme-btn;
+}
+
+@mixin theme-button-variant($name, $background, $border-width, $border-color, $color, $hover-background, $hover-border-color, $hover-color){
+  $name: map-get($theme-btn);
+  background-color: map-deep-get($theme-btn, $name, 'background');
+  background-image: none;
+  border: map-deep-get($theme-btn, $name, 'border-width') solid map-deep-get($theme-btn, $name, 'border-color');
+  color: map-deep-get($theme-btn, $name, 'color');
+  &:hover, &:focus{
+    background-color: map-deep-get($theme-btn, $name, 'hover-background');
+    border-color: map-deep-get($theme-btn, $name, 'hover-border-color');
+    color: map-deep-get($theme-btn, $name, 'hover-color');
+  }
+}
+@mixin placeholder($color: _misc(placeholder-color), $fz: _misc(placeholder-size), $fw:normal, $op: 1) {
+  &::-moz-placeholder {
+    color: $color;
+    font-size: rem($fz);
+    font-weight: $fw;
+    opacity: $op;
+  }
+  &:-moz-placeholder {
+    color: $color;
+    font-size: rem($fz);
+    font-weight: $fw;
+    opacity: $op;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+    font-size: rem($fz);
+    font-weight: $fw;
+    opacity: $op;
+  } // Internet Explorer 10+
+  &::-webkit-input-placeholder  {
+    color: $color;
+    font-size: rem($fz);
+    font-weight: $fw;
+    opacity: $op;
+  } // Safari and Chrome
+}
+
+@mixin underline($color-underline){
+  position: relative;
+  &:before{
+    border-bottom: 1px solid $color-underline;
+    bottom: -5px;
+    content: '';
+    left: 0;
+    position: absolute;
+    -webkit-transition: width 0.5s;
+    -moz-transition: width 0.5s;
+    overflow: hidden;
+    transition: width 0.5s;
+    width: 0;
+  }
+  &:hover, &.active{
+    &:before{
+      width: 100%;
+    }
+  }
+}

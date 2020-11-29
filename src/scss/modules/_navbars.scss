@@ -1,0 +1,361 @@
+/* ============================= */
+/*  Navbar                       */
+/* ============================= */
+// $navbar-upbreakpoint-bg:            transparentize($navbar-light-color, .5) !default;
+$navbar-upbreakpoint-bg:            $white;
+// $navbar-downbreakpoint-bg:          transparentize($navbar-light-color, .2) !default;
+// $navbar-downbreakpoint-bg:          $brown;
+$navbar-downbreakpoint-bg:          $white;
+
+$navbar-active-color:               $very-bright-violet;
+$navbar-color:                      $navbar-light-color !default;
+$navbar-color:                      $very-bright-violet;
+$navbar-sidebar-color:              $dark-grey;
+$navbar-link-bgc-hover:             $gray;
+$navbar-hover-color:                $navbar-light-hover-color !default;
+$navbar-hover-color:                $very-bright-violet;
+$navbar-disabled-color:             $navbar-light-disabled-color !default;
+$navbar-padding-y:                  0;
+$navbar-padding-x:                  0;
+$navbar-brand-mr:                   rem(40);
+$navbar-link-fz:                    rem(15);
+$navbar-link-fw:                    600;
+$navbar-link-ls:                    0;
+$navbar-link-lh:                    48;
+$navbar-brand-fs:                   1em;
+$navbar-active-bgc:                 $red;
+$navbar-dropdown-bg: transparentize(#000, .5);
+$navbar-dropdown-bg-hover: transparentize(#000, .5);
+
+
+.navbar {
+  position: relative;
+  header &{
+    -webkit-order: 1;
+    -moz-order: 1;
+    -ms-order: 1;
+    -o-order: 1;
+    order: 1;
+  }
+  footer &{
+    padding: 0 rem(15);
+    @include media-breakpoint-up(lg){
+      padding: 0;
+    }
+  }
+  // @if $enable-flex {
+  //   display: flex;
+  //   flex-direction: column;
+  // }
+  // background-color: $white;
+  // @include media-breakpoint-down(md){
+  //   background-color: $navbar-upbreakpoint-bg;
+  // }
+  padding: $navbar-padding-y $navbar-padding-x;
+  transition-duration: 0.2s;
+  .navbar-nav{
+    list-style-type: none;
+    margin: 0;
+    padding-left: rem(0);
+    @include clearfix;
+    header &{
+      margin-top: rem(24);
+      @include media-breakpoint-up(lg){
+        margin-top: 0;
+      }
+    }
+  }
+  .dropdown-menu {
+    @include media-breakpoint-down(md){
+      @include box-shadow(none);
+      padding-top: 0;
+      // padding-bottom: 1.2em;
+    }
+    @include media-breakpoint-up(lg){
+      header &{
+      // background-color: transparent;
+        background-color: $white;
+        padding-bottom: rem(10);
+        margin-right: rem(-15);
+      }
+    }
+  }
+  .dropdown-item{
+    // font-size: em(14);
+    // line-height: 2em;
+    text-decoration: none;
+    header &{
+      padding: rem(8) 0;
+      line-height: rem(12);
+    }
+    @include media-breakpoint-down(md){
+      text-align: center;
+    }
+    @include media-breakpoint-up(lg){
+      header &{
+        color: $black;
+        display: block;
+        float: left;
+        font-size: rem(18);
+        // font-weight: 100;
+        padding: rem(11) 0;
+        text-align: left;
+        width: auto;
+        & + .dropdown-item {
+          margin-left: rem(36);
+        }
+      }
+    }
+    &.active,  &:active {
+      background-color: transparent;
+      text-decoration: underline;
+      header &{
+        color: $orange;
+      }
+    }
+    @include hover-focus {
+      background-color: $navbar-dropdown-bg-hover;
+      color:#fff;
+      text-decoration: none;
+      header &{
+        background-color: transparent;
+        color: $black;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.navbar-toggler {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: rem(18) rem(27) rem(0) rem(0);
+  @include media-breakpoint-up(lg){
+    display: none;
+  }
+  .svg--navbar-toggler-icon{
+    display: none;
+    height: rem(12);
+    width: rem(18);
+    svg{
+      fill: $orange;
+      height: rem(12);
+      vertical-align: top;
+      width: rem(18);
+    }
+  }
+  .svg--close{
+    display: block;
+    height: rem(14);
+    width: rem(18);
+    svg{
+      fill: $orange;
+      height: rem(14);
+      vertical-align: top;
+      width: rem(14);
+    }
+  }
+  &.collapsed{
+    .svg--navbar-toggler-icon{
+      display: block;
+    }
+    .svg--close{
+      display: none;
+    }
+  }
+  &:focus{
+    outline: none;
+  }
+}
+
+// .nav-tabs {
+//   &.nav{
+//     padding-left: 0;
+//     margin-top: 0;
+//     margin-bottom: 0;
+//     @include clearfix;
+//   }
+// }
+// .navbar-brand {
+//   color: $navbar-active-color;
+//   display: inline-block;
+//   font-size: $navbar-brand-fs;
+//   // padding-top: .25rem;
+//   // padding-bottom: .25rem;
+//   padding: 0;
+//   margin-right: $navbar-brand-mr;
+//   line-height: inherit;
+//   white-space: nowrap;
+//   @include hover-focus {
+//     color: $navbar-active-color;
+//     text-decoration: none;
+//   }
+// }
+
+// .navbar-toggler2{
+//   @include media-breakpoint-up(lg){
+//     &:hover{
+//      & + .sidebar_menu {
+//         display: block;
+//       }
+//     }
+//   }
+// }
+
+
+.nav-item {
+  // line-height: $navbar-brand-height;
+  text-align: center;
+  footer &{
+    float: left;
+  }
+  @include media-breakpoint-up(lg){
+    display: block;
+    float: left;
+  }
+  &:first-child {
+    .nav-link{
+      border-left: 0;
+      padding-left: 0;
+    }
+  }
+  // &:last-child {
+  //   @include media-breakpoint-down(md){
+  //   .nav-link{
+  //       padding-bottom: 0;
+  //     }
+  //   }
+  // }
+  &.show{
+    position: relative;
+  }
+}
+
+.nav-link {
+  border-bottom: 0;
+  // color: inherit;
+  // display: inline-block;
+  display: block;
+  // font-family: $font-family-base2;
+  // letter-spacing: $navbar-link-ls;
+  position: relative;
+  // text-transform: uppercase;
+  z-index:10;
+  header &{
+    color: $black;
+    font-size: rem(18);
+    // font-weight: 100;
+    line-height: rem(12);
+    padding: rem(8) 0;
+    @include media-breakpoint-up(lg){
+      color: $very-bright-violet;
+      font-size: rem(22);
+      // font-weight: 600;
+      opacity: .5;
+      padding: rem(25) rem(18) rem(19);
+    }
+  }
+  footer &{
+    color: $white;
+    font-size: rem(18);
+    // font-weight: 300;
+    line-height: rem(70);
+    opacity: 1;
+    padding: rem(0) rem(18) rem(0);
+  }
+  @include transition(all .3s linear);
+  @include hover-focus {
+    color: $navbar-hover-color;
+    // background-color: $navbar-link-bgc-hover;
+    text-decoration: none;
+    opacity: 1;
+  }
+  &.disabled {
+    color: $navbar-disabled-color;
+  }
+  .open > &,
+  .active > &,
+  &.open,
+  &.active {
+    opacity: 1;
+    header &{
+      color: $very-bright-violet;
+      text-decoration: none;
+    }
+    footer &{
+      color: $white;
+    }
+  }
+}
+
+// .navbar-text {
+//   color: $navbar-color;
+//   display: inline-block;
+//   padding-top:    .425rem;
+//   padding-bottom: .425rem;
+// }
+
+
+// Generate series of `.navbar-toggleable-*` responsive classes for configuring
+// where your navbar collapses.
+
+.navbar-toggleable {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    &#{$infix} {
+      @include media-breakpoint-down($breakpoint) {
+        .navbar-nav {
+          .dropdown-menu {
+            position: static;
+            float: none;
+          }
+        }
+        .navbar-collapse.show{
+          .dropdown-menu {
+            display: block;
+          }
+        }
+        > .container {
+          padding-right: 0;
+          padding-left: 0;
+        }
+      }
+
+      @include media-breakpoint-up($next) {
+        @if $enable-flex {
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+          .navbar-nav {
+            flex-direction: row;
+            .nav-link {
+              padding-right: .5rem;
+              padding-left: .5rem;
+            }
+          }
+          > .container {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+          }
+        }
+        .navbar-collapse {
+        @if $enable-flex {
+          display: flex !important;
+          }@else {
+            display: block !important;
+          }
+          float: left;
+          // width: 100%;
+        }
+        .navbar-toggler {
+          display: none;
+        }
+      }
+    }
+  }
+}

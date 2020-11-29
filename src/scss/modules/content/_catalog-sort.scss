@@ -1,0 +1,70 @@
+.catalog-sort{
+  // border-bottom: 1px solid _colors(light-grey);
+  // color: _colors(grey);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  font-style: normal;
+  font-weight: normal;
+  // font-size: rem(14);
+  line-height: 18px;
+  padding-bottom: 9px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  label{
+    color: _colors(blue);
+    font-style: normal;
+    font-weight: normal;
+    // font-size: rem(14);
+    font-size: inherit;
+    line-height: 17px;
+    letter-spacing: 0.05em;
+    margin-left: 10px;
+  }
+  .svg--sort {
+    height: 8px;
+    margin-left: 5px;
+    width: 5px;
+    svg{
+      height: 8px;
+      width: 5px;
+    }
+    .stroke{
+      stroke: _colors(blue);
+    }
+    &.sort--desc{
+      svg{
+        transform: rotate(180deg);
+      }
+    }
+    &.sort--asc{
+      svg{
+        transform: rotate(0deg);
+      }
+    }
+  }
+  .btn--sorting{
+    .svg--sort{
+      display: none;
+    }
+    .asc,
+    .desc{
+      & + .svg--sort{
+        display: inline-block;
+      }
+    }
+  }
+  .asc{
+    & + .svg--sort{
+      svg{
+        transform: rotate(0);
+      }
+    }
+  }
+  .desc{
+    & + .svg--sort{
+      svg{
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

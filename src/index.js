@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import OnlineShowroomApp from './App';
 import reportWebVitals from './reportWebVitals';
-import './index.scss';
+import './scss/compiled.scss';
 
 ReactDOM.render(
   <OnlineShowroomApp />,

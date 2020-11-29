@@ -1,0 +1,9 @@
+/* ============================= */
+/*  Footer                       */
+/* ============================= */
+
+footer{
+  @include media-breakpoint-up(md){
+    margin-top: 60px;
+  }
+}

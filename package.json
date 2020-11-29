@@ -19,6 +19,7 @@
     "axios": "^0.21.0",
     "babel-eslint": "^10.1.0",
     "bootstrap": "^4.5.3",
+    "bootstrap-select": "^1.13.18",
     "lodash": "^4.17.20",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",

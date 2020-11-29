@@ -1,0 +1,61 @@
+// ----------------------------------------------------------- SIZE //
+// Gets a size value.
+// @param {string} $keys Key(s).
+// @return {string} Value.
+
+@function _size($keys...) {
+  @return val($size, $keys...);
+}
+
+$size: (
+  badge-font-size:                      14,
+  btn-border-radius:                    0,
+  btn-border-width:                     2,
+  btn-border-width-x:                   2,
+  btn-border-width-y:                   1,
+  btn-font-size:                        14,
+  btn-font-weight:                      400,
+  btn-letter-spacing:                   0.05,
+  // btn-line-height:                      32,
+  btn-height:                           46,
+  btn-padding-x:                        30,
+  bootstrap-switch-label-size:          21,
+  border-radius:                        4px,
+  caret-width:                          4px,
+  caret-width-base:                     4px,
+  carousel-indicator-width:             87,
+  carousel-indicator-height:            37,
+  carousel-indicator-spacer:            8,
+  colorfilter-size:                     36,
+  colorfilter-item-border:              3,
+  checkboxItem--size:                   26,
+  dealer-info-block--name-fontSize:     16,
+  dealer-info-block--phone-fontSize:    18,
+  instock-block-buttonFontSize:         13,
+  element-height:                       2.75em,
+  element-margin:                       2em,
+  form-group-mb:                        20, //px to rem
+  form-control-borderRadius:            2,
+  gutter:                               10px,
+  headings-line-height:                 20, //px to rem
+  headings-margin-bottom:               20, //px to rem
+  label-margin-bottom:                  20, //px to rem
+  leading-values:                       32, //px to rem
+  line-height-base:                     22, //px to rem
+  nav-link-fontSize:                    13, //px to rem
+  paragraph-margin-bottom:              20, //px to rem
+  placeholder-size:                     14,
+  placeholder-weight:                   400,
+  spacer:                               1rem,
+  sidebar-width:                        360,
+  sidebar-width-alt:                    320,
+  sidebar-width-alt2:                   295,
+  sidebar-width-alt3:                   260,
+  table-border-width:                   1,
+  table-font-size:                      14,
+  table-cell-padding-x:                 5,
+  table-cell-padding-y:                 0,
+  vehicle-list-item--title-fz:          18,
+  vehicle-list-item--price-fz:          21,
+  vehicle-list-item-pad:                20,
+);

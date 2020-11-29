@@ -1,0 +1,49 @@
+// ----------------------------------------------------- PLACEHOLDER //
+// @mixin placeholder($color: $placeholder-color, $fw: $placeholder-fw) {
+//   &::-moz-placeholder {
+//     color: $color;
+//     font-weight: $fw;
+//     opacity: 1;
+//   }
+//   &:-moz-placeholder {
+//     color: $color;
+//     font-weight: $fw;
+//     opacity: 1;
+//   }
+//   &:-ms-input-placeholder {
+//     color: $color;
+//     font-weight: $fw;
+//     opacity: 1;
+//   } // Internet Explorer 10+
+//   &::-webkit-input-placeholder  {
+//     color: $color;
+//     font-weight: $fw;
+//     opacity: 1;
+//   } // Safari and Chrome
+// }
+@mixin placeholder($color: _misc(placeholder-color), $fz: _misc(placeholder-size), $fw: normal, $op: 1) {
+  &::-moz-placeholder {
+    color: $color;
+    font-size: rem($fz);
+    font-weight: $fw;
+    opacity: $op;
+  }
+  &:-moz-placeholder {
+    color: $color;
+    font-size: rem($fz);
+    font-weight: $fw;
+    opacity: $op;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+    font-size: rem($fz);
+    font-weight: $fw;
+    opacity: $op;
+  } // Internet Explorer 10+
+  &::-webkit-input-placeholder  {
+    color: $color;
+    font-size: rem($fz);
+    font-weight: $fw;
+    opacity: $op;
+  } // Safari and Chrome
+}

@@ -1,0 +1,36 @@
+.notifyDiscount{
+  align-items: center;
+  display: block;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  // justify-content: center;
+  @include media-breakpoint-up(xxl){
+    margin-top: 10px;
+  }
+  .svg--gift{
+    float: left;
+    height: 25px;
+    // margin-top: 7px;
+    width: auto;
+  }
+  svg{
+    height: 25px;
+    width: auto;
+    .fill-1{
+      fill: _colors(red);
+    }
+    .fill-2{
+      fill: _colors(dark-grey);
+    }
+  }
+  &--text{
+    color: _colors(red);
+    display: block;
+    padding-left: 10px;
+    padding-right: 5px;
+    line-height: 17px;
+  }
+}

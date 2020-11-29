@@ -1,0 +1,220 @@
+.successfully{
+  margin-top: 12px;
+  padding-top: 20px;
+  text-align: left;
+  h5{
+    font-size: rem(16);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .dealership-phone{
+    display: block;
+    font-size: rem(18);
+    margin: 10px 0 8px;
+  }
+}
+
+.biiling-success{
+  background-color: #64727E;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  font-size: rem(16);
+  padding: 80px 40px 130px;
+  .mobile-view &{
+    flex-direction: column;
+    padding: 40px 10px 40px;
+  }
+  &-item{
+    .mobile-view &{
+      flex-direction: column;
+    }
+    & + &{
+      margin-left: 80px;
+      .mobile-view &{
+        margin-left: 0;
+        margin-top: 40px;
+      }
+    }
+    &:first-child{
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      justify-content: space-between;
+      .mobile-view &{
+        align-items: center;
+        flex-direction: column;
+      }
+    }
+  }
+  &-text{
+    color: _colors(white);
+    line-height: 23px;
+  }
+  &-h1{
+    color: _colors(white);
+    font-size: rem(50);
+    line-height: 60px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    .mobile-view &{
+      font-size: rem(32);
+      line-height: 40px;
+    }
+  }
+  &-phone{
+    color: _colors(white);
+    font-size: rem(36);
+    line-height: 42px;
+    margin-bottom: 40px;
+  }
+  &-card{
+    background-color: _colors(white);
+    padding: 47px 18px;
+    position: relative;
+    margin: 10px auto;
+    width: 322px;
+    &:after,
+    &:before{
+      background-color: transparent;
+      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDM2MCAxMS4xNyI+PHBhdGggZD0iTTAsMTEuMTcsMTIuMjQsMCwyMy40NiwxMS4xNywzNC42NywwLDQ1Ljg5LDExLjE3LDU3LjExLDAsNjguMzMsMTEuMTcsNzkuNTUsMCw5MC43NiwxMS4xNywxMDIsMCwxMTMuMiwxMS4xNywxMjQuNDIsMGwxMS4yMiwxMS4xN0wxNDYuODYsMGwxMS4yMSwxMS4xN0wxNjkuMjksMGwxMS4yMiwxMS4xN0wxOTEuNzMsMCwyMDMsMTEuMTcsMjE0LjE2LDBsMTEuMjIsMTEuMTdMMjM2LjYsMGwxMS4yMiwxMS4xN0wyNTksMGwxMS4yMiwxMS4xN0wyODEuNDcsMGwxMS4yMiwxMS4xN0wzMDMuOTEsMGwxMS4yMiwxMS4xN0wzMjYuMzUsMGwxMS4yMSwxMS4xN0wzNDguNzgsMCwzNjAsMTEuMTdWMEgwWiIgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+');
+      background-position: 10px top;
+      background-repeat: repeat-x;
+      background-size: auto 10px;
+      content: '';
+      display: block;
+      height: 10px;
+      left: 0;
+      position: absolute;
+      bottom: -10px;
+      width: 100%;
+      z-index: _zindex(dealer-info-map);
+    }
+    &:before{
+      background-position: 10px top;
+      top: -10px;
+      bottom: auto;
+      transform: rotate(180deg);
+    }
+    &-header{
+      border-top: 1.5px dashed #BABABA;
+      border-bottom: 1.5px dashed #BABABA;
+      color: #333333;
+      font-size: 18px;
+      padding: 10px 0;
+      letter-spacing: 0.05em;
+      line-height: 22px;
+      text-align: center;
+      text-transform: uppercase;
+      &-outer{
+        border-top: 1.5px dashed #BABABA;
+        border-bottom: 1.5px dashed #BABABA;
+        padding: 10px 0;
+        margin-bottom: 20px;
+      }
+    }
+    &-footer{
+      border-bottom: 1.5px dashed #BABABA;
+      color: #69C26A;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      line-height: 22px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      text-align: center;
+      text-transform: uppercase;
+      .biiling-error &{
+        color: #FF534E;
+      }
+    }
+    &-sum{
+      border-bottom: 1.5px dashed #BABABA;
+      border-top: 1.5px dashed #BABABA;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      line-height: 19px;
+      padding: 20px 0 20px;
+      margin-bottom: 10px;
+      .biiling-error &{
+        text-decoration-line: line-through;
+      }
+    }
+    &-description{
+      padding-bottom: 20px;
+      color: #BABABA;
+      font-size: 14px;
+      line-height: 17px;
+    }
+    &-title{
+      color: #000000;
+      font-size: 16px;
+      line-height: 19px;
+      margin-bottom: 10px;
+    }
+    &-price{
+      color: #000000;
+      font-size: 18px;
+      line-height: 22px;
+    }
+    &-year{
+      color: #000000;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: right;
+    }
+    &-image{
+      border-radius: 4px;
+    }
+    &-body{
+      align-items: center;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+  }
+  &--svg{
+    margin-top: 10px;
+    margin-right: 30px;
+    .mobile-view &{
+      margin: 0 0 20px;
+    }
+  }
+}
+.biiling-error{
+  background-color: #64727E;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  font-size: rem(16);
+  padding: 80px 40px 130px;
+  .mobile-view &{
+    flex-direction: column;
+    padding: 40px 10px 40px;
+  }
+  &--svg{
+    height: 53px;
+    width: 53px;
+    margin-right: 30px;
+    margin-top: 10px;
+    .mobile-view &{
+      margin: 0 0 20px;
+    }
+  }
+}

@@ -1,0 +1,1358 @@
+@each $fonts-weight, $fonts-face in $fonts-list {
+    @font-face {
+        font-family: '#{$fonts-face}';
+        font-style: normal;
+        src: url($fonts-path + '#{$fonts-face}.eot');
+        src: local('#{$fonts-face}'), url($fonts-path + '#{$fonts-face}.eot') format('embedded-opentype'), url($fonts-path + '#{$fonts-face}.woff2') format('woff2'), url($fonts-path + '#{$fonts-face}.woff') format('woff'), url($fonts-path + '#{$fonts-face}.ttf') format('truetype'), url($fonts-path + '#{$fonts-face}.svg##{$fonts-face}') format('svg');
+    }
+}
+$var--control-label-height: _theme-size(control-label-fontSize)+2;
+$var--colorfilter-item-border: 3; // размер бордера
+body {
+    background-color: _theme-palette(body-bg);
+    color: _theme-palette(body-color);
+    font-family: map-get($fonts-list, "#{_fonts-weight(body)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    font-size: rem(_theme-size(body-font-size));
+    letter-spacing: rem(_theme-size(body-letter-spacing));
+}
+a {
+    color: _theme-palette(link-color); // font-family: map-get($fonts-list, "#{_fonts-weight(link)}"), Arial, Helvetica Neue, Roboto, san-serif;  // перебивает другие правила.
+    svg {
+        .fill {
+            fill: _theme-palette(link-color);
+        }
+        .stroke {
+            stroke: _theme-palette(link-color);
+        }
+    }
+    &:hover {
+        color: _theme-palette(link-hover-color);
+        svg {
+            .fill {
+                fill: _theme-palette(link-hover-color);
+            }
+            .stroke {
+                stroke: _theme-palette(link-hover-color);
+            }
+        }
+    }
+    &:active {
+        // color: _theme-palette(link-active-color);
+        svg {
+            .fill {
+                fill: _theme-palette(link-active-color);
+            }
+            .stroke {
+                stroke: _theme-palette(link-active-color);
+            }
+        }
+    }
+}
+b, strong {
+    font-family: map-get($fonts-list, "#{_fonts-weight(strong)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    font-weight: normal;
+}
+h1, .h1 {
+    color: _theme-palette(headings-font-color);
+    font-size: rem(_theme-size(h1-font-size));
+    font-family: map-get($fonts-list, "#{_fonts-weight(h1)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    letter-spacing: rem(_theme-size(h1-letter-spacing));
+    line-height: rem(_theme-size(h1-line-height));
+    position: relative;
+    text-transform: _theme-input(h1-textTransform)
+}
+h2, .h2 {
+    color: _theme-palette(headings-font-color);
+    font-size: rem(_theme-size(h2-font-size));
+    font-family: map-get($fonts-list, "#{_fonts-weight(h2)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    line-height: rem(_theme-size(h2-line-height));
+    text-transform: _theme-input(h2-textTransform);
+}
+h3, .h3 {
+    color: _theme-palette(headings-font-color);
+    font-size: rem(_theme-size(h3-font-size));
+    font-family: map-get($fonts-list, "#{_fonts-weight(h3)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    line-height: rem(_theme-size(h3-line-height));
+    text-transform: _theme-input(h3-textTransform);
+}
+h4, .h4 {
+    font-family: map-get($fonts-list, "#{_fonts-weight(h4)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    font-size: rem(_theme-size(h4-font-size));
+    line-height: rem(_theme-size(h4-line-height));
+    text-transform: _theme-input(h4-textTransform);
+}
+h5, .h5 {
+    font-family: map-get($fonts-list, "#{_fonts-weight(h5)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    font-size: rem(_theme-size(h5-font-size));
+    line-height: rem(_theme-size(h5-line-height));
+    text-transform: _theme-input(typography-textTransform);
+}
+h6, .h6 {
+    font-family: map-get($fonts-list, "#{_fonts-weight(h6)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    font-size: rem(_theme-size(h6-font-size));
+    line-height: rem(_theme-size(h6-line-height));
+}
+.btn {
+    border-top-width: #{_theme-size(btn-borderTop-width)}px;
+    border-right-width: #{_theme-size(btn-borderRight-width)}px;
+    border-bottom-width: #{_theme-size(btn-borderBottom-width)}px;
+    border-left-width: #{_theme-size(btn-borderLeft-width)}px;
+    border-style: solid;
+    border-radius: #{_theme-size(btn-borderRadius-size)}px;
+    font-family: map-get($fonts-list, "#{_fonts-weight(btn)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    font-size: #{_theme-size(btn-font-size)}px;
+    height: #{_theme-size(btn-height)}px;
+    line-height: #{_theme-size(btn-height) - _theme-size(btn-borderTop-width) - _theme-size(btn-borderBottom-width)}px;
+    letter-spacing: #{_theme-size(btn-letter-spacing)}px;
+    text-transform: _theme-input(btn-textTransform);
+}
+.btn--link {
+    letter-spacing: #{_theme-size(btn-letter-spacing)}px;
+    @if _theme-boolean(effect-underline) {
+        @include underline(_theme-palette(link-hover-underline));
+    }
+}
+.btn--reset, .btn--sorting, .vehicle-list-item--link-more {
+    @if _theme-boolean(effect-underline) {
+        @include underline(_theme-palette(link-hover-underline));
+    }
+}
+.btn--counter-instock, .btn--counter-shipping, .btn--counter-empty {
+    text-transform: _theme-input(btn--counter-textTransform);
+}
+@each $name, $value in $theme-btn {
+    .btn-#{$name} {
+        background-color: map-deep-get($theme-btn, $name, 'background');
+        background-image: none;
+        border-top-color: map-deep-get($theme-btn, $name, 'borderTop-color');
+        border-right-color: map-deep-get($theme-btn, $name, 'borderRight-color');
+        border-bottom-color: map-deep-get($theme-btn, $name, 'borderBottom-color');
+        border-left-color: map-deep-get($theme-btn, $name, 'borderLeft-color');
+        color: map-deep-get($theme-btn, $name, 'color');
+        &:hover {
+            background-color: map-deep-get($theme-btn, $name, 'hover-background');
+            border-top-color: map-deep-get($theme-btn, $name, 'hover-borderTop-color');
+            border-right-color: map-deep-get($theme-btn, $name, 'hover-borderRight-color');
+            border-bottom-color: map-deep-get($theme-btn, $name, 'hover-borderBottom-color');
+            border-left-color: map-deep-get($theme-btn, $name, 'hover-borderLeft-color');
+            color: map-deep-get($theme-btn, $name, 'hover-color');
+            svg {
+                fill: map-deep-get($theme-btn, $name, 'hover-svg');
+                stroke: map-deep-get($theme-btn, $name, 'hover-svg');
+                .fill {
+                    fill: map-deep-get($theme-btn, $name, 'hover-svg');
+                }
+                .stroke {
+                    stroke: map-deep-get($theme-btn, $name, 'svg');
+                }
+            }
+        }
+        svg {
+            fill: map-deep-get($theme-btn, $name, 'svg');
+            stroke: map-deep-get($theme-btn, $name, 'svg');
+            .fill {
+                fill: map-deep-get($theme-btn, $name, 'svg');
+            }
+            .stroke {
+                stroke: map-deep-get($theme-btn, $name, 'svg');
+            }
+        }
+        &.active {
+            background-color: map-deep-get($theme-btn, $name, 'active-background');
+            border-top-color: map-deep-get($theme-btn, $name, 'active-borderTop-color');
+            border-right-color: map-deep-get($theme-btn, $name, 'active-borderRight-color');
+            border-bottom-color: map-deep-get($theme-btn, $name, 'active-borderBottom-color');
+            border-left-color: map-deep-get($theme-btn, $name, 'active-borderLeft-color');
+            color: map-deep-get($theme-btn, $name, 'active-color') !important;
+            >a {
+                color: map-deep-get($theme-btn, $name, 'active-color') !important; // кнопки в избранное имеют внутри <a>
+            }
+            svg {
+                fill: map-deep-get($theme-btn, $name, 'active-svg');
+                stroke: map-deep-get($theme-btn, $name, 'active-svg');
+                .fill {
+                    fill: map-deep-get($theme-btn, $name, 'active-svg');
+                }
+                .stroke {
+                    stroke: map-deep-get($theme-btn, $name, 'active-svg');
+                }
+            }
+        }
+    }
+}
+.btn--show {
+    border: none;
+    font-family: map-get($fonts-list, "#{_fonts-weight(form-control)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    font-size: rem(_theme-size(form-control-fontSize));
+    text-transform: none;
+    &-counter {
+        font-family: map-get($fonts-list, "#{_fonts-weight(strong)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    }
+}
+@each $name, $value in $theme-btn-list {
+    .#{$name} {
+        @extend .btn-#{$value};
+    }
+}
+.fi-hub__open-button {
+    .vehicle-view--right & {
+        display: block;
+        margin-top: 10px;
+        width: 100%;
+    }
+    @extend .btn;
+    @extend .btn--testdrive;
+}
+.btn--comparison, .btn--favorite, .btn--share {
+    font-family: map-get($fonts-list, "#{_fonts-weight(btn)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    font-size: #{_theme-size(btn-font-size)}px;
+    letter-spacing: #{_theme-size(btn-letter-spacing)}px;
+    text-transform: _theme-input(btn-textTransform);
+}
+.btn-group {
+    height: #{_theme-size(btn-height)}px;
+    padding-top: #{_theme-size(btn-height) - _theme-size(btnGroup-height)}px;
+    >.btn {
+        border-color: _theme-palette(form-control-borderBottomColor);
+        height: #{_theme-size(btnGroup-height)}px;
+        line-height: #{_theme-size(btnGroup-height) - _theme-size(btn-borderTop-width) - _theme-size(btn-borderBottom-width)}px; // font-family: map-get($fonts-list, "#{_fonts-weight(form-control)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        // font-size: rem(_theme-size(form-control-fontSize));
+        font-family: map-get($fonts-list, "#{_fonts-weight(btn)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        font-size: #{_theme-size(btn-font-size)}px; // text-transform: none;
+        &:first-child {
+            border-top-left-radius:#{_theme-size(btn-borderRadius-size)}px;
+            border-bottom-left-radius:#{_theme-size(btn-borderRadius-size)}px;
+        }
+        &:last-child {
+            border-top-right-radius:#{_theme-size(btn-borderRadius-size)}px;
+            border-bottom-right-radius:#{_theme-size(btn-borderRadius-size)}px;
+        }
+        &.active {
+            border-color: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), borderBottom-color);
+            background-color: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), background);
+            color: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), color);
+        }
+    }
+}
+.bootstrap-switch {
+    // height: #{_theme-size(btn-height)}px;
+    border-radius:#{_theme-size(btn-borderRadius-size)}px;
+    height: #{_theme-size(btnGroup-height)}px;
+    margin-top: #{_theme-size(btn-height) - _theme-size(btnGroup-height)}px;
+    &.bootstrap-switch-on {
+        border-color: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), background);
+        background-color: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), background);
+    }
+    &.bootstrap-switch-off {
+        border-color: _theme-palette(form-control-borderBottomColor);
+    }
+    &-label {
+        border-radius: #{_theme-size(btn-borderRadius-size)}px;
+        padding: 0;
+        top: #{(_theme-size(btnGroup-height) - _theme-size(bootstrap-switch-label-size) - 4) / 2}px;
+        ;
+    }
+    .bootstrap-switch-handle-on, .bootstrap-switch-handle-off {
+        border-radius: #{_theme-size(btn-borderRadius-size)}px;
+    }
+    &-container {
+        border-radius: #{_theme-size(btn-borderRadius-size)}px;
+        .bootstrap-switch-on & {
+            background-color: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), background);
+        }
+    }
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+.form-control {
+    border-color: _theme-palette(form-control-borderColor);
+    border-bottom-color: _theme-palette(form-control-borderBottomColor);
+    border-top-width: #{_theme-size(bootstrapSelect-borderTop-width)}px;
+    border-right-width: #{_theme-size(bootstrapSelect-borderRight-width)}px;
+    border-bottom-width: #{_theme-size(bootstrapSelect-borderBottom-width)}px;
+    border-left-width: #{_theme-size(bootstrapSelect-borderLeft-width)}px;
+    @if theme-deep($theme-size, bootstrapSelect-borderLeft-width) == 0 {
+        border-radius: 0;
+    }
+    @else{
+        border-radius: #{_theme-size(btn-borderRadius-size)}px;
+    }
+    color: _theme-palette(form-control-color);
+    font-family: map-get($fonts-list, "#{_fonts-weight(form-control)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    font-size: rem(_theme-size(form-control-fontSize));
+    line-height: #{_theme-size(btn-height)}px;
+    @include placeholder(_theme-palette(form-control-placeholderColor), _theme-size(form-control-fontSize), 400);
+    text-transform: _theme-input(formControl-textTransform);
+}
+.input-group-text {
+    border-color: _theme-palette(form-control-borderColor);
+    border-bottom-color: _theme-palette(form-control-borderBottomColor);
+    color: _theme-palette(form-control-addon-color);
+    line-height: #{_theme-size(btn-height)}px;
+    font-size: rem(_theme-size(form-control-fontSize));
+}
+.input-group-line {
+    background-color: _theme-palette(separator-line-color);
+}
+.control-label {
+    color: _theme-palette(control-label--color);
+    font-family: map-get($fonts-list, "#{_fonts-weight(control-label)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    font-size: rem(_theme-size(control-label-fontSize));
+    line-height: #{$var--control-label-height}px;
+    text-transform: _theme-input(label-textTransform);
+    -webkit-transform: translateY(-#{$var--control-label-height / 2}px);
+    transform: translateY(-#{$var--control-label-height / 2}px);
+    .css-form-free & {
+        color: _theme-palette(form-control-placeholderColor);
+        font-family: map-get($fonts-list, "#{_fonts-weight(form-control)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        font-size: rem(_theme-size(form-control-fontSize));
+        line-height: #{_theme-size(btn-height)}px;
+        text-transform: _theme-input(formControl-textTransform);
+    }
+    &.active {
+        .css-form-free & {
+            background-color: _theme-palette(body-bg);
+            color: _theme-palette(control-label--color);
+            font-family: map-get($fonts-list, "#{_fonts-weight(control-label)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            font-size: rem(_theme-size(control-label-fontSize));
+            line-height: #{$var--control-label-height}px;
+            text-transform: _theme-input(label-textTransform); // -webkit-transform: translateY(-#{_theme-size(control-label-fontSize) - 4}px);
+            -webkit-transform: translateY(-#{($var--control-label-height / 2) + 2}px);
+            transform: translateY(-#{($var--control-label-height / 2) + 2}px); // корректируем на случай наличи верхнего бордера у селекта
+        }
+    }
+}
+.bootstrap-select {
+    .btn {
+        border-top-width: #{_theme-size(bootstrapSelect-borderTop-width)}px;
+        border-right-width: #{_theme-size(bootstrapSelect-borderRight-width)}px;
+        border-bottom-width: #{_theme-size(bootstrapSelect-borderBottom-width)}px;
+        border-left-width: #{_theme-size(bootstrapSelect-borderLeft-width)}px;
+        border-color: _theme-palette(form-control-borderColor);
+        border-bottom-color: _theme-palette(form-control-borderBottomColor);
+        @if theme-deep($theme-size, bootstrapSelect-borderLeft-width) == 0 {
+            border-radius: 0;
+        }
+        @else{
+            border-radius: #{_theme-size(btn-borderRadius-size)}px;
+        }
+        color: _theme-palette(form-control-color);
+        font-family: map-get($fonts-list, "#{_fonts-weight(bootstrap-select)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        font-size: rem(_theme-size(form-control-fontSize));
+        line-height: #{_theme-size(btn-height) - 1}px;
+        height: #{_theme-size(btn-height)}px;
+        &:focus, &:active {
+            border: 1px solid _theme-palette(form-control-borderColor);
+            border-bottom: 1px solid _theme-palette(form-control-borderBottomColor);
+        }
+    }
+    >.dropdown-toggle {
+        &.bs-placeholder, &.bs-placeholder:hover, &.bs-placeholder:focus, &.bs-placeholder:active {
+            color: _theme-palette(form-control-color);
+            .filter-option-inner-inner {
+                border: none; // появляется точка
+                color: _theme-palette(bootstrap-select-placeholder-color);
+                font-family: map-get($fonts-list, "#{_fonts-weight(form-control)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            }
+        }
+    }
+    .dropdown-menu {
+        border: 1px solid _theme-palette(bootstrap-select-dropdown-borderColor);
+        z-index: 1003; // может перекрываться таблицей
+        >li {
+            >a {
+                font-size: rem(_theme-size(checkbox-label--size));
+                font-family: map-get($fonts-list, "#{_fonts-weight(bootstrap-select-dropdown-menu)}"), Arial, Helvetica Neue, Roboto, san-serif;
+                padding-left: #{(_theme-size(checkbox--size) + 18)}px;
+                &:before {
+                    background-color: _theme-palette(checkbox--bgColor);
+                    border-color: _theme-palette(checkbox--borderColor);
+                    border-width: #{_theme-size(checkbox-border--size)}px;
+                    height: #{_theme-size(checkbox--size)}px;
+                    width: #{_theme-size(checkbox--size)}px;
+                }
+                &:hover, &:focus, &:active {
+                    color: _theme-palette(checkbox-hover--color);
+                }
+                &.active, &.selected {
+                    color: _theme-palette(form-control-color);
+                    &:before {
+                        background-color: _theme-palette(checkbox-checked--bgColor);
+                        border-color: _theme-palette(checkbox-checked--borderColor);
+                    }
+                    &:after {
+                        color: _theme-palette(checkbox-checked-iconCheck--color);
+                        height: #{_theme-size(checkbox--size)}px;
+                        font-size: rem(_theme-size(checkbox-iconCheck--size));
+                        width: #{_theme-size(checkbox--size)}px;
+                    }
+                }
+            }
+        }
+    }
+    .filter-option-inner-inner {
+        background-color: _theme-palette(bootstrap-select-btnText-bgColor);
+        border: 1px solid _theme-palette(bootstrap-select-btnText-borderColor);
+        font-family: map-get($fonts-list, "#{_fonts-weight(bootstrap-select-btnText)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        text-transform: _theme-input(formControl-textTransform);
+    }
+}
+.bs-actionsbox .btn-group .btn {
+    color: _theme-palette(bootstrap-select-selectAll-color);
+    font-family: map-get($fonts-list, "#{_fonts-weight(bootstrap-select-dropdown-menu)}"), Arial, Helvetica Neue, Roboto, san-serif;
+}
+.bs-actionsbox .btn-group .bs-deselect-all {
+    color: _theme-palette(bootstrap-select-deselectAll-color);
+    font-family: map-get($fonts-list, "#{_fonts-weight(bootstrap-select-dropdown-menu)}"), Arial, Helvetica Neue, Roboto, san-serif;
+}
+.bootstrap-select .popover-header {
+    border-top: 1px solid _theme-palette(bootstrap-select-deselectAll-color);
+    .close:after {
+        color: _theme-palette(bootstrap-select-selectAll-color);
+        font-family: map-get($fonts-list, "#{_fonts-weight(bootstrap-select-dropdown-menu)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    }
+}
+.breadcrumb {
+    background-color: _theme-palette(nav-tabs-bgColor);
+    border-bottom: _theme-palette(breadcrumb-border-color);
+    >ul li {
+        a, span {
+            color: _theme-palette(breadcrumb-color);
+            font-family: map-get($fonts-list, "#{_fonts-weight(breadcrumb)}"), Arial, Helvetica Neue, Roboto, san-serif; // font-size: rem(_theme-size(breadcrumb--size));
+            &:focus, &:hover {
+                color: _theme-palette(breadcrumb-active-color);
+            }
+            @if _theme-boolean(effect-underline) {
+                @include underline(_theme-palette(link-hover-underline));
+            }
+        }
+        &.active {
+            font-family: map-get($fonts-list, "#{_fonts-weight(breadcrumb-active)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+    }
+}
+.carousel {
+    &-control-prev, &-control.left, &-control.right, &-control-next {
+        svg {
+            .stroke {
+                stroke: _theme-palette(carousel-control-svg-stroke);
+            }
+        }
+        &:hover, &:focus {
+            svg {
+                .stroke {
+                    stroke: _theme-palette(carousel-control-hover-svg-stroke);
+                }
+            }
+        }
+    }
+    &-indicators {
+        li {
+            border-bottom-color: _theme-palette(carousel-indicator-borderColor);
+            &:hover {
+                border-bottom-color: _theme-palette(carousel-indicator-active-borderColor);
+            }
+        }
+        .active {
+            border-bottom-color: _theme-palette(carousel-indicator-active-borderColor);
+        }
+    }
+}
+.xdsoft_datetimepicker {
+    .xdsoft_calendar td.xdsoft_today {
+        color: _theme-datetimepicker(datetimepicker-color-active);
+    }
+    .xdsoft_calendar td.xdsoft_default, .xdsoft_calendar td.xdsoft_current, .xdsoft_timepicker .xdsoft_time_box>div>div.xdsoft_current {
+        background: _theme-datetimepicker(datetimepicker-color-active);
+        box-shadow: _theme-datetimepicker(datetimepicker-boxShadowColor) 0 1px 3px 0 inset;
+    }
+    .xdsoft_calendar td.xdsoft_current.xdsoft_disabled:hover, .xdsoft_timepicker .xdsoft_time_box>div>div.xdsoft_current.xdsoft_disabled:hover {
+        background: _theme-datetimepicker(datetimepicker-color-active) !important;
+        box-shadow: _theme-datetimepicker(datetimepicker-boxShadowColor) 0 1px 3px 0 inset !important;
+    }
+    .xdsoft_label>.xdsoft_select>div>.xdsoft_option.xdsoft_current {
+        background: _theme-datetimepicker(datetimepicker-color-active);
+        box-shadow: _theme-datetimepicker(datetimepicker-boxShadowColor) 0 1px 3px 0 inset;
+    }
+}
+.modal {
+    &-title {
+        font-family: map-get($fonts-list, "#{_fonts-weight(modal-title)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    }
+    &-body {
+        .vehicle-view--title {
+            font-family: map-get($fonts-list, "#{_fonts-weight(modal-title)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+        h2.title {
+            font-family: map-get($fonts-list, "#{_fonts-weight(modal-title)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        } // удлалить
+        .link-add-comment {
+            color: _theme-palette(modal-link-add-comment);
+            font-family: map-get($fonts-list, "#{_fonts-weight(modal-title)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+        .diclaration {
+            color: _theme-palette(modal-agree);
+        }
+    }
+    &-agree {
+        color: _theme-palette(modal-agree);
+        &.checkbox-item label.checkbox {
+            color: _theme-palette(modal-agree);
+            &:hover {
+                color: _theme-palette(modal-agree);
+            }
+        }
+    }
+    &-video-title {
+        font-family: map-get($fonts-list, "#{_fonts-weight(body)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    }
+}
+.tooltip {
+    font-family: map-get($fonts-list, "#{_fonts-weight(body)}"), Arial, Helvetica Neue, Roboto, san-serif;
+}
+.noUi {
+    &-horizontal {
+        height: #{_theme-size(btn-height)}px;
+    }
+    &-handle {
+        border-color: _theme-palette(noUi-handle--borderColor);
+        background-color: _theme-palette(noUi-handle--bgColor);
+        .noUi-horizontal & {
+            border-radius: #{_theme-size(noUi-handleSize)}px;
+            height: #{_theme-size(noUi-handleSize)}px;
+            right: #{-(_theme-size(noUi-handleSize) / 2)}px;
+            top: #{(_theme-size(noUi-lineSize) / 2) - (_theme-size(noUi-handleSize) / 2)}px;
+            width: #{_theme-size(noUi-handleSize)}px;
+        }
+    }
+    &-connect {
+        background-color: _theme-palette(noUi-connect--bgColor);
+    }
+    &-connects {
+        background-color: _theme-palette(form-control-borderBottomColor);
+    }
+    &-tooltip {
+        color: _theme-palette(noUi-tooltip--color);
+    }
+    &-target {
+        background-color: _theme-palette(noUi-target--bgColor);
+        border-color: _theme-palette(body-bg);
+        border-top-width: #{_theme-size(btn-height) - _theme-size(noUi-lineSize)}px;
+        .modal & {
+            border-color: _theme-colors(white);
+        }
+        &:after, &:before {
+            background-color: _theme-palette(noUi-tip--bgColor);
+            border-radius: #{_theme-size(noUi-targetSize)}px;
+            height: #{_theme-size(noUi-targetSize)}px;
+            width: #{_theme-size(noUi-targetSize)}px;
+            top: #{(_theme-size(noUi-lineSize) / 2) - (_theme-size(noUi-targetSize) / 2)}px;
+        }
+        &:before {
+            left: #{-(_theme-size(noUi-targetSize) / 2)}px;
+        }
+        &:after {
+            right: #{-(_theme-size(noUi-targetSize) / 2)}px;
+        }
+    } // &-horizontal .noUi-handle{
+    //   top: -(10 - _theme-size(noUi-lineSize))px;
+    // }
+}
+.nav-tabs {
+    background-color: _theme-palette(nav-tabs-bgColor);
+    border-bottom-color: transparentize(_theme-palette(separator-line-color), 0.9);
+    .vehicle-view-media & {
+        @if theme-deep($theme-palette, nav-tabs-bgColor)==_theme-colors(transparent) {
+            padding-left: 20px;
+        }
+    }
+}
+.nav-link {
+    color: _theme-palette(nav-link-color);
+    font-size: rem(_theme-size(nav-link-fontSize));
+    font-family: map-get($fonts-list, "#{_fonts-weight(nav-link)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    line-height: rem(_theme-size(nav-link-fontSize));
+    text-transform: _theme-input(nav-link-textTransform);
+    &.active {
+        border-bottom-color: _theme-palette(nav-link-active-borderColor);
+        font-family: map-get($fonts-list, "#{_fonts-weight(nav-link-active)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        color: _theme-palette(nav-link-activeColor);
+    }
+    &:hover, &:focus {
+        border-bottom-color: _theme-palette(nav-link-active-borderColor);
+        color: _theme-palette(nav-link-activeColor);
+    }
+    &--special {
+        color: _theme-palette(error-color);
+        &.active {
+            border-bottom-color: _theme-palette(error-color);
+            color: _theme-palette(error-color);
+            &:hover {
+                border-bottom-color: _theme-palette(nav-link-active-borderColor);
+                color: _theme-palette(nav-link-activeColor);
+            }
+        }
+        svg {
+            .fill {
+                fill: _theme-palette(error-color);
+            }
+            .stroke {
+                stroke: _theme-palette(error-color);
+            }
+        }
+        &:hover {
+            border-bottom-color: _theme-palette(nav-link-active-borderColor);
+            color: _theme-palette(nav-link-activeColor);
+            svg {
+                .fill {
+                    fill: _theme-palette(nav-link-activeColor);
+                }
+                .stroke {
+                    stroke: _theme-palette(nav-link-activeColor);
+                }
+            }
+        }
+    }
+}
+.checkbox-item {
+    line-height: #{_theme-size(checkbox--size)}px;
+    input[type=checkbox] {
+        &:checked+label.checkbox {
+            color: _theme-palette(checkbox-checked--color);
+            &:before {
+                background-color: _theme-palette(checkbox-checked--bgColor);
+                border-color: _theme-palette(checkbox-checked--borderColor);
+                color: _theme-palette(checkbox-checked-iconCheck--color);
+                font-size: #{_theme-size(checkbox-iconCheck--size)}px;
+            }
+        }
+        &+label.checkbox:before {
+            background-color: _theme-palette(checkbox--bgColor);
+            border-color: _theme-palette(checkbox--borderColor);
+        }
+    }
+    label.checkbox {
+        color: _theme-palette(checkbox--color);
+        font-size: rem(_theme-size(checkbox-label--size));
+        padding-left: #{(_theme-size(checkbox--size) + 10)}px;
+        line-height: #{_theme-size(checkbox--size)}px;
+        &:hover {
+            color: _theme-palette(checkbox-hover--color);
+        }
+        &:before {
+            border-width: #{_theme-size(checkbox-border--size)}px;
+            height: #{_theme-size(checkbox--size)}px;
+            margin-top: #{-(_theme-size(checkbox--size) / 2)}px;
+            width: #{_theme-size(checkbox--size)}px;
+        }
+        span {
+            line-height: #{_theme-size(checkbox--size)}px;
+        }
+    }
+    +.checkbox-item {
+        margin-top: #{(_theme-size(checkbox--size) / 2)}px;
+    }
+}
+.jspDrag {
+    background-color: _theme-palette(jspDrag-bgc);
+}
+.jspTrack{
+    background-color: _theme-palette(separator-line-color);
+}
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev, .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+    background-color: _theme-palette(swiper-button-bgColor);
+    border-color: _theme-palette(swiper-button-borderColor);
+    svg {
+        fill: _theme-palette(swiper-button-svg);
+    }
+    &:hover, &:focus, &:active {
+        border-color: _theme-palette(swiper-button-borderColor);
+        background-color: _theme-palette(swiper-button-active-bgColor);
+        svg {
+            fill: _theme-palette(swiper-button-active-svg);
+        }
+    }
+}
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+    border-top-right-radius: #{_theme-size(swiper-button-borderRadius)}px;
+    border-bottom-right-radius: #{_theme-size(swiper-button-borderRadius)}px;
+}
+.swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+    border-top-left-radius: #{_theme-size(swiper-button-borderRadius)}px;
+    border-bottom-left-radius: #{_theme-size(swiper-button-borderRadius)}px;
+}
+.vehicle-view {
+    &--price {
+        font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-view--price)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        font-size: rem(_theme-size(vehicle-view--price-size));
+        .svg--arrow {
+            svg {
+                fill: _theme-palette(vehicle-view-price-svg-color);
+            }
+        }
+        &-old {
+            color: _theme-palette(vehicle-view-oldprice-color);
+        }
+        &-badge {
+            // &-nds,
+            &-profit {
+                border-radius: rem(_theme-size(vehicle-list-item--price-badge));
+                font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-view-badge-profit)}"), Arial, Helvetica Neue, Roboto, san-serif;
+                font-size: rem(_theme-size(vehicle-view--price-badge-fontSize));
+                text-transform: _theme-input(btn-textTransform);
+            }
+            &-profit {
+                background-color: _theme-palette(vehicle-list-item--price-badge-profit);
+                text-transform: _theme-input(btn-textTransform);
+            }
+        }
+    }
+    &--image {
+        border-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+        overflow: hidden;
+    }
+    &-tradein {
+        &--info-item {
+            font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-view-tradein--info-item)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            .svg--date, .svg--union {
+                svg {
+                    fill: _theme-palette(vehicle-view-tradein-svgDate);
+                }
+            }
+        }
+    }
+    .autocrm10-carousel {
+        .carousel-item {
+            overflow: hidden;
+            border-top-left-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+            border-top-right-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+        }
+        .carousel-counter {
+            border-radius: rem(_theme-size(vehicle-list-item--borderRadius) / 2);
+            font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-view_carousel-counter)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+    }
+    &.tradein-view .carousel-indicators li {
+        &:first-child {
+            img {
+                border-bottom-left-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+            }
+        }
+        &:last-child {
+            img {
+                border-bottom-right-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+            }
+        }
+        &.last {
+            &:before {
+                border-bottom-right-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+            }
+            img {
+                border-bottom-right-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+            }
+        }
+    }
+    &--description {
+        color: _theme-palette(vehicle-view--description-color);
+        .modal-sideRight & {
+            border-bottom-color: _theme-palette(vehicle-view--description-color);
+        }
+    }
+    &--info {
+        svg {
+            fill: _theme-palette(vehicle-view--info-svg);
+            stroke: _theme-palette(vehicle-view--info-svg);
+        }
+        &-item {
+            &-label {
+                color: _theme-palette(vehicle-view--info-item-label);
+                font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-view--info-item-label)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            }
+            &-value {
+                color: _theme-palette(vehicle-view--info-item-value);
+                font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-view--info-item-value)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            }
+        }
+    }
+    &-media {
+        &-images {
+            &--item {
+                border-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+            }
+        }
+    }
+    &--title {
+        @if _theme-boolean(title-underline) {
+            border-bottom: 1px solid _theme-palette(separator-line-color);
+        }
+    }
+}
+.vehicle-list {
+    &-item {
+        background-color: _theme-palette(body-bg);
+        border-top-left-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+        border-top-right-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+        &--description {
+            color: _theme-palette(vehicle-list-item--description-color);
+            line-height: #{_theme-size(body-font-size) + 3}px;
+            max-height: #{((_theme-size(body-font-size) + 3) * 2)}px;
+            min-height: #{((_theme-size(body-font-size) + 3) * 2)}px;
+        }
+        &--title {
+            font-size: rem(_theme-size(vehicle-list-item--title-fz));
+            font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-list-item--title)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            max-height: calc(#{_theme-size(vehicle-list-item--title-fz) * 2 + 4}px);
+            .swiper-slide & {
+                height: calc(#{_theme-size(vehicle-list-item--title-fz) * 2 + 4}px);
+            }
+            .tradein-model-list-item &, .tradein-model-list & {
+                font-size: rem(_theme-size(vehicle-list-item-tradein--title-fz));
+                font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-list-item--title_tradein)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            }
+            &--link {
+                color: _theme-palette(vehicle-list-item--title--link);
+                line-height: #{_theme-size(vehicle-list-item--title-fz) + 3}px;
+            }
+        }
+        &--image-counter {
+            font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-list--image-counter)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+        &--link-more {
+            color: _theme-palette(link-color);
+            font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-list--link-more)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            font-size: rem(_theme-size(vehicle-list-item--link-more-fontSize));
+            text-transform: _theme-input(vehicle-list-item--link-more-textTransform);
+            &:hover {
+                .vehicle-list-item:hover & {
+                    color: _theme-palette(link-hover-color);
+                }
+            }
+            &-outer {
+                .vehicle-list-item:hover & {
+                    background-color: _theme-palette(body-bg);
+                }
+            }
+        }
+        &--link-more-outer {
+            border-bottom-left-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+            border-bottom-right-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+        }
+        &--price {
+            color: _theme-palette(vehicle-list-item--price-color);
+            font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-list--price)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            font-size: rem(_theme-size(vehicle-list-item--price-fz));
+            &--action {
+                color: _theme-palette(vehicle-list-item--priceAction-color);
+            }
+        }
+        &--img {
+            border-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+        }
+        .carousel-item {
+            border-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+        }
+        &--discount {
+            background-color: _theme-palette(vehicle-list-item--discount-bgColor);
+            border-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+            color: _theme-palette(vehicle-list-item--discount-color);
+            font-family: map-get($fonts-list, "#{_fonts-weight(vehicle-list--discount)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            a {
+                color: _theme-palette(vehicle-list-item--discount-color);
+            }
+        }
+        &--information {
+            background-color: _theme-palette(body-bg);
+        }
+        &--separator {
+            .recentlyViewed & {
+                background-color: _theme-palette(body-bg);
+            }
+        }
+        .btn--favorite, .btn--share, .btn--comparison {
+            svg {
+                fill: _theme-palette(vehicle-list-item--svg);
+                stroke: _theme-palette(vehicle-list-item--svg);
+            }
+            &.active {
+                svg {
+                    fill: _theme-palette(vehicle-list-item--svg-active);
+                    stroke: _theme-palette(vehicle-list-item--svg-active);
+                }
+            }
+        }
+    }
+}
+.model-list {
+    &-title {
+        &--inner {
+            color: _theme-palette(model-list-color);
+            background-color: _theme-palette(body-bg);
+            font-size: rem(_theme-size(model-list-title--inner-fontSize));
+            font-family: map-get($fonts-list, "#{_fonts-weight(model-list-title--inner)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+        &--outer {
+            background-color: _theme-palette(model-list-bgColor);
+        }
+        svg {
+            .fill {
+                fill: _theme-palette(body-bg);
+            }
+        }
+        &-value{
+            border-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+            font-family: map-get($fonts-list, "#{_fonts-weight(model-list-title--inner)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+    }
+    &-item {
+        background-color: _theme-palette(body-bg);
+        &--name {
+            color: _theme-palette(model-list-item--name--color);
+            font-size: rem(_theme-size(model-list-item--name-fontSize));
+            font-family: map-get($fonts-list, "#{_fonts-weight(model-list-item--name)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            &:hover, &:focus {
+                color: _theme-palette(model-list-item--name--color);
+            }
+        }
+        &--action {
+            background-color: _theme-palette(model-list-item--action--bgColor);
+            border-radius: rem(_theme-size(vehicle-list-item--price-badge));
+            color: _theme-palette(model-list-item--action--color);
+            font-size: rem(_theme-size(model-list-item--action-fontSize));
+            font-family: map-get($fonts-list, "#{_fonts-weight(model-list-item--action)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            text-transform: _theme-input(btn-textTransform);
+        }
+        &--price {
+            color: _theme-palette(model-list-item--price--color);
+            font-size: rem(_theme-size(model-list-item--price-fontSize));
+            font-family: map-get($fonts-list, "#{_fonts-weight(model-list-item--price)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            &--action {
+                color: _theme-palette(model-list-item--priceAction--color);
+            }
+            &--old {
+                color: _theme-palette(model-list-item--priceOld--color);
+                font-size: rem(_theme-size(model-list-item--priceOld-fontSize));
+                font-family: map-get($fonts-list, "#{_fonts-weight(model-list-item--priceOld)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            }
+        }
+    }
+}
+.dealership-list {
+    &-item {
+        &--title {
+            &--inner {
+                color: _theme-palette(model-list-color);
+                background-color: _theme-palette(body-bg);
+                font-size: rem(_theme-size(model-list-title--inner-fontSize));
+                font-family: map-get($fonts-list, "#{_fonts-weight(model-list-title--inner)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            }
+            &--outer {
+                background-color: _theme-palette(model-list-bgColor);
+            }
+        }
+        &--info {
+            &--phone {
+                &--value {
+                    color: _theme-palette(dealer-info-block--phone-color);
+                }
+            }
+        }
+        &--brand {
+            &--item {
+                &-outer {
+                    border-radius: #{_theme-size(btn-borderRadius-size)}px;
+                    &:hover {
+                        border-color: _theme-palette(headings-font-color);
+                    }
+                }
+            }
+            &--counter {
+                &-inner {
+                    border-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+                    font-family: map-get($fonts-list, "#{_fonts-weight(instock-block--button)}"), Arial, Helvetica Neue, Roboto, san-serif;
+                    font-size: rem(_theme-size(instock-block--button-fontSize));
+                }
+            }
+        }
+    }
+}
+.group-selection {
+    &-item {
+        &--title {
+            color: _theme-palette(model-list-item--name--color);
+            font-family: map-get($fonts-list, "#{_fonts-weight(model-list-item--name)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            font-size: rem(_theme-size(model-list-item--name-fontSize));
+        }
+        &--price {
+            color: _theme-palette(model-list-item--price--color);
+            font-family: map-get($fonts-list, "#{_fonts-weight(model-list-item--price)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            font-size: rem(_theme-size(model-list-item--price-fontSize));
+        }
+    }
+}
+.notifyDiscount {
+    &--text {
+        color: _theme-palette(notifyDiscount-textColor);
+    }
+}
+.instock-block {
+    &--button {
+        background-color: _theme-palette(instock-block-bgColor);
+        border-radius: rem(_theme-size(vehicle-list-item--borderRadius));
+        color: _theme-palette(instock-block-color);
+        font-family: map-get($fonts-list, "#{_fonts-weight(instock-block--button)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        font-size: rem(_theme-size(instock-block--button-fontSize));
+        text-transform: _theme-input(label-textTransform);
+        &--instock {
+            background-color: _theme-palette(instock-block-instock-bgColor);
+            color: _theme-palette(instock-block-instock-color);
+        }
+        &--shipping {
+            background-color: _theme-palette(instock-block-shipping-bgColor);
+            color: _theme-palette(instock-block-shipping-color);
+        }
+    }
+    .svg--auto {
+        color: _theme-palette(instock-block-valueColor);
+        svg {
+            fill: _theme-palette(instock-block-svg);
+        }
+    }
+    .svg--arrow-alt {
+        svg {
+            stroke: _theme-palette(instock-block-svg);
+        }
+    }
+    &-dropdown--value {
+        color: _theme-palette(instock-block-instock-bgColor);
+    }
+}
+.specifications-list {
+    &-categorytitle {
+        font-family: map-get($fonts-list, "#{_fonts-weight(specifications-list-value)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        @if _theme-boolean(title-underline) {
+            border-bottom: 1px solid _theme-palette(separator-line-color);
+        }
+    }
+    &-value {
+        background-color: _theme-palette(body-bg);
+        font-family: map-get($fonts-list, "#{_fonts-weight(specifications-list-value)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    }
+    &-title {
+        background-color: _theme-palette(body-bg);
+    }
+    &--description {
+        border-top-color: _theme-palette(dealer-info-block--phone-color);
+        &--title {
+            font-family: map-get($fonts-list, "#{_fonts-weight(strong)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+        &--button {
+            color: _theme-palette(link-color);
+            &:hover {
+                color: _theme-palette(link-hover-color);
+            }
+        }
+    }
+    &-group {
+        &:before {
+            border-bottom-color: transparentize(_theme-palette(separator-line-color), 0.9);
+        }
+    }
+}
+.dealer-info {
+    &-block {
+        &--name {
+            font-size: rem(_theme-size(dealer-info-block--name-fontSize));
+            font-family: map-get($fonts-list, "#{_fonts-weight(dealer-info-block-info)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            text-transform: _theme-input(typography-textTransform);
+        }
+        &--phone {
+            color: _theme-palette(dealer-info-block--phone-color);
+            font-size: rem(_theme-size(dealer-info-block--phone-fontSize));
+            font-family: map-get($fonts-list, "#{_fonts-weight(dealer-info-block-phone)}"), Arial, Helvetica Neue, Roboto, san-serif;
+            &--icon {
+                background-color: _theme-palette(dealer-info-block--phone--icon);
+            }
+            &--value {
+                color: _theme-palette(dealer-info-block--phone-color);
+                &:hover, &:focus {
+                    color: _theme-palette(dealer-info-block--phone-color);
+                }
+            }
+        }
+    }
+    &-map {
+        &--btn {
+            height: #{_theme-size(btn-height)}px;
+            margin-top: -#{(_theme-size(btn-height) / 2)}px;
+        }
+    }
+}
+.collapsetab {
+    font-family: map-get($fonts-list, "#{_fonts-weight(collapsetab)}"), Arial, Helvetica Neue, Roboto, san-serif;
+}
+.has-error {
+    .form-control {
+        border-color: _theme-palette(error-color);
+        @include placeholder(_theme-palette(error-color), 14, 500);
+    }
+    .help-block {
+        color: _theme-palette(error-color);
+        font-size: rem(12);
+    }
+}
+.error-summary {
+    li {
+        color: _theme-palette(error-color);
+        font-family: map-get($fonts-list, "#{_fonts-weight(error-summary)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    }
+}
+.colorfilter {
+    @if #{_theme-size(bootstrapSelect-borderTop-width)}>0 {
+        margin-top: -#{$var--control-label-height}px;
+    }
+    &-item {
+        &.all {
+            color: _theme-palette(link-color);
+            &.active {
+                color: _theme-palette(link-color);
+            }
+            &:hover {
+                color: _theme-palette(link-hover-color);
+            }
+        }
+        &-outer {
+            @if #{_theme-size(bootstrapSelect-borderTop-width)}>0 {
+                height: #{_theme-size(btn-height)}px;
+            }
+            @else {
+                height: #{_theme-size(btn-height) - $var--control-label-height}px;
+            }
+        }
+    }
+    &-item, &-item-label {
+        top: -#{$var--colorfilter-item-border}px;
+        @if _theme-boolean(colorfilter-round) {
+            border-radius: #{_theme-size(btn-height) - $var--control-label-height}px;
+        }
+        @else {
+            border-radius: #{_theme-size(btn-borderRadius-size)}px;
+        }
+        &:before {
+            left: -#{$var--colorfilter-item-border}px;
+            top: -#{$var--colorfilter-item-border}px;
+            @if _theme-boolean(colorfilter-round) {
+                border-radius: #{_theme-size(btn-height) - $var--control-label-height}px;
+            }
+            @else {
+                border-radius: #{_theme-size(btn-borderRadius-size)}px;
+            }
+        }
+    }
+    &-item:hover, &-item.active, &-item-label:hover, &-item-checkbox:checked+.colorfilter-item-label {
+        &:before {
+            left: -#{$var--colorfilter-item-border}px;
+            top: -#{$var--colorfilter-item-border}px;
+            @if _theme-boolean(colorfilter-round) {
+                border-radius: #{_theme-size(btn-height) - $var--control-label-height}px;
+            }
+            @else {
+                border-radius: #{_theme-size(btn-borderRadius-size)}px;
+            }
+        }
+    }
+}
+.colorList-item {
+    border-radius: #{_theme-size(colorList-item--borderRadius)}px;
+    height: #{_theme-size(colorList-item--size)}px;
+    width: #{_theme-size(colorList-item--size)}px;
+}
+.catalog-sort {
+    border-bottom-color: _theme-palette(separator-line-color);
+    color: _theme-palette(link-color); // font-size: rem(_theme-size(catalog-sort--size));
+    label.btn--sorting {
+        color: _theme-palette(btn--sorting-active-color);
+        +.svg--sort {
+            .stroke {
+                stroke: _theme-palette(btn--sorting-active-color);
+            }
+        }
+    }
+}
+.btn--sorting {
+    a {
+        color: _theme-palette(btn--sorting-color);
+        +.svg--sort {
+            .stroke {
+                stroke: _theme-palette(btn--sorting-color);
+            }
+        }
+        &.asc, &.desc {
+            color: _theme-palette(btn--sorting-active-color);
+            +.svg--sort {
+                .stroke {
+                    stroke: _theme-palette(btn--sorting-active-color);
+                }
+            }
+        }
+    }
+}
+.callme {
+    border-color: _theme-palette(callme-borderColor);
+    border-width: #{_theme-size(callme-borderSize)}px;
+}
+.modalblock-info {
+    border-color: _theme-palette(callme-borderColor);
+    &--item {
+        &--header {
+            font-family: map-get($fonts-list, "#{_fonts-weight(modalblock-info--item--header)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+    }
+    svg {
+        fill: _theme-palette(sticky-block--toggle-bgColor);
+    }
+}
+.modal-sideLeft {
+    border-right-color: _theme-palette(callme-borderColor);
+}
+.sticky-block {
+    $sticky-block-padding-top: 9;
+    .modal & {
+        padding-top: #{$sticky-block-padding-top}px;
+        height: #{_theme-size(btn-height) + ($sticky-block-padding-top * 2)}px;
+    }
+    &.active {
+        .sticky-block--toggle {
+            background-color: _theme-palette(sticky-block--toggle-bgColor);
+        }
+    }
+}
+.modal-sticky {
+    .accordion {
+        .collapse {
+            padding-bottom: #{_theme-size(btn-height)}px;
+        }
+    }
+}
+.peoplebrowsing {
+    svg {
+        .stroke {
+            stroke: _theme-palette(peoplebrowsing-svg-triangle);
+        }
+        .fill {
+            fill: _theme-palette(peoplebrowsing-svg-exclamation);
+        }
+    }
+}
+.successfully {
+    border-top-color: _theme-palette(separator-line-color);
+    h5, .dealership-phone, .dealership-name {
+        font-family: map-get($fonts-list, "#{_fonts-weight(successfully_dealership-phone)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    }
+    .btn--link {
+        text-transform: _theme-input(btn-textTransform);
+    }
+}
+.creditinfo--sum {
+    font-family: map-get($fonts-list, "#{_fonts-weight(creditinfo--sum)}"), Arial, Helvetica Neue, Roboto, san-serif;
+}
+.biiling-success {
+    font-family: map-get($fonts-list, "#{_fonts-weight(biiling-success)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    &-h1 {
+        font-family: map-get($fonts-list, "#{_fonts-weight(biiling-success-h1)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    }
+    &-card {
+        &-header {
+            font-family: map-get($fonts-list, "#{_fonts-weight(biiling-success-card-header-footer)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+        &-footer {
+            font-family: map-get($fonts-list, "#{_fonts-weight(biiling-success-card-header-footer)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+        &-price {
+            font-family: map-get($fonts-list, "#{_fonts-weight(biiling-success-h1)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        }
+    }
+}
+.preloader {
+    border-top-color: _theme-palette(preloader-first);
+    &:after {
+        border-top-color: _theme-palette(preloader-second);
+    }
+    &:before {
+        border-top-color: _theme-palette(preloader-third);
+    }
+}
+.attention {
+    &--warning {
+        background-color: transparentize(_theme-palette(attention--warning--text-color), .8);
+        border-radius: #{_theme-size(btn-borderRadius-size)}px;
+        border-color: _theme-palette(attention--warning--text-color);
+        border-width: #{_theme-size(btn-borderBottom-width)}px;
+        border-style: solid;
+        color: _theme-palette(body-color);
+        font-family: map-get($fonts-list, "#{_fonts-weight(btn)}"), Arial, Helvetica Neue, Roboto, san-serif;
+        font-size: #{_theme-size(btn-font-size)}px;
+        height: #{_theme-size(btn-height)}px; // line-height: #{_theme-size(btn-height) - _theme-size(btn-borderTop-width) - _theme-size(btn-borderBottom-width)}px; // в мобильной версии слишком большой отсуп
+        letter-spacing: #{_theme-size(btn-letter-spacing)}px;
+        text-transform: _theme-input(btn-textTransform);
+        &--text {
+            color: _theme-palette(attention--warning--text-color);
+        }
+        a {
+            color: _theme-palette(body-color);
+        }
+        span {
+            line-height: #{_theme-size(btn-font-size)}px;
+        }
+        .svg--arrow2 svg {
+            fill: _theme-palette(body-color);
+        }
+        &:hover, &:focus {
+            .svg--arrow2 svg {
+                fill: _theme-palette(body-color);
+            }
+        }
+    }
+}
+.site-error {
+    // font-family: map-get($fonts-list, "#{_fonts-weight(bold)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    &--title, &--code {
+        font-family: map-get($fonts-list, "#{_fonts-weight(strong)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    }
+}
+.test {
+    font-family: map-get($fonts-list, "#{_fonts-weight(strong)}"), Arial, Helvetica Neue, Roboto, san-serif;
+}
+.wishlist-button {
+    .svg--icon {
+        @if theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), background) ==_theme-colors(white) {
+            svg {
+                .fill {
+                    fill: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), color);
+                }
+                .stroke {
+                    stroke: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), color);
+                }
+            }
+        }
+        @else{
+            svg {
+                .fill {
+                    fill: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), background);
+                }
+                .stroke {
+                    stroke: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), background);
+                }
+            }
+        }
+    }
+    &--badge {
+        @if theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), background) ==_theme-colors(white) {
+            background-color: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), color);
+        }
+        @else{
+            background-color: theme-deep($theme-btn, _theme-deep-deep($theme-btn-list, btn--mainButton), background);
+        }
+        font-family: map-get($fonts-list, "#{_fonts-weight(body)}"), Arial, Helvetica Neue, Roboto, san-serif;
+    }
+}

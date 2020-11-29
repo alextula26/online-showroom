@@ -1,0 +1,76 @@
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+/*                                                                  */
+/*                             I C O N S                           */
+/*                                                                */
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+// @import "icons.data.svg";
+
+
+
+
+@font-face {
+  font-family: 'Warehouse Glyph';
+  font-style: normal;
+  font-weight: normal;
+  src: url(_path(fonts) + 'warehouse.eot');
+  src: local('warehouse'),
+   url(_path(fonts) + 'warehouse.eot') format('embedded-opentype'),
+   url(_path(fonts) + 'warehouse.woff2') format('woff2'),
+   url(_path(fonts) + 'warehouse.woff') format('woff'),
+   url(_path(fonts) + 'warehouse.ttf') format('truetype'),
+   url(_path(fonts) + 'warehouse.svg#warehouse') format('svg');
+}
+
+// Catchall baseclass
+.whglyph {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: "Warehouse Glyph";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Individual icons
+.whglyph-check                  { &:before { content: "\F002"; } }
+.whglyph-check-alt              { &:before { content: "\E000"; } }
+.whglyph-facebook               { &:before { content: "\E0DC"; } }
+.whglyph-ok                     { &:before { content: "\E0DE"; } }
+.whglyph-instagram              { &:before { content: "\E0DF"; } }
+.whglyph-whatsup                { &:before { content: "\E0E0"; } }
+.whglyph-youtube                { &:before { content: "\E0E1"; } }
+.whglyph-vk                     { &:before { content: "\E0E2"; } }
+.whglyph-viber                  { &:before { content: "\E0E3"; } }
+.whglyph-twitter                { &:before { content: "\E0E4"; } }
+
+// .whglyph:before {
+//   font-family: "fontello";
+//   font-style: normal;
+//   font-weight: normal;
+//   speak: none;
+
+//   display: inline-block;
+//   text-decoration: inherit;
+//   width: 1em;
+//   margin-right: .2em;
+//   text-align: center;
+//   font-variant: normal;
+//   text-transform: none;
+//   line-height: 1em;
+//   margin-left: .2em;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+// }
+
+.icon-twitter:before { content: '\e800'; }
+.icon-viber:before { content: '\e802'; }
+.icon-facebook:before { content: '\e803'; }
+.icon-instagram:before { content: '\e804'; }
+.icon-ok:before { content: '\e805'; }
+.icon-vk:before { content: '\e806'; }
+.icon-whatsapp:before { content: '\e807'; }
+.icon-youtube:before { content: '\e808'; }
+.icon-check:before { content: '\e809'; }

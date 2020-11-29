@@ -1,0 +1,227 @@
+/* ============================= */
+/*  Bootstrap checkbox & radio   */
+/* ============================= */
+
+// Checkboxes and radios
+//
+// Indent the labels to position radios/checkboxes as hanging controls.
+$form-check-enable: false;
+$checkbox-item-enable: true;
+$radio-item-enable:false;
+$checkbox-img-enable: false;
+
+@if $form-check-enable{
+    .form-check {
+      position: relative;
+      display: block;
+      margin-bottom: $form-check-margin-bottom;
+
+        &.disabled {
+            .form-check-label {
+              color: $text-muted;
+              cursor: $cursor-disabled;
+            }
+        }
+        &-label {
+          padding-left: $form-check-input-gutter;
+          margin-bottom: 0; // Override default `<label>` bottom margin
+          cursor: pointer;
+        }
+        &-input {
+          position: absolute;
+          margin-top: $form-check-input-margin-y;
+          margin-left: -$form-check-input-gutter;
+
+          &:only-child {
+            position: static;
+          }
+        }
+        // Radios and checkboxes on same line
+        &-inline {
+          display: inline-block;
+
+          .form-check-label {
+            vertical-align: middle;
+          }
+
+          + .form-check-inline {
+            margin-left: $form-check-inline-margin-x;
+          }
+        }
+    }
+}
+
+/* ============================= */
+/*  Modify checkbox & radio      */
+/* ============================= */
+
+
+@if $checkbox-item-enable{
+    .checkbox-item {
+        $pad: _size(leading-values);
+
+        // line-height: 28px;
+        position: relative;
+        input[type=checkbox] {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+            &:checked + label.checkbox{
+                &:before {
+                    content: '\F002';
+                    font-family: 'warehouse';
+                    text-align: center;
+                }
+            }
+            & + label.checkbox:before {
+                background-image: none;
+            }
+            &:checked + label.checkbox:hover:before {
+            }
+            &[disabled] + label.checkbox{
+                cursor: not-allowed;
+                &:before{
+                    cursor: not-allowed;
+                }
+            }
+        }
+        label.checkbox {
+            cursor: pointer;
+            display: inline-block;
+            // font-size: rem(14);
+            margin: 0;
+            position: relative;
+            text-align: left;
+            // text-transform: lowercase;
+            // line-height: 28px;
+            vertical-align: top;
+            // &:hover:before {
+                // border-color: _checkbox(checkboxItem--borderColor);
+            // }
+            &:before {
+                // background-color: _checkbox(checkboxItem--bgColor);
+                background-repeat: no-repeat;
+                background-size: 74% auto;
+                background-position: center center;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 0px;
+                content: " ";
+                display: inline-block;
+                // height: rem(_size(checkboxItem--size));
+                left: 0px;
+                // margin-top: rem(-(_size(checkboxItem--size) / 2));
+                position: absolute;
+                top: 50%;
+                // width: rem(_size(checkboxItem--size));
+            }
+            span{
+                display: inline-block;
+                // line-height: rem(_size(checkboxItem--size));
+                vertical-align: middle;
+            }
+            fieldset[disabled]{
+                cursor: $cursor-disabled;
+            }
+        }
+        + .checkbox-item{
+            // margin-top: rem($pad / 2);
+            .checkbox-inline &{
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+@if $radio-item-enable{
+    .radio-item {
+        line-height: 0.875;
+        padding-left: 22px;
+        position: relative;
+        margin-bottom: 15px;
+        input[type=radio] {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+            left: 1px;
+            top: 3px;
+            &:checked + label.radio{
+                &:before {
+                    background-color: #fff;
+                    border-color: $checkbox-item-border-color;
+                    border-width: 5px;
+                }
+            }
+        }
+        label{
+            &.radio {
+                cursor: pointer;
+                padding-top: 0;
+                position: relative;
+                &:before {
+                    border-radius: 14px;
+                    background-color: $checkbox-item-bg;
+                    border: 2px solid $checkbox-item-color;
+                    content: " ";
+                    display: inline-block;
+                    height: 14px;
+                    left: -22px;
+                    position: absolute;
+                    top: 2px;
+                    width: 14px;
+                }
+                &:hover:before {
+                    border-color: $checkbox-item-border-color;
+                    border-width: 5px;
+                    background-color: #fff;
+                }
+            }
+            &:hover:before {
+                border-color: $checkbox-item-color;
+                background-color: #fff;
+            }
+        }
+    }
+}
+
+@if $checkbox-img-enable{
+    .checkbox-img{
+        // background-color: #fff;
+        border: 5px solid transparent;
+        float: left;
+        height: auto;
+        overflow: hidden;
+        margin: 0 0 0.5em;
+        width: 100%;
+        // @include media-breakpoint-down(414px) {
+        //     height: 143px;
+        // }
+        // @include media-breakpoint-up(sm) {
+        //     height: 94px;
+        // }
+        // @include media-breakpoint-up(md) {
+        //     height: 104px;
+        // }
+        // @include media-breakpoint-up(lg) {
+        //     height: 104px;
+        // }
+        // @include media-breakpoint-up(xl) {
+        //     height: 102.33px;
+        // }
+        &.on{
+            border-color: #fff;
+        }
+        input[type="checkbox"] {
+            cursor: pointer;
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+        img{
+            height: auto;
+            width: 100%;
+        }
+    }
+}

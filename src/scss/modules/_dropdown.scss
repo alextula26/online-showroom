@@ -1,0 +1,129 @@
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+/*                                                                  */
+/*                          D R O P D O W N S                      */
+/*                                                                */
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+
+$dropdown-margin-top: 0;
+$dropdown-border-width:0;
+$dropdown-item-padding-x: 1.2rem;
+$zindex-dropdown-backdrop: 10 !default;
+
+.dropup,
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  &::after {
+    border-top: _size(caret-width) solid;
+    border-right: _size(caret-width) solid transparent;
+    border-left: _size(caret-width) solid transparent;
+    content: "";
+    display: inline-block;
+    height: 0;
+    margin-left: _size(caret-width);
+    vertical-align: middle;
+    width: 0;
+    .dropup & {
+      border-top: 0;
+      border-bottom: _size(caret-width) solid;
+    }
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+
+// The dropdown menu
+.dropdown-menu {
+  background: _palette(dropdownmenu-bgc);
+  // box-shadow: 0px 2px 15px transparentize(_colors(black), 0.85);
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
+  z-index: $zindex-dropdown;
+  // @if $enable-rounded{
+  //   @include border-radius($border-radius);
+  // }
+  // @include box-shadow($dropdown-box-shadow);
+  // @include media-breakpoint-down(lg){
+  //   margin: 0 #{-$navbar-padding-x};
+  // }
+  // .dropup & {
+  //   margin-top: 0;
+  //   margin-bottom: $dropdown-spacer;
+  //   top: auto;
+  //   bottom: 100%;
+  // }
+}
+
+// Links, buttons, and more within the dropdown menu
+//
+// `<button>`-specific styles are denoted with `// For <button>s`
+.dropdown-item {
+  background: none; // For `<button>`s
+  border: 0; // For `<button>`s
+  clear: both;
+  color: $dropdown-link-color;
+  display: block;
+  // font-weight: $font-weight-normal;
+  padding: 0 $dropdown-item-padding-x;
+  text-align: inherit; // For `<button>`s
+  width: 100%; // For `<button>`s
+  white-space: nowrap; // prevent links from randomly breaking onto new lines
+  @include hover-focus {
+    background-color: $dropdown-link-hover-bg;
+    color: $dropdown-link-hover-color;
+    text-decoration: none;
+  }
+
+  &.active,
+  &:active {
+    background-color: $dropdown-link-active-bg;
+    color: $dropdown-link-active-color;
+    text-decoration: none;
+  }
+  &.disabled,
+  &:disabled {
+    background-color: transparent;
+    color: $dropdown-link-disabled-color;
+    cursor: $cursor-disabled;
+    // Remove CSS gradients if they're enabled
+    @if $enable-gradients {
+      background-image: none;
+    }
+  }
+}
+
+// Open state for the dropdown
+.open,
+.show{
+  // Show the menu
+  > .dropdown-menu {
+    display: block;
+  }
+
+  // Remove the outline when :focus is triggered
+  > a {
+    outline: 0;
+  }
+}
+
+// Menu positioning
+//
+// Add extra class to `.dropdown-menu` to flip the alignment of the dropdown
+// menu with the parent.
+.dropdown-menu-right {
+  right: 0;
+  left: auto; // Reset the default from `.dropdown-menu`
+}
+
+.dropdown-menu-left {
+  right: auto;
+  left: 0;
+}
+

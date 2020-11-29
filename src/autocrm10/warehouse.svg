@@ -1,0 +1,47 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<metadata>
+Created by FontForge 20170731 at Tue Oct  6 17:27:09 2020
+ By Aleksey,,,
+autocrm.ru (c). 2020. All Rights Reserved
+</metadata>
+<defs>
+<font id="warehouse" horiz-adv-x="0" >
+  <font-face 
+    font-family="warehouse"
+    font-weight="400"
+    font-stretch="normal"
+    units-per-em="2048"
+    panose-1="2 0 5 0 0 0 0 0 0 0"
+    ascent="1638"
+    descent="-410"
+    bbox="0 0 1587.15 1434"
+    underline-thickness="150"
+    underline-position="-742"
+    unicode-range="U+001D-F002"
+  />
+<missing-glyph horiz-adv-x="1024" 
+d="M100 0v1434h824v-1434h-824zM150 50h724v1334h-724v-1334zM325 1148q31 28 58 43q53 30 112 30q92 0 148 -47.5t56 -127.5q0 -49 -23 -98.5t-87 -129.5q-63 -80 -99 -132t-36 -99q0 -38 24 -133h-32q-35 97 -35 148q0 76 81.5 218t81.5 217q0 57 -33 90t-91 33
+q-38 0 -69 -17q-26 -15 -56 -40v45zM389 334l57 58q11 10 20 10q10 0 22 -11l56 -60q9 -11 9 -20q0 -11 -10 -22l-56 -62q-14 -14 -21 -14q-11 0 -20 10l-61 71q-7 9 -7 18q0 10 11 22z" />
+    <glyph glyph-name=".notdef" horiz-adv-x="1024" 
+d="M100 0v1434h824v-1434h-824zM150 50h724v1334h-724v-1334zM325 1148q31 28 58 43q53 30 112 30q92 0 148 -47.5t56 -127.5q0 -49 -23 -98.5t-87 -129.5q-63 -80 -99 -132t-36 -99q0 -38 24 -133h-32q-35 97 -35 148q0 76 81.5 218t81.5 217q0 57 -33 90t-91 33
+q-38 0 -69 -17q-26 -15 -56 -40v45zM389 334l57 58q11 10 20 10q10 0 22 -11l56 -60q9 -11 9 -20q0 -11 -10 -22l-56 -62q-14 -14 -21 -14q-11 0 -20 10l-61 71q-7 9 -7 18q0 10 11 22z" />
+    <glyph glyph-name=".null" 
+ />
+    <glyph glyph-name="glyph2" horiz-adv-x="508" 
+ />
+    <glyph glyph-name="uni001D" 
+ />
+    <glyph glyph-name="uni001D" 
+ />
+    <glyph glyph-name="space" unicode=" " horiz-adv-x="508" 
+ />
+    <glyph glyph-name="space" unicode="&#xa0;" horiz-adv-x="508" 
+ />
+    <glyph glyph-name="uniE000" unicode="&#xe000;" horiz-adv-x="1301" 
+d="M1301 771l-744 -745q-53 -52 -103 0l-454 452v52l205 205h52l247 -249l542 541h50l205 -204v-52z" />
+    <glyph glyph-name="uniF002" unicode="&#xf002;" horiz-adv-x="1587" 
+d="M475 215l-347 342q-33 31 -69 0l-44 -46q-30 -35 0 -67l434 -428q38 -33 71 3l1055 1295q27 38 -6 68l-51 41q-8 6 -15 8l-6 2l-5 1q-22 0 -38 -14z" />
+  </font>
+</defs></svg>

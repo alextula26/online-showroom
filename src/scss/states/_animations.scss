@@ -1,0 +1,61 @@
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+/*                                                                  */
+/*                         A N I M A T I O N S                     */
+/*                                                                */
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+.fade {
+  opacity: 0;
+  @include transition($transition-fade);
+  &.in {
+    opacity: 1;
+  }
+  &.show {
+    opacity: 1;
+  }
+}
+
+.collapse {
+  display: none;
+  &.in {
+    display: block;
+  }
+  &.active,
+  &.show {
+    display: block;
+  }
+}
+
+tr.collapse.in    { display: table-row; }
+
+tbody.collapse.in { display: table-row-group; }
+// tr {
+//   &.collapse.show {
+//     display: table-row;
+//   }
+// }
+
+// tbody {
+//   &.collapse.show {
+//     display: table-row-group;
+//   }
+// }
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  @include transition($transition-collapse);
+}
+
+.collapse-hide{
+  display: block;
+  .collapsed &{
+    display: none;
+  }
+}
+.collapse-show{
+  display: none;
+  .collapsed &{
+    display: block;
+  }
+}

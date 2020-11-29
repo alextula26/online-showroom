@@ -1,0 +1,388 @@
+  // --------------------------------------------------------------- //
+ // -------------------------- FUNCTIONS -------------------------- //
+// --------------------------------------------------------------- //
+@import "../bootstrap/_functions";
+
+// ------------------------------------------------------- FUNCTIONS //
+// ФУНКЦИЯ ЗАМЕНЫ СИМВОЛОВ
+// --------------------------------------------------------------- //
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+// ------------------------------------------------------- FUNCTIONS //
+// HELPER FUNCTION ДЛЯ [@mixin aspect-ratio]
+// Return null rather than throwing an error if index is outside list
+// range.
+// --------------------------------------------------------------- //
+@function nth-or-null($list, $index) {
+  @return if(length($list) >= $index, nth($list, $index), null);
+}
+
+// ------------------------------------------------------- FUNCTIONS //
+// REMOVES A SPECIFIC ITEM FROM A LIST.
+// @author Hugo Giraudel
+// @param {list} $list List.
+// @param {integer} $index Index.
+// @return {list} Updated list.
+// --------------------------------------------------------------- //
+@function remove-nth($list, $index) {
+  $result: null;
+
+  @if type-of($index) != number {
+    @warn "$index: #{quote($index)} is not a number for `remove-nth`.";
+  }
+  @else if $index == 0 {
+    @warn "List index 0 must be a non-zero integer for `remove-nth`.";
+  }
+  @else if abs($index) > length($list) {
+    @warn "List index is #{$index} but list is only #{length($list)} item long for `remove-nth`.";
+  }
+
+  @else {
+    $result: ();
+    $index: if($index < 0, length($list) + $index + 1, $index);
+
+    @for $i from 1 through length($list) {
+
+      @if $i != $index {
+        $result: append($result, nth($list, $i));
+      }
+
+    }
+
+  }
+
+  @return $result;
+}
+
+// ------------------------------------------------------- FUNCTIONS //
+// Gets a value from a map.
+// @author Hugo Giraudel
+// @param {map} $map Map.
+// @param {string} $keys Key(s).
+// @return {string} Value.
+// --------------------------------------------------------------- //
+@function val($map, $keys...) {
+
+  @if nth($keys, 1) == null {
+    $keys: remove-nth($keys, 1);
+  }
+
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+
+}
+
+// ------------------------------------------------------- FUNCTIONS //
+// Computes a bottom-shadow for a card effect.
+// @param {Number} $depth - depth level
+// @return {List}
+// --------------------------------------------------------------- //
+@function bottom-shadow($depth) {
+  $primary-offset: nth(1.5 3 6 10 15, $depth) * 1px;
+  $blur: nth(1 3 3 5 6, $depth) * 4px;
+  $color: rgba(black, nth(.24 .23 .23 .22 .22, $depth));
+
+  @return 0 $primary-offset $blur $color;
+}
+
+
+// ------------------------------------------------------- FUNCTIONS //
+// Добавляем пути
+// Base path for assets (fonts, images...),
+// испльзования функция для пути картинок
+// background-image: image('kittens.png');
+// should not include trailing slash
+// @access public
+// @type String
+// --------------------------------------------------------------- //
+$asset-base-path: '../assets' !default;
+// --------------------------------------------------------------- //
+// Asset URL builder
+// @access private
+// @param {String} $type - Asset type, matching folder name
+// @param {String} $file - Asset file name, including extension
+// @return {URL} - A `url()` function leading to the asset
+// --------------------------------------------------------------- //
+@function asset($type, $file) {
+  @return url($asset-base-path + '/' + $type + '/' + $file);
+}
+
+// --------------------------------------------------------------- //
+// Image asset helper
+// @access public
+// @param {String} $file - Asset file name, including extension
+// @return {URL} - A `url()` function leading to the image
+// @require {function} asset
+// --------------------------------------------------------------- //
+@function image($file) {
+  @return asset('img', $file);
+}
+
+// --------------------------------------------------------------- //
+// Font asset helper
+// @access public
+// @param {String} $file - Asset file name, including extension
+// @return {URL} - A `url()` function leading to the font
+// @require {function} asset
+// --------------------------------------------------------------- //
+@function font($file) {
+  @return asset('fonts', $file);
+}
+
+// ------------------------------------------------------- FUNCTIONS //
+// ИСПОЛЬЗОВАНИЕ EM/REM ВМЕСТО /PX
+// для подклчения шрифта: font-size: em(14)
+// --------------------------------------------------------------- //
+
+$browser-context: 16;
+$font-size-context: $browser-context;
+
+@function rem( $pixels, $context: $font-size-context ) {
+  @return ($pixels/$context)*1rem;
+}
+
+@function em($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  @return $pixels / $context * 1em;
+}
+
+
+// ------------------------------------------------------- FUNCTIONS //
+// Encodes a SVG data URL so IE doesn't choke
+// (via codepen.io/jakob-e/pen/YXXBrp).
+// @param {string} $svg SVG data URL.
+// @return {string} Encoded SVG data URL.
+// --------------------------------------------------------------- //
+@function svg-url($svg) {
+
+  $svg: str-replace($svg, '"', '\'');
+  $svg: str-replace($svg, '%', '%25');
+  $svg: str-replace($svg, '<', '%3C');
+  $svg: str-replace($svg, '>', '%3E');
+  $svg: str-replace($svg, '&', '%26');
+  $svg: str-replace($svg, '#', '%23');
+  $svg: str-replace($svg, '{', '%7B');
+  $svg: str-replace($svg, '}', '%7D');
+  $svg: str-replace($svg, ';', '%3B');
+
+  @return url("data:image/svg+xml;charset=utf8,#{$svg}");
+
+}
+
+// ------------------------------------------------------- FUNCTIONS //
+/// ПРЕВРАЩЕНИЕ В ЧИСЛА
+// --------------------------------------------------------------- //
+@function el-numbers($value) {
+  @if type-of($value) == 'number' {
+    @return $value;
+  } @else if type-of($value) != 'string' {
+    $_: log('Value for `to-number` should be a number or a string.');
+  }
+
+  $result: 0;
+  $digits: 0;
+  $minus: str-slice($value, 1, 1) == '-';
+  $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
+
+  @for $i from if($minus, 2, 1) through str-length($value) {
+    $character: str-slice($value, $i, $i);
+
+    @if not (index(map-keys($numbers), $character) or $character == '.') {
+      @return to-length(if($minus, -$result, $result), str-slice($value, $i))
+    }
+
+    @if $character == '.' {
+      $digits: 1;
+    } @else if $digits == 0 {
+      $result: $result * 10 + map-get($numbers, $character);
+    } @else {
+      $digits: $digits * 10;
+      $result: $result + map-get($numbers, $character) / $digits;
+    }
+  }
+
+  @return if($minus, -$result, $result);
+}
+
+// ------------------------------------------------------- FUNCTIONS //
+// ДЛЯ РАБОТЫ С MAP
+// Fetch nested keys
+// @param {Map} $map - Map
+// @param {Arglist} $keys - Keys to fetch
+// @return {*}
+// --------------------------------------------------------------- //
+// ДЛЯ ВЫТАСКИВАНИЯ ИЗ DEEP MAP
+// $grid-configuration: (
+// 'columns': 12,
+// 'layouts': (
+// 'small': 800px,
+// 'medium': 1000px,
+// 'large': 1200px,
+// ),
+// );
+// $medium: map-deep-get($grid-configuration, 'layouts', 'medium');
+// --------------------------------------------------------------- //
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// --------------------------------------------------------------- //
+// UPDATE A KEY DEEPLY NESTED
+// @author Hugo Giraudel
+// @param {Map} $map - Map to update
+// @param {Arglist} $keys - Keys to access to value to update
+// @param {*} $value - New value (last member of `$keys`)
+// @return {Map} - Updated map
+// $medium: map-deep-set($grid-configuration, 'layouts', 'medium', 1300px);
+// --------------------------------------------------------------- //
+@function map-deep-set($map, $keys.../*, $value */) {
+  $map-list: ($map,);
+  $result: null;
+
+  @if length($keys) == 2 {
+    @return map-merge($map, (nth($keys, 1): nth($keys, -1)));
+  }
+
+  @for $i from 1 through length($keys) - 2 {
+    $map-list: append($map-list, map-get(nth($map-list, -1), nth($keys, $i)));
+  }
+
+  @for $i from length($map-list) through 1 {
+    $result: map-merge(nth($map-list, $i), (nth($keys, $i): if($i == length($map-list), nth($keys, -1), $result)));
+  }
+
+  @return $result;
+}
+
+// --------------------------------------------------------------- //
+/// COMPUTE THE MAXIMUM DEPTH OF A MAP
+/// @param {Map} $map
+/// @return {Number} max depth of `$map`
+/// $depth: map-depth($grid-configuration);
+// -> 2
+// --------------------------------------------------------------- //
+@function map-depth($map) {
+  $level: 1;
+
+  @each $key, $value in $map {
+    @if type-of($value) == "map" {
+      $level: max(map-depth($value) + 1, $level);
+    }
+  }
+
+  @return $level;
+}
+
+// --------------------------------------------------------------- //
+// TEST IF MAP GOT ALL `$KEYS` AT FIRST LEVEL
+// @author Hugo Giraudel
+// @param {Map} $map - Map
+// @param {Arglist} $keys - Keys to test
+// @return {Bool}
+// $depth: map-has-keys($grid-configuration, 'columns', 'layouts');
+// -> true
+// $depth: map-has-keys($grid-configuration, 'columns', 'options');
+// -> false
+// --------------------------------------------------------------- //
+@function map-has-keys($map, $keys...) {
+  @each $key in $keys {
+    @if not map-has-key($map, $key) {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+// --------------------------------------------------------------- //
+// TEST IF MAP GOT ALL `$KEYS` NESTED WITH EACH OTHERS
+// @author Hugo Giraudel
+// @param {Map} $map - Map
+// @param {Arglist} $keys - Keys to test
+// @return {Bool}
+// --------------------------------------------------------------- //
+@function map-has-nested-keys($map, $keys...) {
+  @each $key in $keys {
+    @if not map-has-key($map, $key) {
+      @return false;
+    }
+    $map: map-get($map, $key);
+  }
+
+  @return true;
+}
+
+// --------------------------------------------------------------- //
+// MAP TO LIST
+// $breakpoints: (
+// 'small': 600px,
+// 'medium': 900px,
+// 'large': 1200px
+// );
+// $breakpoints-list: to-list($breakpoints, 'both');
+// ('small' 600px, 'medium' 900px, 'large' 1200px)
+// $breakpoints-keys: to-list($breakpoints, 'keys');
+// ('small' 'medium' 'large')
+// $breakpoints-values: to-list($breakpoints, 'values');
+// (600px 900px 1200px)
+// --------------------------------------------------------------- //
+@function to-list($value, $keep: 'both') {
+  $keep: if(index('keys' 'values', $keep), $keep, 'both');
+
+  @if type-of($value) == 'map' {
+    $keys: ();
+    $values: ();
+
+    @each $key, $val in $value {
+      $keys: append($keys, $key);
+      $values: append($values, $val);
+    }
+
+    @if $keep == 'keys' {
+      @return $keys;
+    } @else if $keep == 'values' {
+      @return $values;
+    } @else {
+      @return zip($keys, $values);
+    }
+  }
+
+  @return if(type-of($value) != 'list', ($value,), $value);
+}
+
+// --------------------------------------------------------------- //
+// COMPUTE THE MAXIMUM DEPTH OF A MAP
+// @param {Map} $map
+// @return {Number} max depth of `$map`
+// --------------------------------------------------------------- //
+
+@function depth($map) {
+  $level: 1;
+
+  @each $key, $value in $map {
+    @if type-of($value) == "map" {
+      $level: max(depth($value) + 1, $level);
+    }
+  }
+
+  @return $level;
+}

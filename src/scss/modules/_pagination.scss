@@ -1,0 +1,80 @@
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+/*                                                                  */
+/*                        P A G I N A T I O N                      */
+/*                                                                */
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+
+.pagination {
+  $pad: _size(leading-values);
+
+  display: flex;
+  // @if $enable-flex{
+  //   display: flex;
+  // }@else{
+  //   display: block;
+  // }
+  // 1-2: Disable browser default list styles
+  justify-content: center;
+  padding-left: 0; // 1
+  list-style: none; // 2
+  margin: rem($pad) 0;
+  text-align: center;
+  @include border-radius();
+  // @include clearfix;
+}
+
+.page-item {
+  // float: left;
+  display: inline-block;
+  &:first-child {
+    .page-link {
+      margin-left: 0;
+      @include border-left-radius($border-radius);
+    }
+  }
+  &:last-child {
+    .page-link {
+      @include border-right-radius($border-radius);
+    }
+  }
+
+  &.active .page-link {
+    background-color: _pagination(pagination-bg-active);
+    border-color: _pagination(pagination-bg-active);
+    color: _pagination(pagination-color-active);
+    z-index: 2;
+  }
+
+  &.disabled .page-link {
+    opacity: .2;
+    pointer-events: none;
+  }
+
+  & + &{
+    margin-left: rem(2);
+  }
+}
+
+.page-link {
+  $pad: _size(leading-values);
+
+  background-color: _pagination(pagination-bg);
+  border: 1px solid _pagination(pagination-color);
+  border-radius: rem(0);
+  background-image: none;
+  color: _pagination(pagination-color);
+  display: block;
+  font-size: rem(16);
+  // font-weight: 500;
+  line-height: rem($pad);
+  // margin-left: -1px;
+  padding: 0 rem($pad / 2);
+  position: relative;
+
+  @include hover-focus {
+    background-color: _pagination(pagination-bg-active);
+    border-color: _pagination(pagination-bg-active);
+    color: _pagination(pagination-color-active);
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,11 @@
+
+// ----------------------------------------------------------- BG //
+// GETS A BG VALUE
+// @param {string} $keys Key(s).
+// @return {string} Value.
+@function _bg($keys...) {
+  @return val($bg, $keys...);
+}
+
+$bg:(
+);

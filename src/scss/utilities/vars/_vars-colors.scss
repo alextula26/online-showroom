@@ -1,0 +1,302 @@
+// ---------------------------------------------------------- COLOR //
+
+// -------------------------------------------------- DEFAULT COLOR //
+$color-red:                         red !default;
+$gray-lighter:                      gray !default;
+$color-blue:                        blue !default;
+
+// ------------------------------------------------ BOOTSTRAP COLOR //
+$blue:                              #007bff !default;
+$indigo:                            #6610f2 !default;
+$purple:                            #6f42c1 !default;
+$pink:                              #e83e8c !default;
+$red:                               #dc3545 !default;
+$orange:                            #fd7e14 !default;
+$yellow:                            #ffc107 !default;
+$green:                             #28a745 !default;
+$teal:                              #20c997 !default;
+$cyan:                              #17a2b8 !default;
+$brown:                             #646974 !default;
+$gray:                              $gray-600;
+$gray-lighter:                      $gray-100;
+$gray-dark:                         $gray-800;
+
+$colors: (
+  blue: $blue,
+  indigo: $indigo,
+  purple: $purple,
+  pink: $pink,
+  red: $red,
+  orange: $orange,
+  yellow: $yellow,
+  green: $green,
+  teal: $teal,
+  cyan: $cyan,
+  white: $white,
+  gray: $gray,
+  gray-dark: $gray-dark
+) !default;
+
+$theme-colors: (
+  primary: $blue,
+  secondary: $gray-600,
+  success: $green,
+  info: $cyan,
+  warning: $yellow,
+  danger: $red,
+  light: $gray-100,
+  dark: $gray-800
+) !default;
+
+// ---------------------------------------------------- BRAND COLOR //
+@function _colors($keys...) {
+  @return val($colors, $keys...);
+}
+$colors: (
+  transparent:                            unquote('#00000000'), // в следующих версияъ SASS без unquote
+  white:                                  #ffffff,
+  black:                                  #000000,
+  red:                                    #E72434,
+  dark-red:                               #C61017,
+  dark-grey:                              #333333,
+  light-grey:                             #E5E5E5,
+  grey:                                   #B7B7B7,
+  blue:                                   #1F7BB7,
+  dark-blue:                              #1C3B4F,
+);
+
+// Gets a palette value.
+// @param {string} $keys Key(s).
+// @return {string} Value.
+//
+
+@function _checkbox($keys...) {
+  @return val($checkbox, $keys...);
+}
+$checkbox: (
+  checkboxItem--color:                    _colors(dark-blue),
+  checkboxItem--color_active:             _colors(dark-blue),
+  checkboxItem--bgColor:                  _colors(grey),
+  checkboxItem--bgColor_active:           _colors(light-grey),
+  checkboxItem--bgColor_hover:            _colors(light-grey),
+  checkboxItem--borderColor:              _colors(grey),
+  checkboxItem--borderColor_active:       _colors(light-grey),
+  checkboxItem--borderColor_hover:        _colors(light-grey),
+);
+
+@function _btn($keys...) {
+  @return val($btn, $keys...);
+}
+$btn:(
+  red: (
+    background:                           _colors(red),
+    border-color:                         _colors(red),
+    color:                                _colors(white),
+    hover-background:                     _colors(dark-red),
+    hover-border-color:                   _colors(dark-red),
+    hover-color:                          _colors(white),
+    svg:                                  _colors(white),
+    active-background:                    _colors(dark-red),
+    active-border-color:                  _colors(dark-red),
+    active-color:                         _colors(white),
+    active-svg:                           _colors(white),
+  ),
+  black:(
+    background:                           _colors(dark-grey),
+    border-color:                         _colors(dark-grey),
+    color:                                _colors(white),
+    hover-background:                     _colors(black),
+    hover-border-color:                   _colors(black),
+    hover-color:                          _colors(white),
+    svg:                                  _colors(red),
+    active-background:                    _colors(black),
+    active-border-color:                  _colors(black),
+    active-color:                         _colors(white),
+    active-svg:                           _colors(red),
+  ),
+  red-link:(
+    background:                           _colors(transparent),
+    border-color:                         _colors(transparent),
+    color:                                _colors(red),
+    hover-background:                     _colors(transparent),
+    hover-border-color:                   _colors(transparent),
+    hover-color:                          _colors(dark-red),
+    svg:                                  _colors(dark-red),
+    active-background:                    _colors(transparent),
+    active-border-color:                  _colors(transparent),
+    active-color:                         _colors(dark-grey),
+    active-svg:                           _colors(dark-grey),
+  ),
+  red-outline:(
+    background:                           _colors(transparent),
+    border-color:                         _colors(grey),
+    color:                                _colors(black),
+    hover-background:                     _colors(transparent),
+    hover-border-color:                   _colors(grey),
+    hover-color:                          _colors(black),
+    svg:                                  _colors(red),
+    active-background:                    _colors(transparent),
+    active-border-color:                  _colors(grey),
+    active-color:                         _colors(black),
+    active-svg:                           _colors(red),
+  ),
+);
+
+@function _badge($keys...) {
+  @return val($badge, $keys...);
+}
+$badge: (
+  red:                                    _colors(red),
+  black:                                  _colors(black),
+);
+
+@function _breadcrumb($keys...) {
+  @return val($breadcrumb, $keys...);
+}
+$breadcrumb: (
+  breadcrumb-active-color:                _colors(red),
+  breadcrumb-color:                       _colors(grey),
+  breadcrumb-svg:                         _colors(green),
+);
+
+@function _menu($keys...) {
+  @return val($menu, $keys...);
+}
+$menu: (
+  menu-active-color:                      _colors(red),
+  menu-active-bgcolor:                    _colors(white),
+  menu-bgcolor:                           _colors(bright-blue),
+  menu-hover-bgcolor:                     _colors(bright-green),
+  menu-color:                             _colors(green2),
+  menu-hover-color:                       _colors(white),
+);
+
+@function _pagination($keys...) {
+  @return val($pagination, $keys...);
+}
+$pagination:(
+  pagination-bg:                          _colors(white),
+  pagination-color:                       _colors(bright-blue5),
+  pagination-bg-active:                   _colors(bright-blue5),
+  pagination-color-active:                _colors(white),
+);
+
+// ====---------------------------------------------------- PALETTE //
+@function _palette($keys...) {
+  @return val($palette, $keys...);
+}
+
+$palette: (
+  base-link:                              _colors(blue),
+  base-link-hover:                        _colors(red),
+
+  bg:                                     _colors(white),
+  body-bg:                                _colors(white),
+
+  body-color:                             _colors(black),
+  btn--reset-color:                       _colors(grey),
+  btn--reset-svg:                         _colors(grey),
+  bootstrap-select-check-bgColor:         _colors(light-grey),
+  bootstrap-select-btnText-bgColor:       _colors(light-grey),
+  bootstrap-select-check-active-bgColor:  _colors(red),
+
+  brand-color:                            _colors(red),
+
+  carousel-indicator-borderColor:         _colors(grey),
+  carousel-indicator-active-borderColor:  _colors(red),
+  carousel-indicator-active-bg:           transparent,
+  carousel-capton-color:                  _colors(white),
+  carousel-control-svg-stroke:            _colors(grey),
+  carousel-control-hover-svg-stroke:      _colors(red),
+  collapsetab-bgColor:                    _colors(light-grey),
+
+  dropdownmenu-bgc:                       _colors(white),
+
+  datetimepicker-color:                   _colors(red),
+  datetimepicker-color-active:            _colors(red),
+  datetimepicker-boxShadowColor:          _colors(red),
+
+  dealer-info-block--phone-color:         _colors(red),
+  dealer-info-block--phone--icon:         _colors(red),
+  instock-block-bgColor:                  _colors(red),
+  instock-block-instock-bgColor:          _colors(red),
+  instock-block-shipping-bgColor:         _colors(grey),
+  instock-block-valueColor:               _colors(red),
+
+  error-color:                            _colors(red),
+
+  footer-color:                           _colors(black),
+
+  form-control-borderColor:               _colors(black),
+  form-control-color:                     _colors(black),
+
+  jspDrag-bgc:                            _colors(red),
+
+  headings-font-color:                    _colors(dark-grey),
+  h1:                                     _colors(dark-grey),
+
+  hr-border-color:                        _colors(gray),
+
+  link-color:                             _colors(red),
+  link-active-color:                      _colors(red),
+
+  modal-link-add-comment:                 _colors(red),
+
+  model-list-color:                       _colors(black),
+  model-list-bgColor:                     _colors(light-grey),
+
+  model-list-item--action--bgColor:       _colors(red),
+  model-list-item--action--color:         _colors(white),
+  model-list-item--name--color:           _colors(black),
+  model-list-item--price--color:          _colors(black),
+  model-list-item--priceAction--color:    _colors(red),
+  model-list-item--priceOld--color:       _colors(grey),
+  model-list-item--counter--bgColor:      _colors(dark-grey),
+  model-list-item--counterEmpty--bgColor: _colors(grey),
+  model-list-item--counter--color:        _colors(white),
+
+  placeholder-color:                      _colors(placeholder-color),
+  peoplebrowsing-svg-fill:                _colors(dark-blue),
+  peoplebrowsing-svg-stroke:              _colors(red),
+  required-color:                         _colors(red),
+  required-borderColor:                   _colors(red),
+
+  nav-link-color:                         _colors(black),
+  nav-link-activeColor:                  _colors(red),
+  nav-link-borderColor:                   _colors(black),
+  nav-link-active-borderColor:            _colors(red),
+  nav-tabs-borderColor:                   _colors(light-grey),
+
+  noUi-handle--borderColor:               _colors(red),
+  noUi-handle--bgColor:                   _colors(red),
+  noUi-target--borderColor:               _colors(white),
+  noUi-target--bgColor:                   _colors(light-grey),
+  noUi-connect--bgColor:                  _colors(red),
+  noUi-tooltip--color:                    _colors(grey),
+  noUi-value--color:                      _colors(grey),
+
+  table-th-color:                         _colors(dark-grey),
+  table-td-color:                         _colors(dark-grey),
+  table-border-color:                     _colors(light-grey),
+  table-bgColor:                          _colors(light-grey),
+
+  text-color:                             _colors(black),
+  tiresasgift-svg-fill1:                  _colors(dark-grey),
+  tiresasgift-svg-fill2:                  _colors(red),
+  sticky-block--bgColor:                  _colors(white),
+  sticky-block--toggle-bgColor:           _colors(black),
+  sticky-block--toggle-bgColor-active:    _colors(red),
+  toggle:                                 _colors(red),
+  toggle-bg:                              _colors(white),
+  specifications-list-borderColor:        _colors(light-grey),
+  vehicle-view-label-color:               _colors(grey),
+  vehicle-view-oldprice-color:            _colors(grey),
+  vehicle-view-price-svg-color:           _colors(black),
+  vehicle-list-item--title-color:         _colors(black),
+  vehicle-list-item--description-color:   _colors(grey),
+  vehicle-list-item--link-more-color:     _colors(grey),
+  vehicle-list-item--price-color:         _colors(black),
+  vehicle-list-item--priceAction-color:   _colors(red),
+  vehicle-list-item--svg:                 _colors(grey),
+
+);

@@ -1,0 +1,129 @@
+
+//  ----------------------------------------------Functions //
+// Поодержака мапов шрифтов гуглфонтс
+// для подклчения шрифта:
+// @include import-google-font-family($open-sans);
+//
+// для испльзования в стилях:
+// $font-family: google-font-family($lora);
+
+@function font-subset(){
+  $subset-cyrillic: '';
+  $subset-cyrillic-ext: '';
+  $subset-latin-ext: '';
+  @if $google-subset-cyrillic {
+    $subset-cyrillic: '&subset=cyrillic';
+  }
+  @if $google-subset-cyrillic-ext {
+    @if $google-subset-cyrillic {
+      $subset-cyrillic-ext: ',cyrillic-ext';
+    }
+    @else{
+      $subset-cyrillic-ext: '&subset=cyrillic-ext';
+    }
+  }
+  @if $google-subset-latin-ext {
+    @if $google-subset-cyrillic {
+      $subset-latin-ext: ',latin-ext';
+    }
+    @else{
+      @if $google-subset-cyrillic-ext {
+        $subset-latin-ext: ',latin-ext';
+      }
+      @else{
+        $subset-latin-ext: '&subset=latin-ext';
+      }
+    }
+  }
+  @return unquote($subset-cyrillic + $subset-cyrillic-ext + $subset-latin-ext);
+}
+
+@function function-import-google-font-family($import-ff) {
+  $google-url: 'https://fonts.googleapis.com/css?family=';
+  $google-font-subset: font-subset();
+  @return unquote(unquote($google-url) + str-replace(map-get($import-ff, ff1), ' ', '+') + ':' + map-get($import-ff, ffstyle) + '' + unquote($google-font-subset));
+}
+
+@function google-font-family($google-ff){
+  @return unquote('"' + map-get($google-ff, ff1) + '"' + ',' + map-get($google-ff, ff2));
+}
+
+@mixin import-google-font-family($import-ff) {
+  @import url('#{function-import-google-font-family($import-ff)}');
+}
+
+//  ----------------------------------------Fonts-family //
+$cuprum:(
+  ff1: 'Cuprum',
+  ff2: sans-serif,
+  ffstyle: '400,700', // only 400, 400i, 700, 700i
+);
+
+$arsenal:(
+  ff1: 'Arsenal',
+  ff2: sans-serif,
+  ffstyle: '400,700', // only 400, 400i, 700, 700i
+);
+
+$pt-sans: (
+  ff1: 'PT Sans',
+  ff2: sans-serif,
+  ffstyle: '400,700', // only 400, 400i, 700, 700i
+);
+
+$istok-web: (
+  ff1: 'Istok Web',
+  ff2: sans-serif,
+  ffstyle: '400,700', // only 400, 400i, 700, 700i
+);
+
+$exo-2:(
+  ff1: 'Exo 2',
+  ff2: sans-serif,
+  ffstyle: '200,300,400,700',
+);
+
+$ubuntu:(
+  ff1: 'Ubuntu',
+  ff2: sans-serif,
+  ffstyle: '400,700',
+);
+
+$pt-serif:(
+  ff1: 'PT Serif',
+  ff2: serif,
+  ffstyle: '400,700',
+);
+
+$roboto:(
+  ff1: 'Roboto',
+  ff2: sans-serif,
+  ffstyle: '300,400,700',
+);
+
+$roboto-condensed:(
+  ff1: 'Roboto Condensed',
+  ff2: sans-serif,
+  ffstyle: '300,500,700',
+);
+
+$open-sans:(
+  ff1: 'Open Sans',
+  ff2: sans-serif,
+  ffstyle: '400,700',
+);
+
+$lora:(
+  ff1: 'Lora',
+  ff2: serif,
+  ffstyle: '400,700',
+);
+
+// подкючения нужной гарнитуры языка в google-fonts
+$google-subset-cyrillic:  true;
+$google-subset-cyrillic-ext:  false;
+$google-subset-latin-ext:  false;
+
+
+$font-family:                       $roboto-condensed;
+$font-family-base:                  google-font-family($font-family);

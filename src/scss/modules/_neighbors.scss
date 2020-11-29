@@ -1,0 +1,86 @@
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+/*                                                                  */
+/*                         N E I G H B O R S                       */
+/*                                                                */
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+
+.neighbors{
+  $pad: _size(leading-values);
+
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: space-between;
+  // margin-bottom: rem($pad);
+  margin-bottom: rem($pad / 2);
+  padding: 0 rem($pad) 0;
+  @include media-breakpoint-up(md){
+    padding: 0 rem($pad * 2) 0;
+  }
+  // @include media-breakpoint-down('md') {
+  //   padding: 0 rem($pad / 2);
+  // }
+  .link-prev,
+  .link-up,
+  .link-next{
+    span{
+      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1OTQuOTggMzQ4LjU5Ij48cGF0aCBkPSJNMTIuNiw3NS40MmE0NSw0NSwwLDAsMSwwLTYyLjQ4LDQyLjIxLDQyLjIxLDAsMCwxLDYwLjgzLDBMMjk3LjUxLDI0My4wNmwyMjQtMjMwLjEyYTQyLjI5LDQyLjI5LDAsMCwxLDYwLjg5LDAsNDUuMTEsNDUuMTEsMCwwLDEsMCw2Mi40OEwzMjguNzksMzM1LjgzYTQ0LjgsNDQuOCwwLDAsMS02Mi42MiwwWiIgc3R5bGU9ImZpbGw6I0QyNEE0MztmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvc3ZnPg==');
+      background-repeat: no-repeat;
+      background-position: left center;
+      background-size: rem(12) auto;
+      display: inline-block;
+      height: rem(20);
+      vertical-align: middle;
+      width: rem(12);
+    }
+    &:hover{
+      text-decoration: none;
+      span{
+        @include vendor('transition', (
+          'transform #{_duration(transition)} ease-in-out'
+        ));
+      }
+    }
+  }
+  .link-prev{
+    span{
+      transform: rotate(90deg);
+    }
+    &:hover{
+      span{
+        @include vendor('transform', 'rotate(-270deg)');
+      }
+    }
+  }
+  .link-up{
+    span{
+      transform: rotate(180deg);
+    }
+    &:hover{
+      span{
+        @include vendor('transform', 'rotate(-180deg)');
+      }
+    }
+  }
+  .link-next{
+    span{
+      margin-left: 5px;
+    }
+    &:hover{
+      span{
+        @include vendor('transform', 'rotate(-360deg)');
+      }
+    }
+  }
+  a{
+    display: inline-block;
+    font-size: rem(12);
+    line-height: rem(20);
+    text-transform: uppercase;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}

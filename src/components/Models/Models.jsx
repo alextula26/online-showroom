@@ -4,7 +4,7 @@ import { getPriceCurrencyFormat } from '../../utils';
 
 class Models extends React.Component {
   renderModels() {
-    const { models } = this.props;
+    const { models, currentBrandId } = this.props;
 
     return (
       models.map((model) => {
@@ -12,13 +12,45 @@ class Models extends React.Component {
           id, name, image, min_price,
         } = model;
         return (
-          <div key={id} className="col-lg-6 col-xl-4">
-            <div className="card model-list-item-outer">
-              <img src={image} className="card-img-top" alt={name} />
-              <div className="card-body">
-                <h5 className="card-title">{name}</h5>
-                <p className="card-text">{getPriceCurrencyFormat(min_price)} руб.</p>
-                <NavLink to={`/catalog/119/model/${id}`} className="btn btn-primary">Подробнее</NavLink>
+          <div key={id} className="col-lg-12 col-xl-8">
+            <div className="model-list-item-outer">
+              <div className="model-list-item">
+
+                <div className="model-list-item--title">
+                  <span className="model-list-item--action">Акция</span>
+                  <NavLink
+                    className="model-list-item--name"
+                    to={`/catalog/${currentBrandId}/model/${id}`}
+                  >
+                    {name}
+                  </NavLink>
+                </div>
+
+                <div className="model-list-item--image-container">
+                  <NavLink to={`/catalog/${currentBrandId}/model/${id}`}>
+                    <img
+                      className="model-list-image img-responsive"
+                      src={image}
+                      alt={name}
+                    />
+                  </NavLink>
+                </div>
+
+                <div className="model-list-item--prices">
+                  <span className="model-list-item--price">
+                    {getPriceCurrencyFormat(min_price)} руб.
+                  </span>
+                </div>
+
+                <div className="model-list-item--information">
+                  <NavLink
+                    className="btn btn--counter-instock"
+                    to={`/catalog/119/model/${id}`}
+                  >
+                    Подробнее
+                  </NavLink>
+                </div>
+
               </div>
             </div>
           </div>
@@ -28,7 +60,7 @@ class Models extends React.Component {
   }
 
   render() {
-    const { brands, models } = this.props;
+    const { brands, models, currentBrandId } = this.props;
 
     if (models.length === 0) {
       return null;
@@ -38,20 +70,23 @@ class Models extends React.Component {
 
     return (
       <>
-        <h1>
-          Автомобили
-          {name}
-          {' '}
-          в наличии
-        </h1>
+        <h1> Автомобили {name} в наличии</h1>
+        <section className="filter" style={{ marginBottom: '30px' }}>
+          <div className="filter-footer-action mt-10">
+            <NavLink
+              to={`/catalog/${currentBrandId}/`}
+              className="btn--reset"
+            >
+              Сбросить все фильтры <span className="svg--icon svg--reset" />
+            </NavLink>
 
-        <div className="filter-footer-action mt-10">
-          <div className="btn--show mt-10 js-submit">
-            Доступно
-            <span className="btn--show-counter">{vehicles}</span>
-            предложение
+            <div className="btn--show mt-10 js-submit" style={{ cursor: 'default' }}>
+              Доступно
+              <span className="btn--show-counter">{vehicles}</span>
+              предложений
+            </div>
           </div>
-        </div>
+        </section>
 
         <div className="row model-list">
           {this.renderModels()}

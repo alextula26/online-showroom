@@ -1,0 +1,95 @@
+      // --------------------------------------------------------------- //
+    // ---------------------------- TOOLS ---------------------------- //
+  // --------------------------------------------------------------- //
+// -------------------- правила имеют min приоритет ------------- //
+
+// @import "~bootstrap/scss/utilities/align";
+// @import "~bootstrap/scss/utilities/background";
+// @import "~bootstrap/scss/utilities/borders";
+@import "~bootstrap/scss/utilities/clearfix";
+
+  // --------------------------------------------------------------- //
+ // ---------------------------- DISPLAY -------------------------- //
+// --------------------------------------------------------------- //
+@import "tools/display";
+
+// @import "~bootstrap/scss/utilities/embed.scss";
+
+  // --------------------------------------------------------------- //
+ // ---------------------------- FLEX ----------------------------- //
+// --------------------------------------------------------------- //
+@import "tools/flex";
+
+  // --------------------------------------------------------------- //
+ // --------------------------- FLOAT ----------------------------- //
+// --------------------------------------------------------------- //
+@import "tools/float";
+
+// @import "~bootstrap/scss/utilities/position";
+// @import "~bootstrap/scss/utilities/screenreaders";
+// @import "~bootstrap/scss/utilities/shadows";
+// @import "~bootstrap/scss/utilities/sizing";
+// @import "~bootstrap/scss/utilities/spacing";
+
+  // --------------------------------------------------------------- //
+ // --------------------------- TEXT ------------------------------ //
+// --------------------------------------------------------------- //
+@import "tools/text";
+
+  // --------------------------------------------------------------- //
+ // ------------------------ VISIBILITY --------------------------- //
+// --------------------------------------------------------------- //
+// @import "~bootstrap/scss/utilities/visibility";
+
+.sr-only {
+ @include sr-only();
+}
+
+.mb-10{
+  margin-bottom: 10px;
+}
+.mb-15{
+  margin-bottom: 15px;
+}
+.mb-20{
+  margin-bottom: 20px;
+}
+.mb-30{
+  margin-bottom: 30px;
+}
+.ml-10{
+  margin-left: 10px;
+}
+.mobile-ml-20{
+  .mobile-view &{
+    margin-left: 20px;
+  }
+}
+.mobile-mr-20{
+  .mobile-view &{
+    margin-right: 20px;
+  }
+}
+.pt-20{
+  padding-top: 20px;
+}
+.pb-20{
+  padding-bottom: 20px;
+}
+.pb-30{
+  padding-bottom: 30px;
+}
+
+.mt-10{
+  margin-top: 10px;
+}
+.mt-20{
+  margin-top: 20px;
+}
+.wd50pr{
+  width: 50%;
+}
+
+.relative{
+  position: relative;
+}

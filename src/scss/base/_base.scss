@@ -1,0 +1,193 @@
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+/*                                                                  */
+/*                              B A S E                            */
+/*                                                                */
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+
+@font-face{
+  font-family: 'warehouse';
+  font-style: normal;
+  src: url(_path(fonts) + 'warehouse.eot');
+  src: local('warehouse'),
+   url(_path(fonts) + 'warehouse.eot') format('embedded-opentype'),
+   url(_path(fonts) + 'warehouse.woff2') format('woff2'),
+   url(_path(fonts) + 'warehouse.woff') format('woff'),
+   url(_path(fonts) + 'warehouse.ttf') format('truetype'),
+   url(_path(fonts) + 'warehouse.svg#warehouse') format('svg');
+}
+
+html {
+  font-size: $font-size-base;
+  overflow-x: hidden; // скрыть в swipper скролл
+}
+
+body {
+  background-color: _palette(body-bg);
+  // background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  color: _palette(body-color);
+  // font-size: $font-size-body;
+  font-style: normal;
+  font-size: 18px;
+  font-family: "Arial", "Helvetica", "Roboto", san-serif;
+  height: 100vh;
+  position: relative;
+  text-rendering: optimizeLegibility;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: 'liga', 'kern';
+  &.mobile-view {
+    height: auto;
+    overflow-x: hidden; // fix: без сдвигается .sticky-block
+    &.modal-open{
+      height: 100vh;
+    }
+    &.bodyCollapse{
+      height: 100vh;
+      padding-right: 0;
+    }
+  }
+  &.sticky-open{
+    overflow: hidden;
+    height: 100vh;
+  }
+  // height: 100%;
+  // text-align: left;
+}
+
+// Links
+
+a {
+  color: _palette(link-color);
+  &:hover{
+    color: _palette(link-active-color);
+    text-decoration: none;
+  }
+  &.disabled,
+  &[disabled] {
+    cursor: $cursor-disabled;
+    pointer-events: none;
+    @include opacity(.1);
+    @include box-shadow(none);
+  }
+  &.nolink{
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+// Images
+
+img {
+  @include img-fluid;
+}
+
+.img-responsive {
+  @include img-fluid;
+}
+
+hr {
+  margin-top: $spacer-y;
+  margin-bottom: $spacer-y;
+  border: 0;
+  border-top: 1px solid $hr-border-color;
+}
+
+small,
+.small {
+  font-size: _fonts(small-font-size);
+  // font-weight: _fonts(weight);
+}
+
+.list-unstyled {
+  @include list-unstyled;
+}
+
+// iOS "clickable elements" fix for role="button"
+//
+// Fixes "clickability" issue (and more generally, the firing of events such as focus as well)
+// for traditionally non-focusable elements with role="button"
+// see https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+[role="button"] {
+  cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  $headings-line-height: _size(headings-line-height);
+  $headings-margin-bottom: _size(headings-margin-bottom);
+  // color: $headings-color;
+  color: _palette(headings-font-color);
+  font-family: $headings-font-family;
+  font-weight: normal;
+  // font-weight: $headings-font-weight;
+  line-height: rem($headings-line-height);
+  margin-top: 0;
+  margin-bottom: rem($headings-margin-bottom);
+  position: relative;
+}
+
+h1, .h1{
+  font-size: rem(_fonts(h1-font-size));
+  // font-weight: _fonts(weight-heading);
+  line-height: rem(_fonts(h1-line-height));
+  position: relative;
+}
+h2, .h2{
+  font-size: rem(_fonts(h2-font-size));
+  // font-weight: _fonts(weight-heading);
+  line-height: rem(_fonts(h2-line-height));
+  text-transform: uppercase;
+}
+h3, .h3 {
+  font-size: rem(_fonts(h3-font-size));
+  // font-weight: _fonts(weight-heading);
+  line-height: rem(_fonts(h3-line-height));
+}
+h4, .h4 {
+  $h4-font-size: _fonts(h4-font-size);
+  // font-weight: _fonts(weight-heading);
+  font-size: rem($h4-font-size);
+  line-height: rem(_fonts(h4-line-height));
+}
+h5, .h5 {
+  $h5-font-size: _fonts(h5-font-size);
+  font-size: rem($h5-font-size);
+  // font-weight: _fonts(weight-heading);
+  line-height: rem(_fonts(h5-line-height));
+}
+h6, .h6 {
+  $h6-font-size: _fonts(h6-font-size);
+  // font-weight: _fonts(weight-heading);
+  font-size: rem($h6-font-size);
+  line-height: rem(_fonts(h6-line-height));
+}
+
+p{
+  $paragraph-margin-bottom: _size(paragraph-margin-bottom);
+  margin-bottom: rem($paragraph-margin-bottom);
+}
+ul{
+  @include media-breakpoint-down(sm) {
+    padding-left: 0;
+  }
+}
+.page-title{
+  padding: 0 10px;
+  @include media-breakpoint-up(md){
+    padding: 0;
+  }
+}
+.right {
+  float:right;
+}
+.left {
+  float:left;
+}
+img, img:focus, img:active{
+    border: 0 solid;
+    outline: medium none;
+}

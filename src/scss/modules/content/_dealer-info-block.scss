@@ -1,0 +1,103 @@
+.dealer-info{
+  &-block{
+    text-align: center;
+    &--name{
+      font-size: rem(_size(dealer-info-block--name-fontSize));
+      // font-weight: 600;
+      line-height: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    &--postal{
+      display: inline-block;
+    }
+    &--adress{
+      // margin-bottom: 7px;
+      line-height: 17px;
+      &--street,
+      &--city{
+        display: inline-block;
+      }
+    }
+    &--phone{
+      color: _palette(dealer-info-block--phone-color);
+      font-size: rem(_size(dealer-info-block--phone-fontSize));
+      margin-bottom: 10px;
+      margin-top: 10px;
+      text-align: center;
+      &--icon{
+        border-radius: 32px;
+        background-color: _palette(dealer-info-block--phone--icon);
+        display: inline-block;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        vertical-align: middle;
+        width: 32px;
+      }
+      &--value{
+        color: _palette(dealer-info-block--phone-color);
+        &:hover, &:focus{
+          color: _palette(dealer-info-block--phone-color);
+          text-decoration: none;
+        }
+      }
+    }
+    .svg--phone{
+      display: inline-block;
+      height: 12px;
+      position: relative;
+      top: -2px;
+      vertical-align: middle;
+      width: 12px;
+      svg{
+        height: 12px;
+        vertical-align: top;
+        width: 12px;
+        .stroke{
+          stroke: _colors(white);
+        }
+      }
+    }
+  }
+  &-map{
+    position: relative;
+    text-align: center;
+    margin-bottom: 50px;
+    &:after,
+    &:before{
+      background-color: transparent;
+      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDM2MCAxMS4xNyI+PHBhdGggZD0iTTAsMTEuMTcsMTIuMjQsMCwyMy40NiwxMS4xNywzNC42NywwLDQ1Ljg5LDExLjE3LDU3LjExLDAsNjguMzMsMTEuMTcsNzkuNTUsMCw5MC43NiwxMS4xNywxMDIsMCwxMTMuMiwxMS4xNywxMjQuNDIsMGwxMS4yMiwxMS4xN0wxNDYuODYsMGwxMS4yMSwxMS4xN0wxNjkuMjksMGwxMS4yMiwxMS4xN0wxOTEuNzMsMCwyMDMsMTEuMTcsMjE0LjE2LDBsMTEuMjIsMTEuMTdMMjM2LjYsMGwxMS4yMiwxMS4xN0wyNTksMGwxMS4yMiwxMS4xN0wyODEuNDcsMGwxMS4yMiwxMS4xN0wzMDMuOTEsMGwxMS4yMiwxMS4xN0wzMjYuMzUsMGwxMS4yMSwxMS4xN0wzNDguNzgsMCwzNjAsMTEuMTdWMEgwWiIgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+');
+      background-position: left top;
+      background-repeat: no-repeat;
+      background-size: auto 10px;
+      content: '';
+      display: block;
+      height: 10px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: _zindex(dealer-info-map);
+    }
+    &:after{
+      background-position: left bottom;
+      bottom: 0;
+      top: auto;
+      transform: rotate(180deg);
+    }
+    &--btn{
+      margin-top: -#{(_size(btn-height) / 2)}px;
+      position: absolute;
+      height: #{_size(btn-height)}px;
+      text-align: center;
+      top: 50%;
+      width: 100%;
+      .sticky-block &{ // пофпксить надо zindex
+        display: none;
+      }
+    }
+    .btn--map{
+    }
+  }
+}

@@ -1,0 +1,79 @@
+// ----------------------------------------------------------- GRID //
+// ----------------------------------------- Bootstrap-4 overwrite //
+// @mixin _assert-ascending($map, $map-name) {
+//   $prev-key: null;
+//   $prev-num: null;
+//   @each $key, $num in $map {
+//     @if $prev-num == null {
+//       // Do nothing
+//     } @else if not comparable($prev-num, $num) {
+//       @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+//     } @else if $prev-num >= $num {
+//       @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+//     }
+//     $prev-key: $key;
+//     $prev-num: $num;
+//   }
+// }
+@mixin _assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+  @each $key, $num in $map {
+    @if $prev-num == null or unit($num) == "%" {
+      // Do nothing
+    } @else if not comparable($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    } @else if $prev-num >= $num {
+      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    }
+    $prev-key: $key;
+    $prev-num: $num;
+  }
+}
+
+$enable-grid-classes:               true;
+$enable-col-offset:                 false !default;
+$enable-col-auto:                   true;
+$enable-col-order:                  false;
+$grid-columns:                      24;
+$gutter:                            10px;
+$grid-gutter-width:                 0px;
+
+
+$grid-gutter-width-base-equal:      true !default; // убрать лишние правила при одинковом значении для всех media
+
+$grid-gutter-widths: (
+  xs: 0px
+  // ,sm: 10px
+  ,md: 18px
+  ,lg: 24px
+  ,xl: 16px
+  // ,xxl: 16px
+  ,xxxl: 20px
+  // ,qxl: 20px
+);
+
+// @include _assert-ascending($grid-gutter-widths, "$grid-gutter-widths");
+
+$grid-breakpoints: (
+  xs: 0px
+  ,sm: 360px
+  ,md: 576px
+  ,lg: 768px
+  ,xl: 992px
+  ,xxl: 1200px
+  ,xxxl: 1441px
+  ,qxl: 1680px
+);
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+
+$container-max-widths: (
+  md: 540px
+  ,lg: 720px
+  ,xl: 928px
+  ,xxl: 1168px
+  ,xxxl: 1420px
+  ,qxl: 1440px
+);
+
+@include _assert-ascending($container-max-widths, "$container-max-widths");

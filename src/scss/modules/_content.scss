@@ -1,0 +1,308 @@
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+
+/*                                                                  */
+
+/*                           C O N T E N T                         */
+
+/*                                                                */
+
+/* =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~= */
+
+@import "content/_vehicle-view.scss";
+@import "content/_vehicle-list.scss";
+@import "content/_peoplebrowsing.scss";
+@import "content/_colorfilter.scss";
+@import "content/_instock-block.scss";
+@import "content/_notifyDiscount.scss";
+@import "content/_specifications.scss";
+@import "content/_dealer-info-block.scss";
+@import "content/_sticky-block.scss";
+@import "content/_model-list.scss";
+@import "content/_callme.scss";
+@import "content/_recentlyViewed.scss";
+@import "content/_group-selection.scss";
+@import "content/_dealership-list.scss";
+@import "content/_catalog-sort.scss";
+
+.formSend {
+    cursor: default;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.square-question {
+    background-color: _colors(black);
+    color: _colors(white);
+    cursor: default;
+    display: inline-block;
+    font-size: 11px;
+    height: 12px;
+    line-height: 12px;
+    text-align: center;
+    width: 12px;
+}
+
+.filter {
+    padding: 0 10px;
+    &.filter-tradein {
+        // margin-bottom: 30px;
+    }
+    @include media-breakpoint-up(md) {
+        padding: 0;
+    }
+    .btn--sort {
+        width: 100%;
+        @include media-breakpoint-up(md) {
+            width: auto;
+        }
+    }
+    &-footer-action {
+        align-items: center;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .btn--show {
+            .mobile-view &{
+                flex: 1 1 100%;
+                margin-top: 20px;
+            }
+        }
+    }
+    .filter-group{
+        .row{
+            .mobile-view &{
+                // justify-content: space-between;
+            }
+        }
+    }
+}
+
+.modal-sideLeft {
+    border-right-width: 4px;
+    border-right-style: solid;
+    padding-right: 15px;
+    height: 100%;
+}
+
+.modal-sideRight {
+    @include media-breakpoint-up(xl) {
+        padding-left: 17px;
+    }
+}
+
+.modal-agree {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    font-size: rem(13);
+    line-height: 16px;
+    flex-wrap: wrap;
+    .svg--bankcard {
+        margin-right: 4px;
+        svg {
+            height: 24px;
+            width: 24px;
+        }
+    }
+    &.checkbox-item label.checkbox {
+        font-size: rem(13);
+    }
+}
+
+.main-tradein-slider {
+    margin-bottom: 40px;
+    margin-top: -30px;
+}
+
+.tradein-discounted-cars, .tradein-new-cars {
+    margin-bottom: 55px;
+    .mobile-view & {
+        padding: 0 20px;
+    } // overflow: hidden;
+}
+
+.creditinfo {
+    align-items: center;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    &--sum {
+        font-size: rem(21);
+        line-height: 25px;
+    }
+}
+
+.creditcard {
+    align-items: center;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: flex-end;
+    &-mir {
+        background-color: transparent;
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAANCAYAAAA9tuesAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMySURBVHgBtVZbSFRBGP5mzp7W6xpdiIiiG0VU0AWCypcuL90kA0MxKi16FMMLSVFI9KAmUU8+dhFShMJVBPMhe9AHXySSJEPyIQu7ou66untm/v6z626bunmU+mDO+c8/33+ZmX9mjvCUZp0jiMOIQhBJiBejNc2NiENK8ZnVpmmVaBLLfnMFpdBEkV+a64R2lUXVJKnHV+2ti357Sk4dIyFz4v0lTYwW/Tz08gBB58oQZzCp4AqGIKYsuAIKRoDlIOsmtZaToZ7Q8Ken37yZ47ati+mZHLsg3iGBCjNKsn6M1no7ojpOuJ2AncyNZ5IfqRWC1LI/fCgs52c46Yyyk3s4RptAvB0wYXoqoMGZoQCkefw6zJAUmxBEQmn7cSlp5apr6y/2Hx56uG1IIgFI6PyonFaavcNOGIsAQd5K1GedRacQoheO/GCD0rKR50nIxDRxAlf2mrYkhTqCRSC9PGsrv7IShxBkqVA+r8RnOMO+tef79sq/OFyRlr5mf1gEsrEI8AJfn5eU6+634M9kdjucQBubXDN1XM9cf+K4LUsDRz1Xc/pITB2014eI3vEmNUlg43y+lxafXq8pUmJs+pZrNSmBnUD+0g9TwDF33ZfNpnRvYV2qXeeaCC7eIFLyxrTrW/O2NYJds5LWGg1S4hDPbjJHOyGNYK+2bcPB5RM+GfJm7Kk5oUxVwYOPrCSJG2x3e6ZdRvnpI0S6IaYYvByhc7OmVZYd2W4p4eENeULullnlIQ0a54RfRaxptxZ0M9pHhmqFE0hs54TzpjMYGL/b/DwBz+DnCkeNuPyFVfjxXlNgzprmpL0Rgc8dYNf0AN77q1pfwwHYaBO/0qd93IFTEMa4IgbiG+u6uaeSTGOHv6rtjU1zzWVrBfHMcOMBKL5fdmCh4OUcS95VDzQ740u0jVd78+anzQH/fe8Iz1ZXvE6TasKCQTWorNT4x0h45PFt1BILTRjx1bZ2YgHgzTQ45kt6jP8AF0jVQxjdUUVI6fANpVL0IzFhfLVlvoK/xyyULOO7dmX0MxVp/oA12c8/DhdiHKHJTLaaUeP1JbJLMwM+vzB6JZbE7JSlhuEAvwCO/Enk6Hqt8gAAAABJRU5ErkJggg==');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 44px 12px;
+        height: 12px;
+        margin-right: 10px;
+        width: 44px;
+    }
+    &-visa {
+        background-color: transparent;
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAPCAYAAACfvC2ZAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUcSURBVHgBtVZ/TFVVHP+ec+/DVEpZuVScPASEMHXmgmAQb2FJa42yWBbTWm1Z0bIfs+WoAKMss1wtsbEym9EY/UG1amvwB5D8EKy1mA7hPXwKijUTkALee/eeb99z7rv3XVT6p3XgcM8531+f7/d8v+cL86ZtztYESwdNAwA55Ye+jI9PjvKmkZHaSbhspKx7cStwyctBY3pf/7E3u1OzyksQ+FxJ1zkETna90W7ze30VCz3m/PtQ44sZ8PmI/CKgFhBxca2DzdvG3bpT7z64CAQrQs6YxIMG7xxsKh2w6bqO2tkIwFIO7H4AfIQxQoIWcW4CtMEIFMxQuPb5LYj4OQhBTgGYGNq0PO+VBAxhAzAEkqczVkasCnBa3u5qMGA7qYwHkyww5SfJCuBGuJJWVY7ykgaNj030ENgkJhnpF3V4iyjlNgv3++uGTwfqGk/1H97KzXAy2ewChZiMA96+ZMmT89yABeK9Nh1RBAO/7G30hLSbokd0prB0KLA51QdQiHI6i7dlHCa1EkdnBGN89FFkmDSDj+Etbh7u3gQC9UOoadVu5XMSYLVNT1/zbDI5URK1RsDwbbUUZr5LZmygp+rXtLxd2eTSU2AzI9RxxE0kX0BWn6CTzyLG5AzATLDtlgrbKQoaYu769cc8No8Ol4+QdgQ8phVBKcAwizZKsYFQIq89GsbROZHwN1FAhQ4wIfrUyhBFVjykYSZvo7K/c6c/aqWN5kG32bSNNRsol9ZY/BCguYzWc2heN3pjbwbte6+IsByDg7VUBNjreA0iO0bFMjuSlMHfnjhRc97igZudWwSZUio2F2ekAcOmFfnvFMJsw+ClrlT8hL59tqiOPNNm41cVRvgulkf0gtBIWf1MMYVpuX0shKGKJTX75WWUE0tcedcsz81rxGH6nHdAMPBSSjSn5O+p9962z+s2l+E74EU0H8NoOoTDRj19emO1wnL/FTBy7HByCTDd5/PpVG3bHAV0A6d/++iUim4Ys92RjEBEpUSwpWqMhHIo+sEYWeXkQ7rHaM8ofG+lbS/CxQN2pOinJdjydJBSsT2mN/ZSXRWwSQqJMRRVcu3QSOo9dFrkADZgl80rQBS4AP0x9PO7AZvW11UVHOh8bQXRXqJrDrpMLI1EsMbeMDRfcEXzkAVCtDpBY1T4FRV8VsBner8cpSzttKpVRhw+tFKLFAoMTo+GfnCYBWa6ItxxpTaG/q5X30czLF+SM84LgLBKUlfe8cEW2ifa53QDD6duqP2anvPdYDcE6jQZPd5VswKWQ2O8Lcot53JbmK74i1j3q6B+FEsJstcqT7237licnFud5NZXWgTniOGCy7kh5a/Ax2f6JzZSoRdTcyp2p5ohPPmSrM8GmJwi4ybEniYVgbAp8FObJ3XdeLZqCqp9ySswT6ooYNxmFpnal5L1+hFCcFzjzKz7UfeRqkxXHTR5fXsz6Mp89G+A8+6qJ1D9dZBEp5CFVzMr4NDff3XGzZs7RsuFzpsM+H2w7+OgwyQgJ/pkKRPTnuluC7AoRPmvAIg8atV5QrVZoXIrCqUzYWpB5aX4iVpEx4EhNizS/P6ysBOQOw89SNFusHbmWqV7NsDDw19NEZCfSNkEbdU0Afe4eQSYsqAUjZxpO9u9/08VE45UeOx361IcQDJBA9RAdiyYHiyYnHfhBmrbdyl5pQMb/f7nQpb30anjccu+nCxxUcn+eAb/40jM2nl9HItL9BgQFjqc8x+tugT/cfwD3xW2rM0iMr0AAAAASUVORK5CYII=');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 43px 14px;
+        height: 14px;
+        margin-right: 10px;
+        width: 43px;
+    }
+    &-mastercard {
+        background-color: transparent;
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAARCAYAAAAyhueAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJ2SURBVHgBrZTPS1RRFMe/596n88Mxp4LRsnQYSY0CM4MIgppNhJm0aNNOkIj+h2D0z4ggCIJAqKBN9GMRtMpFRIsoQn3YaJo/cGwsp/fuPZ03/mps5kHQWcyce+73fs45l3seYZctoDUrf4MMJAlYsbCvm/H1UbC3dH/fnpgfvaQMzrKiOMEuw+qX0eH80z8ZtOXMI91D8MYk0Lk7kcTc2NXSPdUfvQFwC/42F6W6bOym625DpbpOAr1hcLLKAUS7i0icLsDr2gvTEq8mAQddGTqXuJ5/rzbJz2oBdcJHw4nVsu9MFEC+rQoVRlJrHgt89Q2tQ5IljRoWO1YERXjjoAB1vogQ61q72zqgpO0LYSonVapYq+VSmByaMCDt84EwkarnijV5JkwOy+gKKl3BPxg7OnRfkV0LKh0PE3mL9ZXQhIPwrHiu6kC3xV2rpVn/1FCxrvWkNomGS/xENSG/LLd2q5bMm4tg/fMG2BxqhG2K1ETKXY5+t2Zxe6KWcDBnQSPVxKQZiSvFt9zfeHJnBncXySOx4dnRMnwrth9BQJ+SIXiMnesIHuUrNjYbfbjaJ8AhefovAkKZI1MkKR9ID+e3gP/dmLncR/mno709C6KURH8poil5iWfI6nGtrfYNX1Owd5ioXcRzlrkh0FqiWcWcUVYVoeyC7DezRc/ktDu60T5R8GWKGKJGAV6UYIrJ77bWHieFd1AqJW33im5QwD9JdAqqVwqYsQ4uSzEFiXfLZc7ncjlVrjSdTicdx0kEvuP7TsnQ4YjmL+tAUxQoeFr/MMYcjSs19WFycrqjra3PKDURHJX9lY+u62YymSOSLBL3vJnfVGblFuimU14AAAAASUVORK5CYII=');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 20.5px 16px;
+        height: 16px;
+        width: 20.5px;
+    }
+}
+
+.modalblock-info {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    background-color: _colors(white);
+    border: 10px solid _colors(transparent);
+    padding: 20px 10px 20px;
+    margin-bottom: 20px;
+    &--item {
+        align-items: flex-start;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        justify-content: space-between;
+        width: 33.33%;
+        .svg--hand-donate {
+            height: 27px;
+            margin-right: 10px;
+            width: 28px;
+            svg {
+                height: 27px;
+                width: 28px;
+            }
+        }
+        .svg--history {
+            height: 24px;
+            margin-right: 10px;
+            width: 26.5px;
+            svg {
+                height: 24px;
+                width: 26.5px;
+            }
+        }
+        .svg--user-chat {
+            height: 28px;
+            margin-right: 10px;
+            width: 28px;
+            svg {
+                height: 28px;
+                width: 28px;
+            }
+        }
+        &--header {
+            color: _colors(black);
+            font-size: rem(14);
+            line-height: 17px;
+            margin-bottom: 3px;
+        }
+        &--body {
+            font-size: rem(13);
+            color: _colors(black);
+            line-height: 16px;
+        }
+    }
+}
+
+.block-show-more-outer {
+    margin-bottom: 50px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.wishlist-button {
+    align-items: center;
+    background-color: _colors(white);
+    box-shadow: 0px 2px 15px transparentize(_colors(black), 0.85);
+    border-radius: 64px;
+    bottom: 40px;
+    color: _colors(black);
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    font-size: rem(14);
+    justify-content: center;
+    line-height: 17px;
+    height: 64px;
+    position: fixed;
+    right: 36px;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 64px;
+    z-index: 1000;
+    @media (max-width: 1199px) {
+        margin-left: 10px;
+    }
+    .svg--icon {
+        margin-right: -7px;
+        vertical-align: middle;
+        svg {
+            // fill: _theme-colors(light-blue);
+            height: 21px;
+            // stroke: _theme-colors(light-blue);
+            width: 28px;
+        }
+        .check {
+            display: none;
+        }
+        .notcheck {
+            display: none;
+        }
+    }
+    &--badge {
+        border-radius: 13px;
+        display: inline-block;
+        color: _colors(white);
+        // font-family: map-get($fonts-list, "400"), Arial, Helvetica, Roboto, san-serif;
+        font-size: 8px;
+        height: 13px;
+        line-height: 13px;
+        margin-top: -5px;
+        margin-right: 0px;
+        text-align: center;
+        vertical-align: top;
+        width: 13px;
+    }
+    &--text{
+        display: none;
+    }
+}

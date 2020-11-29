@@ -1,0 +1,197 @@
+.crm__footer{
+  background-color: _theme-colors(light-grey);
+  padding: 30px 10px 30px;
+  @media (min-width: 576px){
+    padding: 50px 10px 36px;
+  }
+  @media (min-width: 768px){
+    padding-top: 54px;
+  }
+  &--logo{
+    // height: 86px;
+    margin: 0px 0px 30px;
+    width: auto;
+    a{
+      display: block;
+      img{
+        max-height: 34px;
+        width: auto;
+      }
+    }
+  }
+  &--top{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    // margin-top: 30px;
+    @media (max-width: 767px){
+      flex-wrap: wrap;
+    }
+    &--nav{
+      width: 100%;
+      &--header{
+        color: _theme-colors(dark-grey);
+        display: block;
+        font-family: map-get($fonts-list, "600"), Arial, Helvetica, Roboto, san-serif;
+        font-size: 15px;
+        line-height: 17px;
+        text-transform: uppercase;
+        margin-bottom: 32px;
+      }
+      &--ul-level_1{
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        list-style-type: none;
+        padding-left: 0;
+        flex-direction: column;
+        @media (min-width: 768px){
+          flex-direction: row;
+        }
+      }
+      &--li-level_1{
+        margin-bottom: 30px;
+        width: 100%;
+        @media (min-width: 768px){
+          margin-bottom: 0;
+          width: 50%;
+        }
+      }
+      &--ul-level_2{
+        list-style-type: none;
+        padding-left: 0;
+      }
+      &--li-level_2{
+        & + &{
+          margin-top: 11px;
+        }
+      }
+      a{
+        color: _theme-colors(dark-grey);
+        font-size: 12px;
+        font-family: map-get($fonts-list, "400"), Arial, Helvetica, Roboto, san-serif;
+        line-height: 14px;
+        &:hover{
+          color: _theme-colors(blue);
+        }
+      }
+    }
+    &--contact{
+      @media (min-width: 768px){
+        min-width: 33.33%;
+      }
+      &--item{
+        & + &{
+          margin-top: 11px;
+        }
+        a, span{
+          color: _theme-colors(dark-grey);
+          font-size: 12px;
+          font-family: map-get($fonts-list, "400"), Arial, Helvetica, Roboto, san-serif;
+          line-height: 14px;
+        }
+        a{
+          &:hover{
+            color: _theme-colors(dark-grey);
+          }
+        }
+      }
+    }
+  }
+  &--bottom{
+    align-items: flex-start;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction: column;
+    @media (min-width: 992px){
+      align-items: center;
+      flex-direction: row;
+    }
+    &--nav{
+      align-items: center;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      @media (min-width: 992px){
+        margin-top: 44px;
+      }
+      a{
+        color: _theme-colors(dark-grey);
+        font-size: 12px;
+        font-family: map-get($fonts-list, "400"), Arial, Helvetica, Roboto, san-serif;
+        line-height: 18px;
+        & + a{
+          margin-left: 20px;
+          @media (min-width: 992px){
+            margin-left: 40px;
+          }
+        }
+        &:hover{
+          color: _theme-colors(dark-grey);
+        }
+      }
+    }
+  }
+  &--secondarybottom{
+    align-items: flex-start;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+    @media (min-width: 992px){
+      align-items: center;
+      flex-direction: row;
+    }
+  }
+  &--name{
+    color: _theme-colors(dark-grey);
+    font-family: map-get($fonts-list, "600"), Arial, Helvetica, Roboto, san-serif;
+    font-size: 15px;
+    line-height: 21px;
+    margin-top: 20px;
+    padding-right: 0px;
+    text-transform: uppercase;
+    @media (min-width: 992px){
+      margin-top: 44px;
+      padding-right: 40px;
+    }
+  }
+  &--lic{
+    width: 80%;
+  }
+  &--lic,
+  &--web{
+    color: _theme-colors(grey);
+    font-family: map-get($fonts-list, "400"), Arial, Helvetica, Roboto, san-serif;
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 17px;
+  }
+  &--web{
+    font-size: 10px;
+    text-align: right;
+  }
+  &--logo-infotec{
+    display: block;
+    height: 10px;
+    margin-top: 7px;
+    width: 141px;
+  }
+}

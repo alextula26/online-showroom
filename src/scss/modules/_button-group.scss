@@ -1,0 +1,211 @@
+/* ============================= */
+/*  Buttons Groups               */
+/* ============================= */
+
+// Make the div behave like a button
+.btn-group{
+// .btn-group-vertical {
+  position: relative;
+  @if $enable-flex {
+    display: inline-flex;
+  }
+  vertical-align: middle;
+  .mobile-view &{
+    width: 100%;
+  }
+  > .btn {
+    position: relative;
+    padding: 0 10px;
+    @if $enable-flex {
+      flex: 0 1 auto;
+      .mobile-view &{
+        // padding: 0; // в наличии слипается
+        width: 100%;
+      }
+    }
+    @include hover {
+      z-index: 2;
+    }
+    &:focus,
+    &:active,
+    &.active {
+      z-index: 2;
+    }
+  }
+  .btn + .btn,
+  .btn + .btn-group,
+  .btn-group + .btn,
+  .btn-group + .btn-group {
+    margin-left: -$input-btn-border-width;
+  }
+}
+
+// .btn-toolbar {
+//   @if $enable-flex {
+//     display: flex;
+//     justify-content: flex-start;
+//   }
+//   .input-group {
+//     width: auto;
+//   }
+// }
+
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+
+
+.btn-group > .btn:first-child {
+  margin-left: 0;
+  @if $enable-rounded {
+    &:not(:last-child):not(.dropdown-toggle) {
+      @include border-right-radius(0);
+    }
+  }
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+  .btn-group > .btn:last-child:not(:first-child),
+  .btn-group > .dropdown-toggle:not(:first-child) {
+    @include border-left-radius(0);
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+@if $enable-rounded {
+}
+
+
+.btn-group > .btn-group {
+  float: left;
+}
+
+@if $enable-rounded {
+  .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+    border-radius: 0;
+  }
+
+  .btn-group > .btn-group:first-child:not(:last-child) {
+    > .btn:last-child,
+    > .dropdown-toggle {
+      @include border-right-radius(0);
+    }
+  }
+
+  .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
+    @include border-left-radius(0);
+  }
+}
+
+
+.btn-group .dropdown-toggle:active,
+.btn-group.open .dropdown-toggle {
+  outline: 0;
+}
+
+
+// Sizing
+
+// .btn-group-sm > .btn { @extend .btn-sm; }
+// .btn-group-lg > .btn { @extend .btn-lg; }
+
+
+//
+// Split button dropdowns
+//
+
+// .btn + .dropdown-toggle-split {
+//   padding-right: $btn-padding-x * .75;
+//   padding-left: $btn-padding-x * .75;
+//   &::after {
+//     margin-left: 0;
+//   }
+// }
+
+// .btn-sm + .dropdown-toggle-split {
+//   padding-right: $btn-padding-x-sm * .75;
+//   padding-left: $btn-padding-x-sm * .75;
+// }
+
+// .btn-lg + .dropdown-toggle-split {
+//   padding-right: $btn-padding-x-lg * .75;
+//   padding-left: $btn-padding-x-lg * .75;
+// }
+
+
+// .btn-group.open .dropdown-toggle {
+//   @include box-shadow($btn-active-box-shadow);
+//   // &.btn-link {
+//   //   @include box-shadow(none);
+//   // }
+// }
+
+//
+// Vertical button groups
+//
+
+// .btn-group-vertical {
+//   @if $enable-flex {
+//     display: inline-flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//   }
+//   justify-content: center;
+//   .btn,
+//   .btn-group {
+//     width: 100%;
+//   }
+//   > .btn + .btn,
+//   > .btn + .btn-group,
+//   > .btn-group + .btn,
+//   > .btn-group + .btn-group {
+//     margin-top: -$input-btn-border-width;
+//     margin-left: 0;
+//   }
+// }
+
+// @if $enable-rounded {
+//   .btn-group-vertical > .btn {
+//     &:not(:first-child):not(:last-child) {
+//       border-radius: 0;
+//     }
+//     &:first-child:not(:last-child) {
+//       @include border-bottom-radius(0);
+//     }
+//     &:last-child:not(:first-child) {
+//       @include border-top-radius(0);
+//     }
+//   }
+
+//   .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {
+//     border-radius: 0;
+//   }
+
+//   .btn-group-vertical > .btn-group:first-child:not(:last-child) {
+//     > .btn:last-child,
+//     > .dropdown-toggle {
+//       @include border-bottom-radius(0);
+//     }
+//   }
+
+//   .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {
+//     @include border-top-radius(0);
+//   }
+
+// }
+
+
+// Checkbox and radio options
+//
+
+[data-toggle="buttons"] {
+  > .btn,
+  > .btn-group > .btn {
+    input[type="radio"],
+    input[type="checkbox"] {
+      position: absolute;
+      clip: rect(0,0,0,0);
+      pointer-events: none;
+    }
+  }
+}
