@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Models from './Models';
 import { fetchModels } from '../../redusers/modelsReduser';
 import { filteredModelsSelector } from '../../selectors';
+import { isEmpty } from '../../utils';
 
 class ModelsContainer extends React.Component {
   componentDidMount() {
@@ -22,28 +23,31 @@ class ModelsContainer extends React.Component {
   }
 
   getBrandId() {
-    const { brands } = this.props;
-    const [{ id }] = brands;
+    const { brand: { id } } = this.props;
     return id;
   }
 
   render() {
-    const { models, brands } = this.props;
+    const { models, brand } = this.props;
+
+    if (isEmpty(models)) {
+      return null;
+    }
+
     return (
-      <Models
-        models={models}
-        brands={brands}
-        currentBrandId={this.getCurrentBrandId()}
-      />
+      <Models models={models} brand={brand} />
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  dealers: state.dealers,
-  brands: state.brands,
-  models: filteredModelsSelector(state),
-});
+const mapStateToProps = (state) => {
+  const [brand] = state.brands;
+  return {
+    brand,
+    models: filteredModelsSelector(state),
+    dealers: state.dealers,
+  };
+};
 
 const actionCreators = {
   setModels: fetchModels,

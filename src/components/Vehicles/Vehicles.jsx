@@ -11,10 +11,10 @@ class Vehicles extends React.Component {
         const {
           id,
           modification,
-          brand_name: brandName,
-          model_name: modelname,
           price,
           status,
+          brand_name: brandName,
+          model_name: modelname,
           modification_name: modificationName,
           image_preview: imagePreview,
           special_price: specialPrice,

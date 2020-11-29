@@ -4,7 +4,7 @@ import { getPriceCurrencyFormat } from '../../utils';
 
 class Models extends React.Component {
   renderModels() {
-    const { models, currentBrandId } = this.props;
+    const { models, brand } = this.props;
 
     return (
       models.map((model) => {
@@ -20,14 +20,14 @@ class Models extends React.Component {
                   <span className="model-list-item--action">Акция</span>
                   <NavLink
                     className="model-list-item--name"
-                    to={`/catalog/${currentBrandId}/model/${id}`}
+                    to={`/catalog/${brand.id}/model/${id}`}
                   >
                     {name}
                   </NavLink>
                 </div>
 
                 <div className="model-list-item--image-container">
-                  <NavLink to={`/catalog/${currentBrandId}/model/${id}`}>
+                  <NavLink to={`/catalog/${brand.id}/model/${id}`}>
                     <img
                       className="model-list-image img-responsive"
                       src={image}
@@ -45,7 +45,7 @@ class Models extends React.Component {
                 <div className="model-list-item--information">
                   <NavLink
                     className="btn btn--counter-instock"
-                    to={`/catalog/119/model/${id}`}
+                    to={`/catalog/${brand.id}/model/${id}`}
                   >
                     Подробнее
                   </NavLink>
@@ -60,21 +60,15 @@ class Models extends React.Component {
   }
 
   render() {
-    const { brands, models, currentBrandId } = this.props;
-
-    if (models.length === 0) {
-      return null;
-    }
-
-    const [{ name, vehicles }] = brands;
+    const { brand } = this.props;
 
     return (
       <>
-        <h1> Автомобили {name} в наличии</h1>
+        <h1> Автомобили {brand.name} в наличии</h1>
         <section className="filter" style={{ marginBottom: '30px' }}>
           <div className="filter-footer-action mt-10">
             <NavLink
-              to={`/catalog/${currentBrandId}/`}
+              to={`/catalog/${brand.id}/`}
               className="btn--reset"
             >
               Сбросить все фильтры <span className="svg--icon svg--reset" />
@@ -82,7 +76,7 @@ class Models extends React.Component {
 
             <div className="btn--show mt-10 js-submit" style={{ cursor: 'default' }}>
               Доступно
-              <span className="btn--show-counter">{vehicles}</span>
+              <span className="btn--show-counter">{brand.vehicles}</span>
               предложений
             </div>
           </div>
