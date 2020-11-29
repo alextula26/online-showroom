@@ -18,12 +18,12 @@ const vehiclesReducer = handleActions({
       characteristics: payload.characteristics,
     };
   },
-}, { vehicles: [], characteristics: {} });
+}, { vehicles: {}, characteristics: {} });
 
 export const fetchVehicles = (modelId) => async (dispatch) => {
   const vehicles = await API.getVehicles(modelId);
   // getting all modification ids for cars
-  const modificationIds = vehicles.map(({ modification }) => modification);
+  const modificationIds = vehicles.items.map(({ modification }) => modification);
   // getting unique modification ids
   const unionModificationIds = getUnionElements(modificationIds);
   // getting characteristics by modification id

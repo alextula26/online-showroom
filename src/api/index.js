@@ -22,7 +22,7 @@ const API = {
     instance.get(`/brands/${brandId}/models`).then((responce) => responce.data.items)
   ),
   getVehicles: (modelId) => (
-    instance.get(`/models/${modelId}/vehicles`).then((responce) => responce.data.items)
+    instance.get(`/models/${modelId}/vehicles`).then((responce) => responce.data)
   ),
   getCharacteristics: (modificationId) => (
     instance.get(`/info/characteristics/${modificationId}`).then((responce) => responce.data)

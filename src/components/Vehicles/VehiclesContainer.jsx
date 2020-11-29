@@ -8,22 +8,40 @@ import { isEmpty } from '../../utils';
 
 class VehiclesContainer extends React.Component {
   componentDidMount() {
-    const {
-      match: { params: { modelId } },
-      setVehiclesState,
-    } = this.props;
+    const { setVehiclesState } = this.props;
+    const modelId = this.getCurrentModelId();
     setVehiclesState(modelId);
   }
 
-  render() {
-    const { vehicles, characteristics } = this.props;
+  getCurrentModelId() {
+    const { match: { params: { modelId } } } = this.props;
+    return modelId;
+  }
 
-    if (isEmpty(vehicles) || isEmpty(characteristics)) {
+  render() {
+    const { vehicles: { brand, items, model }, characteristics } = this.props;
+
+    if (isEmpty(items) || isEmpty(characteristics)) {
       return null;
     }
 
     return (
-      <Vehicles vehicles={vehicles} characteristics={characteristics} />
+      <>
+        <div className="clearfix">
+          <h1 className="page-title">Автомобили {brand.name} {model.name} в наличии</h1>
+        </div>
+
+        <div id="vehicle-list-by-model" className="list-view">
+          <div className="model-list">
+            <div className="row model-list-flex items">
+              <Vehicles
+                vehicles={items}
+                characteristics={characteristics}
+              />
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 }

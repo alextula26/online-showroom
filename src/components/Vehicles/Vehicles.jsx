@@ -29,7 +29,7 @@ class Vehicles extends React.Component {
         const characteristicsFullName = `${engine.value} ${engine.unit} / (${power.value} ${power.unit}) /  ${engineType.value}, ${kpp.value}, ${drive.value} / ${body.value}`;
 
         return (
-          <div key={id} className="col-lg-12 col-xl-4 col-xxl-3">
+          <div key={id} className="col-lg-12 col-xl-8 col-xxl-6">
             <div className="vehicle-list-item">
               <div className="vehicle-list-item--title">
                 <NavLink
@@ -46,7 +46,7 @@ class Vehicles extends React.Component {
                 <div className="clearfix">
                   <div className="instock-block">
                     <div className="instock-block--button instock-block--button--shipping">
-                      <span className="svg--icon svg--auto" data-grunticon-embed />
+                      <span className="svg--icon svg--auto" />
                       {status.name}
                     </div>
                   </div>
@@ -111,7 +111,6 @@ class Vehicles extends React.Component {
           {this.renderCars()}
         </div>
       </div>
-
     );
   }
 }
