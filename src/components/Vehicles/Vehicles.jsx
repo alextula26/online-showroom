@@ -93,16 +93,17 @@ class Vehicles extends React.Component {
                   <div className="vehicle-list-item--description">
                     {characteristicsFullName}
                   </div>
-                  <div className="vehicle-list-item--separator" />
-                  <div className="vehicle-list-item--link-more-outer">
-                    <NavLink
-                      className="vehicle-list-item--link-more"
-                      to="/"
-                      rel="nofollow"
-                    >
-                      Подробнее
-                    </NavLink>
-                  </div>
+                </div>
+
+                <div className="vehicle-list-item--separator" />
+                <div className="vehicle-list-item--link-more-outer">
+                  <NavLink
+                    className="vehicle-list-item--link-more"
+                    to="/"
+                    rel="nofollow"
+                  >
+                    Подробнее
+                  </NavLink>
                 </div>
               </div>
             </div>
