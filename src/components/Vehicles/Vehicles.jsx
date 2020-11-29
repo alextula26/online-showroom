@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import { getPriceCurrencyFormat, isSpecialPrice } from '../../utils';
 
 class Vehicles extends React.Component {
-  renderCars() {
+  render() {
     const { vehicles, characteristics } = this.props;
 
     return (
@@ -34,7 +34,7 @@ class Vehicles extends React.Component {
               <div className="vehicle-list-item--title">
                 <NavLink
                   className="vehicle-list-item--title--link"
-                  href="#"
+                  to="/"
                   data-toggle="tooltip"
                   data-original-title={carsFullName}
                 >
@@ -45,20 +45,22 @@ class Vehicles extends React.Component {
               <div>
                 <div className="clearfix">
                   <div className="instock-block">
-                    <div className="instock-block--button instock-block--button--shipping">
-                      <span className="svg--icon svg--auto" />
+                    <div className="instock-block--button instock-block--button--instock ">
+                      <span className="svg--icon svg--auto" style={{ backgroundImage: 'none' }} />
                       {status.name}
                     </div>
                   </div>
                 </div>
 
                 <div className="vehicle-list-item--image-container">
-                  <img
-                    src={imagePreview}
-                    alt={`${carsFullName} Тестовый дилер Тула`}
-                    rel="nofollow"
-                    style={{ width: '100%' }}
-                  />
+                  <div className="autocrm10-carousel">
+                    <img
+                      src={imagePreview}
+                      alt={`${carsFullName} Тестовый дилер Тула`}
+                      rel="nofollow"
+                      style={{ width: '100%' }}
+                    />
+                  </div>
                   {isSpecialPrice(price, specialPrice)
                     && (
                       <div className="vehicle-list-item--discount">
@@ -88,12 +90,18 @@ class Vehicles extends React.Component {
                     </div>
                   </div>
 
-                  <div
-                    className="vehicle-list-item--description"
-                    data-toggle="tooltip"
-                    data-original-title={characteristicsFullName}
-                  >
+                  <div className="vehicle-list-item--description">
                     {characteristicsFullName}
+                  </div>
+                  <div className="vehicle-list-item--separator" />
+                  <div className="vehicle-list-item--link-more-outer">
+                    <NavLink
+                      className="vehicle-list-item--link-more"
+                      to="/"
+                      rel="nofollow"
+                    >
+                      Подробнее
+                    </NavLink>
                   </div>
                 </div>
               </div>
@@ -101,16 +109,6 @@ class Vehicles extends React.Component {
           </div>
         );
       })
-    );
-  }
-
-  render() {
-    return (
-      <div className="model-list">
-        <div className="row model-list-flex items">
-          {this.renderCars()}
-        </div>
-      </div>
     );
   }
 }

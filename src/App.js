@@ -32,14 +32,16 @@ class App extends React.Component {
     }
 
     return (
-      <div className="container">
-        <Switch>
-          {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
-          <Route exact path="/" render={() => this.getMainPageComponent(mainPageType)} />
-          <Route exact path="/catalog/:brandId?" render={() => <ModelsContainer />} />
-          <Route exact path="/catalog/:brandId/model/:modelId?" render={() => <VehiclesContainer />} />
-          <Route path="*" render={() => <div>404 Filenot found</div>} />
-        </Switch>
+      <div className="crm-common-wrap" id="js-container-wrap">
+        <div className="container">
+          <Switch>
+            {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
+            <Route exact path="/" render={() => this.getMainPageComponent(mainPageType)} />
+            <Route exact path="/catalog/:brandId?" render={() => <ModelsContainer />} />
+            <Route exact path="/catalog/:brandId/model/:modelId?" render={() => <VehiclesContainer />} />
+            <Route path="*" render={() => <div>404 Filenot found</div>} />
+          </Switch>
+        </div>
       </div>
     );
   }
