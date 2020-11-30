@@ -19,7 +19,7 @@ const API = {
     instance.get('/brands').then((responce) => responce.data.items)
   ),
   getModels: (brandId) => (
-    instance.get(`/brands/${brandId}/models`).then((responce) => responce.data.items)
+    instance.get(`/brands/${brandId}/models`).then((responce) => responce.data)
   ),
   getVehicles: (modelId) => (
     instance.get(`/models/${modelId}/vehicles`).then((responce) => responce.data)
@@ -29,6 +29,9 @@ const API = {
   ),
   getModifications: (modelId) => (
     instance.get(`/models/${modelId}/modifications`).then((responce) => responce.data.items)
+  ),
+  getVehicle: (vehicleId) => (
+    instance.get(`/vehicles/${vehicleId}`).then((responce) => responce.data)
   ),
 };
 

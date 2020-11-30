@@ -9,6 +9,7 @@ import { fetchBrands } from './redusers/brandsReduser';
 import ModelsContainer from './components/Models/ModelsContainer';
 import VehiclesContainer from './components/Vehicles/VehiclesContainer';
 import ListAllNewCarsContainer from './components/ListAllNewCars/ListAllNewCarsContainer';
+import NewVehicleContainer from './components/Vehicle/NewVehicleContainer';
 
 class App extends React.Component {
   componentDidMount() {
@@ -39,6 +40,7 @@ class App extends React.Component {
             <Route exact path="/" render={() => this.getMainPageComponent(mainPageType)} />
             <Route exact path="/catalog/:brandId?" render={() => <ModelsContainer />} />
             <Route exact path="/catalog/:brandId/model/:modelId?" render={() => <VehiclesContainer />} />
+            <Route exact path="/catalog/:brandId/model/:modelId/vehicle/:vehicleId?" render={() => <NewVehicleContainer />} />
             <Route path="*" render={() => <div>404 Filenot found</div>} />
           </Switch>
         </div>

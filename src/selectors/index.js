@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const getVisibleModels = (state) => state.models;
+const getVisibleModels = (state) => state.modelsPage.models;
 
 export const filteredModelsSelector = createSelector(
   getVisibleModels,

@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import API from '../api';
 import { getUnionElements } from '../utils';
 
-const fetchVehiclesSuccess = createAction('FETCH_CARS');
+const fetchVehiclesSuccess = createAction('FETCH_VEHICLES');
 const fetchCharacteristicsSuccess = createAction('FETCH_CHARACTERISTICS');
 
 const vehiclesReducer = handleActions({

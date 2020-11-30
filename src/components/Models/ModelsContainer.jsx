@@ -30,7 +30,7 @@ class ModelsContainer extends React.Component {
   render() {
     const { models, brand } = this.props;
 
-    if (isEmpty(models)) {
+    if (isEmpty(models) || isEmpty(brand)) {
       return null;
     }
 
@@ -40,14 +40,10 @@ class ModelsContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const [brand] = state.brands;
-  return {
-    brand,
-    models: filteredModelsSelector(state),
-    dealers: state.dealers,
-  };
-};
+const mapStateToProps = (state) => ({
+  brand: state.modelsPage.brand,
+  models: filteredModelsSelector(state),
+});
 
 const actionCreators = {
   setModels: fetchModels,
