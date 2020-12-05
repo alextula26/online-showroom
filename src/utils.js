@@ -9,3 +9,5 @@ export const isEqual = (value, other) => _.isEqual(value, other);
 export const getUnionElements = (array) => _.union(array);
 
 export const isEmpty = (data) => _.isEmpty(data);
+
+export const uniqueId = () => _.uniqueId();

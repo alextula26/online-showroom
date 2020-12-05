@@ -20,6 +20,7 @@
     "babel-eslint": "^10.1.0",
     "bootstrap": "^4.5.3",
     "bootstrap-select": "^1.13.18",
+    "classnames": "^2.2.6",
     "lodash": "^4.17.20",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",

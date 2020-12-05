@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { fetchVehicle } from '../../redusers/vehicleReducer';
 import { isEmpty } from '../../utils';
+import NewVehicle from './NewVehicle';
 
 class NewVehicleContainer extends React.Component {
   componentDidMount() {
@@ -24,9 +25,9 @@ class NewVehicleContainer extends React.Component {
       return null;
     }
 
-    console.log(vehicle);
-
-    return (<div>Vehicle</div>);
+    return (
+      <NewVehicle vehicle={vehicle} />
+    );
   }
 }
 
