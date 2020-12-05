@@ -1,79 +1,8 @@
 import React from 'react';
-import cn from 'classnames';
-import { isEmpty, uniqueId } from '../../utils';
+import { isEmpty } from '../../utils';
+import VehicleCarousel from '../commons/VehicleCarousel';
 
 class NewVehicle extends React.Component {
-  constructor(props) {
-    super(props);
-    const { vehicle: { images } } = this.props;
-    this.state = {
-      carouselCurrentIdx: 0,
-      images: images.map((image) => {
-        const key = `${image.full}_${uniqueId()}`;
-        return { ...image, key };
-      }),
-    };
-  }
-
-  renderCarouselItem(vehicleFullName, vehicleId) {
-    const { carouselCurrentIdx, images } = this.state;
-
-    return (
-      images.map(({ full, key }, index) => {
-        const classesCarousel = cn({
-          'carousel-item': true,
-          item: true,
-          active: carouselCurrentIdx === index,
-        });
-
-        return (
-          <div key={key} className={classesCarousel}>
-            <a
-              href={full}
-              data-fancybox={`gallery${vehicleId}`}
-            >
-              <img
-                src={full}
-                alt={`${vehicleFullName} Тестовый дилер Тула`}
-                rel="nofollow"
-              />
-            </a>
-          </div>
-        );
-      })
-    );
-  }
-
-  renderCarouselIndicatorsItem(vehicleFullName, vehicleId) {
-    const { carouselCurrentIdx, images } = this.state;
-
-    return (
-      images.map(({ full, key }, index) => {
-        const classesCarouselIndicators = cn({
-          visible: true,
-          active: carouselCurrentIdx === index,
-        });
-
-        return (
-          <li
-            key={key}
-            className={classesCarouselIndicators}
-            data-target={`#js-carousel-${vehicleId}`}
-            data-slide-to={index}
-          >
-            <a href={full}>
-              <img
-                src={full}
-                alt={`${vehicleFullName} Тестовый дилер Тула`}
-                rel="nofollow"
-              />
-            </a>
-          </li>
-        );
-      })
-    );
-  }
-
   render() {
     const { vehicle } = this.props;
 
@@ -111,31 +40,11 @@ class NewVehicle extends React.Component {
                 && (
                   <div className="vehicle-view-block">
                     <div className="carousel-overflow-hidden">
-                      <div className="autocrm10-carousel">
-                        <div
-                          id={`js-carousel-${id}`}
-                          className="carousel-fade slide carousel"
-                          data-interval="false"
-                        >
-                          <div className="carousel-inner">
-                            {this.renderCarouselItem(vehicleFullName, id)}
-                          </div>
-
-                          <ol className="carousel-indicators">
-                            {this.renderCarouselIndicatorsItem(vehicleFullName, id)}
-                          </ol>
-
-                          <a className="left carousel-control" href={`#js-carousel-${id}`} data-slide="prev">
-                            <span className="svg--icon svg--arrow-alt2" data-grunticon-embed aria-hidden="true" />
-                          </a>
-                          <a className="right carousel-control" href={`#js-carousel-${id}`} data-slide="next">
-                            <span className="svg--icon svg--arrow-alt2" data-grunticon-embed aria-hidden="true" />
-                          </a>
-                          <div className="carousel-counter">
-                            <span className="current-slide">1</span>/<span className="all-slides">4</span>
-                          </div>
-                        </div>
-                      </div>
+                      <VehicleCarousel
+                        vehicleFullName={vehicleFullName}
+                        vehicleId={id}
+                        images={images}
+                      />
                     </div>
                   </div>
                 )}
