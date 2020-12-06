@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { uniqueId, getHtml } from '../../utils';
 
-class VehicleSpecification extends React.Component {
+class VehicleEquipment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,4 +64,4 @@ class VehicleSpecification extends React.Component {
   }
 }
 
-export default VehicleSpecification;
+export default VehicleEquipment;

@@ -1,7 +1,8 @@
 import React from 'react';
 import { isEmpty } from '../../utils';
 import VehicleCarousel from '../commons/VehicleCarousel';
-import VehicleSpecification from '../commons/VehicleSpecification';
+import VehicleEquipment from '../commons/VehicleEquipment';
+import VehicleAdditionalOptions from '../commons/VehicleAdditionalOptions';
 
 class NewVehicle extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class NewVehicle extends React.Component {
       status: { name: statusName },
       images,
       options,
+      side_options: sideOptions,
     } = vehicle;
 
     const vehicleFullName = `${brandName} ${modelname} ${modificationName} ${equipment}`;
@@ -70,18 +72,18 @@ class NewVehicle extends React.Component {
                       Общие характеристики
                     </a>
                   </li>
-                  <li className="nav-item active">
+                  <li className="nav-item">
                     <a
-                      className="nav-link active"
+                      className="nav-link"
                       href="#js-specification-tab1"
                       data-toggle="tab"
                     >
                       Комплектация
                     </a>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item active">
                     <a
-                      className="nav-link nav-link--special"
+                      className="nav-link nav-link--special active"
                       href="#js-specification-tab2"
                       data-toggle="tab"
                     >
@@ -111,25 +113,17 @@ class NewVehicle extends React.Component {
 
                   {!isEmpty(options)
                     && (
-                      <div id="js-specification-tab1" className="tab-pane active">
-                        <VehicleSpecification options={options} />
+                      <div id="js-specification-tab1" className="tab-pane">
+                        <VehicleEquipment options={options} />
                       </div>
                     )}
 
-                  <div id="js-specification-tab2" className="tab-pane">
-                    <ul>
-                      <li>Блокировка замков задних дверей с электроприводом</li>
-                      <li>Противотуманные фары, в спойлере переднего бампера</li>
-                      <li>Тонировка стекол задних дверей и заднего стекла</li>
-                      <li>Навигационная система Pro</li>
-                      <li>Парковочный радар, передний и задний</li>
-                      <li>Видеокамера для облегчения парковки</li>
-                      <li>Чехол для автомобиля транспортировочный</li>
-                      <li>Подогрев рулевого колеса</li>
-                      <li>Подогрев ветрового стекла</li>
-                      <li>Пакет освещения салона, высший уровень</li>
-                    </ul>
-                  </div>
+                  {!isEmpty(sideOptions)
+                  && (
+                    <div id="js-specification-tab2" className="tab-pane active">
+                      <VehicleAdditionalOptions options={sideOptions} />
+                    </div>
+                  )}
 
                   <div id="js-specification-tab3" className="tab-pane">
                     <p>Резиновые коврики в салоне Коврик для багажника</p>
