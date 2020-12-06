@@ -1,10 +1,9 @@
 import React from 'react';
 import {
-  isEmpty, getHtml, getPriceCurrencyFormat, isSpecialPrice,
+  isEmpty, getPriceCurrencyFormat, isSpecialPrice,
 } from '../../utils';
 import VehicleCarousel from '../commons/VehicleCarousel';
-import VehicleEquipment from '../commons/VehicleEquipment';
-import VehicleAdditionalOptions from '../commons/VehicleAdditionalOptions';
+import VehicleSpecifications from '../commons/VehicleSpecifications';
 import VehicleGeneralSpecifications from '../commons/VehicleGeneralSpecifications';
 
 class NewVehicle extends React.Component {
@@ -53,103 +52,26 @@ class NewVehicle extends React.Component {
                 </div>
               </div>
 
-              {!isEmpty(images)
-                && (
-                  <div className="vehicle-view-block">
-                    <div className="carousel-overflow-hidden">
-                      <VehicleCarousel
-                        vehicleFullName={vehicleFullName}
-                        vehicleId={id}
-                        images={images}
-                      />
-                    </div>
+              {!isEmpty(images) && (
+                <div className="vehicle-view-block">
+                  <div className="carousel-overflow-hidden">
+                    <VehicleCarousel
+                      vehicleFullName={vehicleFullName}
+                      vehicleId={id}
+                      images={images}
+                    />
                   </div>
-                )}
+                </div>
+              )}
 
               <section className="specifications">
-                <ul
-                  id="js-specification"
-                  className="nav nav-tabs"
-                  role="tablist"
-                >
-                  <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      href="#js-specification-tab0"
-                      data-toggle="tab"
-                    >
-                      Общие характеристики
-                    </a>
-                  </li>
-
-                  {!isEmpty(options) && (
-                    <li className="nav-item">
-                      <a
-                        className="nav-link"
-                        href="#js-specification-tab1"
-                        data-toggle="tab"
-                      >
-                        Комплектация
-                      </a>
-                    </li>
-                  )}
-
-                  {!isEmpty(sideOptions) && (
-                    <li className="nav-item ">
-                      <a
-                        className="nav-link nav-link--special "
-                        href="#js-specification-tab2"
-                        data-toggle="tab"
-                      >
-                        <span className="svg--checklist" data-grunticon-embed /> Доп. опции
-                      </a>
-                    </li>
-                  )}
-
-                  {!isEmpty(additionalEquipmentDescription) && (
-                    <li className="nav-item active">
-                      <a
-                        className="nav-link nav-link--special active"
-                        href="#js-specification-tab3"
-                        data-toggle="tab"
-                      >
-                        <span className="svg--cogwheel" data-grunticon-embed /> Доп. оборудование
-                      </a>
-                    </li>
-                  )}
-
-                </ul>
-                <div className="tab-content">
-                  <div id="js-specification-tab0" className="tab-pane">
-                    <div className="specifications-list-categorytitle">Двигатель и трансмиссия</div>
-                    <div className="specifications-list">
-                      <div className="specifications-list-group">
-                        <div className="specifications-list-title">Рабочий объём: </div>
-                        <div className="specifications-list-value">1969 (см3)</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {!isEmpty(options) && (
-                    <div id="js-specification-tab1" className="tab-pane">
-                      <VehicleEquipment options={options} />
-                    </div>
-                  )}
-
-                  {!isEmpty(sideOptions) && (
-                    <div id="js-specification-tab2" className="tab-pane ">
-                      <VehicleAdditionalOptions options={sideOptions} />
-                    </div>
-                  )}
-
-                  {!isEmpty(additionalEquipmentDescription) && (
-                    <div id="js-specification-tab3" className="tab-pane active">
-                      {getHtml(additionalEquipmentDescription)}
-                    </div>
-                  )}
-
-                </div>
+                <VehicleSpecifications
+                  options={options}
+                  sideOptions={sideOptions}
+                  additionalEquipmentDescription={additionalEquipmentDescription}
+                />
               </section>
+
             </div>
             <div className="col-sm-24 col-xl-8">
               <div className="vehicle-view--right">
