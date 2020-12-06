@@ -1,8 +1,11 @@
 import React from 'react';
-import { isEmpty } from '../../utils';
+import {
+  isEmpty, getHtml, getPriceCurrencyFormat, isSpecialPrice,
+} from '../../utils';
 import VehicleCarousel from '../commons/VehicleCarousel';
 import VehicleEquipment from '../commons/VehicleEquipment';
 import VehicleAdditionalOptions from '../commons/VehicleAdditionalOptions';
+import VehicleGeneralSpecifications from '../commons/VehicleGeneralSpecifications';
 
 class NewVehicle extends React.Component {
   render() {
@@ -19,6 +22,11 @@ class NewVehicle extends React.Component {
       images,
       options,
       side_options: sideOptions,
+      additional_equipment_description: additionalEquipmentDescription,
+      price,
+      special_price: specialPrice,
+      general,
+      vin,
     } = vehicle;
 
     const vehicleFullName = `${brandName} ${modelname} ${modificationName} ${equipment}`;
@@ -72,33 +80,43 @@ class NewVehicle extends React.Component {
                       Общие характеристики
                     </a>
                   </li>
-                  <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      href="#js-specification-tab1"
-                      data-toggle="tab"
-                    >
-                      Комплектация
-                    </a>
-                  </li>
-                  <li className="nav-item active">
-                    <a
-                      className="nav-link nav-link--special active"
-                      href="#js-specification-tab2"
-                      data-toggle="tab"
-                    >
-                      <span className="svg--checklist" data-grunticon-embed /> Доп. опции
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a
-                      className="nav-link nav-link--special"
-                      href="#js-specification-tab3"
-                      data-toggle="tab"
-                    >
-                      <span className="svg--cogwheel" data-grunticon-embed /> Доп. оборудование
-                    </a>
-                  </li>
+
+                  {!isEmpty(options) && (
+                    <li className="nav-item">
+                      <a
+                        className="nav-link"
+                        href="#js-specification-tab1"
+                        data-toggle="tab"
+                      >
+                        Комплектация
+                      </a>
+                    </li>
+                  )}
+
+                  {!isEmpty(sideOptions) && (
+                    <li className="nav-item ">
+                      <a
+                        className="nav-link nav-link--special "
+                        href="#js-specification-tab2"
+                        data-toggle="tab"
+                      >
+                        <span className="svg--checklist" data-grunticon-embed /> Доп. опции
+                      </a>
+                    </li>
+                  )}
+
+                  {!isEmpty(additionalEquipmentDescription) && (
+                    <li className="nav-item active">
+                      <a
+                        className="nav-link nav-link--special active"
+                        href="#js-specification-tab3"
+                        data-toggle="tab"
+                      >
+                        <span className="svg--cogwheel" data-grunticon-embed /> Доп. оборудование
+                      </a>
+                    </li>
+                  )}
+
                 </ul>
                 <div className="tab-content">
                   <div id="js-specification-tab0" className="tab-pane">
@@ -111,24 +129,23 @@ class NewVehicle extends React.Component {
                     </div>
                   </div>
 
-                  {!isEmpty(options)
-                    && (
-                      <div id="js-specification-tab1" className="tab-pane">
-                        <VehicleEquipment options={options} />
-                      </div>
-                    )}
+                  {!isEmpty(options) && (
+                    <div id="js-specification-tab1" className="tab-pane">
+                      <VehicleEquipment options={options} />
+                    </div>
+                  )}
 
-                  {!isEmpty(sideOptions)
-                  && (
-                    <div id="js-specification-tab2" className="tab-pane active">
+                  {!isEmpty(sideOptions) && (
+                    <div id="js-specification-tab2" className="tab-pane ">
                       <VehicleAdditionalOptions options={sideOptions} />
                     </div>
                   )}
 
-                  <div id="js-specification-tab3" className="tab-pane">
-                    <p>Резиновые коврики в салоне Коврик для багажника</p>
-                    <span>52 000</span><span>₽</span>
-                  </div>
+                  {!isEmpty(additionalEquipmentDescription) && (
+                    <div id="js-specification-tab3" className="tab-pane active">
+                      {getHtml(additionalEquipmentDescription)}
+                    </div>
+                  )}
 
                 </div>
               </section>
@@ -141,26 +158,35 @@ class NewVehicle extends React.Component {
                     <div className="row">
                       <div className="col-sm-24 col-md-12 col-lg-24 col-xxl-15">
                         <div className="vehicle-view--priceblock js-toggleBlock">
-
-                          <div className="vehicle-view--price-badge">
-                            <span className="badge vehicle-view--price-badge-profit">
-                              <span>Выгода до</span>
-                              <span className="js-promo-sum">
-                                20 000
+                          {isSpecialPrice(price, specialPrice) && (
+                            <div className="vehicle-view--price-badge">
+                              <span className="badge vehicle-view--price-badge-profit">
+                                <span>Выгода до </span>
+                                <span className="js-promo-sum">
+                                  {getPriceCurrencyFormat(price - specialPrice)}
+                                </span>
+                                <span> ₽</span>
                               </span>
-                              <span>₽</span>
-                            </span>
-                          </div>
+                            </div>
+                          )}
+
                           <div className="vehicle-view--price">
-                            <span className="js-final-sum" data-original-price="4774500">
-                              4 754 500
+                            <span className="js-final-sum" data-original-price={specialPrice}>
+                              {isSpecialPrice(price, specialPrice)
+                                ? getPriceCurrencyFormat(specialPrice)
+                                : getPriceCurrencyFormat(price)}
                             </span>
-                            <span>₽</span>
+                            <span> ₽</span>
                           </div>
-                          <div className="vehicle-view--price-old">
-                            <span>Цена без скидок</span>
-                            4 774 500        <span>₽</span>
-                          </div>
+
+                          {isSpecialPrice(price, specialPrice) && (
+                            <div className="vehicle-view--price-old">
+                              <span>Цена без скидок </span>
+                              {getPriceCurrencyFormat(price)}
+                              <span> ₽</span>
+                            </div>
+                          )}
+
                         </div>
                       </div>
                       <div className="col-sm-24 col-md-12 col-lg-24 col-xxl-9">
@@ -174,7 +200,15 @@ class NewVehicle extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="row" />
+
+                {!isEmpty(general) && (
+                  <div className="row">
+                    <div className="col-sm-24 col-md-12-col-xl-24">
+                      <VehicleGeneralSpecifications general={general} vin={vin} />
+                    </div>
+                  </div>
+                )}
+
                 <div className="dealer-info-block">map</div>
               </div>
             </div>

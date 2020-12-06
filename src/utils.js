@@ -14,3 +14,5 @@ export const isEmpty = (data) => _.isEmpty(data);
 export const uniqueId = () => _.uniqueId();
 
 export const getHtml = (str) => ReactHtmlParser(str);
+
+export const merge = (object, other) => _.merge(object, other);
