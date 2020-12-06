@@ -9,7 +9,7 @@ class Models extends React.Component {
     return (
       models.map((model) => {
         const {
-          id, name, image, min_price,
+          id, name, image, min_price, has_shares: hasShares, has_discounts: hasDiscounts,
         } = model;
         return (
           <div key={id} className="col-lg-12 col-xl-8">
@@ -17,7 +17,9 @@ class Models extends React.Component {
               <div className="model-list-item">
 
                 <div className="model-list-item--title">
-                  <span className="model-list-item--action">Акция</span>
+                  {(hasShares || hasDiscounts) && (
+                    <span className="model-list-item--action">Акция</span>
+                  )}
                   <NavLink
                     className="model-list-item--name"
                     to={`/catalog/${brand.id}/model/${id}`}
