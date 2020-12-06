@@ -1,6 +1,7 @@
 import React from 'react';
 import { isEmpty } from '../../utils';
 import VehicleCarousel from '../commons/VehicleCarousel';
+import VehicleSpecification from '../commons/VehicleSpecification';
 
 class NewVehicle extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class NewVehicle extends React.Component {
       equipment,
       status: { name: statusName },
       images,
+      options,
     } = vehicle;
 
     const vehicleFullName = `${brandName} ${modelname} ${modificationName} ${equipment}`;
@@ -22,9 +24,12 @@ class NewVehicle extends React.Component {
     return (
       <>
         <section className="vehicle-view">
+
           <div className="row">
             <div className="col-sm-24 col-xl-16">
+
               <h1 className="vehicle-view--title">{vehicleFullName}</h1>
+
               <div className="vehicle-view--action">
                 <div className="instock-block">
                   <div className="instock-block--button">
@@ -36,6 +41,7 @@ class NewVehicle extends React.Component {
                   </div>
                 </div>
               </div>
+
               {!isEmpty(images)
                 && (
                   <div className="vehicle-view-block">
@@ -50,13 +56,50 @@ class NewVehicle extends React.Component {
                 )}
 
               <section className="specifications">
-                <ul id="js-specification" className="nav nav-tabs" role="tablist"><li className="nav-item active"><a className="nav-link active" href="#js-specification-tab0" data-toggle="tab">Общие характеристики</a></li>
-                  <li className="nav-item"><a className="nav-link" href="#js-specification-tab1" data-toggle="tab">Комплектация</a></li>
-                  <li className="nav-item"><a className="nav-link nav-link--special" href="#js-specification-tab2" data-toggle="tab"><span className="svg--checklist" data-grunticon-embed /> Доп. опции</a></li>
-                  <li className="nav-item"><a className="nav-link nav-link--special" href="#js-specification-tab3" data-toggle="tab"><span className="svg--cogwheel" data-grunticon-embed /> Доп. оборудование</a></li>
+                <ul
+                  id="js-specification"
+                  className="nav nav-tabs"
+                  role="tablist"
+                >
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      href="#js-specification-tab0"
+                      data-toggle="tab"
+                    >
+                      Общие характеристики
+                    </a>
+                  </li>
+                  <li className="nav-item active">
+                    <a
+                      className="nav-link active"
+                      href="#js-specification-tab1"
+                      data-toggle="tab"
+                    >
+                      Комплектация
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link nav-link--special"
+                      href="#js-specification-tab2"
+                      data-toggle="tab"
+                    >
+                      <span className="svg--checklist" data-grunticon-embed /> Доп. опции
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link nav-link--special"
+                      href="#js-specification-tab3"
+                      data-toggle="tab"
+                    >
+                      <span className="svg--cogwheel" data-grunticon-embed /> Доп. оборудование
+                    </a>
+                  </li>
                 </ul>
                 <div className="tab-content">
-                  <div id="js-specification-tab0" className="tab-pane active">
+                  <div id="js-specification-tab0" className="tab-pane">
                     <div className="specifications-list-categorytitle">Двигатель и трансмиссия</div>
                     <div className="specifications-list">
                       <div className="specifications-list-group">
@@ -66,30 +109,14 @@ class NewVehicle extends React.Component {
                     </div>
                   </div>
 
-                  <div id="js-specification-tab1" className="tab-pane active">
-                    <div id="w0" className="panel-group collapse show">
-                      <div className="panel panel-default">
-                        <div className="panel-heading">
-                          <h4 className="panel-title">
-                            <a className="collapse-toggle collapsed" href="#w0-collapse1" data-toggle="collapse" data-parent="#w0">Аудио, навигация и мультимедиа</a>
-                          </h4>
-                        </div>
-                        <div id="w0-collapse1" className="panel-collapse collapse">
-                          <ul className="list-group">
-                            <li className="list-group-item"><span data-option-id="917576" data-option-name="Аудиосистема Sensus Connect HIGH PERFOMANCE - 10 динамиков" data-model-option-id="169397" data-model-option-name="Аудиосистема Sensus Connect HIGH PERFOMANCE - 10 динамиков" data-option-group-id="208" data-option-group-name="Аудио, навигация и мультимедиа">Аудиосистема Sensus Connect HIGH PERFOMANCE - 10 динамиков</span></li>
-                            <li className="list-group-item"><span data-option-id="917585" data-option-name="Управление аудиосистемой на рулевом колесе" data-model-option-id="169400" data-model-option-name="Управление аудиосистемой на рулевом колесе" data-option-group-id="208" data-option-group-name="Аудио, навигация и мультимедиа">Управление аудиосистемой на рулевом колесе</span></li>
-                            <li className="list-group-item"><span data-option-id="917594" data-option-name="2 USB разъема" data-model-option-id="169403" data-model-option-name="2 USB разъема" data-option-group-id="208" data-option-group-name="Аудио, навигация и мультимедиа">2 USB разъема</span></li>
-                            <li className="list-group-item"><span data-option-id="917603" data-option-name="Bluetooth - система синхронизации мобильного телефона с аудиосистемой а/м" data-model-option-id="169406" data-model-option-name="Bluetooth - система синхронизации мобильного телефона с аудиосистемой а/м" data-option-group-id="208" data-option-group-name="Аудио, навигация и мультимедиа">Bluetooth - система синхронизации мобильного телефона с аудиосистемой а/м</span></li>
-                            <li className="list-group-item"><span data-option-id="917612" data-option-name="WiFi модем / роутер" data-model-option-id="169409" data-model-option-name="WiFi модем / роутер" data-option-group-id="208" data-option-group-name="Аудио, навигация и мультимедиа">WiFi модем / роутер</span></li>
-                            <li className="list-group-item"><span data-option-id="917621" data-option-name="Bluetooth модем" data-model-option-id="169412" data-model-option-name="Bluetooth модем" data-option-group-id="208" data-option-group-name="Аудио, навигация и мультимедиа">Bluetooth модем</span></li>
-                            <li className="list-group-item"><span data-option-id="917630" data-option-name="P-SIM слот для установки SIM-карты с пакетом интернет-трафика любого поставщика услуг" data-model-option-id="169415" data-model-option-name="P-SIM слот для установки SIM-карты с пакетом интернет-трафика любого поставщика услуг" data-option-group-id="208" data-option-group-name="Аудио, навигация и мультимедиа">P-SIM слот для установки SIM-карты с пакетом интернет-трафика любого поставщика услуг</span></li>
-                          </ul>
-                        </div>
+                  {!isEmpty(options)
+                    && (
+                      <div id="js-specification-tab1" className="tab-pane active">
+                        <VehicleSpecification options={options} />
                       </div>
-                    </div>
-                  </div>
+                    )}
 
-                  <div id="js-specification-tab2" className="tab-pane active">
+                  <div id="js-specification-tab2" className="tab-pane">
                     <ul>
                       <li>Блокировка замков задних дверей с электроприводом</li>
                       <li>Противотуманные фары, в спойлере переднего бампера</li>
@@ -104,7 +131,7 @@ class NewVehicle extends React.Component {
                     </ul>
                   </div>
 
-                  <div id="js-specification-tab3" className="tab-pane active">
+                  <div id="js-specification-tab3" className="tab-pane">
                     <p>Резиновые коврики в салоне Коврик для багажника</p>
                     <span>52 000</span><span>₽</span>
                   </div>

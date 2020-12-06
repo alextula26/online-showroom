@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import ReactHtmlParser from 'react-html-parser';
 
 export const getPriceCurrencyFormat = (price) => Math.round(price).toLocaleString('ru-RU');
 
@@ -11,3 +12,5 @@ export const getUnionElements = (array) => _.union(array);
 export const isEmpty = (data) => _.isEmpty(data);
 
 export const uniqueId = () => _.uniqueId();
+
+export const getHtml = (str) => ReactHtmlParser(str);
