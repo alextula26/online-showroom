@@ -44,9 +44,9 @@ class VehicleEquipment extends React.Component {
                 <h4 className="panel-title">
                   <a
                     className={classes}
-                    href={`#group-collapse${index}`}
+                    href={`#equipment-group-collapse-${index}`}
                     aria-expanded={isIncludes}
-                    aria-controls={`specification-group-${index}`}
+                    aria-controls={`equipment-group-${index}`}
                     onClick={() => this.setIndexCollapse(index)}
                   >
                     {option.group}
@@ -55,7 +55,7 @@ class VehicleEquipment extends React.Component {
               </div>
 
               <Collapse in={isIncludes}>
-                <div id={`specification-group-${index}`}>
+                <div id={`equipment-group-${index}`}>
                   <ul className="list-group">
                     {option.options.map((html) => (
                       <li

@@ -41,7 +41,7 @@ class ModelsContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  brand: state.modelsPage.brand,
+  brand: !isEmpty(state.modelsPage.brand) ? state.modelsPage.brand : state.brands[0],
   models: filteredModelsSelector(state),
 });
 
