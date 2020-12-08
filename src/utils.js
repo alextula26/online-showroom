@@ -16,3 +16,5 @@ export const uniqueId = () => _.uniqueId();
 export const getHtml = (str) => ReactHtmlParser(str);
 
 export const merge = (object, other) => _.merge(object, other);
+
+export const includes = (array, index) => _.includes(array, index);
