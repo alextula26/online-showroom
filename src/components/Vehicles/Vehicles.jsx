@@ -10,7 +10,6 @@ class Vehicles extends React.Component {
       vehicles.map((vehicle) => {
         const {
           id,
-          modification,
           price,
           status,
           brand_name: brandName,
@@ -18,15 +17,14 @@ class Vehicles extends React.Component {
           modification_name: modificationName,
           image_preview: imagePreview,
           special_price: specialPrice,
+          body_type: bodyType,
         } = vehicle;
 
-        const carsFullName = `${brandName} ${modelname} ${modificationName}`;
+        const carsFullName = `${id} ${brandName} ${modelname} ${modificationName}`;
 
-        const {
-          body, engineType, engine, power, kpp, drive,
-        } = characteristics[modification];
+        const [engine, transmission, , , year] = characteristics[id];
 
-        const characteristicsFullName = `${engine.value} ${engine.unit} / (${power.value} ${power.unit}) /  ${engineType.value}, ${kpp.value}, ${drive.value} / ${body.value}`;
+        const characteristicsFullName = `${engine.value}, ${transmission.value}, ${year.value}, ${bodyType}`;
 
         return (
           <div key={id} className="col-lg-12 col-xl-8 col-xxl-6">

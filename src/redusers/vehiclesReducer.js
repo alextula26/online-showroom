@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import API from '../api';
-import { getUnionElements } from '../utils';
+// import { getUnionElements } from '../utils';
 
 const fetchVehiclesSuccess = createAction('FETCH_VEHICLES');
 const fetchCharacteristicsSuccess = createAction('FETCH_CHARACTERISTICS');
@@ -22,53 +22,20 @@ const vehiclesReducer = handleActions({
 
 export const fetchVehicles = (modelId) => async (dispatch) => {
   const vehicles = await API.getVehicles(modelId);
-  // getting all modification ids for cars
-  const modificationIds = vehicles.items.map(({ modification }) => modification);
-  // getting unique modification ids
-  const unionModificationIds = getUnionElements(modificationIds);
-  // getting characteristics by modification id
-  const promises = unionModificationIds
-    .map(async (modificationId) => {
-      const characteristics = await API.getCharacteristics(modificationId);
-      return { [modificationId]: characteristics };
-    });
 
-  const characteristicsSettled = await Promise.allSettled(promises);
+  const promisesVehicles = vehicles.items.map(async ({ id }) => {
+    const vehicle = await API.getVehicle(id);
+    return { [id]: vehicle.general };
+  });
 
-  const characteristics = characteristicsSettled
-    .filter((characteristic) => characteristic.status === 'fulfilled')
+  const promisesVehiclesSettled = await Promise.allSettled(promisesVehicles);
+
+  const characteristics = promisesVehiclesSettled
+    .filter((item) => item.status === 'fulfilled')
     .reduce((acc, { value }) => {
-      const [modificationId] = Object.keys(value);
-      const [characteristicsList] = Object.values(value);
-      const mainCharacteristics = characteristicsList.reduce((accN, item) => {
-        if (item.id === 2) {
-          return { ...accN, body: item };
-        }
-
-        if (item.id === 12) {
-          return { ...accN, engineType: item };
-        }
-
-        if (item.id === 13) {
-          return { ...accN, engine: item };
-        }
-
-        if (item.id === 14) {
-          return { ...accN, power: item };
-        }
-
-        if (item.id === 24) {
-          return { ...accN, kpp: item };
-        }
-
-        if (item.id === 27) {
-          return { ...accN, drive: item };
-        }
-
-        return accN;
-      }, {});
-
-      return { ...acc, [modificationId]: mainCharacteristics };
+      const [vehicleId] = Object.keys(value);
+      const [specifications] = Object.values(value);
+      return { ...acc, [vehicleId]: specifications };
     }, {});
 
   dispatch(fetchVehiclesSuccess({ vehicles }));
