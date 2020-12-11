@@ -1,11 +1,16 @@
 import * as axios from 'axios/index';
 
 const instance = axios.create({
-  baseURL: 'https://cors-anywhere.herokuapp.com/https://autos.autocrm.ru/api/v1/',
+  // baseURL: 'https://cors-anywhere.herokuapp.com/https://autos.autocrm.ru/api/v1/',
+  baseURL: 'https://autos.autocrm.ru/api/v1/',
   // contentType: 'application/json',
   responseType: 'json',
   headers: {
-    'Content-Type': 'origin, x-requested-with',
+    // 'Content-Type': 'origin, x-requested-with',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE',
+    'Access-Control-Allow-Headers': 'Bearer, API-Key, Content-Type, If-Modified-Since, Cache-Control',
+    'Access-Control-Allow-Origin': 'http://localhost:3000',
     // 'X-Requested-With': 'XMLHttpRequest',
     Authorization: 'Bearer lW4pUiiMIaAQ8SSGN3gMIWCINafeyo2N',
   },

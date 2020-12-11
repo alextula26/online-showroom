@@ -112,21 +112,14 @@ class Vehicles extends React.Component {
   }
 
   render() {
-    const { brand, model } = this.props;
     return (
-      <>
-        <div className="clearfix">
-          <h1 className="page-title">Автомобили {brand.name} {model.name} в наличии</h1>
-        </div>
-
-        <div id="vehicle-list-by-model" className="list-view">
-          <div className="model-list">
-            <div className="row model-list-flex items">
-              {this.renderVehicles()}
-            </div>
+      <div id="vehicle-list-by-model" className="list-view">
+        <div className="model-list">
+          <div className="row model-list-flex items">
+            {this.renderVehicles()}
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

@@ -2,9 +2,11 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import Vehicles from './Vehicles';
 import { fetchVehicles } from '../../redusers/vehiclesReducer';
-import { isEmpty } from '../../utils';
+import VehiclesFilterForm from '../forms/VehiclesFilterForm';
+import Vehicles from './Vehicles';
+import { isEmpty, getListForFilter } from '../../utils';
+import PageHeader from '../commons/PageHeader';
 
 class VehiclesContainer extends React.Component {
   componentDidMount() {
@@ -25,13 +27,24 @@ class VehiclesContainer extends React.Component {
       return null;
     }
 
+    const header = `Автомобили ${brand.name} ${model.name} в наличии`;
+
+    console.log(items);
+
+    const modifications = getListForFilter(items, 'modification', 'modification_name');
+    const equipments = getListForFilter(items, 'equipment', 'equipment_name');
+
     return (
-      <Vehicles
-        brand={brand}
-        model={model}
-        vehicles={items}
-        characteristics={characteristics}
-      />
+      <>
+        <PageHeader header={header} classes="page-title" />
+        <VehiclesFilterForm modifications={modifications} equipments={equipments} />
+        <Vehicles
+          brand={brand}
+          model={model}
+          vehicles={items}
+          characteristics={characteristics}
+        />
+      </>
     );
   }
 }

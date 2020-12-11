@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import thunkMiddleware from 'redux-thunk';
 import modelsRedusers from './modelsReduser';
 import brandsReduser from './brandsReduser';
@@ -12,6 +13,7 @@ const redusers = combineReducers({
   modelsPage: modelsRedusers,
   vehiclesPage: vehiclesReducer,
   vehiclePage: vehicleReducer,
+  form: formReducer,
 });
 
 export default createStore(redusers, applyMiddleware(thunkMiddleware));
