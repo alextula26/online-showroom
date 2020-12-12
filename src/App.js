@@ -31,7 +31,7 @@ class App extends React.Component {
     if (brands.length === 0) {
       return null;
     }
-    console.log(this.props);
+
     return (
       <div className="crm-common-wrap" id="js-container-wrap">
         <div className="container">
