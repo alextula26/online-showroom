@@ -2,17 +2,17 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { fetchVehicles } from '../../redusers/vehiclesReducer';
+import * as actions from '../../actions';
+import PageHeader from '../commons/PageHeader';
 import VehiclesFilterForm from '../forms/VehiclesFilterForm';
 import Vehicles from './Vehicles';
 import { isEmpty, getListForFilter } from '../../utils';
-import PageHeader from '../commons/PageHeader';
 
 class VehiclesContainer extends React.Component {
   componentDidMount() {
-    const { setVehiclesState } = this.props;
+    const { fetchVehicles } = this.props;
     const modelId = this.getCurrentModelId();
-    setVehiclesState(modelId);
+    fetchVehicles(modelId);
   }
 
   getCurrentModelId() {
@@ -55,7 +55,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  setVehiclesState: fetchVehicles,
+  fetchVehicles: actions.fetchVehicles,
 };
 
 export default compose(

@@ -5,7 +5,7 @@ import {
 import { compose } from 'redux';
 import { Provider, connect } from 'react-redux';
 import store from './redusers';
-import { fetchBrands } from './redusers/brandsReduser';
+import * as actions from './actions';
 import ModelsContainer from './components/Models/ModelsContainer';
 import VehiclesContainer from './components/Vehicles/VehiclesContainer';
 import ListAllNewCarsContainer from './components/ListAllNewCars/ListAllNewCarsContainer';
@@ -13,8 +13,8 @@ import NewVehicleContainer from './components/Vehicle/NewVehicleContainer';
 
 class App extends React.Component {
   componentDidMount() {
-    const { setBrands } = this.props;
-    setBrands();
+    const { fetchBrands } = this.props;
+    fetchBrands();
   }
 
   getMainPageComponent = (type) => {
@@ -31,7 +31,7 @@ class App extends React.Component {
     if (brands.length === 0) {
       return null;
     }
-
+    console.log(this.props);
     return (
       <div className="crm-common-wrap" id="js-container-wrap">
         <div className="container">
@@ -55,7 +55,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  setBrands: fetchBrands,
+  fetchBrands: actions.fetchBrands,
 };
 
 const AppContainer = compose(connect(mapStateToProps, actionCreators), withRouter)(App);

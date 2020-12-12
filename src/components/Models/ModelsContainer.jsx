@@ -2,18 +2,18 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import Models from './Models';
-import { fetchModels } from '../../redusers/modelsReduser';
 import { filteredModelsSelector } from '../../selectors';
 import { isEmpty } from '../../utils';
 
 class ModelsContainer extends React.Component {
   componentDidMount() {
-    const { setModels } = this.props;
+    const { fetchModels } = this.props;
 
     const currentBrandId = this.getCurrentBrandId();
 
-    setModels(currentBrandId);
+    fetchModels(currentBrandId);
   }
 
   getCurrentBrandId() {
@@ -46,7 +46,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  setModels: fetchModels,
+  fetchModels: actions.fetchModels,
 };
 
 export default compose(

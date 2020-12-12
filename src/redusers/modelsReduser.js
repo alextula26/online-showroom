@@ -1,29 +1,19 @@
-import { createAction, handleActions } from 'redux-actions';
-import API from '../api';
-
-const fetchModelsSuccess = createAction('MODELS_FETCH_SUCCESS');
-const fetchBrandModelsSuccess = createAction('BRAND_MODELS_FETCH_SUCCESS');
+import { handleActions } from 'redux-actions';
+import * as actions from '../actions';
 
 const modelsReduser = handleActions({
-  [fetchModelsSuccess](state, { payload }) {
+  [actions.fetchModelsSuccess](state, { payload }) {
     return {
       ...state,
       models: payload.items,
     };
   },
-  [fetchBrandModelsSuccess](state, { payload }) {
+  [actions.fetchBrandModelsSuccess](state, { payload }) {
     return {
       ...state,
       brand: payload.brand,
     };
   },
 }, { models: [], brand: {} });
-
-export const fetchModels = (brandId) => async (dispatch) => {
-  const models = await API.getModels(brandId);
-  const { items, brand } = models;
-  dispatch(fetchModelsSuccess({ items }));
-  dispatch(fetchBrandModelsSuccess({ brand }));
-};
 
 export default modelsReduser;

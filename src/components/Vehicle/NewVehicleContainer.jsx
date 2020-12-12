@@ -2,15 +2,15 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { fetchVehicle } from '../../redusers/vehicleReducer';
-import { isEmpty } from '../../utils';
+import * as actions from '../../actions';
 import NewVehicle from './NewVehicle';
+import { isEmpty } from '../../utils';
 
 class NewVehicleContainer extends React.Component {
   componentDidMount() {
-    const { getVehicle } = this.props;
+    const { fetchVehicle } = this.props;
     const vehicleId = this.getCurrentVehicleId();
-    getVehicle(vehicleId);
+    fetchVehicle(vehicleId);
   }
 
   getCurrentVehicleId() {
@@ -36,7 +36,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = ({
-  getVehicle: fetchVehicle,
+  fetchVehicle: actions.fetchVehicle,
 });
 
 export default compose(

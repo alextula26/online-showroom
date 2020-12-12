@@ -1,20 +1,13 @@
-import { createAction, handleActions } from 'redux-actions';
-import API from '../api';
-
-const fetchVehicleSuccess = createAction('FETCH_VEHICLE');
+import { handleActions } from 'redux-actions';
+import * as actions from '../actions';
 
 const vehicleReducer = handleActions({
-  [fetchVehicleSuccess](state, { payload }) {
+  [actions.fetchVehicleSuccess](state, { payload }) {
     return {
       ...state,
       vehicle: payload.vehicle,
     };
   },
 }, { vehicle: {} });
-
-export const fetchVehicle = (vehicleId) => async (dispatch) => {
-  const vehicle = await API.getVehicle(vehicleId);
-  dispatch(fetchVehicleSuccess({ vehicle }));
-};
 
 export default vehicleReducer;
