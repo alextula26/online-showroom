@@ -9,6 +9,9 @@ export const fetchVehiclesSuccess = createAction('FETCH_VEHICLES');
 export const fetchCharacteristicsSuccess = createAction('FETCH_CHARACTERISTICS');
 export const fetchVehicleSuccess = createAction('FETCH_VEHICLE');
 
+export const addModifications = createAction('ADD_MODIFICATIONS');
+export const addEquipments = createAction('ADD_EQUIPMENTS');
+
 export const fetchDealers = () => async (dispatch) => {
   const dealers = await API.getDealers();
   dispatch(fetchDealersSuccess({ dealers }));
@@ -53,4 +56,12 @@ export const fetchVehicles = (modelId) => async (dispatch) => {
 export const fetchVehicle = (vehicleId) => async (dispatch) => {
   const vehicle = await API.getVehicle(vehicleId);
   dispatch(fetchVehicleSuccess({ vehicle }));
+};
+
+export const setModifications = (modifications) => (dispatch) => {
+  dispatch(addModifications({ modifications }));
+};
+
+export const setEquipments = (equipments) => (dispatch) => {
+  dispatch(addEquipments({ equipments }));
 };

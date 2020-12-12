@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Form, Dropdown } from 'react-bootstrap';
+import cn from 'classnames';
+import * as actions from '../../actions';
+import { includes } from '../../utils';
 
 class VehiclesFilterForm extends React.Component {
   handleToggle = () => {
@@ -9,7 +12,10 @@ class VehiclesFilterForm extends React.Component {
   };
 
   render() {
-    const { modifications, equipments } = this.props;
+    const {
+      modifications, equipments, modificationsFilter, equipmentsFilters,
+    } = this.props;
+    console.log(this.props);
 
     return (
       <section className="filter">
@@ -37,13 +43,18 @@ class VehiclesFilterForm extends React.Component {
                     <Dropdown.Menu>
                       <div className="inner show">
                         <ul className="dropdown-menu inner show">
-                          {modifications.map(({ id, name }) => (
-                            <li key={id}>
-                              <Dropdown.Item as="a" className="selected">
-                                <span className="text">{name}</span>
-                              </Dropdown.Item>
-                            </li>
-                          ))}
+                          {modifications.map(({ id, name }) => {
+                            const classes = cn({
+                              selected: includes(modificationsFilter, id),
+                            });
+                            return (
+                              <li key={id}>
+                                <Dropdown.Item as="a" className={classes}>
+                                  <span className="text">{name}</span>
+                                </Dropdown.Item>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     </Dropdown.Menu>
@@ -71,13 +82,18 @@ class VehiclesFilterForm extends React.Component {
                     <Dropdown.Menu>
                       <div className="inner show">
                         <ul className="dropdown-menu inner show">
-                          {equipments.map(({ id, name }) => (
-                            <li key={id}>
-                              <Dropdown.Item as="a" className="selected">
-                                <span className="text">{name}</span>
-                              </Dropdown.Item>
-                            </li>
-                          ))}
+                          {equipments.map(({ id, name }) => {
+                            const classes = cn({
+                              selected: includes(equipmentsFilters, id),
+                            });
+                            return (
+                              <li key={id}>
+                                <Dropdown.Item as="a" className={classes}>
+                                  <span className="text">{name}</span>
+                                </Dropdown.Item>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     </Dropdown.Menu>
@@ -95,12 +111,16 @@ class VehiclesFilterForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  const props = {};
-  return props;
-};
+const mapStateToProps = (state) => ({
+  modificationsFilter: state.filters.modifications,
+  equipmentsFilters: state.filters.equipments,
+});
 
-const ConnectedVehiclesFilterForm = connect(mapStateToProps)(VehiclesFilterForm);
+const actionCreators = ({
+  setModifications: actions.setModifications,
+  setEquipments: actions.setEquipments,
+});
+
+const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);
 
 export default reduxForm({ form: 'VehiclesFilter' })(ConnectedVehiclesFilterForm);
