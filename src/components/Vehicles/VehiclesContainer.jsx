@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import PageHeader from '../commons/PageHeader';
-import VehiclesFilterForm from '../forms/VehiclesFilterForm';
+import VehiclesFilterForm from '../filters/VehiclesFilterForm';
 import Vehicles from './Vehicles';
 import { isEmpty, getListForFilter } from '../../utils';
 
