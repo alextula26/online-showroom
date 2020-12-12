@@ -7,15 +7,28 @@ import * as actions from '../../actions';
 import { includes } from '../../utils';
 
 class VehiclesFilterForm extends React.Component {
-  handleToggle = () => {
-    console.log('index');
+  handleModificationsFilterOnSelect = (modificationId) => {
+    const { setModification, removeModification, modificationsFilter } = this.props;
+    if (!includes(modificationsFilter, Number(modificationId))) {
+      setModification({ modificationId });
+    } else {
+      removeModification({ modificationId });
+    }
   };
+
+  handleEquipmentsFiltersOnSelect = (equipmentId) => {
+    const { setEquipment, removeEquipment, equipmentsFilter } = this.props;
+    if (!includes(equipmentsFilter, Number(equipmentId))) {
+      setEquipment({ equipmentId });
+    } else {
+      removeEquipment({ equipmentId });
+    }
+  }
 
   render() {
     const {
-      modifications, equipments, modificationsFilter, equipmentsFilters,
+      modifications, equipments, modificationsFilter, equipmentsFilter,
     } = this.props;
-    console.log(this.props);
 
     return (
       <section className="filter">
@@ -30,7 +43,7 @@ class VehiclesFilterForm extends React.Component {
 
                   <Form.Label className="control-label">Модификации</Form.Label>
 
-                  <Dropdown show className="dropdown bootstrap-select form-control" onToggle={this.handleToggle}>
+                  <Dropdown show className="dropdown bootstrap-select form-control">
 
                     <Dropdown.Toggle className="btn-default bs-placeholder">
                       <div className="filter-option">
@@ -49,7 +62,12 @@ class VehiclesFilterForm extends React.Component {
                             });
                             return (
                               <li key={id}>
-                                <Dropdown.Item as="a" className={classes}>
+                                <Dropdown.Item
+                                  as="a"
+                                  className={classes}
+                                  eventKey={id}
+                                  onSelect={this.handleModificationsFilterOnSelect}
+                                >
                                   <span className="text">{name}</span>
                                 </Dropdown.Item>
                               </li>
@@ -84,11 +102,16 @@ class VehiclesFilterForm extends React.Component {
                         <ul className="dropdown-menu inner show">
                           {equipments.map(({ id, name }) => {
                             const classes = cn({
-                              selected: includes(equipmentsFilters, id),
+                              selected: includes(equipmentsFilter, id),
                             });
                             return (
                               <li key={id}>
-                                <Dropdown.Item as="a" className={classes}>
+                                <Dropdown.Item
+                                  as="a"
+                                  className={classes}
+                                  eventKey={id}
+                                  onSelect={this.handleEquipmentsFiltersOnSelect}
+                                >
                                   <span className="text">{name}</span>
                                 </Dropdown.Item>
                               </li>
@@ -113,12 +136,14 @@ class VehiclesFilterForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   modificationsFilter: state.filters.modifications,
-  equipmentsFilters: state.filters.equipments,
+  equipmentsFilter: state.filters.equipments,
 });
 
 const actionCreators = ({
-  setModifications: actions.setModifications,
-  setEquipments: actions.setEquipments,
+  setModification: actions.setModification,
+  removeModification: actions.removeModification,
+  setEquipment: actions.setEquipment,
+  removeEquipment: actions.removeEquipment,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);

@@ -2,18 +2,32 @@ import { handleActions } from 'redux-actions';
 import * as actions from '../actions';
 
 const filtersReducer = handleActions({
-  [actions.addModifications](state, { payload }) {
+  [actions.setModification](state, { payload: { modificationId } }) {
     return {
       ...state,
-      modifications: payload.modifications,
+      modifications: [...state.modifications, Number(modificationId)],
     };
   },
-  [actions.addEquipments](state, { payload }) {
+  [actions.removeModification](state, { payload: { modificationId } }) {
     return {
       ...state,
-      equipments: payload.equipments,
+      modifications: state.modifications.filter((modification) => (
+        modification !== Number(modificationId))),
     };
   },
-}, { modifications: [243145, 243148], equipments: [14732] });
+  [actions.setEquipment](state, { payload: { equipmentId } }) {
+    return {
+      ...state,
+      equipments: [...state.equipments, Number(equipmentId)],
+    };
+  },
+  [actions.removeEquipment](state, { payload: { equipmentId } }) {
+    return {
+      ...state,
+      equipments: state.equipments.filter((equipment) => (
+        equipment !== Number(equipmentId))),
+    };
+  },
+}, { modifications: [], equipments: [] });
 
 export default filtersReducer;
