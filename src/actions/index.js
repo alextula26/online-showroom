@@ -9,10 +9,10 @@ export const fetchVehiclesSuccess = createAction('FETCH_VEHICLES');
 export const fetchCharacteristicsSuccess = createAction('FETCH_CHARACTERISTICS');
 export const fetchVehicleSuccess = createAction('FETCH_VEHICLE');
 
-export const setModification = createAction('SET_MODIFICATION');
-export const removeModification = createAction('REMOVE_MODIFICATION');
-export const setEquipment = createAction('SET_EQUIPMENT');
-export const removeEquipment = createAction('REMOVE_EQUIPMENT');
+export const setCheckModification = createAction('SET_CHECK_MODIFICATION');
+export const removeCheckModification = createAction('REMOVE_CHECK_MODIFICATION');
+export const setCheckEquipment = createAction('SET_CHECK_EQUIPMENT');
+export const removeCheckEquipment = createAction('REMOVE_CHECK_EQUIPMENT');
 
 export const fetchDealers = () => async (dispatch) => {
   const dealers = await API.getDealers();

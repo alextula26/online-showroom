@@ -2,32 +2,59 @@ import { handleActions } from 'redux-actions';
 import * as actions from '../actions';
 
 const filtersReducer = handleActions({
-  [actions.setModification](state, { payload: { modificationId } }) {
+  [actions.setCheckModification](state, { payload: { modificationId } }) {
+    const { modifications } = state;
+    const { checks } = modifications;
+
     return {
       ...state,
-      modifications: [...state.modifications, Number(modificationId)],
+      modifications: {
+        ...modifications,
+        checks: [...checks, Number(modificationId)],
+      },
     };
   },
-  [actions.removeModification](state, { payload: { modificationId } }) {
+  [actions.removeCheckModification](state, { payload: { modificationId } }) {
+    const { modifications } = state;
+    const { checks } = modifications;
+
     return {
       ...state,
-      modifications: state.modifications.filter((modification) => (
-        modification !== Number(modificationId))),
+      modifications: {
+        ...modifications,
+        checks: checks.filter((modification) => (
+          modification !== Number(modificationId))),
+      },
     };
   },
-  [actions.setEquipment](state, { payload: { equipmentId } }) {
+  [actions.setCheckEquipment](state, { payload: { equipmentId } }) {
+    const { equipments } = state;
+    const { checks } = equipments;
+    console.log(equipmentId);
     return {
       ...state,
-      equipments: [...state.equipments, Number(equipmentId)],
+      equipments: {
+        ...equipments,
+        checks: [...checks, Number(equipmentId)],
+      },
     };
   },
-  [actions.removeEquipment](state, { payload: { equipmentId } }) {
+  [actions.removeCheckEquipment](state, { payload: { equipmentId } }) {
+    const { equipments } = state;
+    const { checks } = equipments;
+
     return {
       ...state,
-      equipments: state.equipments.filter((equipment) => (
-        equipment !== Number(equipmentId))),
+      equipments: {
+        ...equipments,
+        checks: checks.filter((equipment) => (
+          equipment !== Number(equipmentId))),
+      },
     };
   },
-}, { modifications: [], equipments: [] });
+}, {
+  modifications: { items: [], checks: [] },
+  equipments: { items: [], checks: [] },
+});
 
 export default filtersReducer;

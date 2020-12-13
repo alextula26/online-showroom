@@ -11,12 +11,12 @@ class VehiclesFilterForm extends React.Component {
       equipments,
       modificationsFilter,
       equipmentsFilter,
-      setModification,
-      removeModification,
-      setEquipment,
-      removeEquipment,
+      setCheckModification,
+      removeCheckModification,
+      setCheckEquipment,
+      removeCheckEquipment,
     } = this.props;
-
+    console.log(this.props);
     return (
       <section className="filter">
         <form
@@ -30,8 +30,8 @@ class VehiclesFilterForm extends React.Component {
                   label="Модификации"
                   listContents={modifications}
                   filterElements={modificationsFilter}
-                  set={setModification}
-                  remove={removeModification}
+                  set={setCheckModification}
+                  remove={removeCheckModification}
                   payload="modificationId"
                 />
               </div>
@@ -41,8 +41,8 @@ class VehiclesFilterForm extends React.Component {
                   label="Комплектации"
                   listContents={equipments}
                   filterElements={equipmentsFilter}
-                  set={setEquipment}
-                  remove={removeEquipment}
+                  set={setCheckEquipment}
+                  remove={removeCheckEquipment}
                   payload="equipmentId"
                 />
               </div>
@@ -56,15 +56,15 @@ class VehiclesFilterForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  modificationsFilter: state.filters.modifications,
-  equipmentsFilter: state.filters.equipments,
+  modificationsFilter: state.filters.modifications.checks,
+  equipmentsFilter: state.filters.equipments.checks,
 });
 
 const actionCreators = ({
-  setModification: actions.setModification,
-  removeModification: actions.removeModification,
-  setEquipment: actions.setEquipment,
-  removeEquipment: actions.removeEquipment,
+  setCheckModification: actions.setCheckModification,
+  removeCheckModification: actions.removeCheckModification,
+  setCheckEquipment: actions.setCheckEquipment,
+  removeCheckEquipment: actions.removeCheckEquipment,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);
