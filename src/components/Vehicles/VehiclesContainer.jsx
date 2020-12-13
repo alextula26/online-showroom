@@ -6,7 +6,7 @@ import * as actions from '../../actions';
 import PageHeader from '../commons/PageHeader';
 import VehiclesFilterForm from '../filters/VehiclesFilterForm';
 import Vehicles from './Vehicles';
-import { isEmpty, getListForFilter } from '../../utils';
+import { isEmpty } from '../../utils';
 
 class VehiclesContainer extends React.Component {
   componentDidMount() {
@@ -21,23 +21,28 @@ class VehiclesContainer extends React.Component {
   }
 
   render() {
-    const { vehicles: { brand, items, model }, characteristics } = this.props;
+    const {
+      vehicles: { brand, items, model },
+      characteristics,
+      modificationsForFilter,
+      equipmentsForFilter,
+    } = this.props;
 
-    if (isEmpty(items) || isEmpty(characteristics)) {
+    if (isEmpty(items)) {
       return null;
     }
 
     const header = `Автомобили ${brand.name} ${model.name} в наличии`;
 
-    console.log(items);
-
-    const modifications = getListForFilter(items, 'modification', 'modification_name');
-    const equipments = getListForFilter(items, 'equipment', 'equipment_name');
+    console.log('VehiclesContainer', this.props);
 
     return (
       <>
         <PageHeader header={header} classes="page-title" />
-        <VehiclesFilterForm modifications={modifications} equipments={equipments} />
+        <VehiclesFilterForm
+          modifications={modificationsForFilter}
+          equipments={equipmentsForFilter}
+        />
         <Vehicles
           brand={brand}
           model={model}
@@ -52,6 +57,8 @@ class VehiclesContainer extends React.Component {
 const mapStateToProps = (state) => ({
   vehicles: state.vehiclesPage.vehicles,
   characteristics: state.vehiclesPage.characteristics,
+  modificationsForFilter: state.filters.modifications.items,
+  equipmentsForFilter: state.filters.equipments.items,
 });
 
 const actionCreators = {

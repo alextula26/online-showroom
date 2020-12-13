@@ -6,17 +6,17 @@ import { includes } from '../../../utils';
 class SelectComponent extends React.Component {
   handleOnSelect = (selectId) => {
     const {
-      set, remove, filterElements, payload,
+      onSelect, onUnSelect, selectedElement, payload,
     } = this.props;
-    if (!includes(filterElements, Number(selectId))) {
-      set({ [payload]: selectId });
+    if (!includes(selectedElement, Number(selectId))) {
+      onSelect({ [payload]: selectId });
     } else {
-      remove({ [payload]: selectId });
+      onUnSelect({ [payload]: selectId });
     }
   };
 
   render() {
-    const { label, listContents, filterElements } = this.props;
+    const { label, elements, selectedElement } = this.props;
 
     return (
       <Form.Group>
@@ -36,9 +36,9 @@ class SelectComponent extends React.Component {
           <Dropdown.Menu>
             <div className="inner show">
               <ul className="dropdown-menu inner show">
-                {listContents.map(({ id, name }) => {
+                {elements.map(({ id, name }) => {
                   const classes = cn({
-                    selected: includes(filterElements, id),
+                    selected: includes(selectedElement, id),
                   });
                   return (
                     <li key={id}>

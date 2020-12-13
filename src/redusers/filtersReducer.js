@@ -30,7 +30,7 @@ const filtersReducer = handleActions({
   [actions.setCheckEquipment](state, { payload: { equipmentId } }) {
     const { equipments } = state;
     const { checks } = equipments;
-    console.log(equipmentId);
+
     return {
       ...state,
       equipments: {
@@ -52,6 +52,30 @@ const filtersReducer = handleActions({
       },
     };
   },
+  [actions.setModificationsForFilter](state, { payload: { modificationsForFilter } }) {
+    const { modifications } = state;
+
+    return {
+      ...state,
+      modifications: {
+        ...modifications,
+        items: modificationsForFilter,
+      },
+    };
+  },
+
+  [actions.setEquipmentsForFilter](state, { payload: { equipmentsForFilter } }) {
+    const { equipments } = state;
+
+    return {
+      ...state,
+      equipments: {
+        ...equipments,
+        items: equipmentsForFilter,
+      },
+    };
+  },
+
 }, {
   modifications: { items: [], checks: [] },
   equipments: { items: [], checks: [] },

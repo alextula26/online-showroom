@@ -16,7 +16,7 @@ class VehiclesFilterForm extends React.Component {
       setCheckEquipment,
       removeCheckEquipment,
     } = this.props;
-    console.log(this.props);
+
     return (
       <section className="filter">
         <form
@@ -28,10 +28,10 @@ class VehiclesFilterForm extends React.Component {
               <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
                 <SelectComponent
                   label="Модификации"
-                  listContents={modifications}
-                  filterElements={modificationsFilter}
-                  set={setCheckModification}
-                  remove={removeCheckModification}
+                  elements={modifications}
+                  selectedElement={modificationsFilter}
+                  onSelect={setCheckModification}
+                  onUnSelect={removeCheckModification}
                   payload="modificationId"
                 />
               </div>
@@ -39,10 +39,10 @@ class VehiclesFilterForm extends React.Component {
               <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
                 <SelectComponent
                   label="Комплектации"
-                  listContents={equipments}
-                  filterElements={equipmentsFilter}
-                  set={setCheckEquipment}
-                  remove={removeCheckEquipment}
+                  elements={equipments}
+                  selectedElement={equipmentsFilter}
+                  onSelect={setCheckEquipment}
+                  onUnSelect={removeCheckEquipment}
                   payload="equipmentId"
                 />
               </div>
