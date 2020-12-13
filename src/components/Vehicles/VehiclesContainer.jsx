@@ -7,6 +7,7 @@ import PageHeader from '../commons/PageHeader';
 import VehiclesFilterForm from '../filters/VehiclesFilterForm';
 import Vehicles from './Vehicles';
 import { isEmpty } from '../../utils';
+import { getVehiclesSelector } from '../../selectors';
 
 class VehiclesContainer extends React.Component {
   componentDidMount() {
@@ -55,7 +56,7 @@ class VehiclesContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  vehicles: state.vehiclesPage.vehicles,
+  vehicles: getVehiclesSelector(state),
   characteristics: state.vehiclesPage.characteristics,
   modificationsForFilter: state.filters.modifications.items,
   equipmentsForFilter: state.filters.equipments.items,
