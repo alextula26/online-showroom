@@ -6,9 +6,9 @@ import { includes } from '../../../utils';
 class SelectComponent extends React.Component {
   handleOnSelect = (selectId) => {
     const {
-      onSelect, onUnSelect, selectedElement, payload,
+      onSelect, onUnSelect, selectedElements, payload,
     } = this.props;
-    if (!includes(selectedElement, Number(selectId))) {
+    if (!includes(selectedElements, Number(selectId))) {
       onSelect({ [payload]: selectId });
     } else {
       onUnSelect({ [payload]: selectId });
@@ -16,7 +16,7 @@ class SelectComponent extends React.Component {
   };
 
   render() {
-    const { label, elements, selectedElement } = this.props;
+    const { label, elements, selectedElements } = this.props;
 
     return (
       <Form.Group>
@@ -38,7 +38,7 @@ class SelectComponent extends React.Component {
               <ul className="dropdown-menu inner show">
                 {elements.map(({ id, name }) => {
                   const classes = cn({
-                    selected: includes(selectedElement, id),
+                    selected: includes(selectedElements, id),
                   });
                   return (
                     <li key={id}>

@@ -12,10 +12,10 @@ export const fetchCharacteristicsSuccess = createAction('FETCH_CHARACTERISTICS')
 export const fetchVehicleSuccess = createAction('FETCH_VEHICLE');
 
 // Action creators for filters
-export const setCheckModification = createAction('SET_CHECK_MODIFICATION');
-export const removeCheckModification = createAction('REMOVE_CHECK_MODIFICATION');
-export const setCheckEquipment = createAction('SET_CHECK_EQUIPMENT');
-export const removeCheckEquipment = createAction('REMOVE_CHECK_EQUIPMENT');
+export const selectModification = createAction('SELECT_MODIFICATION');
+export const unSelectModification = createAction('UNSELECT_MODIFICATION');
+export const selectEquipment = createAction('SELECT_EQUIPMENT');
+export const unSelectEquipment = createAction('UNSELECT_EQUIPMENT');
 export const setModificationsForFilter = createAction('SET_MODIFICATIONS_FOR_FILTER');
 export const setEquipmentsForFilter = createAction('SET_EQUIPMENTS_FOR_FILTER');
 

@@ -2,52 +2,52 @@ import { handleActions } from 'redux-actions';
 import * as actions from '../actions';
 
 const filtersReducer = handleActions({
-  [actions.setCheckModification](state, { payload: { modificationId } }) {
+  [actions.selectModification](state, { payload: { modificationId } }) {
     const { modifications } = state;
-    const { checks } = modifications;
+    const { selected } = modifications;
 
     return {
       ...state,
       modifications: {
         ...modifications,
-        checks: [...checks, Number(modificationId)],
+        selected: [...selected, Number(modificationId)],
       },
     };
   },
-  [actions.removeCheckModification](state, { payload: { modificationId } }) {
+  [actions.unSelectModification](state, { payload: { modificationId } }) {
     const { modifications } = state;
-    const { checks } = modifications;
+    const { selected } = modifications;
 
     return {
       ...state,
       modifications: {
         ...modifications,
-        checks: checks.filter((modification) => (
+        selected: selected.filter((modification) => (
           modification !== Number(modificationId))),
       },
     };
   },
-  [actions.setCheckEquipment](state, { payload: { equipmentId } }) {
+  [actions.selectEquipment](state, { payload: { equipmentId } }) {
     const { equipments } = state;
-    const { checks } = equipments;
+    const { selected } = equipments;
 
     return {
       ...state,
       equipments: {
         ...equipments,
-        checks: [...checks, Number(equipmentId)],
+        selected: [...selected, Number(equipmentId)],
       },
     };
   },
-  [actions.removeCheckEquipment](state, { payload: { equipmentId } }) {
+  [actions.unSelectEquipment](state, { payload: { equipmentId } }) {
     const { equipments } = state;
-    const { checks } = equipments;
+    const { selected } = equipments;
 
     return {
       ...state,
       equipments: {
         ...equipments,
-        checks: checks.filter((equipment) => (
+        selected: selected.filter((equipment) => (
           equipment !== Number(equipmentId))),
       },
     };
@@ -77,8 +77,8 @@ const filtersReducer = handleActions({
   },
 
 }, {
-  modifications: { items: [], checks: [] },
-  equipments: { items: [], checks: [] },
+  modifications: { items: [], selected: [] },
+  equipments: { items: [], selected: [] },
 });
 
 export default filtersReducer;
