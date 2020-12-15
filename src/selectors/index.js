@@ -10,19 +10,22 @@ export const filteredModelsSelector = createSelector(
 
 const getVehicles = (state) => state.vehiclesPage.vehicles;
 const getSelectedModifications = (state) => state.filters.modifications.selected;
+const getSelectedEquipments = (state) => state.filters.equipments.selected;
 
 export const getVehiclesSelector = createSelector(
-  [getVehicles, getSelectedModifications],
-  (vehicles, selectedModifications) => {
-    console.log('vehicles', vehicles);
-    console.log('selectedModifications', selectedModifications);
+  [getVehicles, getSelectedModifications, getSelectedEquipments],
+  (
+    vehicles,
+    selectedModifications,
+    // selectedEquipments,
+  ) => {
+    // console.log(selectedEquipments);
+
     if (!isEmpty(selectedModifications)) {
-      const result = vehicles
-        .items.filter((vehicle) => includes(selectedModifications, vehicle.modification));
-      console.log(result);
       return {
         ...vehicles,
-        items: result,
+        items: vehicles.items.filter((vehicle) => (
+          includes(selectedModifications, vehicle.modification))),
       };
     }
 

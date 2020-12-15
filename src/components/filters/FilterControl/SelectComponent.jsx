@@ -1,22 +1,24 @@
 import React from 'react';
 import { Form, Dropdown } from 'react-bootstrap';
 import cn from 'classnames';
-import { includes } from '../../../utils';
 
 class SelectComponent extends React.Component {
   handleOnSelect = (selectId) => {
     const {
-      onSelect, onUnSelect, selectedElements, payload,
+      select,
+      filter,
+      payload: { currentFilter, property, modelId },
     } = this.props;
-    if (!includes(selectedElements, Number(selectId))) {
-      onSelect({ [payload]: selectId });
-    } else {
-      onUnSelect({ [payload]: selectId });
-    }
+
+    select({ [property]: selectId });
+    filter(modelId, { filterElementId: selectId, expand: currentFilter });
   };
 
   render() {
-    const { label, elements, selectedElements } = this.props;
+    const {
+      label,
+      elements,
+    } = this.props;
 
     return (
       <Form.Group>
@@ -36,9 +38,12 @@ class SelectComponent extends React.Component {
           <Dropdown.Menu>
             <div className="inner show">
               <ul className="dropdown-menu inner show">
-                {elements.map(({ id, name }) => {
+                {elements.map(({
+                  id, name, selected, disabled,
+                }) => {
                   const classes = cn({
-                    selected: includes(selectedElements, id),
+                    selected,
+                    disabled,
                   });
                   return (
                     <li key={id}>

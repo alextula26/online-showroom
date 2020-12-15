@@ -2,83 +2,41 @@ import { handleActions } from 'redux-actions';
 import * as actions from '../actions';
 
 const filtersReducer = handleActions({
-  [actions.selectModification](state, { payload: { modificationId } }) {
-    const { modifications } = state;
-    const { selected } = modifications;
-
-    return {
-      ...state,
-      modifications: {
-        ...modifications,
-        selected: [...selected, Number(modificationId)],
-      },
-    };
-  },
-  [actions.unSelectModification](state, { payload: { modificationId } }) {
-    const { modifications } = state;
-    const { selected } = modifications;
-
-    return {
-      ...state,
-      modifications: {
-        ...modifications,
-        selected: selected.filter((modification) => (
-          modification !== Number(modificationId))),
-      },
-    };
-  },
-  [actions.selectEquipment](state, { payload: { equipmentId } }) {
-    const { equipments } = state;
-    const { selected } = equipments;
-
-    return {
-      ...state,
-      equipments: {
-        ...equipments,
-        selected: [...selected, Number(equipmentId)],
-      },
-    };
-  },
-  [actions.unSelectEquipment](state, { payload: { equipmentId } }) {
-    const { equipments } = state;
-    const { selected } = equipments;
-
-    return {
-      ...state,
-      equipments: {
-        ...equipments,
-        selected: selected.filter((equipment) => (
-          equipment !== Number(equipmentId))),
-      },
-    };
-  },
   [actions.setModificationsForFilter](state, { payload: { modificationsForFilter } }) {
-    const { modifications } = state;
-
     return {
       ...state,
-      modifications: {
-        ...modifications,
-        items: modificationsForFilter,
-      },
+      modifications: modificationsForFilter,
     };
   },
 
   [actions.setEquipmentsForFilter](state, { payload: { equipmentsForFilter } }) {
-    const { equipments } = state;
-
     return {
       ...state,
-      equipments: {
-        ...equipments,
-        items: equipmentsForFilter,
-      },
+      equipments: equipmentsForFilter,
+    };
+  },
+
+  [actions.selectModification](state, { payload: { modificationId } }) {
+    const { modifications } = state;
+    return {
+      ...state,
+      modifications: modifications.map((item) => (
+        item.id === Number(modificationId) ? { ...item, selected: !item.selected } : item)),
+    };
+  },
+
+  [actions.selectEquipment](state, { payload: { equipmentId } }) {
+    const { equipments } = state;
+    return {
+      ...state,
+      equipments: equipments.map((item) => (
+        item.id === Number(equipmentId) ? { ...item, selected: !item.selected } : item)),
     };
   },
 
 }, {
-  modifications: { items: [], selected: [] },
-  equipments: { items: [], selected: [] },
+  modifications: [],
+  equipments: [],
 });
 
 export default filtersReducer;

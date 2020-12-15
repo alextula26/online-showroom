@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import API from '../api';
-import { getListForFilter } from '../utils';
+import { getListForFilter, isEmpty } from '../utils';
 
 // Action creators for API requests
 export const fetchDealersSuccess = createAction('DEALERS_FETCH_SUCCESS');
@@ -36,10 +36,8 @@ export const fetchModels = (brandId) => async (dispatch) => {
   dispatch(fetchBrandModelsSuccess({ brand }));
 };
 
-export const fetchVehicles = (modelId) => async (dispatch) => {
-  const vehicles = await API.getVehicles(modelId);
-
-  const promisesVehicles = vehicles.items.map(async ({ id }) => {
+const getVehiclesCharacteristics = async (vehicles) => {
+  const promisesVehicles = vehicles.map(async ({ id }) => {
     const vehicle = await API.getVehicle(id);
     return { [id]: vehicle.general };
   });
@@ -54,11 +52,20 @@ export const fetchVehicles = (modelId) => async (dispatch) => {
       return { ...acc, [vehicleId]: specifications };
     }, {});
 
+  return characteristics;
+};
+
+export const fetchVehicles = (modelId, options = {}) => async (dispatch) => {
+  const vehicles = await API.getVehicles(modelId);
+  const characteristics = await getVehiclesCharacteristics(vehicles.items);
   const modificationsForFilter = getListForFilter(vehicles.items, 'modification', 'modification_name');
   const equipmentsForFilter = getListForFilter(vehicles.items, 'equipment', 'equipment_name');
+  console.log(options);
+  if (isEmpty(options)) {
+    dispatch(setModificationsForFilter({ modificationsForFilter }));
+    dispatch(setEquipmentsForFilter({ equipmentsForFilter }));
+  }
 
-  dispatch(setModificationsForFilter({ modificationsForFilter }));
-  dispatch(setEquipmentsForFilter({ equipmentsForFilter }));
   dispatch(fetchCharacteristicsSuccess({ characteristics }));
   dispatch(fetchVehiclesSuccess({ vehicles }));
 };
@@ -66,4 +73,12 @@ export const fetchVehicles = (modelId) => async (dispatch) => {
 export const fetchVehicle = (vehicleId) => async (dispatch) => {
   const vehicle = await API.getVehicle(vehicleId);
   dispatch(fetchVehicleSuccess({ vehicle }));
+};
+
+export const fetchVehicleFilteredByElement = (
+  currentFilter, elementId, modelId,
+) => async () => {
+  console.log('currentFilter', currentFilter);
+  console.log('elementId', elementId);
+  console.log('modelId', modelId);
 };

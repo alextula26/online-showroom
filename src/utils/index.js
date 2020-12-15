@@ -19,8 +19,13 @@ export const merge = (object, other) => _.merge(object, other);
 
 export const includes = (array, index) => _.includes(array, index);
 
-export const getListForFilter = (items, key, value) => {
+export const getListForFilter = (items, filterId, filterName) => {
   const data = items.map((item) => (
-    { id: item[key], name: item[value] }));
+    {
+      id: item[filterId],
+      name: item[filterName],
+      selected: false,
+      disabled: false,
+    }));
   return _.uniqWith(data, _.isEqual);
 };

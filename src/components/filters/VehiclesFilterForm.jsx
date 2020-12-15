@@ -7,14 +7,12 @@ import SelectComponent from './FilterControl/SelectComponent';
 class VehiclesFilterForm extends React.Component {
   render() {
     const {
+      modelId,
       modifications,
       equipments,
-      selectedModifications,
-      selectedEquipments,
       selectModification,
-      unSelectModification,
       selectEquipment,
-      unSelectEquipment,
+      fetchVehicles,
     } = this.props;
 
     return (
@@ -29,10 +27,9 @@ class VehiclesFilterForm extends React.Component {
                 <SelectComponent
                   label="Модификации"
                   elements={modifications}
-                  selectedElements={selectedModifications}
-                  onSelect={selectModification}
-                  onUnSelect={unSelectModification}
-                  payload="modificationId"
+                  select={selectModification}
+                  filter={fetchVehicles}
+                  payload={{ currentFilter: 'modification', property: 'modificationId', modelId }}
                 />
               </div>
 
@@ -40,10 +37,9 @@ class VehiclesFilterForm extends React.Component {
                 <SelectComponent
                   label="Комплектации"
                   elements={equipments}
-                  selectedElements={selectedEquipments}
-                  onSelect={selectEquipment}
-                  onUnSelect={unSelectEquipment}
-                  payload="equipmentId"
+                  select={selectEquipment}
+                  filter={fetchVehicles}
+                  payload={{ currentFilter: 'equipment', property: 'equipmentId', modelId }}
                 />
               </div>
             </div>
@@ -56,15 +52,14 @@ class VehiclesFilterForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  selectedModifications: state.filters.modifications.selected,
-  selectedEquipments: state.filters.equipments.selected,
+  modifications: state.filters.modifications,
+  equipments: state.filters.equipments,
 });
 
 const actionCreators = ({
   selectModification: actions.selectModification,
-  unSelectModification: actions.unSelectModification,
   selectEquipment: actions.selectEquipment,
-  unSelectEquipment: actions.unSelectEquipment,
+  fetchVehicles: actions.fetchVehicles,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);

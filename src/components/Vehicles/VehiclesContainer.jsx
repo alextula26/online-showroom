@@ -25,8 +25,6 @@ class VehiclesContainer extends React.Component {
     const {
       vehicles: { brand, items, model },
       characteristics,
-      modificationsForFilter,
-      equipmentsForFilter,
     } = this.props;
 
     if (isEmpty(items)) {
@@ -35,15 +33,10 @@ class VehiclesContainer extends React.Component {
 
     const header = `Автомобили ${brand.name} ${model.name} в наличии`;
 
-    console.log('VehiclesContainer', this.props);
-
     return (
       <>
         <PageHeader header={header} classes="page-title" />
-        <VehiclesFilterForm
-          modifications={modificationsForFilter}
-          equipments={equipmentsForFilter}
-        />
+        <VehiclesFilterForm modelId={model.id} />
         <Vehicles
           brand={brand}
           model={model}
@@ -58,8 +51,6 @@ class VehiclesContainer extends React.Component {
 const mapStateToProps = (state) => ({
   vehicles: getVehiclesSelector(state),
   characteristics: state.vehiclesPage.characteristics,
-  modificationsForFilter: state.filters.modifications.items,
-  equipmentsForFilter: state.filters.equipments.items,
 });
 
 const actionCreators = {
