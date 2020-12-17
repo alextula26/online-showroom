@@ -4,7 +4,11 @@ import { getPriceCurrencyFormat, isSpecialPrice } from '../../utils';
 
 class Vehicles extends React.Component {
   renderVehicles() {
-    const { vehicles, characteristics } = this.props;
+    const {
+      brand, model, vehicles, characteristics,
+    } = this.props;
+
+    console.log(this.props);
 
     return (
       vehicles.map((vehicle) => {
@@ -20,10 +24,9 @@ class Vehicles extends React.Component {
           body_type: bodyType,
         } = vehicle;
 
-        const carsFullName = `${id} ${brandName} ${modelname} ${modificationName}`;
-
+        const vehicleFullName = `${brandName} ${modelname} ${modificationName}`;
+        const vehicleUrl = `/catalog/${brand.id}/model/${model.id}/vehicle/${id}`;
         const [engine, transmission, , , year] = characteristics[id];
-
         const characteristicsFullName = `${engine.value}, ${transmission.value}, ${year.value}, ${bodyType}`;
 
         return (
@@ -32,11 +35,10 @@ class Vehicles extends React.Component {
               <div className="vehicle-list-item--title">
                 <NavLink
                   className="vehicle-list-item--title--link"
-                  to="/"
-                  data-toggle="tooltip"
-                  data-original-title={carsFullName}
+                  to={vehicleUrl}
+                  data-original-title={vehicleFullName}
                 >
-                  {carsFullName}
+                  {vehicleFullName}
                 </NavLink>
               </div>
 
@@ -54,7 +56,7 @@ class Vehicles extends React.Component {
                   <div className="autocrm10-carousel">
                     <img
                       src={imagePreview}
-                      alt={`${carsFullName} Тестовый дилер Тула`}
+                      alt={`${vehicleFullName} Тестовый дилер Тула`}
                       rel="nofollow"
                       style={{ width: '100%' }}
                     />
@@ -97,8 +99,7 @@ class Vehicles extends React.Component {
                 <div className="vehicle-list-item--link-more-outer">
                   <NavLink
                     className="vehicle-list-item--link-more"
-                    to="/"
-                    rel="nofollow"
+                    to={vehicleUrl}
                   >
                     Подробнее
                   </NavLink>
