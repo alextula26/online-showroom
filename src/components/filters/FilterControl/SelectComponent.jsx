@@ -11,7 +11,7 @@ class SelectComponent extends React.Component {
     } = this.props;
 
     select({ [property]: selectId });
-    filter(modelId, { filterElementId: selectId, expand: currentFilter });
+    filter(modelId, { filterElementId: selectId, field: currentFilter });
   };
 
   render() {

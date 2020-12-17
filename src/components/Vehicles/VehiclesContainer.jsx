@@ -22,10 +22,7 @@ class VehiclesContainer extends React.Component {
   }
 
   render() {
-    const {
-      vehicles: { brand, items, model },
-      characteristics,
-    } = this.props;
+    const { vehicles: { brand, items, model } } = this.props;
 
     if (isEmpty(items)) {
       return null;
@@ -41,7 +38,6 @@ class VehiclesContainer extends React.Component {
           brand={brand}
           model={model}
           vehicles={items}
-          characteristics={characteristics}
         />
       </>
     );
@@ -50,7 +46,6 @@ class VehiclesContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   vehicles: getVehiclesSelector(state),
-  characteristics: state.vehiclesPage.characteristics,
 });
 
 const actionCreators = {

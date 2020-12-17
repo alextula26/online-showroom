@@ -1,17 +1,14 @@
 import * as axios from 'axios/index';
+import { isEmpty } from '../utils';
 
 const instance = axios.create({
-  // baseURL: 'https://cors-anywhere.herokuapp.com/https://autos.autocrm.ru/api/v1/',
   baseURL: 'https://autos.autocrm.ru/api/v1/',
-  // contentType: 'application/json',
   responseType: 'json',
   headers: {
-    // 'Content-Type': 'origin, x-requested-with',
     'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE',
     'Access-Control-Allow-Headers': 'Bearer, API-Key, Content-Type, If-Modified-Since, Cache-Control',
     'Access-Control-Allow-Origin': 'http://localhost:3000',
-    // 'X-Requested-With': 'XMLHttpRequest',
     Authorization: 'Bearer lW4pUiiMIaAQ8SSGN3gMIWCINafeyo2N',
   },
 });
@@ -26,9 +23,10 @@ const API = {
   getModels: (brandId) => (
     instance.get(`/brands/${brandId}/models`).then((responce) => responce.data)
   ),
-  getVehicles: (modelId) => (
-    instance.get(`/models/${modelId}/vehicles`).then((responce) => responce.data)
-  ),
+  getVehicles: (modelId, options = {}) => {
+    const query = !isEmpty(options) ? `?${options.field}=${options.filterElementId}` : '';
+    return instance.get(`/models/${modelId}/vehicles${query}`).then((responce) => responce.data);
+  },
   getCharacteristics: (modificationId) => (
     instance.get(`/info/characteristics/${modificationId}`).then((responce) => responce.data)
   ),

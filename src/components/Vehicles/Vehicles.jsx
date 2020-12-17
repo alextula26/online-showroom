@@ -4,11 +4,7 @@ import { getPriceCurrencyFormat, isSpecialPrice } from '../../utils';
 
 class Vehicles extends React.Component {
   renderVehicles() {
-    const {
-      brand, model, vehicles, characteristics,
-    } = this.props;
-
-    console.log(this.props);
+    const { brand, model, vehicles } = this.props;
 
     return (
       vehicles.map((vehicle) => {
@@ -22,11 +18,12 @@ class Vehicles extends React.Component {
           image_preview: imagePreview,
           special_price: specialPrice,
           body_type: bodyType,
+          general,
         } = vehicle;
 
         const vehicleFullName = `${brandName} ${modelname} ${modificationName}`;
         const vehicleUrl = `/catalog/${brand.id}/model/${model.id}/vehicle/${id}`;
-        const [engine, transmission, , , year] = characteristics[id];
+        const [engine, transmission, , , year] = general;
         const characteristicsFullName = `${engine.value}, ${transmission.value}, ${year.value}, ${bodyType}`;
 
         return (

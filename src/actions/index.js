@@ -36,37 +36,32 @@ export const fetchModels = (brandId) => async (dispatch) => {
   dispatch(fetchBrandModelsSuccess({ brand }));
 };
 
-const getVehiclesCharacteristics = async (vehicles) => {
-  const promisesVehicles = vehicles.map(async ({ id }) => {
-    const vehicle = await API.getVehicle(id);
-    return { [id]: vehicle.general };
+const getVehicles = async (modelId, options) => {
+  const vehicles = await API.getVehicles(modelId, options);
+  const promisesVehicles = vehicles.items.map(async (vehicle) => {
+    const { general } = await API.getVehicle(vehicle.id);
+    return { ...vehicle, general };
   });
 
   const promisesVehiclesSettled = await Promise.allSettled(promisesVehicles);
 
-  const characteristics = promisesVehiclesSettled
+  const items = promisesVehiclesSettled
     .filter((item) => item.status === 'fulfilled')
-    .reduce((acc, { value }) => {
-      const [vehicleId] = Object.keys(value);
-      const [specifications] = Object.values(value);
-      return { ...acc, [vehicleId]: specifications };
-    }, {});
+    .map(({ value }) => value);
 
-  return characteristics;
+  return { ...vehicles, items };
 };
 
 export const fetchVehicles = (modelId, options = {}) => async (dispatch) => {
-  const vehicles = await API.getVehicles(modelId);
-  const characteristics = await getVehiclesCharacteristics(vehicles.items);
+  const vehicles = await getVehicles(modelId, options);
   const modificationsForFilter = getListForFilter(vehicles.items, 'modification', 'modification_name');
   const equipmentsForFilter = getListForFilter(vehicles.items, 'equipment', 'equipment_name');
-  console.log(options);
+
   if (isEmpty(options)) {
     dispatch(setModificationsForFilter({ modificationsForFilter }));
     dispatch(setEquipmentsForFilter({ equipmentsForFilter }));
   }
 
-  dispatch(fetchCharacteristicsSuccess({ characteristics }));
   dispatch(fetchVehiclesSuccess({ vehicles }));
 };
 

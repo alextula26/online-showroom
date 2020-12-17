@@ -8,12 +8,6 @@ const vehiclesReducer = handleActions({
       vehicles: payload.vehicles,
     };
   },
-  [actions.fetchCharacteristicsSuccess](state, { payload }) {
-    return {
-      ...state,
-      characteristics: payload.characteristics,
-    };
-  },
-}, { vehicles: {}, characteristics: {} });
+}, { vehicles: {} });
 
 export default vehiclesReducer;
