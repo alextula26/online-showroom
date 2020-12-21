@@ -26,7 +26,7 @@ class VehiclesFilterForm extends React.Component {
               <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
                 <SelectComponent
                   label="Модификации"
-                  elements={modifications}
+                  elements={modifications.items}
                   select={selectModification}
                   filter={fetchVehicles}
                   payload={{ currentFilter: 'modification', property: 'modificationId', modelId }}
@@ -36,7 +36,7 @@ class VehiclesFilterForm extends React.Component {
               <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
                 <SelectComponent
                   label="Комплектации"
-                  elements={equipments}
+                  elements={equipments.items}
                   select={selectEquipment}
                   filter={fetchVehicles}
                   payload={{ currentFilter: 'equipment', property: 'equipmentId', modelId }}
