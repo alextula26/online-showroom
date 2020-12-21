@@ -7,14 +7,10 @@ import SelectComponent from './FilterControl/SelectComponent';
 class VehiclesFilterForm extends React.Component {
   render() {
     const {
-      modelId,
-      modifications,
-      equipments,
+      filters: { modifications, equipments },
       selectModification,
       selectEquipment,
-      fetchVehicles,
     } = this.props;
-
     return (
       <section className="filter">
         <form
@@ -28,8 +24,7 @@ class VehiclesFilterForm extends React.Component {
                   label="Модификации"
                   elements={modifications.items}
                   select={selectModification}
-                  filter={fetchVehicles}
-                  payload={{ currentFilter: 'modification', property: 'modificationId', modelId }}
+                  payload={{ currentFilter: 'modifications', property: 'modificationId' }}
                 />
               </div>
 
@@ -38,8 +33,7 @@ class VehiclesFilterForm extends React.Component {
                   label="Комплектации"
                   elements={equipments.items}
                   select={selectEquipment}
-                  filter={fetchVehicles}
-                  payload={{ currentFilter: 'equipment', property: 'equipmentId', modelId }}
+                  payload={{ currentFilter: 'equipments', property: 'equipmentId' }}
                 />
               </div>
             </div>
@@ -52,14 +46,12 @@ class VehiclesFilterForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  modifications: state.filters.modifications,
-  equipments: state.filters.equipments,
+  filters: state.filters,
 });
 
 const actionCreators = ({
   selectModification: actions.selectModification,
   selectEquipment: actions.selectEquipment,
-  fetchVehicles: actions.fetchVehicles,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);

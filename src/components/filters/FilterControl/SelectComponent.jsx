@@ -6,12 +6,10 @@ class SelectComponent extends React.Component {
   handleOnSelect = (selectId) => {
     const {
       select,
-      filter,
-      payload: { currentFilter, property, modelId },
+      payload: { property },
     } = this.props;
 
-    select({ [property]: selectId });
-    filter(modelId, { filterElementId: selectId, field: currentFilter });
+    select({ [property]: Number(selectId) });
   };
 
   render() {
@@ -19,7 +17,6 @@ class SelectComponent extends React.Component {
       label,
       elements,
     } = this.props;
-
     return (
       <Form.Group>
 

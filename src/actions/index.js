@@ -69,11 +69,3 @@ export const fetchVehicle = (vehicleId) => async (dispatch) => {
   const vehicle = await API.getVehicle(vehicleId);
   dispatch(fetchVehicleSuccess({ vehicle }));
 };
-
-export const fetchVehicleFilteredByElement = (
-  currentFilter, elementId, modelId,
-) => async () => {
-  console.log('currentFilter', currentFilter);
-  console.log('elementId', elementId);
-  console.log('modelId', modelId);
-};
