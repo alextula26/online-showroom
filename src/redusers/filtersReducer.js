@@ -5,9 +5,9 @@ const filtersReducer = handleActions({
   [actions.setModificationsForFilter](state, { payload: { modificationsForFilter } }) {
     return {
       ...state,
-      modifications: {
-        ...state.modifications,
-        items: modificationsForFilter,
+      lists: {
+        ...state.lists,
+        modifications: modificationsForFilter,
       },
     };
   },
@@ -15,9 +15,9 @@ const filtersReducer = handleActions({
   [actions.setEquipmentsForFilter](state, { payload: { equipmentsForFilter } }) {
     return {
       ...state,
-      equipments: {
-        ...state.equipments,
-        items: equipmentsForFilter,
+      lists: {
+        ...state.lists,
+        equipments: equipmentsForFilter,
       },
     };
   },
@@ -25,11 +25,10 @@ const filtersReducer = handleActions({
   [actions.selectModification](state, { payload: { modificationId } }) {
     return {
       ...state,
-      modifications: {
-        ...state.modifications,
-        items: state.modifications.items.map((item) => (
+      lists: {
+        ...state.lists,
+        modifications: state.lists.modifications.map((item) => (
           item.id === modificationId ? { ...item, selected: !item.selected } : item)),
-        selected: [...state.modifications.selected, modificationId],
       },
     };
   },
@@ -37,27 +36,34 @@ const filtersReducer = handleActions({
   [actions.selectEquipment](state, { payload: { equipmentId } }) {
     return {
       ...state,
-      equipments: {
-        ...state.equipments,
-        items: state.equipments.items.map((item) => (
+      lists: {
+        ...state.lists,
+        equipments: state.lists.equipments.map((item) => (
           item.id === equipmentId ? { ...item, selected: !item.selected } : item)),
-        selected: [...state.equipments.selected, equipmentId],
+      },
+    };
+  },
+
+  [actions.setEquipmentsSelected](state, { payload: { selected } }) {
+    return {
+      ...state,
+      selected: {
+        ...state.selected,
+        modifications: selected,
       },
     };
   },
 
 }, {
-  modifications: {
-    items: [],
-    selected: [],
+  lists: {
+    modifications: [],
+    equipments: [],
+    colors: [],
   },
-  equipments: {
-    items: [],
-    selected: [],
-  },
-  colors: {
-    items: [],
-    selected: [],
+  selected: {
+    modifications: [],
+    equipments: [],
+    colors: [],
   },
 });
 

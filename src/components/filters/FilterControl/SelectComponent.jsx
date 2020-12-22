@@ -5,11 +5,16 @@ import cn from 'classnames';
 class SelectComponent extends React.Component {
   handleOnSelect = (selectId) => {
     const {
+      id,
+      name,
+      selected,
       select,
-      payload: { property },
+      filter,
+      model,
     } = this.props;
 
-    select({ [property]: Number(selectId) });
+    select({ [id]: Number(selectId) });
+    filter(model, name, Number(selectId), selected);
   };
 
   render() {

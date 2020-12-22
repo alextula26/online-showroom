@@ -7,10 +7,14 @@ import SelectComponent from './FilterControl/SelectComponent';
 class VehiclesFilterForm extends React.Component {
   render() {
     const {
-      filters: { modifications, equipments },
+      modelId,
+      filters,
+      selected,
       selectModification,
       selectEquipment,
+      fetchVehiclesByFilter,
     } = this.props;
+
     return (
       <section className="filter">
         <form
@@ -22,18 +26,26 @@ class VehiclesFilterForm extends React.Component {
               <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
                 <SelectComponent
                   label="Модификации"
-                  elements={modifications.items}
+                  name="modifications"
+                  id="modificationId"
+                  elements={filters.modifications}
+                  selected={selected}
                   select={selectModification}
-                  payload={{ currentFilter: 'modifications', property: 'modificationId' }}
+                  filter={fetchVehiclesByFilter}
+                  model={modelId}
                 />
               </div>
 
               <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
                 <SelectComponent
                   label="Комплектации"
-                  elements={equipments.items}
+                  name="equipments"
+                  id="equipmentId"
+                  elements={filters.equipments}
                   select={selectEquipment}
-                  payload={{ currentFilter: 'equipments', property: 'equipmentId' }}
+                  selected={selected}
+                  filter={fetchVehiclesByFilter}
+                  options={modelId}
                 />
               </div>
             </div>
@@ -46,12 +58,14 @@ class VehiclesFilterForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  filters: state.filters,
+  filters: state.filters.lists,
+  selected: state.filters.selected,
 });
 
 const actionCreators = ({
   selectModification: actions.selectModification,
   selectEquipment: actions.selectEquipment,
+  fetchVehiclesByFilter: actions.fetchVehiclesByFilter,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);
