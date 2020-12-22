@@ -29,3 +29,28 @@ export const getListForFilter = (items, filterId, filterName) => {
     }));
   return _.uniqWith(data, _.isEqual);
 };
+
+export const getQueryString = (filters) => {
+  const mappingOptions = {
+    modifications: (item) => `modification[]=${item}`,
+    equipments: (item) => `equipment[]=${item}`,
+    colors: (item) => `color[]=${item}`,
+  };
+
+  const keys = Object.keys(filters);
+
+  const query = keys
+    .reduce((acc, key) => {
+      if (isEmpty(filters[key])) {
+        return acc;
+      }
+
+      const queryItem = filters[key]
+        .map((item) => mappingOptions[key](item))
+        .join('&');
+
+      return [...acc, queryItem];
+    }, []);
+
+  return !isEmpty(query) ? `?${query.join('&')}` : '';
+};

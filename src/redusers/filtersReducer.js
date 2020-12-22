@@ -44,13 +44,10 @@ const filtersReducer = handleActions({
     };
   },
 
-  [actions.setEquipmentsSelected](state, { payload: { selected } }) {
+  [actions.setSelected](state, { payload: { selected } }) {
     return {
       ...state,
-      selected: {
-        ...state.selected,
-        modifications: selected,
-      },
+      selected,
     };
   },
 

@@ -32,7 +32,7 @@ class VehiclesFilterForm extends React.Component {
                   selected={selected}
                   select={selectModification}
                   filter={fetchVehiclesByFilter}
-                  model={modelId}
+                  modelId={modelId}
                 />
               </div>
 
@@ -45,7 +45,7 @@ class VehiclesFilterForm extends React.Component {
                   select={selectEquipment}
                   selected={selected}
                   filter={fetchVehiclesByFilter}
-                  options={modelId}
+                  modelId={modelId}
                 />
               </div>
             </div>

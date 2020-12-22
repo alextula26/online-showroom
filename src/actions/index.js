@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import API from '../api';
-import { getListForFilter } from '../utils';
+import { getListForFilter, getQueryString, includes } from '../utils';
 
 // Action creators for API requests
 export const fetchDealersSuccess = createAction('DEALERS_FETCH_SUCCESS');
@@ -19,7 +19,7 @@ export const unSelectEquipment = createAction('UNSELECT_EQUIPMENT');
 export const setModificationsForFilter = createAction('SET_MODIFICATIONS_FOR_FILTER');
 export const setEquipmentsForFilter = createAction('SET_EQUIPMENTS_FOR_FILTER');
 
-export const setEquipmentsSelected = createAction('SET_EQUIPMENTS_SELECTED');
+export const setSelected = createAction('SET_SELECTED');
 
 export const fetchDealers = () => async (dispatch) => {
   const dealers = await API.getDealers();
@@ -68,41 +68,20 @@ export const fetchVehicle = (vehicleId) => async (dispatch) => {
   dispatch(fetchVehicleSuccess({ vehicle }));
 };
 
-export const fetchVehiclesByFilter = (model, name, selectId, selected) => async (dispatch) => {
-  console.log('selectId', Number(selectId));
-  console.log('selected', selected);
-  console.log('modelId', model);
-  console.log('name', selected[name]);
+export const fetchVehiclesByFilter = (options) => async (dispatch) => {
+  const {
+    modelId, name, selectId, selected,
+  } = options;
 
-  const newSelected = { ...selected, [name]: [...selected[name], selectId] };
-  console.log('newSelected', newSelected);
-
-  if (name === 'modifications') {
-    dispatch(setEquipmentsSelected({ selected: newSelected }));
-  }
-
-  const mappingOptions = {
-    modifications: (item) => `modification[]=${item}`,
-    equipments: (item) => `equipment[]=${item}`,
+  const selectedFilters = {
+    ...selected,
+    [name]: includes(selected[name], selectId)
+      ? selected[name].filter((item) => item !== selectId)
+      : [...selected[name], selectId],
   };
+  dispatch(setSelected({ selected: selectedFilters }));
 
-  const keys1 = Object.keys(newSelected);
-
-  const result1 = keys1.reduce((acc, key) => {
-    if (newSelected[key].length === 0) {
-      return acc;
-    }
-
-    const query = newSelected[key].map((item) => mappingOptions[key](item));
-
-    return [...acc, query.join('&')];
-  }, '?');
-
-  console.log('result1', result1.join(''));
-
-  const vehicles = await getVehicles(model, result1.join(''));
-
-  console.log(vehicles);
-
+  const query = getQueryString(selectedFilters);
+  const vehicles = await getVehicles(modelId, query);
   dispatch(fetchVehiclesSuccess({ vehicles }));
 };

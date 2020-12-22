@@ -10,11 +10,14 @@ class SelectComponent extends React.Component {
       selected,
       select,
       filter,
-      model,
+      modelId,
     } = this.props;
 
     select({ [id]: Number(selectId) });
-    filter(model, name, Number(selectId), selected);
+
+    filter({
+      modelId, name, selectId: Number(selectId), selected,
+    });
   };
 
   render() {
