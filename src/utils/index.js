@@ -30,6 +30,11 @@ export const getListForFilter = (items, filterId, filterName) => {
   return _.uniqWith(data, _.isEqual);
 };
 
+export const getfiltersIds = (items, filterId) => {
+  const data = items.map((item) => item[filterId]);
+  return _.uniqWith(data, _.isEqual);
+};
+
 export const getQueryString = (filters) => {
   const mappingOptions = {
     modifications: (item) => `modification[]=${item}`,

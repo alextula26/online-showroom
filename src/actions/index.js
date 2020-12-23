@@ -1,6 +1,8 @@
 import { createAction } from 'redux-actions';
 import API from '../api';
-import { getListForFilter, getQueryString, includes } from '../utils';
+import {
+  getListForFilter, getQueryString, includes, getfiltersIds,
+} from '../utils';
 
 // Action creators for API requests
 export const fetchDealersSuccess = createAction('DEALERS_FETCH_SUCCESS');
@@ -18,6 +20,9 @@ export const selectEquipment = createAction('SELECT_EQUIPMENT');
 export const unSelectEquipment = createAction('UNSELECT_EQUIPMENT');
 export const setModificationsForFilter = createAction('SET_MODIFICATIONS_FOR_FILTER');
 export const setEquipmentsForFilter = createAction('SET_EQUIPMENTS_FOR_FILTER');
+
+export const disabledEquipmentsFilter = createAction('DISABLED_EQUIPMENTS_FILTER');
+export const disabledModificationsFilter = createAction('DISABLED_MODIFICATIONS_FILTER');
 
 export const setSelected = createAction('SET_SELECTED');
 
@@ -83,5 +88,16 @@ export const fetchVehiclesByFilter = (options) => async (dispatch) => {
 
   const query = getQueryString(selectedFilters);
   const vehicles = await getVehicles(modelId, query);
+
+  if (name === 'equipments') {
+    const modificationsIdsForFilter = getfiltersIds(vehicles.items, 'modification');
+    dispatch(disabledModificationsFilter({ modificationsIdsForFilter }));
+  }
+
+  if (name === 'modifications') {
+    const equipmentsIdsForFilter = getfiltersIds(vehicles.items, 'equipment');
+    dispatch(disabledEquipmentsFilter({ equipmentsIdsForFilter }));
+  }
+
   dispatch(fetchVehiclesSuccess({ vehicles }));
 };

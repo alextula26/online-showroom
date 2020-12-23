@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import * as actions from '../actions';
+import { includes } from '../utils';
 
 const filtersReducer = handleActions({
   [actions.setModificationsForFilter](state, { payload: { modificationsForFilter } }) {
@@ -48,6 +49,37 @@ const filtersReducer = handleActions({
     return {
       ...state,
       selected,
+    };
+  },
+
+  [actions.disabledModificationsFilter](state, { payload: { modificationsIdsForFilter } }) {
+    return {
+      ...state,
+      lists: {
+        ...state.lists,
+        modifications: state.lists.modifications.map((item) => {
+          if (includes(modificationsIdsForFilter, item.id)) {
+            return { ...item, disabled: false };
+          }
+
+          return { ...item, disabled: true };
+        }),
+      },
+    };
+  },
+  [actions.disabledEquipmentsFilter](state, { payload: { equipmentsIdsForFilter } }) {
+    return {
+      ...state,
+      lists: {
+        ...state.lists,
+        equipments: state.lists.equipments.map((item) => {
+          if (includes(equipmentsIdsForFilter, item.id)) {
+            return { ...item, disabled: false };
+          }
+
+          return { ...item, disabled: true };
+        }),
+      },
     };
   },
 
