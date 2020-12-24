@@ -19,22 +19,6 @@ export const merge = (object, other) => _.merge(object, other);
 
 export const includes = (array, index) => _.includes(array, index);
 
-export const getListForFilter = (items, filterId, filterName) => {
-  const data = items.map((item) => (
-    {
-      id: item[filterId],
-      name: item[filterName],
-      selected: false,
-      disabled: false,
-    }));
-  return _.uniqWith(data, _.isEqual);
-};
-
-export const getfiltersIds = (items, filterId) => {
-  const data = items.map((item) => item[filterId]);
-  return _.uniqWith(data, _.isEqual);
-};
-
 export const getQueryString = (filters) => {
   const mappingOptions = {
     modifications: (item) => `modification[]=${item}`,
@@ -58,4 +42,28 @@ export const getQueryString = (filters) => {
     }, []);
 
   return !isEmpty(query) ? `?${query.join('&')}` : '';
+};
+
+// functions for filters
+export const getLisFilterItems = (items, filterPropId, filterPropName) => {
+  const data = items.map((item) => (
+    {
+      id: item[filterPropId],
+      name: item[filterPropName],
+      selected: false,
+      disabled: false,
+    }));
+  return _.uniqWith(data, _.isEqual);
+};
+
+export const addSelectedFilterItem = (selectedItems, selectedItemId, filterName) => ({
+  ...selectedItems,
+  [filterName]: includes(selectedItems[filterName], selectedItemId)
+    ? selectedItems[filterName].filter((item) => item !== selectedItemId)
+    : [...selectedItems[filterName], selectedItemId],
+});
+
+export const getIdsItemsFilter = (vehicles, filterProperty) => {
+  const data = vehicles.map((vehicle) => vehicle[filterProperty]);
+  return _.uniqWith(data, _.isEqual);
 };

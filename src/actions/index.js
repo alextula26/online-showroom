@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 import API from '../api';
 import {
-  getListForFilter, getQueryString, includes, getfiltersIds,
+  getLisFilterItems, getQueryString, addSelectedFilterItem, getIdsItemsFilter,
 } from '../utils';
 
 // Action creators for API requests
@@ -14,17 +14,13 @@ export const fetchCharacteristicsSuccess = createAction('FETCH_CHARACTERISTICS')
 export const fetchVehicleSuccess = createAction('FETCH_VEHICLE');
 
 // Action creators for filters
-export const selectModification = createAction('SELECT_MODIFICATION');
-export const unSelectModification = createAction('UNSELECT_MODIFICATION');
-export const selectEquipment = createAction('SELECT_EQUIPMENT');
-export const unSelectEquipment = createAction('UNSELECT_EQUIPMENT');
-export const setModificationsForFilter = createAction('SET_MODIFICATIONS_FOR_FILTER');
-export const setEquipmentsForFilter = createAction('SET_EQUIPMENTS_FOR_FILTER');
-
-export const disabledEquipmentsFilter = createAction('DISABLED_EQUIPMENTS_FILTER');
-export const disabledModificationsFilter = createAction('DISABLED_MODIFICATIONS_FILTER');
-
-export const setSelected = createAction('SET_SELECTED');
+export const selectModificationsFilterItem = createAction('SELECT_MODIFICATION_FILTER_ITEM');
+export const selectEquipmentsFilterItem = createAction('SELECT_EQUIPMENT_FILTER_ITEM');
+export const setModificationsFilter = createAction('SET_MODIFICATIONS_FILTER');
+export const setEquipmentsFilter = createAction('SET_EQUIPMENTS_FILTER');
+export const setSelectedFilterItems = createAction('SET_SELECTED_FILTER_ITEMS');
+export const setDisabledModificationFilterItems = createAction('SET_DISABLED_MODIFICATION_FILTER_ITEMS');
+export const setDisabledEquipmentFilterItems = createAction('SET_DISABLED_EQUIPMENT_FILTER_ITEMS');
 
 export const fetchDealers = () => async (dispatch) => {
   const dealers = await API.getDealers();
@@ -61,10 +57,10 @@ const getVehicles = async (modelId, options) => {
 
 export const fetchVehicles = (modelId) => async (dispatch) => {
   const vehicles = await getVehicles(modelId);
-  const modificationsForFilter = getListForFilter(vehicles.items, 'modification', 'modification_name');
-  const equipmentsForFilter = getListForFilter(vehicles.items, 'equipment', 'equipment_name');
-  dispatch(setModificationsForFilter({ modificationsForFilter }));
-  dispatch(setEquipmentsForFilter({ equipmentsForFilter }));
+  const modificationsForFilter = getLisFilterItems(vehicles.items, 'modification', 'modification_name');
+  const equipmentsForFilter = getLisFilterItems(vehicles.items, 'equipment', 'equipment_name');
+  dispatch(setModificationsFilter({ modificationsForFilter }));
+  dispatch(setEquipmentsFilter({ equipmentsForFilter }));
   dispatch(fetchVehiclesSuccess({ vehicles }));
 };
 
@@ -73,31 +69,29 @@ export const fetchVehicle = (vehicleId) => async (dispatch) => {
   dispatch(fetchVehicleSuccess({ vehicle }));
 };
 
-export const fetchVehiclesByFilter = (options) => async (dispatch) => {
+export const fetchFilterVehicles = (options) => async (dispatch) => {
   const {
-    modelId, name, selectId, selected,
+    modelId, filterName, selectedItemId, selectedItems,
   } = options;
 
-  const selectedFilters = {
-    ...selected,
-    [name]: includes(selected[name], selectId)
-      ? selected[name].filter((item) => item !== selectId)
-      : [...selected[name], selectId],
-  };
-  dispatch(setSelected({ selected: selectedFilters }));
+  const selectedFilterItems = addSelectedFilterItem(selectedItems, selectedItemId, filterName);
+  dispatch(setSelectedFilterItems({ selected: selectedFilterItems }));
 
-  const query = getQueryString(selectedFilters);
+  const query = getQueryString(selectedFilterItems);
   const vehicles = await getVehicles(modelId, query);
 
-  if (name === 'equipments') {
-    const modificationsIdsForFilter = getfiltersIds(vehicles.items, 'modification');
-    dispatch(disabledModificationsFilter({ modificationsIdsForFilter }));
-  }
+  const mappingDesebledFilterItems = {
+    equipments: (items) => {
+      const modificationsIdsForFilter = getIdsItemsFilter(items, 'modification');
+      dispatch(setDisabledModificationFilterItems({ modificationsIdsForFilter }));
+    },
+    modifications: (items) => {
+      const equipmentsIdsForFilter = getIdsItemsFilter(items, 'equipment');
+      dispatch(setDisabledEquipmentFilterItems({ equipmentsIdsForFilter }));
+    },
+  };
 
-  if (name === 'modifications') {
-    const equipmentsIdsForFilter = getfiltersIds(vehicles.items, 'equipment');
-    dispatch(disabledEquipmentsFilter({ equipmentsIdsForFilter }));
-  }
+  mappingDesebledFilterItems[filterName](vehicles.items);
 
   dispatch(fetchVehiclesSuccess({ vehicles }));
 };

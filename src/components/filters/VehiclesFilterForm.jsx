@@ -9,10 +9,10 @@ class VehiclesFilterForm extends React.Component {
     const {
       modelId,
       filters,
-      selected,
-      selectModification,
-      selectEquipment,
-      fetchVehiclesByFilter,
+      selectedItems,
+      selectModificationsFilterItem,
+      selectEquipmentsFilterItem,
+      fetchFilterVehicles,
     } = this.props;
 
     return (
@@ -25,26 +25,26 @@ class VehiclesFilterForm extends React.Component {
             <div className="row">
               <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
                 <SelectComponent
-                  label="Модификации"
-                  name="modifications"
                   id="modificationId"
+                  label="Модификации"
                   elements={filters.modifications}
-                  selected={selected}
-                  select={selectModification}
-                  filter={fetchVehiclesByFilter}
+                  filterName="modifications"
+                  selectedItems={selectedItems}
+                  selectItem={selectModificationsFilterItem}
+                  filter={fetchFilterVehicles}
                   modelId={modelId}
                 />
               </div>
 
               <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
                 <SelectComponent
-                  label="Комплектации"
-                  name="equipments"
                   id="equipmentId"
+                  label="Комплектации"
                   elements={filters.equipments}
-                  select={selectEquipment}
-                  selected={selected}
-                  filter={fetchVehiclesByFilter}
+                  filterName="equipments"
+                  selectedItems={selectedItems}
+                  selectItem={selectEquipmentsFilterItem}
+                  filter={fetchFilterVehicles}
                   modelId={modelId}
                 />
               </div>
@@ -59,13 +59,13 @@ class VehiclesFilterForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   filters: state.filters.lists,
-  selected: state.filters.selected,
+  selectedItems: state.filters.selected,
 });
 
 const actionCreators = ({
-  selectModification: actions.selectModification,
-  selectEquipment: actions.selectEquipment,
-  fetchVehiclesByFilter: actions.fetchVehiclesByFilter,
+  selectModificationsFilterItem: actions.selectModificationsFilterItem,
+  selectEquipmentsFilterItem: actions.selectEquipmentsFilterItem,
+  fetchFilterVehicles: actions.fetchFilterVehicles,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);

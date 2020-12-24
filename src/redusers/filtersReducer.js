@@ -3,7 +3,7 @@ import * as actions from '../actions';
 import { includes } from '../utils';
 
 const filtersReducer = handleActions({
-  [actions.setModificationsForFilter](state, { payload: { modificationsForFilter } }) {
+  [actions.setModificationsFilter](state, { payload: { modificationsForFilter } }) {
     return {
       ...state,
       lists: {
@@ -13,7 +13,7 @@ const filtersReducer = handleActions({
     };
   },
 
-  [actions.setEquipmentsForFilter](state, { payload: { equipmentsForFilter } }) {
+  [actions.setEquipmentsFilter](state, { payload: { equipmentsForFilter } }) {
     return {
       ...state,
       lists: {
@@ -23,7 +23,7 @@ const filtersReducer = handleActions({
     };
   },
 
-  [actions.selectModification](state, { payload: { modificationId } }) {
+  [actions.selectModificationsFilterItem](state, { payload: { modificationId } }) {
     return {
       ...state,
       lists: {
@@ -34,7 +34,7 @@ const filtersReducer = handleActions({
     };
   },
 
-  [actions.selectEquipment](state, { payload: { equipmentId } }) {
+  [actions.selectEquipmentsFilterItem](state, { payload: { equipmentId } }) {
     return {
       ...state,
       lists: {
@@ -45,14 +45,14 @@ const filtersReducer = handleActions({
     };
   },
 
-  [actions.setSelected](state, { payload: { selected } }) {
+  [actions.setSelectedFilterItems](state, { payload: { selected } }) {
     return {
       ...state,
       selected,
     };
   },
 
-  [actions.disabledModificationsFilter](state, { payload: { modificationsIdsForFilter } }) {
+  [actions.setDisabledModificationFilterItems](state, { payload: { modificationsIdsForFilter } }) {
     return {
       ...state,
       lists: {
@@ -67,7 +67,7 @@ const filtersReducer = handleActions({
       },
     };
   },
-  [actions.disabledEquipmentsFilter](state, { payload: { equipmentsIdsForFilter } }) {
+  [actions.setDisabledEquipmentFilterItems](state, { payload: { equipmentsIdsForFilter } }) {
     return {
       ...state,
       lists: {

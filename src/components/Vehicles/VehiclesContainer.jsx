@@ -7,7 +7,6 @@ import PageHeader from '../commons/PageHeader';
 import VehiclesFilterForm from '../filters/VehiclesFilterForm';
 import Vehicles from './Vehicles';
 import { isEmpty } from '../../utils';
-// import { getVehiclesSelector } from '../../selectors';
 
 class VehiclesContainer extends React.Component {
   componentDidMount() {

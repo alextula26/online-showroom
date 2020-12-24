@@ -3,20 +3,20 @@ import { Form, Dropdown } from 'react-bootstrap';
 import cn from 'classnames';
 
 class SelectComponent extends React.Component {
-  handleOnSelect = (selectId) => {
+  handleOnSelect = (selectedItemId) => {
     const {
       id,
-      name,
-      selected,
-      select,
+      filterName,
+      selectedItems,
+      selectItem,
       filter,
       modelId,
     } = this.props;
 
-    select({ [id]: Number(selectId) });
+    selectItem({ [id]: Number(selectedItemId) });
 
     filter({
-      modelId, name, selectId: Number(selectId), selected,
+      modelId, filterName, selectedItemId: Number(selectedItemId), selectedItems,
     });
   };
 
@@ -25,6 +25,7 @@ class SelectComponent extends React.Component {
       label,
       elements,
     } = this.props;
+
     return (
       <Form.Group>
 
