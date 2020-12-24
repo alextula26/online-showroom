@@ -23,6 +23,7 @@ class NewVehicle extends React.Component {
       options,
       side_options: sideOptions,
       additional_equipment_description: additionalEquipmentDescription,
+      specifications,
       price,
       special_price: specialPrice,
       general,
@@ -31,7 +32,7 @@ class NewVehicle extends React.Component {
     } = vehicle;
 
     const vehicleFullName = `${brandName} ${modelname} ${modificationName} ${equipment}`;
-
+    console.log(this.props);
     return (
       <>
         <section className="vehicle-view">
@@ -60,6 +61,7 @@ class NewVehicle extends React.Component {
                   options={options}
                   sideOptions={sideOptions}
                   additionalEquipmentDescription={additionalEquipmentDescription}
+                  specifications={specifications}
                 />
               </section>
             </div>

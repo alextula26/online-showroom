@@ -64,11 +64,6 @@ export const fetchVehicles = (modelId) => async (dispatch) => {
   dispatch(fetchVehiclesSuccess({ vehicles }));
 };
 
-export const fetchVehicle = (vehicleId) => async (dispatch) => {
-  const vehicle = await API.getVehicle(vehicleId);
-  dispatch(fetchVehicleSuccess({ vehicle }));
-};
-
 export const fetchFilterVehicles = (options) => async (dispatch) => {
   const {
     modelId, filterName, selectedItemId, selectedItems,
@@ -94,4 +89,9 @@ export const fetchFilterVehicles = (options) => async (dispatch) => {
   mappingDesebledFilterItems[filterName](vehicles.items);
 
   dispatch(fetchVehiclesSuccess({ vehicles }));
+};
+
+export const fetchVehicle = (vehicleId) => async (dispatch) => {
+  const vehicle = await API.getVehicle(vehicleId);
+  dispatch(fetchVehicleSuccess({ vehicle }));
 };

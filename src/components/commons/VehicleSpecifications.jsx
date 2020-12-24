@@ -1,22 +1,25 @@
 import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { isEmpty, getHtml } from '../../utils';
+import { isEmpty, getHtml, uniqueId } from '../../utils';
 import VehicleEquipment from './VehicleEquipment';
 import VehicleAdditionalOptions from './VehicleAdditionalOptions';
 
 class VehicleSpecifications extends React.Component {
   render() {
-    const { options, sideOptions, additionalEquipmentDescription } = this.props;
+    const {
+      specifications, options, sideOptions, additionalEquipmentDescription,
+    } = this.props;
 
     return (
       <Tabs>
         <Tab eventKey="general_characteristic" title="Общие характеристики">
-          <div className="specifications-list-categorytitle">Двигатель и трансмиссия</div>
           <div className="specifications-list">
-            <div className="specifications-list-group">
-              <div className="specifications-list-title">Рабочий объём: </div>
-              <div className="specifications-list-value">1969 (см3)</div>
-            </div>
+            {specifications.map(({ name, value }) => (
+              <div key={uniqueId()} className="specifications-list-group">
+                <div className="specifications-list-title">{name}: </div>
+                <div className="specifications-list-value">{value}</div>
+              </div>
+            ))}
           </div>
         </Tab>
 
