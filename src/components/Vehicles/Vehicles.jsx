@@ -54,7 +54,6 @@ class Vehicles extends React.Component {
                     <img
                       src={imagePreview}
                       alt={`${vehicleFullName} Тестовый дилер Тула`}
-                      rel="nofollow"
                       style={{ width: '100%' }}
                     />
                   </div>

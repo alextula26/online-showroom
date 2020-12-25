@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import * as thunkes from '../../thunkes';
 import Models from './Models';
 import { filteredModelsSelector } from '../../selectors';
 import { isEmpty } from '../../utils';
@@ -30,9 +30,11 @@ class ModelsContainer extends React.Component {
   render() {
     const { models, brand } = this.props;
 
-    if (isEmpty(models) || isEmpty(brand)) {
+    if (isEmpty(models)) {
       return null;
     }
+
+    console.log(this.props);
 
     return (
       <Models models={models} brand={brand} />
@@ -41,12 +43,12 @@ class ModelsContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  brand: !isEmpty(state.modelsPage.brand) ? state.modelsPage.brand : state.brands[0],
+  brand: state.brands[0],
   models: filteredModelsSelector(state),
 });
 
 const actionCreators = {
-  fetchModels: actions.fetchModels,
+  fetchModels: thunkes.fetchModels,
 };
 
 export default compose(

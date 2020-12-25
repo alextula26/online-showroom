@@ -5,7 +5,8 @@ import {
 import { compose } from 'redux';
 import { Provider, connect } from 'react-redux';
 import store from './redusers';
-import * as actions from './actions';
+import * as thunkes from './thunkes';
+import { isEmpty } from './utils';
 import ModelsContainer from './components/Models/ModelsContainer';
 import VehiclesContainer from './components/Vehicles/VehiclesContainer';
 import ListAllNewCarsContainer from './components/ListAllNewCars/ListAllNewCarsContainer';
@@ -28,7 +29,7 @@ class App extends React.Component {
   render() {
     const { mainPageType, brands } = this.props;
 
-    if (brands.length === 0) {
+    if (isEmpty(brands)) {
       return null;
     }
 
@@ -55,7 +56,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  fetchBrands: actions.fetchBrands,
+  fetchBrands: thunkes.fetchBrands,
 };
 
 const AppContainer = compose(connect(mapStateToProps, actionCreators), withRouter)(App);

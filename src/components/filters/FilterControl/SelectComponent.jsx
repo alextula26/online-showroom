@@ -31,7 +31,7 @@ class SelectComponent extends React.Component {
 
         <Form.Label className="control-label">{label}</Form.Label>
 
-        <Dropdown show className="dropdown bootstrap-select form-control">
+        <Dropdown className="dropdown bootstrap-select form-control">
 
           <Dropdown.Toggle className="btn-default bs-placeholder">
             <div className="filter-option">
@@ -43,7 +43,7 @@ class SelectComponent extends React.Component {
 
           <Dropdown.Menu>
             <div className="inner show">
-              <ul className="dropdown-menu inner show">
+              <ul className="dropdown-menu inner">
                 {elements.map(({
                   id, name, selected, disabled,
                 }) => {

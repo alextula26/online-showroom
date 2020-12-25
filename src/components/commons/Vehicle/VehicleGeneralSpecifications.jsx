@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import { uniqueId, merge } from '../../utils';
+import { uniqueId, merge } from '../../../utils';
 
 class VehicleGeneralSpecifications extends React.Component {
   render() {

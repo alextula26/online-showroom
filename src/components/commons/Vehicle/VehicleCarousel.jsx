@@ -1,6 +1,6 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
-import { uniqueId } from '../../utils';
+import { uniqueId } from '../../../utils';
 
 class VehicleCarousel extends React.Component {
   constructor(props) {

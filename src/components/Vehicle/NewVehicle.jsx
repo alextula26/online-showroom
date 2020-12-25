@@ -1,17 +1,15 @@
 import React from 'react';
 import { isEmpty } from '../../utils';
-import VehicleCarousel from '../commons/VehicleCarousel';
-import VehicleSpecifications from '../commons/VehicleSpecifications';
-import VehicleGeneralSpecifications from '../commons/VehicleGeneralSpecifications';
-import VehicleInstock from '../commons/VehicleInstock';
-import VehicleDealerInfo from '../commons/VehicleDealerInfo';
-import VehiclePrice from '../commons/VehiclePrice';
+import VehicleCarousel from '../commons/Vehicle/VehicleCarousel';
+import VehicleSpecifications from '../commons/Vehicle/VehicleSpecifications';
+import VehicleGeneralSpecifications from '../commons/Vehicle/VehicleGeneralSpecifications';
+import VehicleInstock from '../commons/Vehicle/VehicleInstock';
+import VehicleDealerInfo from '../commons/Vehicle/VehicleDealerInfo';
+import VehiclePrice from '../commons/Vehicle/VehiclePrice';
 
 class NewVehicle extends React.Component {
   render() {
     const { vehicle } = this.props;
-
-    console.log(vehicle);
     const {
       id,
       brand_name: brandName,

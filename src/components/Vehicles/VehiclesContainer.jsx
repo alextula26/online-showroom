@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import * as thunkes from '../../thunkes';
 import PageHeader from '../commons/PageHeader';
 import VehiclesFilterForm from '../filters/VehiclesFilterForm';
 import Vehicles from './Vehicles';
@@ -48,7 +48,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  fetchVehicles: actions.fetchVehicles,
+  fetchVehicles: thunkes.fetchVehicles,
 };
 
 export default compose(

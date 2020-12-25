@@ -1,7 +1,7 @@
 import React from 'react';
 import { Collapse } from 'react-bootstrap';
 import cn from 'classnames';
-import { uniqueId, includes, getHtml } from '../../utils';
+import { uniqueId, includes, getHtml } from '../../../utils';
 
 class VehicleEquipment extends React.Component {
   constructor(props) {

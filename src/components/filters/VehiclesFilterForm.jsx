@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import { Form, FormCheck } from 'react-bootstrap';
 import * as actions from '../../actions';
+import * as thunkes from '../../thunkes';
 import SelectComponent from './FilterControl/SelectComponent';
 
 class VehiclesFilterForm extends React.Component {
@@ -48,9 +50,38 @@ class VehiclesFilterForm extends React.Component {
                   modelId={modelId}
                 />
               </div>
+
+              <div className="col-24 col-xl-12">
+                <Form.Group>
+                  <Form.Label className="control-label" htmlFor="vehiclecatalogsearch-colorlist">
+                    Цвет
+                  </Form.Label>
+                  <div className="colorfilter">
+                    <div className="colorfilter-item-outer">
+                      <FormCheck>
+                        <FormCheck.Input
+                          type="checkbox"
+                          id="color-checkbox-5631"
+                          className="colorfilter-item-checkbox js-color"
+                          value="5631"
+                        />
+                        <FormCheck.Label
+                          className="colorfilter-item-label"
+                          data-placement="bottom"
+                          data-toggle="tooltip"
+                          data-title="Белый перламутр W76 (8 шт.)"
+                          style={{ backgroundColor: '#f4f4ee' }}
+                          htmlFor="color-checkbox-5631"
+                          data-original-title=""
+                          title=""
+                        />
+                      </FormCheck>
+                    </div>
+                  </div>
+                </Form.Group>
+              </div>
             </div>
           </div>
-
         </form>
       </section>
     );
@@ -65,7 +96,7 @@ const mapStateToProps = (state) => ({
 const actionCreators = ({
   selectModificationsFilterItem: actions.selectModificationsFilterItem,
   selectEquipmentsFilterItem: actions.selectEquipmentsFilterItem,
-  fetchFilterVehicles: actions.fetchFilterVehicles,
+  fetchFilterVehicles: thunkes.fetchFilterVehicles,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);
