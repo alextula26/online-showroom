@@ -5,20 +5,35 @@ import {
 } from '../utils';
 
 export const fetchDealers = () => async (dispatch) => {
-  const dealers = await API.getDealers();
-  dispatch(actions.fetchDealersSuccess({ dealers }));
+  try {
+    const dealers = await API.getDealers();
+    dispatch(actions.fetchDealersSuccess({ dealers }));
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 };
 
 export const fetchBrands = () => async (dispatch) => {
-  const brands = await API.getBrands();
-  dispatch(actions.fetchBrandsSuccess({ brands }));
+  try {
+    const brands = await API.getBrands();
+    dispatch(actions.fetchBrandsSuccess({ brands }));
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 };
 
 export const fetchModels = (brandId) => async (dispatch) => {
-  const models = await API.getModels(brandId);
-  const { items, brand } = models;
-  dispatch(actions.fetchModelsSuccess({ items }));
-  dispatch(actions.fetchBrandModelsSuccess({ brand }));
+  try {
+    const models = await API.getModels(brandId);
+    const { items, brand } = models;
+    dispatch(actions.fetchModelsSuccess({ items }));
+    dispatch(actions.fetchBrandModelsSuccess({ brand }));
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 };
 
 const getVehicles = async (modelId, options) => {
@@ -38,12 +53,17 @@ const getVehicles = async (modelId, options) => {
 };
 
 export const fetchVehicles = (modelId) => async (dispatch) => {
-  const vehicles = await getVehicles(modelId);
-  const modificationsForFilter = getLisFilterItems(vehicles.items, 'modification', 'modification_name');
-  const equipmentsForFilter = getLisFilterItems(vehicles.items, 'equipment', 'equipment_name');
-  dispatch(actions.setModificationsFilter({ modificationsForFilter }));
-  dispatch(actions.setEquipmentsFilter({ equipmentsForFilter }));
-  dispatch(actions.fetchVehiclesSuccess({ vehicles }));
+  try {
+    const vehicles = await getVehicles(modelId);
+    const modificationsForFilter = getLisFilterItems(vehicles.items, 'modification', 'modification_name');
+    const equipmentsForFilter = getLisFilterItems(vehicles.items, 'equipment', 'equipment_name');
+    dispatch(actions.setModificationsFilter({ modificationsForFilter }));
+    dispatch(actions.setEquipmentsFilter({ equipmentsForFilter }));
+    dispatch(actions.fetchVehiclesSuccess({ vehicles }));
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 };
 
 export const fetchFilterVehicles = (options) => async (dispatch) => {
@@ -74,6 +94,11 @@ export const fetchFilterVehicles = (options) => async (dispatch) => {
 };
 
 export const fetchVehicle = (vehicleId) => async (dispatch) => {
-  const vehicle = await API.getVehicle(vehicleId);
-  dispatch(actions.fetchVehicleSuccess({ vehicle }));
+  try {
+    const vehicle = await API.getVehicle(vehicleId);
+    dispatch(actions.fetchVehicleSuccess({ vehicle }));
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 };

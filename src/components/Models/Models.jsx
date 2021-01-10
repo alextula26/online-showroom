@@ -1,63 +1,22 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { getPriceCurrencyFormat } from '../../utils';
+import ModelCard from '../commons/Models/ModelCard';
 
 class Models extends React.Component {
   renderModels() {
     const { models, brand } = this.props;
 
     return (
-      models.map((model) => {
-        const {
-          id, name, image, min_price, has_shares: hasShares, has_discounts: hasDiscounts,
-        } = model;
-        return (
-          <div key={id} className="col-lg-12 col-xl-8">
-            <div className="model-list-item-outer">
-              <div className="model-list-item">
+      models.map((model) => (
+        <div key={model.id} className="col-lg-12 col-xl-8">
 
-                <div className="model-list-item--title">
-                  {(hasShares || hasDiscounts) && (
-                    <span className="model-list-item--action">Акция</span>
-                  )}
-                  <NavLink
-                    className="model-list-item--name"
-                    to={`/catalog/${brand.id}/model/${id}`}
-                  >
-                    {name}
-                  </NavLink>
-                </div>
+          <ModelCard
+            model={model}
+            brand={brand}
+          />
 
-                <div className="model-list-item--image-container">
-                  <NavLink to={`/catalog/${brand.id}/model/${id}`}>
-                    <img
-                      className="model-list-image img-responsive"
-                      src={image}
-                      alt={name}
-                    />
-                  </NavLink>
-                </div>
-
-                <div className="model-list-item--prices">
-                  <span className="model-list-item--price">
-                    {getPriceCurrencyFormat(min_price)} руб.
-                  </span>
-                </div>
-
-                <div className="model-list-item--information">
-                  <NavLink
-                    className="btn btn--counter-instock"
-                    to={`/catalog/${brand.id}/model/${id}`}
-                  >
-                    Подробнее
-                  </NavLink>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        );
-      })
+        </div>
+      ))
     );
   }
 
