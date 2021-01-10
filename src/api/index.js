@@ -32,6 +32,9 @@ const API = {
   getVehicle: (vehicleId) => (
     instance.get(routes.vehicle(vehicleId)).then((responce) => responce.data)
   ),
+  getModelColor: (modelId) => (
+    instance.get(routes.color(modelId)).then((responce) => responce.data)
+  ),
 };
 
 export default API;

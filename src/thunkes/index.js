@@ -55,8 +55,11 @@ const getVehicles = async (modelId, options) => {
 export const fetchVehicles = (modelId) => async (dispatch) => {
   try {
     const vehicles = await getVehicles(modelId);
+    const color = await API.getModelColor(modelId);
+    console.log('color', color);
     const modificationsForFilter = getLisFilterItems(vehicles.items, 'modification', 'modification_name');
     const equipmentsForFilter = getLisFilterItems(vehicles.items, 'equipment', 'equipment_name');
+
     dispatch(actions.setModificationsFilter({ modificationsForFilter }));
     dispatch(actions.setEquipmentsFilter({ equipmentsForFilter }));
     dispatch(actions.fetchVehiclesSuccess({ vehicles }));
