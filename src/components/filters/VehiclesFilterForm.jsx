@@ -16,7 +16,7 @@ class VehiclesFilterForm extends React.Component {
       selectEquipmentsFilterItem,
       fetchFilterVehicles,
     } = this.props;
-
+    console.log(filters);
     return (
       <section className="filter">
         <form
@@ -57,26 +57,27 @@ class VehiclesFilterForm extends React.Component {
                     Цвет
                   </Form.Label>
                   <div className="colorfilter">
-                    <div className="colorfilter-item-outer">
-                      <FormCheck>
-                        <FormCheck.Input
-                          type="checkbox"
-                          id="color-checkbox-5631"
-                          className="colorfilter-item-checkbox js-color"
-                          value="5631"
-                        />
-                        <FormCheck.Label
-                          className="colorfilter-item-label"
-                          data-placement="bottom"
-                          data-toggle="tooltip"
-                          data-title="Белый перламутр W76 (8 шт.)"
-                          style={{ backgroundColor: '#f4f4ee' }}
-                          htmlFor="color-checkbox-5631"
-                          data-original-title=""
-                          title=""
-                        />
-                      </FormCheck>
-                    </div>
+                    {filters.colors.map((color) => (
+                      <div key={color.id} className="colorfilter-item-outer">
+                        <FormCheck>
+                          <FormCheck.Input
+                            type="checkbox"
+                            id={`color-checkbox-${color.id}`}
+                            className="colorfilter-item-checkbox js-color"
+                            value={color.id}
+                          />
+                          <FormCheck.Label
+                            className="colorfilter-item-label"
+                            data-placement="bottom"
+                            data-toggle="tooltip"
+                            data-title={color.name}
+                            style={{ backgroundColor: color.rgb }}
+                            htmlFor={`color-checkbox-${color.id}`}
+                          />
+                        </FormCheck>
+                      </div>
+                    ))}
+
                   </div>
                 </Form.Group>
               </div>

@@ -2,7 +2,7 @@ import * as axios from 'axios/index';
 import routes from '../routes';
 
 const instance = axios.create({
-  baseURL: 'https://autos.autocrm.ru/api/v1/',
+  baseURL: 'https://cors-anywhere.herokuapp.com/https://autos.autocrm.ru/api/v1/',
   responseType: 'json',
   headers: {
     'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ const instance = axios.create({
     // 'Bearer, API-Key, Content-Type,
     // If-Modified-Since, Cache-Control, Origin, X-Requested-With, Accept',
     'Access-Control-Allow-Headers': 'Bearer, Content-Type, Authorization, Content-Length, X-Requested-With',
-    'Access-Control-Allow-Origin': 'http://localhost:3000',
+    'Access-Control-Allow-Origin': '*',
     Authorization: 'Bearer lW4pUiiMIaAQ8SSGN3gMIWCINafeyo2N',
   },
 });
@@ -33,7 +33,7 @@ const API = {
     instance.get(routes.vehicle(vehicleId)).then((responce) => responce.data)
   ),
   getModelColor: (modelId) => (
-    instance.get(routes.color(modelId)).then((responce) => responce.data)
+    instance.get(routes.color(modelId)).then((responce) => responce.data.items)
   ),
 };
 

@@ -1,7 +1,8 @@
+// import _ from 'lodash';
 import * as actions from '../actions';
 import API from '../api';
 import {
-  getLisFilterItems, getQueryString, addSelectedFilterItem, getIdsItemsFilter,
+  getLisFilterItems, getQueryString, addSelectedFilterItem, getIdsItemsFilter, getColorsListFilter,
 } from '../utils';
 
 export const fetchDealers = () => async (dispatch) => {
@@ -55,13 +56,16 @@ const getVehicles = async (modelId, options) => {
 export const fetchVehicles = (modelId) => async (dispatch) => {
   try {
     const vehicles = await getVehicles(modelId);
-    const color = await API.getModelColor(modelId);
-    console.log('color', color);
+    const generalListColorsByModel = await API.getModelColor(modelId);
+
     const modificationsForFilter = getLisFilterItems(vehicles.items, 'modification', 'modification_name');
     const equipmentsForFilter = getLisFilterItems(vehicles.items, 'equipment', 'equipment_name');
+    const colorsForFilter = getColorsListFilter(vehicles.items, generalListColorsByModel);
 
     dispatch(actions.setModificationsFilter({ modificationsForFilter }));
     dispatch(actions.setEquipmentsFilter({ equipmentsForFilter }));
+    dispatch(actions.setColorsFilter({ colorsForFilter }));
+
     dispatch(actions.fetchVehiclesSuccess({ vehicles }));
   } catch (e) {
     console.log(e);

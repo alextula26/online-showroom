@@ -23,6 +23,16 @@ const filtersReducer = handleActions({
     };
   },
 
+  [actions.setColorsFilter](state, { payload: { colorsForFilter } }) {
+    return {
+      ...state,
+      lists: {
+        ...state.lists,
+        colors: colorsForFilter,
+      },
+    };
+  },
+
   [actions.selectModificationsFilterItem](state, { payload: { modificationId } }) {
     return {
       ...state,

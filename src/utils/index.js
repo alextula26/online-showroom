@@ -56,6 +56,23 @@ export const getLisFilterItems = (items, filterPropId, filterPropName) => {
   return _.uniqWith(data, _.isEqual);
 };
 
+export const getColorsListFilter = (items, generalColors) => {
+  const currentlListColorsByModel = items.reduce((acc, vehicle) => {
+    const colors = generalColors.filter((color) => color.id === vehicle.color);
+    return [...acc, ...colors];
+  }, []);
+
+  const uniqColors = _.uniqWith(currentlListColorsByModel, _.isEqual);
+
+  return uniqColors.map((color) => (
+    {
+      ...color,
+      selected: false,
+      disabled: false,
+    }
+  ));
+};
+
 export const addSelectedFilterItem = (selectedItems, selectedItemId, filterName) => ({
   ...selectedItems,
   [filterName]: includes(selectedItems[filterName], selectedItemId)
