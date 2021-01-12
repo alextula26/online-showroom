@@ -12,8 +12,9 @@ export const fetchVehicleSuccess = createAction('FETCH_VEHICLE');
 // Action creators for filters
 
 // Выбрать пункт фильтра
-export const selectModificationsFilterItem = createAction('SELECT_MODIFICATION_FILTER_ITEM');
-export const selectEquipmentsFilterItem = createAction('SELECT_EQUIPMENT_FILTER_ITEM');
+export const selectModificationsFilterItem = createAction('SELECT_MODIFICATIONS_FILTER_ITEM');
+export const selectEquipmentsFilterItem = createAction('SELECT_EQUIPMENTS_FILTER_ITEM');
+export const selectColorsFilterItem = createAction('SELECT_COLORS_FILTER_ITEM');
 
 // Первичное заполнение фильтров
 export const setModificationsFilter = createAction('SET_MODIFICATIONS_FILTER');

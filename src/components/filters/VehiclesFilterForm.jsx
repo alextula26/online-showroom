@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { Form, FormCheck } from 'react-bootstrap';
 import * as actions from '../../actions';
 import * as thunkes from '../../thunkes';
 import SelectComponent from './FilterControl/SelectComponent';
+import ColorsComponent from './FilterControl/ColorsComponent';
 
 class VehiclesFilterForm extends React.Component {
   render() {
@@ -14,6 +14,7 @@ class VehiclesFilterForm extends React.Component {
       selectedItems,
       selectModificationsFilterItem,
       selectEquipmentsFilterItem,
+      selectColorsFilterItem,
       fetchFilterVehicles,
     } = this.props;
     console.log(filters);
@@ -52,34 +53,16 @@ class VehiclesFilterForm extends React.Component {
               </div>
 
               <div className="col-24 col-xl-12">
-                <Form.Group>
-                  <Form.Label className="control-label" htmlFor="vehiclecatalogsearch-colorlist">
-                    Цвет
-                  </Form.Label>
-                  <div className="colorfilter">
-                    {filters.colors.map((color) => (
-                      <div key={color.id} className="colorfilter-item-outer">
-                        <FormCheck>
-                          <FormCheck.Input
-                            type="checkbox"
-                            id={`color-checkbox-${color.id}`}
-                            className="colorfilter-item-checkbox js-color"
-                            value={color.id}
-                          />
-                          <FormCheck.Label
-                            className="colorfilter-item-label"
-                            data-placement="bottom"
-                            data-toggle="tooltip"
-                            data-title={color.name}
-                            style={{ backgroundColor: color.rgb }}
-                            htmlFor={`color-checkbox-${color.id}`}
-                          />
-                        </FormCheck>
-                      </div>
-                    ))}
-
-                  </div>
-                </Form.Group>
+                <ColorsComponent
+                  id="colorId"
+                  label="Цвет"
+                  elements={filters.colors}
+                  filterName="colors"
+                  selectedItems={selectedItems}
+                  selectItem={selectColorsFilterItem}
+                  filter={fetchFilterVehicles}
+                  modelId={modelId}
+                />
               </div>
             </div>
           </div>
@@ -97,6 +80,7 @@ const mapStateToProps = (state) => ({
 const actionCreators = ({
   selectModificationsFilterItem: actions.selectModificationsFilterItem,
   selectEquipmentsFilterItem: actions.selectEquipmentsFilterItem,
+  selectColorsFilterItem: actions.selectColorsFilterItem,
   fetchFilterVehicles: thunkes.fetchFilterVehicles,
 });
 

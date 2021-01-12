@@ -55,6 +55,17 @@ const filtersReducer = handleActions({
     };
   },
 
+  [actions.selectColorsFilterItem](state, { payload: { colorId } }) {
+    return {
+      ...state,
+      lists: {
+        ...state.lists,
+        colors: state.lists.colors.map((item) => (
+          item.id === colorId ? { ...item, selected: !item.selected } : item)),
+      },
+    };
+  },
+
   [actions.setSelectedFilterItems](state, { payload: { selected } }) {
     return {
       ...state,

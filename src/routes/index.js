@@ -1,3 +1,4 @@
+// const host = 'https://cors-anywhere.herokuapp.com/https://autos.autocrm.ru/api/v1/';
 const host = 'https://cors-anywhere.herokuapp.com/https://autos.autocrm.ru/api/v1/';
 
 export default {
