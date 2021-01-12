@@ -17,7 +17,8 @@ class VehiclesFilterForm extends React.Component {
       selectColorsFilterItem,
       fetchFilterVehicles,
     } = this.props;
-    console.log(filters);
+    console.log('filters', filters);
+    console.log('selectedItems', selectedItems);
     return (
       <section className="filter">
         <form

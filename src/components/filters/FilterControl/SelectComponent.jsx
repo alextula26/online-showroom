@@ -13,7 +13,6 @@ class SelectComponent extends React.Component {
       modelId,
     } = this.props;
 
-    console.log(id, selectedItemId);
     selectItem({ [id]: Number(selectedItemId) });
 
     filter({

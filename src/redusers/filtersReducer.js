@@ -56,6 +56,7 @@ const filtersReducer = handleActions({
   },
 
   [actions.selectColorsFilterItem](state, { payload: { colorId } }) {
+    console.log('selectColorsFilterItem', colorId);
     return {
       ...state,
       lists: {

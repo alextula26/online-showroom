@@ -3,21 +3,21 @@ import { Form, FormCheck } from 'react-bootstrap';
 // import cn from 'classnames';
 
 class ColorsComponent extends React.Component {
-  handleOnSelect = (selectedItemId) => {
+  handleOnChange = (e) => {
     const {
       id,
-      filterName,
-      selectedItems,
+      // filterName,
+      // selectedItems,
       selectItem,
-      filter,
-      modelId,
+      // filter,
+      // modelId,
     } = this.props;
 
-    selectItem({ [id]: Number(selectedItemId) });
+    selectItem({ [id]: Number(e.target.value) });
 
-    filter({
+    /* filter({
       modelId, filterName, selectedItemId: Number(selectedItemId), selectedItems,
-    });
+    }); */
   };
 
   render() {
@@ -44,6 +44,7 @@ class ColorsComponent extends React.Component {
                   id={`color-checkbox-${color.id}`}
                   className="colorfilter-item-checkbox"
                   value={color.id}
+                  onChange={this.handleOnChange}
                 />
                 <FormCheck.Label
                   className="colorfilter-item-label"
