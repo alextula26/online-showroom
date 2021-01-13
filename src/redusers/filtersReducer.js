@@ -56,7 +56,6 @@ const filtersReducer = handleActions({
   },
 
   [actions.selectColorsFilterItem](state, { payload: { colorId } }) {
-    console.log('selectColorsFilterItem', colorId);
     return {
       ...state,
       lists: {
@@ -96,6 +95,21 @@ const filtersReducer = handleActions({
         ...state.lists,
         equipments: state.lists.equipments.map((item) => {
           if (includes(equipmentsIdsForFilter, item.id)) {
+            return { ...item, disabled: false };
+          }
+
+          return { ...item, disabled: true };
+        }),
+      },
+    };
+  },
+  [actions.setDisabledColorFilterItems](state, { payload: { colorsIdsForFilter } }) {
+    return {
+      ...state,
+      lists: {
+        ...state.lists,
+        colors: state.lists.colors.map((item) => {
+          if (includes(colorsIdsForFilter, item.id)) {
             return { ...item, disabled: false };
           }
 

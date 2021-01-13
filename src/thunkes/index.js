@@ -87,10 +87,20 @@ export const fetchFilterVehicles = (options) => async (dispatch) => {
   const mappingDesebledFilterItems = {
     equipments: (items) => {
       const modificationsIdsForFilter = getIdsItemsFilter(items, 'modification');
+      const colorsIdsForFilter = getIdsItemsFilter(items, 'color');
       dispatch(actions.setDisabledModificationFilterItems({ modificationsIdsForFilter }));
+      dispatch(actions.setDisabledColorFilterItems({ colorsIdsForFilter }));
     },
     modifications: (items) => {
       const equipmentsIdsForFilter = getIdsItemsFilter(items, 'equipment');
+      const colorsIdsForFilter = getIdsItemsFilter(items, 'color');
+      dispatch(actions.setDisabledEquipmentFilterItems({ equipmentsIdsForFilter }));
+      dispatch(actions.setDisabledColorFilterItems({ colorsIdsForFilter }));
+    },
+    colors: (items) => {
+      const modificationsIdsForFilter = getIdsItemsFilter(items, 'modification');
+      const equipmentsIdsForFilter = getIdsItemsFilter(items, 'equipment');
+      dispatch(actions.setDisabledModificationFilterItems({ modificationsIdsForFilter }));
       dispatch(actions.setDisabledEquipmentFilterItems({ equipmentsIdsForFilter }));
     },
   };
