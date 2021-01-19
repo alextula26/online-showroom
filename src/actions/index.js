@@ -25,3 +25,5 @@ export const setSelectedFilterItems = createAction('SET_SELECTED_FILTER_ITEMS');
 export const setDisabledModificationFilterItems = createAction('SET_DISABLED_MODIFICATION_FILTER_ITEMS');
 export const setDisabledEquipmentFilterItems = createAction('SET_DISABLED_EQUIPMENT_FILTER_ITEMS');
 export const setDisabledColorFilterItems = createAction('SET_DISABLED_COLOR_FILTER_ITEMS');
+
+export const updateFilters = createAction('UPDATE_FILTERS');

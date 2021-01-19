@@ -5,15 +5,15 @@ import cn from 'classnames';
 class SelectComponent extends React.Component {
   handleOnSelect = (selectedItemId) => {
     const {
-      id,
+      // id,
       filterName,
       selectedItems,
-      selectItem,
+      // selectItem,
       filter,
       modelId,
     } = this.props;
 
-    selectItem({ [id]: Number(selectedItemId) });
+    // selectItem({ [id]: Number(selectedItemId) });
 
     filter({
       modelId, filterName, selectedItemId: Number(selectedItemId), selectedItems,

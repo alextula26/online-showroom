@@ -32,7 +32,7 @@ const filtersReducer = handleActions({
       },
     };
   },
-
+  /*
   [actions.selectModificationsFilterItem](state, { payload: { modificationId } }) {
     return {
       ...state,
@@ -65,14 +65,15 @@ const filtersReducer = handleActions({
       },
     };
   },
-
-  [actions.setSelectedFilterItems](state, { payload: { selected } }) {
+  */
+  /* [actions.setSelectedFilterItems](state, { payload: { selected } }) {
     return {
       ...state,
       selected,
     };
-  },
+  }, */
 
+  /*
   [actions.setDisabledModificationFilterItems](state, { payload: { modificationsIdsForFilter } }) {
     return {
       ...state,
@@ -115,6 +116,39 @@ const filtersReducer = handleActions({
 
           return { ...item, disabled: true };
         }),
+      },
+    };
+  },
+  */
+
+  [actions.updateFilters](state, { payload: { filterName, selectedItemId, data } }) {
+    const keys = Object.keys(data.disabledItems);
+
+    const disabledFilter = keys.reduce((acc, key) => {
+      const newFilters = state.lists[key].map((item) => {
+        if (includes(data.disabledItems[key], item.id)) {
+          return { ...item, disabled: false };
+        }
+
+        return { ...item, disabled: true };
+      });
+
+      return { ...acc, [key]: newFilters };
+    }, {});
+
+    return {
+      ...state,
+      lists: {
+        ...state.lists,
+        [filterName]: state.lists[filterName].map((item) => (
+          item.id === selectedItemId ? { ...item, selected: !item.selected } : item)),
+        ...disabledFilter,
+      },
+      selected: {
+        ...state.selected,
+        [filterName]: includes(state.selected[filterName], selectedItemId)
+          ? state.selected[filterName].filter((item) => item !== selectedItemId)
+          : [...state.selected[filterName], selectedItemId],
       },
     };
   },
