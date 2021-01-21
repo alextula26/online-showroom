@@ -1,8 +1,7 @@
-// import _ from 'lodash';
 import * as actions from '../actions';
 import API from '../api';
 import {
-  getLisFilterItems, getQueryString, addSelectedFilterItem, getIdsItemsFilter, getColorsListFilter,
+  getLisFilterItems, getQueryString, addSelectedFilterItem, getIdsFilterItems, getColorsListFilter,
 } from '../utils';
 
 export const fetchDealers = () => async (dispatch) => {
@@ -58,14 +57,13 @@ export const fetchVehicles = (modelId) => async (dispatch) => {
     const vehicles = await getVehicles(modelId);
     const generalListColorsByModel = await API.getModelColor(modelId);
 
-    const modificationsForFilter = getLisFilterItems(vehicles.items, 'modification', 'modification_name');
-    const equipmentsForFilter = getLisFilterItems(vehicles.items, 'equipment', 'equipment_name');
-    const colorsForFilter = getColorsListFilter(vehicles.items, generalListColorsByModel);
+    const filterItems = {
+      modifications: getLisFilterItems(vehicles.items, 'modification', 'modification_name'),
+      equipments: getLisFilterItems(vehicles.items, 'equipment', 'equipment_name'),
+      colors: getColorsListFilter(vehicles.items, generalListColorsByModel),
+    };
 
-    dispatch(actions.setModificationsFilter({ modificationsForFilter }));
-    dispatch(actions.setEquipmentsFilter({ equipmentsForFilter }));
-    dispatch(actions.setColorsFilter({ colorsForFilter }));
-
+    dispatch(actions.setFilterItems({ filterItems }));
     dispatch(actions.fetchVehiclesSuccess({ vehicles }));
   } catch (e) {
     console.log(e);
@@ -78,58 +76,39 @@ export const fetchFilterVehicles = (options) => async (dispatch) => {
     modelId, filterName, selectedItemId, selectedItems,
   } = options;
 
-  const selectedFilterItems = addSelectedFilterItem(selectedItems, selectedItemId, filterName);
-  // dispatch(actions.setSelectedFilterItems({ selected: selectedFilterItems }));
-
-  const query = getQueryString(selectedFilterItems);
-  const vehicles = await getVehicles(modelId, query);
-
-  /* const mappingDesebledFilterItems = {
-    equipments: (items) => {
-      const modificationsIdsForFilter = getIdsItemsFilter(items, 'modification');
-      const colorsIdsForFilter = getIdsItemsFilter(items, 'color');
-      dispatch(actions.setDisabledModificationFilterItems({ modificationsIdsForFilter }));
-      dispatch(actions.setDisabledColorFilterItems({ colorsIdsForFilter }));
-    },
-    modifications: (items) => {
-      const equipmentsIdsForFilter = getIdsItemsFilter(items, 'equipment');
-      const colorsIdsForFilter = getIdsItemsFilter(items, 'color');
-      dispatch(actions.setDisabledEquipmentFilterItems({ equipmentsIdsForFilter }));
-      dispatch(actions.setDisabledColorFilterItems({ colorsIdsForFilter }));
-    },
-    colors: (items) => {
-      const modificationsIdsForFilter = getIdsItemsFilter(items, 'modification');
-      const equipmentsIdsForFilter = getIdsItemsFilter(items, 'equipment');
-      dispatch(actions.setDisabledModificationFilterItems({ modificationsIdsForFilter }));
-      dispatch(actions.setDisabledEquipmentFilterItems({ equipmentsIdsForFilter }));
-    },
-  }; */
-
-  // mappingDesebledFilterItems[filterName](vehicles.items);
-
-  const filterNames = [
+  const filterNamesOfResponseProps = [
     ['modifications', 'modification'],
     ['equipments', 'equipment'],
     ['colors', 'color'],
   ];
 
-  const itemsForDisable = filterNames
-    .filter(([name]) => name !== filterName)
-    .reduce((acc, [name, prop]) => (
-      { ...acc, [name]: getIdsItemsFilter(vehicles.items, prop) }
-    ), {});
+  const selectedFilterItems = addSelectedFilterItem(selectedItems, selectedItemId, filterName);
+  const query = getQueryString(selectedFilterItems);
 
-  const data = {
-    currentItem: {
-      [filterName]: selectedItemId,
-    },
-    disabledItems: {
-      ...itemsForDisable,
-    },
-  };
+  try {
+    const vehicles = await getVehicles(modelId, query);
 
-  dispatch(actions.fetchVehiclesSuccess({ vehicles }));
-  dispatch(actions.updateFilters({ filterName, selectedItemId, data }));
+    const itemsForDisable = filterNamesOfResponseProps
+      .filter(([name]) => name !== filterName)
+      .reduce((acc, [name, prop]) => (
+        { ...acc, [name]: getIdsFilterItems(vehicles.items, prop) }
+      ), {});
+
+    const curentDisabledItems = {
+      currentItem: {
+        [filterName]: selectedItemId,
+      },
+      disabledItems: {
+        ...itemsForDisable,
+      },
+    };
+
+    dispatch(actions.fetchVehiclesSuccess({ vehicles }));
+    dispatch(actions.updateFilterItems({ filterName, selectedItemId, curentDisabledItems }));
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 };
 
 export const fetchVehicle = (vehicleId) => async (dispatch) => {

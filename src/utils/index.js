@@ -80,7 +80,7 @@ export const addSelectedFilterItem = (selectedItems, selectedItemId, filterName)
     : [...selectedItems[filterName], selectedItemId],
 });
 
-export const getIdsItemsFilter = (vehicles, filterProperty) => {
+export const getIdsFilterItems = (vehicles, filterProperty) => {
   const data = vehicles.map((vehicle) => vehicle[filterProperty]);
   return _.uniqWith(data, _.isEqual);
 };

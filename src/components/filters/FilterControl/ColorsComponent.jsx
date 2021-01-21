@@ -5,15 +5,11 @@ import { Form, FormCheck } from 'react-bootstrap';
 class ColorsComponent extends React.Component {
   handleOnChange = (e) => {
     const {
-      id,
       filterName,
       selectedItems,
-      selectItem,
       filter,
       modelId,
     } = this.props;
-
-    selectItem({ [id]: Number(e.target.value) });
 
     filter({
       modelId, filterName, selectedItemId: Number(e.target.value), selectedItems,

@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as thunkes from '../../thunkes';
 import Models from './Models';
-import { filteredModelsSelector } from '../../selectors';
+import { getVisibleModels } from '../../selectors';
 import { isEmpty } from '../../utils';
 
 class ModelsContainer extends React.Component {
@@ -44,7 +44,7 @@ class ModelsContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   brand: state.brands[0],
-  models: filteredModelsSelector(state),
+  models: getVisibleModels(state),
 });
 
 const actionCreators = {

@@ -6,6 +6,7 @@ import * as thunkes from '../../thunkes';
 import PageHeader from '../commons/PageHeader';
 import VehiclesFilterForm from '../filters/VehiclesFilterForm';
 import Vehicles from './Vehicles';
+import { getVehicles } from '../../selectors';
 import { isEmpty } from '../../utils';
 
 class VehiclesContainer extends React.Component {
@@ -44,7 +45,7 @@ class VehiclesContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  vehicles: state.vehiclesPage.vehicles,
+  vehicles: getVehicles(state),
 });
 
 const actionCreators = {
