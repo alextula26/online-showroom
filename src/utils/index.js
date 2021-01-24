@@ -44,6 +44,18 @@ export const getQueryString = (filters) => {
   return !isEmpty(query) ? `?${query.join('&')}` : '';
 };
 
+export const getStatusId = (status) => {
+  if (status === 'inStock') {
+    return 1;
+  }
+
+  if (status === 'onWay') {
+    return 2;
+  }
+
+  return 0;
+};
+
 // functions for filters
 export const getLisFilterItems = (items, filterPropId, filterPropName) => {
   const data = items.map((item) => (

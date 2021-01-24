@@ -44,9 +44,12 @@ class VehiclesContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  vehicles: getVehicles(state),
-});
+const mapStateToProps = (state) => {
+  console.log('getVehicles(state)', getVehicles(state));
+  return {
+    vehicles: getVehicles(state),
+  };
+};
 
 const actionCreators = {
   fetchVehicles: thunkes.fetchVehicles,
