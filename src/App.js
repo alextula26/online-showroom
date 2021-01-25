@@ -8,9 +8,11 @@ import store from './redusers';
 import * as thunkes from './thunkes';
 import { isEmpty } from './utils';
 import ModelsContainer from './components/Models/ModelsContainer';
-import VehiclesContainer from './components/Vehicles/VehiclesContainer';
+import NewVehiclesContainer from './components/Vehicles/NewVehiclesContainer';
+import TradeInVehiclesContainer from './components/Vehicles/TradeInVehiclesContainer';
 import ListAllNewCarsContainer from './components/ListAllNewCars/ListAllNewCarsContainer';
 import NewVehicleContainer from './components/Vehicle/NewVehicleContainer';
+import TradeInVehicleContainer from './components/Vehicle/TradeInVehicleContainer';
 
 class App extends React.Component {
   componentDidMount() {
@@ -21,7 +23,8 @@ class App extends React.Component {
   getMainPageComponent = (type) => {
     const mainPageType = {
       listModelsByBrand: <ModelsContainer />,
-      listAllNewCars: <ListAllNewCarsContainer />,
+      listAllNewVehicles: <ListAllNewCarsContainer />,
+      listTradeInVehicles: <TradeInVehiclesContainer />,
     };
     return mainPageType[type];
   }
@@ -40,8 +43,10 @@ class App extends React.Component {
             {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
             <Route exact path="/" render={() => this.getMainPageComponent(mainPageType)} />
             <Route exact path="/catalog/:brandId?" render={() => <ModelsContainer />} />
-            <Route exact path="/catalog/:brandId/model/:modelId?" render={() => <VehiclesContainer />} />
+            <Route exact path="/catalog/:brandId/model/:modelId?" render={() => <NewVehiclesContainer />} />
             <Route exact path="/catalog/:brandId/model/:modelId/vehicle/:vehicleId?" render={() => <NewVehicleContainer />} />
+            <Route exact path="/trade-in/" render={() => <TradeInVehiclesContainer />} />
+            <Route exact path="/trade-in/:vehicleId?" render={() => <TradeInVehicleContainer />} />
             <Route path="*" render={() => <div>404 Filenot found</div>} />
           </Switch>
         </div>

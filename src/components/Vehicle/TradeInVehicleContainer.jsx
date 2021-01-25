@@ -6,7 +6,7 @@ import * as thunkes from '../../thunkes';
 import NewVehicle from './NewVehicle';
 import { isEmpty } from '../../utils';
 
-class NewVehicleContainer extends React.Component {
+class TradeInVehicleContainer extends React.Component {
   componentDidMount() {
     const { fetchNewVehicle } = this.props;
     const vehicleId = this.getCurrentVehicleId();
@@ -32,7 +32,7 @@ class NewVehicleContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  vehicle: state.newVehiclePage.vehicle,
+  vehicle: state.vehiclePage.vehicle,
 });
 
 const actionCreators = ({
@@ -42,4 +42,4 @@ const actionCreators = ({
 export default compose(
   connect(mapStateToProps, actionCreators),
   withRouter,
-)(NewVehicleContainer);
+)(TradeInVehicleContainer);

@@ -8,13 +8,13 @@ export const getVisibleModels = createSelector(
   (models) => models.filter((model) => !model.is_hidden),
 );
 
-const getAllVehicles = (state) => state.vehiclesPage.vehicles;
+const getAllNewVehicles = (state) => state.newVehiclesPage.vehicles;
 const minPriceOfVehicles = (state) => state.filters.minPrice;
 const maxPriceOfVehicles = (state) => state.filters.maxPrice;
 const getStatusOfVehicles = (state) => state.filters.status;
 
-const getVehiclesByStatus = createSelector(
-  [getAllVehicles, getStatusOfVehicles],
+const getNewVehiclesByStatus = createSelector(
+  [getAllNewVehicles, getStatusOfVehicles],
   (vehicles, status) => {
     if (isEmpty(vehicles.items)) {
       return {};
@@ -30,7 +30,7 @@ const getVehiclesByStatus = createSelector(
 );
 
 export const getVehicles = createSelector(
-  [getVehiclesByStatus, minPriceOfVehicles, maxPriceOfVehicles],
+  [getNewVehiclesByStatus, minPriceOfVehicles, maxPriceOfVehicles],
   (vehicles, minPrice, maxPrice) => {
     if (isEmpty(vehicles.items)) {
       return {};

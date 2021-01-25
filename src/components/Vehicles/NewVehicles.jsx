@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { getPriceCurrencyFormat, isSpecialPrice } from '../../utils';
 
-class Vehicles extends React.Component {
+class NewVehicles extends React.Component {
   renderVehicles() {
     const { brand, model, vehicles } = this.props;
 
@@ -121,4 +121,4 @@ class Vehicles extends React.Component {
   }
 }
 
-export default Vehicles;
+export default NewVehicles;

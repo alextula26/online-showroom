@@ -5,15 +5,15 @@ import { connect } from 'react-redux';
 import * as thunkes from '../../thunkes';
 import PageHeader from '../commons/PageHeader';
 import VehiclesFilterForm from '../filters/VehiclesFilterForm';
-import Vehicles from './Vehicles';
+import NewVehicles from './NewVehicles';
 import { getVehicles } from '../../selectors';
 import { isEmpty } from '../../utils';
 
-class VehiclesContainer extends React.Component {
+class NewVehiclesContainer extends React.Component {
   componentDidMount() {
-    const { fetchVehicles } = this.props;
+    const { fetchNewVehicles } = this.props;
     const modelId = this.getCurrentModelId();
-    fetchVehicles(modelId);
+    fetchNewVehicles(modelId);
   }
 
   getCurrentModelId() {
@@ -34,7 +34,7 @@ class VehiclesContainer extends React.Component {
       <>
         <PageHeader header={header} classes="page-title" />
         <VehiclesFilterForm modelId={model.id} />
-        <Vehicles
+        <NewVehicles
           brand={brand}
           model={model}
           vehicles={items}
@@ -44,18 +44,15 @@ class VehiclesContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log('getVehicles(state)', getVehicles(state));
-  return {
-    vehicles: getVehicles(state),
-  };
-};
+const mapStateToProps = (state) => ({
+  vehicles: getVehicles(state),
+});
 
 const actionCreators = {
-  fetchVehicles: thunkes.fetchVehicles,
+  fetchNewVehicles: thunkes.fetchNewVehicles,
 };
 
 export default compose(
   connect(mapStateToProps, actionCreators),
   withRouter,
-)(VehiclesContainer);
+)(NewVehiclesContainer);

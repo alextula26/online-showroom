@@ -7,7 +7,7 @@ import {
 export const fetchDealers = () => async (dispatch) => {
   try {
     const dealers = await API.getDealers();
-    dispatch(actions.fetchDealersSuccess({ dealers }));
+    dispatch(actions.fetchDealers({ dealers }));
   } catch (e) {
     console.log(e);
     throw e;
@@ -17,7 +17,7 @@ export const fetchDealers = () => async (dispatch) => {
 export const fetchBrands = () => async (dispatch) => {
   try {
     const brands = await API.getBrands();
-    dispatch(actions.fetchBrandsSuccess({ brands }));
+    dispatch(actions.fetchBrands({ brands }));
   } catch (e) {
     console.log(e);
     throw e;
@@ -28,18 +28,18 @@ export const fetchModels = (brandId) => async (dispatch) => {
   try {
     const models = await API.getModels(brandId);
     const { items, brand } = models;
-    dispatch(actions.fetchModelsSuccess({ items }));
-    dispatch(actions.fetchBrandModelsSuccess({ brand }));
+    dispatch(actions.fetchModels({ items }));
+    dispatch(actions.fetchBrandModels({ brand }));
   } catch (e) {
     console.log(e);
     throw e;
   }
 };
 
-const getVehicles = async (modelId, options) => {
-  const vehicles = await API.getVehicles(modelId, options);
+const getNewVehicles = async (modelId, options) => {
+  const vehicles = await API.getNewVehicles(modelId, options);
   const promisesVehicles = vehicles.items.map(async (vehicle) => {
-    const { general } = await API.getVehicle(vehicle.id);
+    const { general } = await API.getNewVehicle(vehicle.id);
     return { ...vehicle, general };
   });
 
@@ -52,9 +52,9 @@ const getVehicles = async (modelId, options) => {
   return { ...vehicles, items };
 };
 
-export const fetchVehicles = (modelId) => async (dispatch) => {
+export const fetchNewVehicles = (modelId) => async (dispatch) => {
   try {
-    const vehicles = await getVehicles(modelId);
+    const vehicles = await getNewVehicles(modelId);
     const generalListColorsByModel = await API.getModelColor(modelId);
 
     const filterItems = {
@@ -64,7 +64,7 @@ export const fetchVehicles = (modelId) => async (dispatch) => {
     };
 
     dispatch(actions.setFilterItems({ filterItems }));
-    dispatch(actions.fetchVehiclesSuccess({ vehicles }));
+    dispatch(actions.fetchNewVehicles({ vehicles }));
   } catch (e) {
     console.log(e);
     throw e;
@@ -86,7 +86,7 @@ export const fetchFilterVehicles = (options) => async (dispatch) => {
   const query = getQueryString(selectedFilterItems);
 
   try {
-    const vehicles = await getVehicles(modelId, query);
+    const vehicles = await getNewVehicles(modelId, query);
 
     const itemsForDisable = filterNamesOfResponseProps
       .filter(([name]) => name !== filterName)
@@ -103,7 +103,7 @@ export const fetchFilterVehicles = (options) => async (dispatch) => {
       },
     };
 
-    dispatch(actions.fetchVehiclesSuccess({ vehicles }));
+    dispatch(actions.fetchNewVehicles({ vehicles }));
     dispatch(actions.updateFilterItems({ filterName, selectedItemId, curentDisabledItems }));
   } catch (e) {
     console.log(e);
@@ -111,10 +111,20 @@ export const fetchFilterVehicles = (options) => async (dispatch) => {
   }
 };
 
-export const fetchVehicle = (vehicleId) => async (dispatch) => {
+export const fetchNewVehicle = (vehicleId) => async (dispatch) => {
   try {
-    const vehicle = await API.getVehicle(vehicleId);
-    dispatch(actions.fetchVehicleSuccess({ vehicle }));
+    const vehicle = await API.getNewVehicle(vehicleId);
+    dispatch(actions.fetchNewVehicle({ vehicle }));
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+export const fetchTradeInVehicles = () => async (dispatch) => {
+  try {
+    const tradeInVehicles = await API.getTradeInVehicles();
+    dispatch(actions.fetchTradeInVehicles({ tradeInVehicles }));
   } catch (e) {
     console.log(e);
     throw e;

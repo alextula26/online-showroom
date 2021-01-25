@@ -1,8 +1,8 @@
 import { handleActions } from 'redux-actions';
 import * as actions from '../actions';
 
-const vehicleReducer = handleActions({
-  [actions.fetchVehicleSuccess](state, { payload }) {
+const newVehicleReducer = handleActions({
+  [actions.fetchNewVehicle](state, { payload }) {
     return {
       ...state,
       vehicle: payload.vehicle,
@@ -10,4 +10,4 @@ const vehicleReducer = handleActions({
   },
 }, { vehicle: {} });
 
-export default vehicleReducer;
+export default newVehicleReducer;

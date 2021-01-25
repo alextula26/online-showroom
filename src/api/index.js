@@ -26,11 +26,17 @@ const API = {
   getModels: (brandId) => (
     instance.get(routes.models(brandId)).then((responce) => responce.data)
   ),
-  getVehicles: (modelId, query = '') => (
-    instance.get(routes.vehicles(modelId, query)).then((responce) => responce.data)
+  getNewVehicles: (modelId, query = '') => (
+    instance.get(routes.newVehicles(modelId, query)).then((responce) => responce.data)
   ),
-  getVehicle: (vehicleId) => (
-    instance.get(routes.vehicle(vehicleId)).then((responce) => responce.data)
+  getNewVehicle: (newVehicleId) => (
+    instance.get(routes.newVehicle(newVehicleId)).then((responce) => responce.data)
+  ),
+  getTradeInVehicles: () => (
+    instance.get(routes.tradeInVehicles()).then((responce) => responce.data)
+  ),
+  getTradeInVehicle: (tradeInVehicleId) => (
+    instance.get(routes.tradeInVehicle(tradeInVehicleId)).then((responce) => responce.data)
   ),
   getModelColor: (modelId) => (
     instance.get(routes.color(modelId)).then((responce) => responce.data.items)

@@ -5,16 +5,18 @@ import dealersReduser from './dealersReduser';
 import brandsReduser from './brandsReduser';
 import filtersReducer from './filtersReducer';
 import modelsRedusers from './modelsReduser';
-import vehiclesReducer from './vehiclesReducer';
-import vehicleReducer from './vehicleReducer';
+import newVehiclesReducer from './newVehiclesReducer';
+import newVehicleReducer from './newVehicleReducer';
+import tradeInVehiclesReducer from './tradeInVehiclesReducer';
 
 const redusers = combineReducers({
   dealers: dealersReduser,
   brands: brandsReduser,
   filters: filtersReducer,
   modelsPage: modelsRedusers,
-  vehiclesPage: vehiclesReducer,
-  vehiclePage: vehicleReducer,
+  newVehiclesPage: newVehiclesReducer,
+  newVehiclePage: newVehicleReducer,
+  tradeInVehiclesPage: tradeInVehiclesReducer,
   form: formReducer,
 });
 

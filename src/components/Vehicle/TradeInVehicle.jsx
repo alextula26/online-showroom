@@ -7,7 +7,7 @@ import VehicleInstock from '../commons/Vehicle/VehicleInstock';
 import VehicleDealerInfo from '../commons/Vehicle/VehicleDealerInfo';
 import VehiclePrice from '../commons/Vehicle/VehiclePrice';
 
-class NewVehicle extends React.Component {
+class TradeInVehicle extends React.Component {
   render() {
     const { vehicle } = this.props;
     const {
@@ -30,7 +30,7 @@ class NewVehicle extends React.Component {
     } = vehicle;
 
     const vehicleFullName = `${brandName} ${modelname} ${modificationName} ${equipment}`;
-
+    console.log(this.props);
     return (
       <>
         <section className="vehicle-view">
@@ -102,4 +102,4 @@ class NewVehicle extends React.Component {
   }
 }
 
-export default NewVehicle;
+export default TradeInVehicle;

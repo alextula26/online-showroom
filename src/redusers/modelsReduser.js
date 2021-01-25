@@ -2,13 +2,13 @@ import { handleActions } from 'redux-actions';
 import * as actions from '../actions';
 
 const modelsReduser = handleActions({
-  [actions.fetchModelsSuccess](state, { payload }) {
+  [actions.fetchModels](state, { payload }) {
     return {
       ...state,
       models: payload.items,
     };
   },
-  [actions.fetchBrandModelsSuccess](state, { payload }) {
+  [actions.fetchBrandModels](state, { payload }) {
     return {
       ...state,
       brand: payload.brand,
