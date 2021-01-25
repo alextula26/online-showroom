@@ -11,16 +11,18 @@ class TradeInVehiclesContainer extends React.Component {
   }
 
   render() {
-    const { tradeInVehicles: { items } } = this.props;
+    const { tradeInVehicles: { items, filter } } = this.props;
 
     if (isEmpty(items)) {
       return null;
     }
 
-    console.log('TradeInVehiclesContainer', items);
-
     return (
-      <TradeInVehicles tradeInVehicles={items} />
+      <TradeInVehicles
+        brands={filter.brands}
+        models={filter.models}
+        tradeInVehicles={items}
+      />
     );
   }
 }

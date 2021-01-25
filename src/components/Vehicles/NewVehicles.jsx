@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { getPriceCurrencyFormat, isSpecialPrice } from '../../utils';
 
 class NewVehicles extends React.Component {
-  renderVehicles() {
+  renderNewVehicles() {
     const { brand, model, vehicles } = this.props;
 
     return (
@@ -113,7 +113,7 @@ class NewVehicles extends React.Component {
       <div id="vehicle-list-by-model" className="list-view">
         <div className="model-list">
           <div className="row model-list-flex items">
-            {this.renderVehicles()}
+            {this.renderNewVehicles()}
           </div>
         </div>
       </div>
