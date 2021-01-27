@@ -4,6 +4,38 @@ import {
   getLisFilterItems, getQueryString, addSelectedFilterItem, getIdsFilterItems, getColorsListFilter,
 } from '../utils';
 
+const getPromisesVehiclesSettled = async (promisesVehicles) => {
+  const promisesVehiclesSettled = await Promise.allSettled(promisesVehicles);
+
+  return promisesVehiclesSettled
+    .filter((item) => item.status === 'fulfilled')
+    .map(({ value }) => value);
+};
+
+const getNewVehicles = async (modelId) => {
+  const vehicles = await API.getNewVehicles(modelId);
+  const promisesVehicles = vehicles.items.map(async (vehicle) => {
+    const { general } = await API.getVehicle(vehicle.id);
+    return { ...vehicle, general };
+  });
+
+  const items = await getPromisesVehiclesSettled(promisesVehicles);
+
+  return { ...vehicles, items };
+};
+
+const getTradeInVehicles = async () => {
+  const vehicles = await API.getTradeInVehicles();
+  const promisesVehicles = vehicles.items.map(async (vehicle) => {
+    const { general, images } = await API.getVehicle(vehicle.id);
+    return { ...vehicle, general, images };
+  });
+
+  const items = await getPromisesVehiclesSettled(promisesVehicles);
+
+  return { ...vehicles, items };
+};
+
 export const fetchDealers = () => async (dispatch) => {
   try {
     const dealers = await API.getDealers();
@@ -34,22 +66,6 @@ export const fetchModels = (brandId) => async (dispatch) => {
     console.log(e);
     throw e;
   }
-};
-
-const getNewVehicles = async (modelId, options) => {
-  const vehicles = await API.getNewVehicles(modelId, options);
-  const promisesVehicles = vehicles.items.map(async (vehicle) => {
-    const { general } = await API.getNewVehicle(vehicle.id);
-    return { ...vehicle, general };
-  });
-
-  const promisesVehiclesSettled = await Promise.allSettled(promisesVehicles);
-
-  const items = promisesVehiclesSettled
-    .filter((item) => item.status === 'fulfilled')
-    .map(({ value }) => value);
-
-  return { ...vehicles, items };
 };
 
 export const fetchNewVehicles = (modelId) => async (dispatch) => {
@@ -123,7 +139,7 @@ export const fetchNewVehicle = (vehicleId) => async (dispatch) => {
 
 export const fetchTradeInVehicles = () => async (dispatch) => {
   try {
-    const tradeInVehicles = await API.getTradeInVehicles();
+    const tradeInVehicles = await getTradeInVehicles();
     dispatch(actions.fetchTradeInVehicles({ tradeInVehicles }));
   } catch (e) {
     console.log(e);

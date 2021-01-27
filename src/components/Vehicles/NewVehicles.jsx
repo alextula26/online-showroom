@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { getPriceCurrencyFormat, isSpecialPrice } from '../../utils';
+import Description from '../commons/Vehicles/Description';
+import Price from '../commons/Vehicles/Price';
+import Discount from '../commons/Vehicles/Discount';
 
 class NewVehicles extends React.Component {
   renderNewVehicles() {
@@ -13,7 +15,7 @@ class NewVehicles extends React.Component {
           price,
           status,
           brand_name: brandName,
-          model_name: modelname,
+          model_name: modelName,
           modification_name: modificationName,
           image_preview: imagePreview,
           special_price: specialPrice,
@@ -21,7 +23,7 @@ class NewVehicles extends React.Component {
           general,
         } = vehicle;
 
-        const vehicleFullName = `${brandName} ${modelname} ${modificationName}`;
+        const vehicleFullName = `${brandName} ${modelName} ${modificationName}`;
         const vehicleUrl = `/catalog/${brand.id}/model/${model.id}/vehicle/${id}`;
         const [engine, transmission, , , year] = general;
         const characteristicsFullName = `${engine.value}, ${transmission.value}, ${year.value}, ${bodyType}`;
@@ -57,38 +59,18 @@ class NewVehicles extends React.Component {
                       style={{ width: '100%' }}
                     />
                   </div>
-                  {isSpecialPrice(price, specialPrice)
-                    && (
-                      <div className="vehicle-list-item--discount">
-                        Цена ниже на {price - specialPrice} руб.
-                      </div>
-                    )}
+
+                  <Discount price={price} specialPrice={specialPrice} />
+
                 </div>
 
                 <div className="vehicle-list-item--information">
                   <div className="vehicle-list-item--price--outer">
                     <div>
-                      {isSpecialPrice(price, specialPrice)
-                        ? (
-                          <>
-                            <span className="vehicle-list-item--price vehicle-list-item--price--action">
-                              {getPriceCurrencyFormat(specialPrice)} руб.
-                            </span>
-                            <span className="vehicle-list-item--oldprice">
-                              {getPriceCurrencyFormat(price)} руб.
-                            </span>
-                          </>
-                        ) : (
-                          <span className="vehicle-list-item--price">
-                            {getPriceCurrencyFormat(price)} руб.
-                          </span>
-                        )}
+                      <Price price={price} specialPrice={specialPrice} />
                     </div>
                   </div>
-
-                  <div className="vehicle-list-item--description">
-                    {characteristicsFullName}
-                  </div>
+                  <Description characteristicsFullName={characteristicsFullName} />
                 </div>
 
                 <div className="vehicle-list-item--separator" />

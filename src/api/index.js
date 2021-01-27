@@ -29,8 +29,8 @@ const API = {
   getNewVehicles: (modelId, query = '') => (
     instance.get(routes.newVehicles(modelId, query)).then((responce) => responce.data)
   ),
-  getNewVehicle: (newVehicleId) => (
-    instance.get(routes.newVehicle(newVehicleId)).then((responce) => responce.data)
+  getVehicle: (vehicleId) => (
+    instance.get(routes.newVehicle(vehicleId)).then((responce) => responce.data)
   ),
   getTradeInVehicles: () => (
     instance.get(routes.tradeInVehicles()).then((responce) => responce.data)
