@@ -129,7 +129,7 @@ export const fetchFilterVehicles = (options) => async (dispatch) => {
 
 export const fetchNewVehicle = (vehicleId) => async (dispatch) => {
   try {
-    const vehicle = await API.getNewVehicle(vehicleId);
+    const vehicle = await API.getVehicle(vehicleId);
     dispatch(actions.fetchNewVehicle({ vehicle }));
   } catch (e) {
     console.log(e);

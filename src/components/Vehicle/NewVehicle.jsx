@@ -1,11 +1,11 @@
 import React from 'react';
 import { isEmpty } from '../../utils';
-import VehicleCarousel from '../commons/Vehicle/VehicleCarousel';
-import VehicleSpecifications from '../commons/Vehicle/VehicleSpecifications';
-import VehicleGeneralSpecifications from '../commons/Vehicle/VehicleGeneralSpecifications';
-import VehicleInstock from '../commons/Vehicle/VehicleInstock';
-import VehicleDealerInfo from '../commons/Vehicle/VehicleDealerInfo';
-import VehiclePrice from '../commons/Vehicle/VehiclePrice';
+import VehicleCarousel from '../commons/parts/VehicleCarousel';
+import VehicleSpecifications from '../commons/parts/VehicleSpecifications';
+import VehicleGeneralSpecifications from '../commons/parts/VehicleGeneralSpecifications';
+import VehicleInstock from '../commons/parts/VehicleInstock';
+import VehicleDealerInfo from '../commons/parts/VehicleDealerInfo';
+import VehiclePrice from '../commons/parts/VehiclePrice';
 
 class NewVehicle extends React.Component {
   render() {
@@ -46,9 +46,10 @@ class NewVehicle extends React.Component {
                 <div className="vehicle-view-block">
                   <div className="carousel-overflow-hidden">
                     <VehicleCarousel
-                      vehicleFullName={vehicleFullName}
+                      name={vehicleFullName}
                       vehicleId={id}
                       images={images}
+                      isControls
                     />
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { getPriceCurrencyFormat, isSpecialPrice } from '../../../utils';
 
-const Discount = ({ price, specialPrice }) => {
+const VehicleListDiscount = ({ price, specialPrice }) => {
   const finalPrice = price - specialPrice;
   return isSpecialPrice(price, specialPrice)
     && (
@@ -11,4 +11,4 @@ const Discount = ({ price, specialPrice }) => {
     );
 };
 
-export default Discount;
+export default VehicleListDiscount;

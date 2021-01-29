@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Description = ({ characteristicsFullName }) => (
+const VehicleListDescription = ({ characteristicsFullName }) => (
   <div className="vehicle-list-item--description">
     {characteristicsFullName}
   </div>
 );
 
-export default Description;
+export default VehicleListDescription;

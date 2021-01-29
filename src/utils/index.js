@@ -7,9 +7,11 @@ export const isSpecialPrice = (price, specialPrice) => price - specialPrice !== 
 
 export const isEqual = (value, other) => _.isEqual(value, other);
 
-export const getUnionElements = (array) => _.union(array);
-
 export const isEmpty = (data) => _.isEmpty(data);
+
+export const hasKey = (object, key) => _.has(object, key);
+
+export const getUnionElements = (array) => _.union(array);
 
 export const uniqueId = () => _.uniqueId();
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { getPriceCurrencyFormat, isSpecialPrice } from '../../../utils';
 
-const Price = ({ price, specialPrice }) => (
+const VehicleListPrice = ({ price, specialPrice }) => (
   isSpecialPrice(price, specialPrice)
     ? (
       <>
@@ -19,4 +19,4 @@ const Price = ({ price, specialPrice }) => (
     )
 );
 
-export default Price;
+export default VehicleListPrice;

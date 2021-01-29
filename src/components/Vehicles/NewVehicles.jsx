@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Description from '../commons/Vehicles/Description';
-import Price from '../commons/Vehicles/Price';
-import Discount from '../commons/Vehicles/Discount';
+import VehicleListDescription from '../commons/parts/VehicleListDescription';
+import VehicleListPrice from '../commons/parts/VehicleListPrice';
+import VehicleListDiscount from '../commons/parts/VehicleListDiscount';
+import More from '../commons/buttons/More';
 
 class NewVehicles extends React.Component {
   renderNewVehicles() {
@@ -60,27 +61,28 @@ class NewVehicles extends React.Component {
                     />
                   </div>
 
-                  <Discount price={price} specialPrice={specialPrice} />
+                  <VehicleListDiscount price={price} specialPrice={specialPrice} />
 
                 </div>
 
                 <div className="vehicle-list-item--information">
                   <div className="vehicle-list-item--price--outer">
                     <div>
-                      <Price price={price} specialPrice={specialPrice} />
+                      <VehicleListPrice price={price} specialPrice={specialPrice} />
                     </div>
                   </div>
-                  <Description characteristicsFullName={characteristicsFullName} />
+                  <VehicleListDescription characteristicsFullName={characteristicsFullName} />
                 </div>
 
                 <div className="vehicle-list-item--separator" />
                 <div className="vehicle-list-item--link-more-outer">
-                  <NavLink
-                    className="vehicle-list-item--link-more"
-                    to={vehicleUrl}
-                  >
-                    Подробнее
-                  </NavLink>
+                  <More
+                    url={vehicleUrl}
+                    title="Подробнее"
+                    options={{
+                      classes: 'vehicle-list-item--link-more',
+                    }}
+                  />
                 </div>
               </div>
             </div>

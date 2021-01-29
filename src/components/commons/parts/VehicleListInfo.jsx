@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TradeInInfo = ({ year, mileage }) => {
+const VehicleListInfo = ({ year, mileage }) => {
   const info = `${year}, ${mileage} км`;
   return (
     <span className="vehicle-list-item--tradeininfo">
@@ -9,4 +9,4 @@ const TradeInInfo = ({ year, mileage }) => {
   );
 };
 
-export default TradeInInfo;
+export default VehicleListInfo;

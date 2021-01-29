@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Title = ({ title, url }) => (
+const VehicleListTitle = ({ title, url }) => (
   <div className="vehicle-list-item--title">
     <NavLink
       className="vehicle-list-item--title--link"
@@ -13,4 +13,4 @@ const Title = ({ title, url }) => (
   </div>
 );
 
-export default Title;
+export default VehicleListTitle;

@@ -1,20 +1,19 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { isEmpty } from '../../utils';
-import Description from '../commons/Vehicles/Description';
-import Price from '../commons/Vehicles/Price';
-import Title from '../commons/Vehicles/Title';
-import Images from '../commons/Vehicles/Images';
-import Discount from '../commons/Vehicles/Discount';
+import VehicleListTitle from '../commons/parts/VehicleListTitle';
+import VehicleCarousel from '../commons/parts/VehicleCarousel';
+import VehicleListDiscount from '../commons/parts/VehicleListDiscount';
+import VehicleListPrice from '../commons/parts/VehicleListPrice';
+import VehicleListInfo from '../commons/parts/VehicleListInfo';
+import VehicleListDescription from '../commons/parts/VehicleListDescription';
+import More from '../commons/buttons/More';
+import OrderCall from '../commons/buttons/OrderСall';
 import defaultVehiclePhoto from '../../img/car_dummy_empty.svg';
-import TradeInInfo from '../commons/Vehicles/TradeInInfo';
 
 class TradeInVehicles extends React.Component {
   renderTradeInVehicles() {
-    const { brands, models, tradeInVehicles } = this.props;
-    console.log('brands', brands);
-    console.log('models', models);
-    console.log('tradeInVehicles', tradeInVehicles);
+    const { tradeInVehicles } = this.props;
+
     return (
       tradeInVehicles.map((vehicle) => {
         const {
@@ -25,12 +24,12 @@ class TradeInVehicles extends React.Component {
           model_name: modelName,
           modification_name: modificationName,
           price,
-          mileage,
-          manufacture_year: manufactureYear,
+          special_price: specialPrice,
           vin,
           general,
           images,
-          special_price: specialPrice,
+          mileage,
+          manufacture_year: manufactureYear,
         } = vehicle;
 
         const vehicleFullName = `${brandName} ${modelName} ${modificationName}`;
@@ -38,52 +37,57 @@ class TradeInVehicles extends React.Component {
         const [engine, transmission, , , year] = general;
         const characteristicsFullName = `${engine.value}, ${transmission.value}, ${year.value}`;
         const defaultPhoto = [{ full: defaultVehiclePhoto }];
+
         return (
           <div key={id} className="col-lg-12 col-xl-8 col-xxl-6">
             <div className="vehicle-list-item tradein-model-list-item">
 
-              <Title url={vehicleUrl} title={vehicleFullName} />
+              <VehicleListTitle url={vehicleUrl} title={vehicleFullName} />
 
               <div>
                 <div className="vehicle-list-item--image-container">
                   {!isEmpty(images) && (
-                    <Images
+                    <VehicleCarousel
                       name={vehicleFullName}
                       images={images.length <= 1 ? defaultPhoto : images.slice(0, 4)}
+                      isControls={false}
                     />
                   )}
 
                   <div className="vehicle-list-item--image-information">
                     <div className="vehicle-list-item--image-counter">{images.length}</div>
-                    <Discount price={price} specialPrice={specialPrice} />
+                    <VehicleListDiscount price={price} specialPrice={specialPrice} />
                   </div>
                 </div>
 
                 <div className="vehicle-list-item--information">
                   <div className="vehicle-list-item--price--outer">
-                    <Price price={price} specialPrice={specialPrice} />
-                    <TradeInInfo year={manufactureYear} mileage={mileage} />
+                    <VehicleListPrice price={price} specialPrice={specialPrice} />
+                    <VehicleListInfo year={manufactureYear} mileage={mileage} />
                   </div>
-                  <Description characteristicsFullName={characteristicsFullName} />
+                  <VehicleListDescription characteristicsFullName={characteristicsFullName} />
                 </div>
 
                 <div className="vehicle-list-item--separator" />
 
                 <div className="vehicle-list-item--link-more-outer withButton">
                   <div className="clearfix">
-                    <NavLink
-                      className="vehicle-list-item--link-more"
-                      to={vehicleUrl}
-                    >
-                      Подробнее
-                    </NavLink>
+                    <More
+                      url={vehicleUrl}
+                      title="Подробнее"
+                      options={{
+                        classes: 'vehicle-list-item--link-more',
+                      }}
+                    />
                   </div>
-                  <span
-                    className="btn btn--mainButton btn-block"
-                    data-href="/ajax-form/request-call?id=357545"
-                  >
-                    <span>Заказать звонок</span>
-                  </span>
+
+                  <OrderCall
+                    title="Заказать звонок"
+                    options={{
+                      classes: 'btn btn--mainButton btn-block',
+                    }}
+                  />
+
                 </div>
 
               </div>
