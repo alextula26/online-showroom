@@ -60,7 +60,7 @@ const filtersReducer = handleActions({
   },
   minPrice: null,
   maxPrice: null,
-  status: 'inStock', // all, inStock, onWay
+  status: 'all', // all, inStock, onWay
 });
 
 export default filtersReducer;

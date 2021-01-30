@@ -3,9 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as thunkes from '../../thunkes';
-import Models from './Models';
-import { getVisibleModels } from '../../selectors';
 import { isEmpty } from '../../utils';
+import { getVisibleModels } from '../../selectors';
+import Models from './Models';
 
 class ModelsContainer extends React.Component {
   componentDidMount() {
@@ -33,8 +33,6 @@ class ModelsContainer extends React.Component {
     if (isEmpty(models)) {
       return null;
     }
-
-    console.log(this.props);
 
     return (
       <Models models={models} brand={brand} />
