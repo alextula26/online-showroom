@@ -15,8 +15,8 @@ const getPromisesVehiclesSettled = async (promisesVehicles) => {
 const getNewVehicles = async (modelId) => {
   const vehicles = await API.getNewVehicles(modelId);
   const promisesVehicles = vehicles.items.map(async (vehicle) => {
-    const { general } = await API.getVehicle(vehicle.id);
-    return { ...vehicle, general };
+    const { general, images } = await API.getVehicle(vehicle.id);
+    return { ...vehicle, general, images };
   });
 
   const items = await getPromisesVehiclesSettled(promisesVehicles);

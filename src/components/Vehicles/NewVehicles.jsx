@@ -1,9 +1,13 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import VehicleListDescription from '../commons/parts/VehicleListDescription';
-import VehicleListPrice from '../commons/parts/VehicleListPrice';
+import { isEmpty } from '../../utils';
+import VehicleListTitle from '../commons/parts/VehicleListTitle';
+import VehicleListInStock from '../commons/parts/VehicleListInStock';
+import VehicleCarousel from '../commons/parts/VehicleCarousel';
 import VehicleListDiscount from '../commons/parts/VehicleListDiscount';
+import VehicleListPrice from '../commons/parts/VehicleListPrice';
+import VehicleListDescription from '../commons/parts/VehicleListDescription';
 import More from '../commons/buttons/More';
+import defaultVehiclePhoto from '../../img/car_dummy_empty.svg';
 
 class NewVehicles extends React.Component {
   renderNewVehicles() {
@@ -13,56 +17,44 @@ class NewVehicles extends React.Component {
       vehicles.map((vehicle) => {
         const {
           id,
-          price,
-          status,
           brand_name: brandName,
           model_name: modelName,
           modification_name: modificationName,
-          image_preview: imagePreview,
+          price,
           special_price: specialPrice,
+          status,
           body_type: bodyType,
           general,
+          images,
         } = vehicle;
 
         const vehicleFullName = `${brandName} ${modelName} ${modificationName}`;
         const vehicleUrl = `/catalog/${brand.id}/model/${model.id}/vehicle/${id}`;
         const [engine, transmission, , , year] = general;
         const characteristicsFullName = `${engine.value}, ${transmission.value}, ${year.value}, ${bodyType}`;
+        const defaultPhoto = [{ full: defaultVehiclePhoto }];
 
         return (
           <div key={id} className="col-lg-12 col-xl-8 col-xxl-6">
             <div className="vehicle-list-item">
-              <div className="vehicle-list-item--title">
-                <NavLink
-                  className="vehicle-list-item--title--link"
-                  to={vehicleUrl}
-                  data-original-title={vehicleFullName}
-                >
-                  {vehicleFullName}
-                </NavLink>
-              </div>
+
+              <VehicleListTitle url={vehicleUrl} title={vehicleFullName} />
 
               <div>
                 <div className="clearfix">
-                  <div className="instock-block">
-                    <div className="instock-block--button instock-block--button--instock ">
-                      <span className="svg--icon svg--auto" style={{ backgroundImage: 'none' }} />
-                      {status.name}
-                    </div>
-                  </div>
+                  <VehicleListInStock name={status.name} />
                 </div>
 
                 <div className="vehicle-list-item--image-container">
-                  <div className="autocrm10-carousel">
-                    <img
-                      src={imagePreview}
-                      alt={`${vehicleFullName} Тестовый дилер Тула`}
-                      style={{ width: '100%' }}
+                  {!isEmpty(images) && (
+                    <VehicleCarousel
+                      name={vehicleFullName}
+                      images={images.length <= 1 ? defaultPhoto : images.slice(0, 4)}
+                      isControls={false}
                     />
-                  </div>
+                  )}
 
                   <VehicleListDiscount price={price} specialPrice={specialPrice} />
-
                 </div>
 
                 <div className="vehicle-list-item--information">
@@ -75,6 +67,7 @@ class NewVehicles extends React.Component {
                 </div>
 
                 <div className="vehicle-list-item--separator" />
+
                 <div className="vehicle-list-item--link-more-outer">
                   <More
                     url={vehicleUrl}
