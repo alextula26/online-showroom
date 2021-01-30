@@ -13,7 +13,7 @@ import defaultVehiclePhoto from '../../img/car_dummy_empty.svg';
 class TradeInVehicles extends React.Component {
   renderTradeInVehicles() {
     const { tradeInVehicles } = this.props;
-
+    console.log(tradeInVehicles);
     return (
       tradeInVehicles.map((vehicle) => {
         const {
@@ -22,6 +22,8 @@ class TradeInVehicles extends React.Component {
           brand_name: brandName,
           model_id: modelId,
           model_name: modelName,
+          // ref_model_id: refModelId,
+          ref_model_name: refModelName,
           modification_name: modificationName,
           price,
           special_price: specialPrice,
@@ -32,7 +34,8 @@ class TradeInVehicles extends React.Component {
           manufacture_year: manufactureYear,
         } = vehicle;
 
-        const vehicleFullName = `${brandName} ${modelName} ${modificationName}`;
+        const modelNameForTitle = !isEmpty(modelName) ? modelName : refModelName;
+        const vehicleFullName = `${brandName} ${modelNameForTitle} ${modificationName}`;
         const vehicleUrl = `/trade-in/${brandId}/model/${modelId}/vehicle/${vin}`;
         const [engine, transmission, , , year] = general;
         const characteristicsFullName = `${engine.value}, ${transmission.value}, ${year.value}`;

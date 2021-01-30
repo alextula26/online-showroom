@@ -3,11 +3,11 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as thunkes from '../../thunkes';
+import { isEmpty } from '../../utils';
+import { getVehicles } from '../../selectors';
 import PageHeader from '../commons/PageHeader';
 import VehiclesFilterForm from '../filters/VehiclesFilterForm';
 import NewVehicles from './NewVehicles';
-import { getVehicles } from '../../selectors';
-import { isEmpty } from '../../utils';
 
 class NewVehiclesContainer extends React.Component {
   componentDidMount() {
