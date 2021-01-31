@@ -1,17 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import { Form, InputGroup } from 'react-bootstrap';
 import * as thunkes from '../../thunkes';
 import SelectComponent from './FilterControl/SelectComponent';
 import ColorsComponent from './FilterControl/ColorsComponent';
 
 class VehiclesFilterForm extends React.Component {
+  handleOnBlurMinPrice = (e) => {
+    const { vehicles, maxPrice, fetchFilterVehiclesByPrice } = this.props;
+    fetchFilterVehiclesByPrice({ vehicles, maxPrice, minPrice: e.target.value });
+  }
+
   render() {
     const {
       modelId,
       filters,
       selectedItems,
       fetchFilterVehicles,
+      minPrice,
+      maxPrice,
     } = this.props;
 
     return (
@@ -57,6 +65,25 @@ class VehiclesFilterForm extends React.Component {
                   modelId={modelId}
                 />
               </div>
+
+              <div className="col-24 col-xl-12 css-form-free">
+                <Form.Group>
+                  <Form.Label className="control-label active">Стоимость</Form.Label>
+                  <InputGroup className="double-input price-form">
+                    <Form.Control
+                      type="text"
+                      defaultValue={minPrice}
+                      placeholder={minPrice}
+                      onBlur={this.handleOnBlurMinPrice}
+                    />
+                    <Form.Control
+                      type="text"
+                      defaultValue={maxPrice}
+                      placeholder={maxPrice}
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </div>
             </div>
           </div>
         </form>
@@ -68,10 +95,14 @@ class VehiclesFilterForm extends React.Component {
 const mapStateToProps = (state) => ({
   filters: state.filters.lists,
   selectedItems: state.filters.selected,
+  vehicles: state.newVehiclesPage.vehicles,
+  minPrice: state.filters.minPrice,
+  maxPrice: state.filters.maxPrice,
 });
 
 const actionCreators = ({
   fetchFilterVehicles: thunkes.fetchFilterVehicles,
+  fetchFilterVehiclesByPrice: thunkes.fetchFilterVehiclesByPrice,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);

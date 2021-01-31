@@ -58,6 +58,14 @@ export const getStatusId = (status) => {
   return 0;
 };
 
+export const getMinPrice = (items, prop) => (
+  _.minBy(items, (vehicle) => vehicle[prop])[prop]
+);
+
+export const getMaxPrice = (items, prop) => (
+  _.maxBy(items, (vehicle) => vehicle[prop])[prop]
+);
+
 // functions for filters
 export const getLisFilterItems = (items, filterPropId, filterPropName) => {
   const data = items.map((item) => (

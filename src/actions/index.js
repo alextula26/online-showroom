@@ -14,3 +14,4 @@ export const fetchTradeInVehicles = createAction('FETCH_TRADEIN_VEHICLES');
 // Action creators for filters
 export const setFilterItems = createAction('SET_FILTER_ITEMS');
 export const updateFilterItems = createAction('UPDATE_FILTER_ITEMS');
+export const setFilterPrice = createAction('SET_FILTER_PRICE');

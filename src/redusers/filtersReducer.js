@@ -12,6 +12,8 @@ const filtersReducer = handleActions({
         equipments: filterItems.equipments,
         colors: filterItems.colors,
       },
+      minPrice: filterItems.minPrice,
+      maxPrice: filterItems.maxPrice,
     };
   },
 
@@ -53,14 +55,14 @@ const filtersReducer = handleActions({
     equipments: [],
     colors: [],
   },
+  minPrice: null,
+  maxPrice: null,
+  status: 'all', // all, inStock, onWay
   selected: {
     modifications: [],
     equipments: [],
     colors: [],
   },
-  minPrice: null,
-  maxPrice: null,
-  status: 'all', // all, inStock, onWay
 });
 
 export default filtersReducer;

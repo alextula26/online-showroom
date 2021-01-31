@@ -1,7 +1,9 @@
 import CONST from '../utils/const';
-import * as actions from '../actions';
 import API from '../api';
-import { getLisFilterItems, getColorsListFilter } from '../utils';
+import * as actions from '../actions';
+import {
+  getLisFilterItems, getColorsListFilter, getMinPrice, getMaxPrice,
+} from '../utils';
 import getVehicles from './vehicles';
 
 export default (modelId, typeVehicles, query) => async (dispatch) => {
@@ -21,6 +23,8 @@ export default (modelId, typeVehicles, query) => async (dispatch) => {
         CONST.vehicleProps.equipment.name,
       ),
       colors: getColorsListFilter(vehicles.items, generalListColorsByModel),
+      minPrice: getMinPrice(vehicles.items, 'price'),
+      maxPrice: getMaxPrice(vehicles.items, 'price'),
     };
 
     dispatch(actions.setFilterItems({ filterItems }));

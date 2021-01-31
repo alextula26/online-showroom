@@ -6,6 +6,7 @@ import addVehicle from './vehicle';
 import addNewVehicles from './newVehicles';
 import addTradeInVehicles from './tradeInVehicles';
 import addFilteredVehicles from './filterVehicles';
+import addFilteredVehiclesByPrice from './filterVehiclesByPrice';
 
 export const fetchDealers = () => addDealers();
 export const fetchBrands = () => addBrands();
@@ -14,3 +15,4 @@ export const fetchNewVehicle = (vehicleId) => addVehicle(vehicleId);
 export const fetchNewVehicles = (modelId) => addNewVehicles(modelId, CONST.vehiclesTypes.newVehicles, '');
 export const fetchTradeInVehicles = () => addTradeInVehicles(null, CONST.vehiclesTypes.tradeInVehicles, '');
 export const fetchFilterVehicles = (options) => addFilteredVehicles(options);
+export const fetchFilterVehiclesByPrice = (options) => addFilteredVehiclesByPrice(options);
