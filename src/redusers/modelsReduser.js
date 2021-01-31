@@ -5,13 +5,8 @@ const modelsReduser = handleActions({
   [actions.fetchModels](state, { payload }) {
     return {
       ...state,
-      models: payload.items,
-    };
-  },
-  [actions.fetchBrandModels](state, { payload }) {
-    return {
-      ...state,
-      brand: payload.brand,
+      models: payload.models.items,
+      brand: payload.models.brand,
     };
   },
 }, { models: [], brand: {} });

@@ -5,9 +5,11 @@ const newVehiclesReducer = handleActions({
   [actions.fetchNewVehicles](state, { payload }) {
     return {
       ...state,
-      vehicles: payload.vehicles,
+      vehicles: payload.vehicles.items,
+      model: payload.vehicles.model,
+      brand: payload.vehicles.brand,
     };
   },
-}, { vehicles: {} });
+}, { vehicles: [], model: {}, brand: {} });
 
 export default newVehiclesReducer;

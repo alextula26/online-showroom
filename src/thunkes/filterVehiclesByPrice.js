@@ -5,7 +5,7 @@
 export default (options) => async () => {
   const { vehicles, minPrice, maxPrice } = options;
 
-  const filteredVehiclesByPrice = vehicles.items.filter((vehicle) => (
+  const filteredVehiclesByPrice = vehicles.filter((vehicle) => (
     vehicle.price >= minPrice && vehicle.price <= maxPrice
   ));
 

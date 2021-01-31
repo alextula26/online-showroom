@@ -21,19 +21,12 @@ class NewVehiclesContainer extends React.Component {
     return modelId;
   }
 
-  getCurrentBrandId() {
-    const { match: { params: { brandId } } } = this.props;
-    return brandId;
-  }
-
   render() {
-    const { vehicles: { brand, items, model } } = this.props;
+    const { brand, model, vehicles } = this.props;
 
-    if (isEmpty(items)) {
+    if (isEmpty(vehicles)) {
       return null;
     }
-
-    console.log('NewVehiclesContainer', this.props);
 
     const header = `Автомобили ${brand.name} ${model.name} в наличии`;
 
@@ -44,7 +37,7 @@ class NewVehiclesContainer extends React.Component {
         <NewVehicles
           brand={brand}
           model={model}
-          vehicles={items}
+          vehicles={vehicles}
         />
       </>
     );
@@ -53,7 +46,8 @@ class NewVehiclesContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   // vehicles: getVehicles(state),
-  all: state,
+  brand: state.newVehiclesPage.brand,
+  model: state.newVehiclesPage.model,
   vehicles: state.newVehiclesPage.vehicles,
   filter: state.filters,
 });
