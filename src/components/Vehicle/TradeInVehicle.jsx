@@ -1,11 +1,10 @@
 import React from 'react';
 import { isEmpty } from '../../utils';
-import VehicleCarousel from '../commons/Vehicle/VehicleCarousel';
-import VehicleSpecifications from '../commons/Vehicle/VehicleSpecifications';
-import VehicleGeneralSpecifications from '../commons/Vehicle/VehicleGeneralSpecifications';
-import VehicleInstock from '../commons/Vehicle/VehicleInstock';
-import VehicleDealerInfo from '../commons/Vehicle/VehicleDealerInfo';
-import VehiclePrice from '../commons/Vehicle/VehiclePrice';
+import VehicleCarousel from '../commons/parts/VehicleCarousel';
+import VehiclePrice from '../commons/parts/VehiclePrice';
+import VehicleSpecifications from '../commons/parts/VehicleSpecifications';
+import VehicleGeneralSpecifications from '../commons/parts/VehicleGeneralSpecifications';
+import VehicleDealerInfo from '../commons/parts/VehicleDealerInfo';
 
 class TradeInVehicle extends React.Component {
   render() {
@@ -16,11 +15,12 @@ class TradeInVehicle extends React.Component {
       model_name: modelname,
       modification_name: modificationName,
       equipment,
-      status: { name: statusName },
+      //  status: { name: statusName },
       images,
       options,
       side_options: sideOptions,
       additional_equipment_description: additionalEquipmentDescription,
+      description,
       specifications,
       price,
       special_price: specialPrice,
@@ -30,25 +30,22 @@ class TradeInVehicle extends React.Component {
     } = vehicle;
 
     const vehicleFullName = `${brandName} ${modelname} ${modificationName} ${equipment}`;
-    console.log(this.props);
+
     return (
       <>
-        <section className="vehicle-view">
+        <section className="vehicle-view tradein-view">
           <div className="row">
             <div className="col-sm-24 col-xl-16">
               <h1 className="vehicle-view--title">{vehicleFullName}</h1>
-
-              <div className="vehicle-view--action">
-                <VehicleInstock statusName={statusName} />
-              </div>
 
               {!isEmpty(images) && (
                 <div className="vehicle-view-block">
                   <div className="carousel-overflow-hidden">
                     <VehicleCarousel
-                      vehicleFullName={vehicleFullName}
+                      name={vehicleFullName}
                       vehicleId={id}
                       images={images}
+                      isControls
                     />
                   </div>
                 </div>
@@ -60,10 +57,11 @@ class TradeInVehicle extends React.Component {
                   sideOptions={sideOptions}
                   additionalEquipmentDescription={additionalEquipmentDescription}
                   specifications={specifications}
+                  description={description}
                 />
               </section>
-            </div>
 
+            </div>
             <div className="col-sm-24 col-xl-8">
               <div className="vehicle-view--right">
 
@@ -85,7 +83,7 @@ class TradeInVehicle extends React.Component {
                   </div>
                 )}
 
-                {isEmpty(dealership) && (
+                {!isEmpty(dealership) && (
                   <div className="row">
                     <div className="col-sm-24 col-md-12-col-xl-24">
                       <VehicleDealerInfo dealership={dealership} />

@@ -5,7 +5,7 @@ import VehicleEquipment from './VehicleEquipment';
 import VehicleAdditionalOptions from './VehicleAdditionalOptions';
 
 const VehicleSpecifications = ({
-  specifications, options, sideOptions, additionalEquipmentDescription,
+  specifications, options, sideOptions, additionalEquipmentDescription, description,
 }) => (
   <Tabs>
     <Tab eventKey="general_characteristic" title="Общие характеристики">
@@ -34,6 +34,12 @@ const VehicleSpecifications = ({
     {!isEmpty(additionalEquipmentDescription) && (
       <Tab eventKey="additional_equipment" title="Доп. оборудование">
         {getHtml(additionalEquipmentDescription)}
+      </Tab>
+    )}
+
+    {!isEmpty(description) && (
+      <Tab eventKey="additional_description" title="Описание">
+        {getHtml(description)}
       </Tab>
     )}
 

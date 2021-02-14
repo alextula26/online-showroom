@@ -2,7 +2,7 @@ import React from 'react';
 import { getPriceCurrencyFormat, isSpecialPrice } from '../../../utils';
 
 const VehiclePrice = ({ price, specialPrice }) => (
-  <div className="vehicle-view--priceblock js-toggleBlock">
+  <div className="vehicle-view--priceblock">
     {isSpecialPrice(price, specialPrice) && (
       <div className="vehicle-view--price-badge">
         <span className="badge vehicle-view--price-badge-profit">

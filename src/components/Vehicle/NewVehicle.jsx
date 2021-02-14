@@ -86,7 +86,7 @@ class NewVehicle extends React.Component {
                   </div>
                 )}
 
-                {isEmpty(dealership) && (
+                {!isEmpty(dealership) && (
                   <div className="row">
                     <div className="col-sm-24 col-md-12-col-xl-24">
                       <VehicleDealerInfo dealership={dealership} />

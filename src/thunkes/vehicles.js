@@ -1,8 +1,9 @@
+import CONST from '../utils/const';
 import API from '../api';
 
 const mappingTypeVehicles = {
-  newVehicles: (modelId, query) => API.getNewVehicles(modelId, query),
-  tradeInVehicles: () => API.getTradeInVehicles(),
+  [CONST.vehiclesTypes.newVehicles]: (modelId, query) => API.getNewVehicles(modelId, query),
+  [CONST.vehiclesTypes.tradeInVehicles]: () => API.getTradeInVehicles(),
 };
 
 export default async (modelId = null, typeVehicles, query = '') => {
