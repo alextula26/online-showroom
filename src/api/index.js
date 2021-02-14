@@ -12,7 +12,7 @@ const instance = axios.create({
     // If-Modified-Since, Cache-Control, Origin, X-Requested-With, Accept',
     'Access-Control-Allow-Headers': 'Bearer, Content-Type, Authorization, Content-Length, X-Requested-With',
     'Access-Control-Allow-Origin': '*',
-    Authorization: 'Bearer lW4pUiiMIaAQ8SSGN3gMIWCINafeyo2N',
+    Authorization: 'Bearer VLRoq17fvx95aiozD18A15Ug_TUNAUc3',
   },
 });
 
@@ -21,7 +21,7 @@ const API = {
     instance.get(routes.dealers()).then((responce) => responce.data)
   ),
   getBrands: () => (
-    instance.get(routes.brands()).then((responce) => responce.data.items)
+    instance.get(routes.brands()).then((responce) => responce.data)
   ),
   getModels: (brandId) => (
     instance.get(routes.models(brandId)).then((responce) => responce.data)

@@ -12,7 +12,7 @@ class TradeInVehiclesContainer extends React.Component {
   }
 
   render() {
-    const { tradeInVehicles: { items, filter } } = this.props;
+    const { vehicles: { items, filter } } = this.props;
 
     if (isEmpty(items)) {
       return null;
@@ -24,7 +24,7 @@ class TradeInVehiclesContainer extends React.Component {
         <TradeInVehicles
           brands={filter.brands}
           models={filter.models}
-          tradeInVehicles={items}
+          vehicles={items}
         />
       </>
     );
@@ -32,7 +32,7 @@ class TradeInVehiclesContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  tradeInVehicles: state.tradeInVehiclesPage.tradeInVehicles,
+  vehicles: state.tradeInVehiclesPage.tradeInVehicles,
 });
 
 const actionCreators = {

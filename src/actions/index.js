@@ -9,6 +9,7 @@ export const fetchNewVehicles = createAction('FETCH_NEW_VEHICLES');
 export const fetchNewVehicle = createAction('FETCH_NEW_VEHICLE');
 export const fetchTradeInVehicles = createAction('FETCH_TRADEIN_VEHICLES');
 export const fetchTradeInVehicle = createAction('FETCH_TRADEIN_VEHICLE');
+export const fetchAllNewVehicles = createAction('FETCH_ALL_NEW_VEHICLES');
 
 // export const fetchCharacteristics = createAction('FETCH_CHARACTERISTICS');
 

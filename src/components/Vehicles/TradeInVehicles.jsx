@@ -12,10 +12,10 @@ import defaultVehiclePhoto from '../../img/car_dummy_empty.svg';
 
 class TradeInVehicles extends React.Component {
   renderTradeInVehicles() {
-    const { tradeInVehicles } = this.props;
-    console.log(tradeInVehicles);
+    const { vehicles } = this.props;
+
     return (
-      tradeInVehicles.map((vehicle) => {
+      vehicles.map((vehicle) => {
         const {
           id,
           brand_id: brandId,

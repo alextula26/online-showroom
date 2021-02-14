@@ -10,7 +10,7 @@ import { isEmpty } from './utils';
 import ModelsContainer from './components/Models/ModelsContainer';
 import NewVehiclesContainer from './components/Vehicles/NewVehiclesContainer';
 import TradeInVehiclesContainer from './components/Vehicles/TradeInVehiclesContainer';
-import ListAllNewCarsContainer from './components/ListAllNewCars/ListAllNewCarsContainer';
+import AllNewVehiclesContainer from './components/Vehicles/AllNewVehiclesContainer';
 import NewVehicleContainer from './components/Vehicle/NewVehicleContainer';
 import TradeInVehicleContainer from './components/Vehicle/TradeInVehicleContainer';
 
@@ -23,7 +23,7 @@ class App extends React.Component {
   getMainPageComponent = (type) => {
     const mainPageType = {
       listModelsByBrand: <ModelsContainer />,
-      listAllNewVehicles: <ListAllNewCarsContainer />,
+      listAllNewVehicles: <AllNewVehiclesContainer />,
       listTradeInVehicles: <TradeInVehiclesContainer />,
     };
     return mainPageType[type];
@@ -56,7 +56,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  brands: state.brands,
+  brands: state.brands.brands,
 });
 
 const actionCreators = {

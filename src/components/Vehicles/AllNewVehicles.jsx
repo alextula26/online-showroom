@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ListAllNewCars extends React.Component {
+class AllNewVehicles extends React.Component {
   render() {
     console.log(this.props);
     return (
@@ -9,4 +9,4 @@ class ListAllNewCars extends React.Component {
   }
 }
 
-export default ListAllNewCars;
+export default AllNewVehicles;

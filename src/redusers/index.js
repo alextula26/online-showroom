@@ -9,6 +9,7 @@ import newVehiclesReducer from './newVehiclesReducer';
 import newVehicleReducer from './newVehicleReducer';
 import tradeInVehiclesReducer from './tradeInVehiclesReducer';
 import tradeInVehicleReducer from './tradeInVehicleReducer';
+import allNewVehiclesReducer from './allNewVehiclesReducer';
 
 const redusers = combineReducers({
   dealers: dealersReduser,
@@ -19,6 +20,7 @@ const redusers = combineReducers({
   newVehiclePage: newVehicleReducer,
   tradeInVehiclesPage: tradeInVehiclesReducer,
   tradeInVehiclePage: tradeInVehicleReducer,
+  allNewVehiclesPage: allNewVehiclesReducer,
   form: formReducer,
 });
 

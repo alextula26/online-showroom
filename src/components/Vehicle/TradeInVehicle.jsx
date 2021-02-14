@@ -9,7 +9,6 @@ import VehicleDealerInfo from '../commons/parts/VehicleDealerInfo';
 class TradeInVehicle extends React.Component {
   render() {
     const { vehicle } = this.props;
-    console.log('vehicle', vehicle);
     const {
       id,
       brand_name: brandName,
