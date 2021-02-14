@@ -56,7 +56,6 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  mainPageType: 'listModelsByBrand',
   brands: state.brands,
 });
 
@@ -66,10 +65,10 @@ const actionCreators = {
 
 const AppContainer = compose(connect(mapStateToProps, actionCreators), withRouter)(App);
 
-const OnlineShowroomApp = () => (
+const OnlineShowroomApp = ({ mainPageType }) => (
   <BrowserRouter>
     <Provider store={store}>
-      <AppContainer key="app" />
+      <AppContainer key="app" mainPageType={mainPageType} />
     </Provider>
   </BrowserRouter>
 );

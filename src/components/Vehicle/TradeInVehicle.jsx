@@ -1,5 +1,5 @@
 import React from 'react';
-import { isEmpty } from '../../utils';
+import { isEmpty, getPriceCurrencyFormat } from '../../utils';
 import VehicleCarousel from '../commons/parts/VehicleCarousel';
 import VehiclePrice from '../commons/parts/VehiclePrice';
 import VehicleSpecifications from '../commons/parts/VehicleSpecifications';
@@ -9,6 +9,7 @@ import VehicleDealerInfo from '../commons/parts/VehicleDealerInfo';
 class TradeInVehicle extends React.Component {
   render() {
     const { vehicle } = this.props;
+    console.log('vehicle', vehicle);
     const {
       id,
       brand_name: brandName,
@@ -30,6 +31,8 @@ class TradeInVehicle extends React.Component {
     } = vehicle;
 
     const vehicleFullName = `${brandName} ${modelname} ${modificationName} ${equipment}`;
+    const year = general[4].value;
+    const mileage = `${getPriceCurrencyFormat(general[5].value)} км.`;
 
     return (
       <>
@@ -71,6 +74,19 @@ class TradeInVehicle extends React.Component {
                       <div className="col-sm-24 col-md-12 col-lg-24 col-xxl-15">
                         <VehiclePrice price={price} specialPrice={specialPrice} />
                       </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-sm-24 col-md-12 col-lg-24">
+                  <div className="vehicle-view-tradein--info">
+                    <div className="vehicle-view-tradein--info-item">
+                      <span className="svg--icon svg--date" data-grunticon-embed />
+                      <span>{year}</span>
+                    </div>
+                    <div className="vehicle-view-tradein--info-item">
+                      <span className="svg--icon svg--union" data-grunticon-embed />
+                      <span>{mileage}</span>
                     </div>
                   </div>
                 </div>

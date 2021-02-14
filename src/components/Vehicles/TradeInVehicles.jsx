@@ -27,7 +27,7 @@ class TradeInVehicles extends React.Component {
           modification_name: modificationName,
           price,
           special_price: specialPrice,
-          vin,
+          // vin,
           general,
           images,
           mileage,
@@ -36,7 +36,7 @@ class TradeInVehicles extends React.Component {
 
         const modelNameForTitle = !isEmpty(modelName) ? modelName : refModelName;
         const vehicleFullName = `${brandName} ${modelNameForTitle} ${modificationName}`;
-        const vehicleUrl = `/trade-in/${brandId}/model/${modelId}/vehicle/${vin}`;
+        const vehicleUrl = `/trade-in/${brandId}/model/${modelId}/vehicle/${id}`;
         const [engine, transmission, , , year] = general;
         const characteristicsFullName = `${engine.value}, ${transmission.value}, ${year.value}`;
         const defaultPhoto = [{ full: defaultVehiclePhoto }];

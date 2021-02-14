@@ -5,8 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import './scss/compiled.scss';
 import './scss/theme.scss';
 
+// Types of main page: listModelsByBrand, listAllNewVehicles, listTradeInVehicles
+
 ReactDOM.render(
-  <OnlineShowroomApp />,
+  <OnlineShowroomApp mainPageType="listTradeInVehicles" />,
   document.getElementById('root'),
 );
 
