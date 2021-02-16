@@ -46,3 +46,10 @@ export const getVehicles = createSelector(
     };
   },
 );
+
+const getAllBrands = (state) => state.brands.brands;
+
+export const getVisibleBrands = createSelector(
+  getAllBrands,
+  (brands) => brands.filter((brand) => brand.vehicles > 0),
+);

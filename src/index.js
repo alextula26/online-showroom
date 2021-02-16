@@ -8,7 +8,7 @@ import './scss/theme.scss';
 // Types of main page: listModelsByBrand, listAllNewVehicles, listTradeInVehicles
 
 ReactDOM.render(
-  <OnlineShowroomApp mainPageType="listAllNewVehicles" />,
+  <OnlineShowroomApp mainPageType="listModelsByBrand" />,
   document.getElementById('root'),
 );
 

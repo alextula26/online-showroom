@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as thunkes from '../../thunkes';
 import { isEmpty } from '../../utils';
-import { getVisibleModels } from '../../selectors';
+import { getVisibleBrands, getVisibleModels } from '../../selectors';
 import Models from './Models';
 
 class ModelsContainer extends React.Component {
@@ -41,7 +41,7 @@ class ModelsContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  brand: state.brands[0],
+  brand: getVisibleBrands(state)[0],
   models: getVisibleModels(state),
 });
 
