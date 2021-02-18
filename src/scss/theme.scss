@@ -7,3 +7,45 @@
 
 // ------------------------------------------------------- RULES //
 @import "_theme-rules.scss";
+
+
+.horizontal-slider {
+  width: 100%;
+  height: 16px;
+}
+
+.horizontal-slider .example-track {
+  top: 6px;
+  height: 4px;
+}
+
+.example-track {
+  position: relative;
+  background: rgb(221, 221, 221);
+}
+
+.example-track.example-track-1 {
+  background: #bb162b;
+}
+
+.example-track.example-track-2 {
+  background: rgb(221, 221, 221);
+}
+
+.horizontal-slider .example-thumb {
+  top: 1px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  border-radius: 50%;
+}
+
+.example-thumb {
+  font-size: 0.9em;
+  text-align: center;
+  background-color: #bb162b;
+  color: white;
+  cursor: pointer;
+  border: 1px solid #bb162b;
+  box-sizing: border-box;
+}
