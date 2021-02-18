@@ -105,8 +105,8 @@ class VehiclesFilterForm extends React.Component {
 
                   <ReactSlider
                     className="horizontal-slider"
-                    thumbClassName="example-thumb"
-                    trackClassName="example-track"
+                    thumbClassName="thumb"
+                    trackClassName="track"
                     min={minPrice}
                     max={maxPrice}
                     defaultValue={[minPriceRange, maxPriceRange]}
