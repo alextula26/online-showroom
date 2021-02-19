@@ -1,37 +1,25 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { Form, InputGroup } from 'react-bootstrap';
-import ReactSlider from 'react-slider';
 import * as actions from '../../actions';
 import * as thunkes from '../../thunkes';
 import SelectComponent from './FilterControl/SelectComponent';
 import ColorsComponent from './FilterControl/ColorsComponent';
+import RangeSliderComponent from './FilterControl/RangeSliderComponent';
 
 class VehiclesFilterForm extends React.Component {
-  handleOnChange = ([minPriceRange, maxPriceRange]) => {
-    const { setFilterPrice } = this.props;
-    setFilterPrice({ minPriceRange, maxPriceRange });
-  }
-
-  handleOnAfterChange = ([minPriceRange, maxPriceRange]) => {
-    const { vehicles, fetchFilterVehiclesByPrice } = this.props;
-    fetchFilterVehiclesByPrice({ vehicles, minPriceRange, maxPriceRange });
-  }
-
   render() {
     const {
       modelId,
       filters,
       selectedItems,
       fetchFilterVehicles,
-      prices,
+      setFilterPrice,
+      fetchFilterVehiclesByPrice,
+      prices: {
+        minPrice, maxPrice, minPriceRange, maxPriceRange,
+      },
     } = this.props;
-
-    const {
-      minPrice, maxPrice, minPriceRange, maxPriceRange,
-    } = prices;
 
     return (
       <section className="filter">
@@ -78,42 +66,14 @@ class VehiclesFilterForm extends React.Component {
               </div>
 
               <div className="col-24 col-xl-12 css-form-free">
-                <Form.Group>
-                  <Form.Label className="control-label active">Стоимость</Form.Label>
-                  <InputGroup className="double-input price-form">
-                    <Form.Control
-                      type="text"
-                      value={minPrice}
-                      placeholder={minPrice}
-                      disabled
-                    />
-                    <Form.Control
-                      type="text"
-                      value={maxPrice}
-                      placeholder={maxPrice}
-                      disabled
-                    />
-                  </InputGroup>
-
-                  <ReactSlider
-                    className="horizontal-slider"
-                    thumbClassName="thumb"
-                    trackClassName="track"
-                    min={minPrice}
-                    max={maxPrice}
-                    value={[minPriceRange, maxPriceRange]}
-                    ariaLabel={['MinPrice thumb', 'MaxPrice thumb']}
-                    ariaValuetext={(state) => `Price value ${state.valueNow}`}
-                    pearling
-                    step={1000}
-                    minDistance={1000}
-                    onAfterChange={this.handleOnAfterChange}
-                    onChange={this.handleOnChange}
-                    renderThumb={(props, state) => (
-                      <div {...props}><span>{state.valueNow}</span></div>
-                    )}
-                  />
-                </Form.Group>
+                <RangeSliderComponent
+                  minPrice={minPrice}
+                  maxPrice={maxPrice}
+                  minPriceRange={minPriceRange}
+                  maxPriceRange={maxPriceRange}
+                  setFilterPrice={setFilterPrice}
+                  fetchFilterVehiclesByPrice={fetchFilterVehiclesByPrice}
+                />
               </div>
             </div>
           </div>

@@ -12,7 +12,13 @@ class ColorsComponent extends React.Component {
     } = this.props;
 
     filter({
-      modelId, filterName, selectedItemId: Number(e.target.value), selectedItems,
+      modelId,
+      filterName,
+      selectedItemId: Number(e.target.value),
+      selectedItems,
+      minPrice: null,
+      maxPrice: null,
+      status: 'all',
     });
   };
 

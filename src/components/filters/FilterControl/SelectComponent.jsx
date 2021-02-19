@@ -12,7 +12,13 @@ class SelectComponent extends React.Component {
     } = this.props;
 
     filter({
-      modelId, filterName, selectedItemId: Number(selectedItemId), selectedItems,
+      modelId,
+      filterName,
+      selectedItemId: Number(selectedItemId),
+      selectedItems,
+      minPrice: null,
+      maxPrice: null,
+      status: 'all',
     });
   };
 

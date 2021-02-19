@@ -13,8 +13,12 @@ const filterNamesOfResponseProps = [
 
 export default (options) => async (dispatch) => {
   const {
-    modelId, filterName, selectedItemId, selectedItems,
+    modelId, filterName, selectedItemId, selectedItems, minPrice, maxPrice, status,
   } = options;
+
+  console.log('minPrice', minPrice);
+  console.log('maxPrice', maxPrice);
+  console.log('status', status);
 
   const selectedFilterItems = addSelectedFilterItem(selectedItems, selectedItemId, filterName);
   const query = getQueryString(selectedFilterItems);
@@ -37,8 +41,8 @@ export default (options) => async (dispatch) => {
       },
     };
 
-    const minPriceRange = getMinPrice(vehicles.items, 'price');
-    const maxPriceRange = getMaxPrice(vehicles.items, 'price');
+    const minPriceRange = minPrice ?? getMinPrice(vehicles.items, 'price');
+    const maxPriceRange = maxPrice ?? getMaxPrice(vehicles.items, 'price');
 
     dispatch(actions.fetchNewVehicles({ vehicles }));
     dispatch(actions.updateFilterItems({
