@@ -1,7 +1,9 @@
 import CONST from '../utils/const';
 import * as actions from '../actions';
 import getVehicles from './vehicles';
-import { getQueryString, addSelectedFilterItem, getIdsFilterItems } from '../utils';
+import {
+  getQueryString, addSelectedFilterItem, getIdsFilterItems, getMinPrice, getMaxPrice,
+} from '../utils';
 
 const filterNamesOfResponseProps = [
   [CONST.vehicleProps.modification.field, CONST.vehicleProps.modification.prop],
@@ -35,8 +37,13 @@ export default (options) => async (dispatch) => {
       },
     };
 
+    const minPriceRange = getMinPrice(vehicles.items, 'price');
+    const maxPriceRange = getMaxPrice(vehicles.items, 'price');
+
     dispatch(actions.fetchNewVehicles({ vehicles }));
-    dispatch(actions.updateFilterItems({ filterName, selectedItemId, curentDisabledItems }));
+    dispatch(actions.updateFilterItems({
+      filterName, selectedItemId, curentDisabledItems, minPriceRange, maxPriceRange,
+    }));
   } catch (e) {
     console.log(e);
     throw e;

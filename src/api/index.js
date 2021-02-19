@@ -12,7 +12,7 @@ const instance = axios.create({
     // If-Modified-Since, Cache-Control, Origin, X-Requested-With, Accept',
     'Access-Control-Allow-Headers': 'Bearer, Content-Type, Authorization, Content-Length, X-Requested-With',
     'Access-Control-Allow-Origin': '*',
-    Authorization: 'Bearer VLRoq17fvx95aiozD18A15Ug_TUNAUc3',
+    Authorization: 'Bearer lW4pUiiMIaAQ8SSGN3gMIWCINafeyo2N',
   },
 });
 

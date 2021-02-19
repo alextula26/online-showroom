@@ -4,29 +4,20 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Form, InputGroup } from 'react-bootstrap';
 import ReactSlider from 'react-slider';
+import * as actions from '../../actions';
 import * as thunkes from '../../thunkes';
 import SelectComponent from './FilterControl/SelectComponent';
 import ColorsComponent from './FilterControl/ColorsComponent';
 
 class VehiclesFilterForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    const { minPrice, maxPrice } = props;
-
-    this.state = {
-      minPriceRange: minPrice,
-      maxPriceRange: maxPrice,
-    };
-  }
-
   handleOnChange = ([minPriceRange, maxPriceRange]) => {
-    this.setState({ minPriceRange, maxPriceRange });
+    const { setFilterPrice } = this.props;
+    setFilterPrice({ minPriceRange, maxPriceRange });
   }
 
-  handleOnAfterChange = ([minPrice, maxPrice]) => {
+  handleOnAfterChange = ([minPriceRange, maxPriceRange]) => {
     const { vehicles, fetchFilterVehiclesByPrice } = this.props;
-    fetchFilterVehiclesByPrice({ vehicles, minPrice, maxPrice });
+    fetchFilterVehiclesByPrice({ vehicles, minPriceRange, maxPriceRange });
   }
 
   render() {
@@ -35,11 +26,12 @@ class VehiclesFilterForm extends React.Component {
       filters,
       selectedItems,
       fetchFilterVehicles,
-      minPrice,
-      maxPrice,
+      prices,
     } = this.props;
 
-    const { minPriceRange, maxPriceRange } = this.state;
+    const {
+      minPrice, maxPrice, minPriceRange, maxPriceRange,
+    } = prices;
 
     return (
       <section className="filter">
@@ -91,13 +83,13 @@ class VehiclesFilterForm extends React.Component {
                   <InputGroup className="double-input price-form">
                     <Form.Control
                       type="text"
-                      value={minPriceRange}
+                      value={minPrice}
                       placeholder={minPrice}
                       disabled
                     />
                     <Form.Control
                       type="text"
-                      value={maxPriceRange}
+                      value={maxPrice}
                       placeholder={maxPrice}
                       disabled
                     />
@@ -109,14 +101,17 @@ class VehiclesFilterForm extends React.Component {
                     trackClassName="track"
                     min={minPrice}
                     max={maxPrice}
-                    defaultValue={[minPriceRange, maxPriceRange]}
-                    ariaLabel={['Lower thumb', 'Upper thumb']}
-                    ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
+                    value={[minPriceRange, maxPriceRange]}
+                    ariaLabel={['MinPrice thumb', 'MaxPrice thumb']}
+                    ariaValuetext={(state) => `Price value ${state.valueNow}`}
                     pearling
                     step={1000}
                     minDistance={1000}
                     onAfterChange={this.handleOnAfterChange}
                     onChange={this.handleOnChange}
+                    renderThumb={(props, state) => (
+                      <div {...props}><span>{state.valueNow}</span></div>
+                    )}
                   />
                 </Form.Group>
               </div>
@@ -132,13 +127,13 @@ const mapStateToProps = (state) => ({
   filters: state.filters.lists,
   selectedItems: state.filters.selected,
   vehicles: state.newVehiclesPage.vehicles,
-  minPrice: state.filters.minPrice,
-  maxPrice: state.filters.maxPrice,
+  prices: state.filters.prices,
 });
 
 const actionCreators = ({
   fetchFilterVehicles: thunkes.fetchFilterVehicles,
   fetchFilterVehiclesByPrice: thunkes.fetchFilterVehiclesByPrice,
+  setFilterPrice: actions.setFilterPrice,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);

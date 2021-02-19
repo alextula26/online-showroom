@@ -12,13 +12,20 @@ const filtersReducer = handleActions({
         equipments: filterItems.equipments,
         colors: filterItems.colors,
       },
-      minPrice: filterItems.minPrice,
-      maxPrice: filterItems.maxPrice,
+      prices: {
+        ...state.prices,
+        minPrice: filterItems.minPrice,
+        maxPrice: filterItems.maxPrice,
+        minPriceRange: filterItems.minPrice,
+        maxPriceRange: filterItems.maxPrice,
+      },
     };
   },
 
   [actions.updateFilterItems](state, {
-    payload: { filterName, selectedItemId, curentDisabledItems },
+    payload: {
+      filterName, selectedItemId, curentDisabledItems, minPriceRange, maxPriceRange,
+    },
   }) {
     const nameDisabledItems = Object.keys(curentDisabledItems.disabledItems);
 
@@ -46,17 +53,36 @@ const filtersReducer = handleActions({
           ? state.selected[filterName].filter((item) => item !== selectedItemId)
           : [...state.selected[filterName], selectedItemId],
       },
+      prices: {
+        ...state.prices,
+        minPriceRange,
+        maxPriceRange,
+      },
     };
   },
 
+  [actions.setFilterPrice](state, { payload: { minPriceRange, maxPriceRange } }) {
+    return {
+      ...state,
+      prices: {
+        ...state.prices,
+        minPriceRange,
+        maxPriceRange,
+      },
+    };
+  },
 }, {
   lists: {
     modifications: [],
     equipments: [],
     colors: [],
   },
-  minPrice: null,
-  maxPrice: null,
+  prices: {
+    minPrice: null,
+    maxPrice: null,
+    minPriceRange: null,
+    maxPriceRange: null,
+  },
   status: 'all', // all, inStock, onWay
   selected: {
     modifications: [],
