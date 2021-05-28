@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as thunkes from '../../thunkes';
 import { isEmpty } from '../../utils';
 import { getVisibleBrands, getVisibleModels } from '../../selectors';
@@ -34,6 +35,8 @@ class ModelsContainer extends React.Component {
       return null;
     }
 
+    console.log(this.props);
+
     return (
       <Models models={models} brand={brand} />
     );
@@ -47,6 +50,15 @@ const mapStateToProps = (state) => ({
 
 const actionCreators = {
   fetchModels: thunkes.fetchModels,
+};
+
+ModelsContainer.propTypes = {
+  brand: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
+  models: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fetchModels: PropTypes.func.isRequired,
 };
 
 export default compose(

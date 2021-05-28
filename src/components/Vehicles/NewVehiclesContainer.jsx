@@ -28,6 +28,8 @@ class NewVehiclesContainer extends React.Component {
       return null;
     }
 
+    console.log(this.props);
+
     const header = `Автомобили ${brand.name} ${model.name} в наличии`;
 
     return (
