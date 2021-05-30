@@ -2,12 +2,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        extensions: [
-          '.js',
-          '.jsx',
-          '.ts',
-          '.tsx',
-        ],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
     react: {
@@ -22,20 +17,13 @@ module.exports = {
       { property: 'freeze', object: 'Object' },
       { property: 'myFavoriteWrapper' },
     ],
-    linkComponents: [
-      'Hyperlink',
-      { name: 'Link', linkAttribute: 'to' },
-    ],
+    linkComponents: ['Hyperlink', { name: 'Link', linkAttribute: 'to' }],
   },
   env: {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'airbnb',
-  ],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'airbnb'],
   parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
@@ -44,11 +32,10 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ['react'],
   rules: {
     camelcase: ['error', { properties: 'never', ignoreDestructuring: true }],
+    'comma-dangle': ['error', 'always-multiline'],
     'react/prop-types': 0,
     'no-console': 0,
     'import/no-unresolved': 0,

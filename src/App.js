@@ -1,18 +1,20 @@
-import React from 'react';
-import {
-  withRouter, BrowserRouter, Switch, Route,
-} from 'react-router-dom';
+import React, { Suspense, lazy } from 'react';
+import { withRouter, BrowserRouter, Switch, Route } from 'react-router-dom';
 import { compose } from 'redux';
 import { Provider, connect } from 'react-redux';
 import store from './redusers';
 import * as thunkes from './thunkes';
 import { isEmpty } from './utils';
-import ModelsContainer from './components/Models/ModelsContainer';
+// import ModelsContainer from './components/Models/ModelsContainer';
 import NewVehiclesContainer from './components/Vehicles/NewVehiclesContainer';
 import TradeInVehiclesContainer from './components/Vehicles/TradeInVehiclesContainer';
 import AllNewVehiclesContainer from './components/Vehicles/AllNewVehiclesContainer';
 import NewVehicleContainer from './components/Vehicle/NewVehicleContainer';
 import TradeInVehicleContainer from './components/Vehicle/TradeInVehicleContainer';
+
+const ModelsContainer = lazy(() =>
+  import('./components/Models/ModelsContainer')
+);
 
 class App extends React.Component {
   componentDidMount() {
@@ -27,7 +29,7 @@ class App extends React.Component {
       listTradeInVehicles: <TradeInVehiclesContainer />,
     };
     return mainPageType[type];
-  }
+  };
 
   render() {
     const { mainPageType, brands } = this.props;
@@ -40,13 +42,45 @@ class App extends React.Component {
       <div className="crm-common-wrap" id="js-container-wrap">
         <div className="container">
           <Switch>
-            {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
-            <Route exact path="/" render={() => this.getMainPageComponent(mainPageType)} />
-            <Route exact path="/catalog/:brandId?" render={() => <ModelsContainer />} />
-            <Route exact path="/catalog/:brandId/model/:modelId?" render={() => <NewVehiclesContainer />} />
-            <Route exact path="/catalog/:brandId/model/:modelId/vehicle/:vehicleId?" render={() => <NewVehicleContainer />} />
-            <Route exact path="/trade-in/" render={() => <TradeInVehiclesContainer />} />
-            <Route exact path="/trade-in/:brandId/model/:modelId/vehicle/:vehicleId?" render={() => <TradeInVehicleContainer />} />
+            <Suspense
+              fallback={
+                <div style={{ height: '100%', border: '10px solid red' }}>
+                  Загрузка
+                </div>
+              }
+            >
+              {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
+              <Route
+                exact
+                path="/"
+                render={() => this.getMainPageComponent(mainPageType)}
+              />
+              <Route
+                exact
+                path="/catalog/:brandId?"
+                render={() => <ModelsContainer />}
+              />
+              <Route
+                exact
+                path="/catalog/:brandId/model/:modelId?"
+                render={() => <NewVehiclesContainer />}
+              />
+              <Route
+                exact
+                path="/catalog/:brandId/model/:modelId/vehicle/:vehicleId?"
+                render={() => <NewVehicleContainer />}
+              />
+              <Route
+                exact
+                path="/trade-in/"
+                render={() => <TradeInVehiclesContainer />}
+              />
+              <Route
+                exact
+                path="/trade-in/:brandId/model/:modelId/vehicle/:vehicleId?"
+                render={() => <TradeInVehicleContainer />}
+              />
+            </Suspense>
             <Route path="*" render={() => <div>404 Filenot found</div>} />
           </Switch>
         </div>
@@ -63,14 +97,20 @@ const actionCreators = {
   fetchBrands: thunkes.fetchBrands,
 };
 
-const AppContainer = compose(connect(mapStateToProps, actionCreators), withRouter)(App);
+const AppContainer = compose(
+  connect(mapStateToProps, actionCreators),
+  withRouter
+)(App);
 
-const OnlineShowroomApp = ({ mainPageType }) => (
-  <BrowserRouter>
-    <Provider store={store}>
-      <AppContainer key="app" mainPageType={mainPageType} />
-    </Provider>
-  </BrowserRouter>
-);
+const OnlineShowroomApp = ({ mainPageType, theme }) => {
+  import(`./scss/${theme}/theme.scss`);
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer key="app" mainPageType={mainPageType} />
+      </Provider>
+    </BrowserRouter>
+  );
+};
 
 export default OnlineShowroomApp;
