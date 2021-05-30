@@ -6,14 +6,40 @@ import store from './redusers';
 import * as thunkes from './thunkes';
 import { isEmpty } from './utils';
 // import ModelsContainer from './components/Models/ModelsContainer';
-import NewVehiclesContainer from './components/Vehicles/NewVehiclesContainer';
-import TradeInVehiclesContainer from './components/Vehicles/TradeInVehiclesContainer';
-import AllNewVehiclesContainer from './components/Vehicles/AllNewVehiclesContainer';
-import NewVehicleContainer from './components/Vehicle/NewVehicleContainer';
-import TradeInVehicleContainer from './components/Vehicle/TradeInVehicleContainer';
+// import NewVehiclesContainer from './components/Vehicles/NewVehiclesContainer';
+// import TradeInVehiclesContainer from './components/Vehicles/TradeInVehiclesContainer';
+// import AllNewVehiclesContainer from './components/Vehicles/AllNewVehiclesContainer';
+// import NewVehicleContainer from './components/Vehicle/NewVehicleContainer';
+// import TradeInVehicleContainer from './components/Vehicle/TradeInVehicleContainer';
 
 const ModelsContainer = lazy(() =>
   import('./components/Models/ModelsContainer')
+);
+
+const NewVehiclesContainer = lazy(() =>
+  import('./components/Vehicles/NewVehiclesContainer')
+);
+
+const TradeInVehiclesContainer = lazy(() =>
+  import('./components/Vehicles/TradeInVehiclesContainer')
+);
+
+const AllNewVehiclesContainer = lazy(() =>
+  import('./components/Vehicle/NewVehicleContainer')
+);
+
+const NewVehicleContainer = lazy(() =>
+  import('./components/Models/ModelsContainer')
+);
+
+const TradeInVehicleContainer = lazy(() =>
+  import('./components/Vehicle/TradeInVehicleContainer')
+);
+
+const Preloader = () => (
+  <div id="infscr-loading" style={{ height: '100vh', width: '100%' }}>
+    <div className="preloader"></div>
+  </div>
 );
 
 class App extends React.Component {
@@ -42,13 +68,7 @@ class App extends React.Component {
       <div className="crm-common-wrap" id="js-container-wrap">
         <div className="container">
           <Switch>
-            <Suspense
-              fallback={
-                <div style={{ height: '100%', border: '10px solid red' }}>
-                  Загрузка
-                </div>
-              }
-            >
+            <Suspense fallback={<Preloader />}>
               {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
               <Route
                 exact

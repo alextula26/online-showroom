@@ -15,6 +15,8 @@ class ModelsContainer extends React.Component {
     const currentBrandId = this.getCurrentBrandId();
 
     fetchModels(currentBrandId);
+
+    console.log('componentDidMount');
   }
 
   getCurrentBrandId() {
@@ -29,6 +31,7 @@ class ModelsContainer extends React.Component {
   }
 
   render() {
+    console.log('render ModelsContainer');
     const { models, brand } = this.props;
 
     if (isEmpty(models)) {

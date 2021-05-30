@@ -21,6 +21,7 @@ class Models extends React.Component {
   }
 
   render() {
+    console.log('render Models');
     const { brand } = this.props;
 
     return (

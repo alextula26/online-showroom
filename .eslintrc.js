@@ -35,7 +35,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     camelcase: ['error', { properties: 'never', ignoreDestructuring: true }],
-    'comma-dangle': ['error', 'always-multiline'],
+    // 'comma-dangle': ['error', 'always-multiline'],
     'react/prop-types': 0,
     'no-console': 0,
     'import/no-unresolved': 0,
@@ -44,6 +44,11 @@ module.exports = {
     'react/jsx-one-expression-per-line': 0,
     'react/jsx-filename-extension': 0,
     'react/no-unused-state': 0,
-    'react/static-property-placement': ['enabled'],
+    'react/static-property-placement': ['warn', 'property assignment', {
+      childContextTypes: 'static getter',
+      contextTypes: 'static public field',
+      contextType: 'static public field',
+      displayName: 'static public field',
+    }],
   },
 };
