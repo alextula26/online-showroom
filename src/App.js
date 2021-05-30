@@ -5,36 +5,13 @@ import { Provider, connect } from 'react-redux';
 import store from './redusers';
 import * as thunkes from './thunkes';
 import { isEmpty } from './utils';
-// import ModelsContainer from './components/Models/ModelsContainer';
-// import NewVehiclesContainer from './components/Vehicles/NewVehiclesContainer';
-// import TradeInVehiclesContainer from './components/Vehicles/TradeInVehiclesContainer';
-// import AllNewVehiclesContainer from './components/Vehicles/AllNewVehiclesContainer';
-// import NewVehicleContainer from './components/Vehicle/NewVehicleContainer';
-// import TradeInVehicleContainer from './components/Vehicle/TradeInVehicleContainer';
 
-const ModelsContainer = lazy(() =>
-  import('./components/Models/ModelsContainer')
-);
-
-const NewVehiclesContainer = lazy(() =>
-  import('./components/Vehicles/NewVehiclesContainer')
-);
-
-const TradeInVehiclesContainer = lazy(() =>
-  import('./components/Vehicles/TradeInVehiclesContainer')
-);
-
-const AllNewVehiclesContainer = lazy(() =>
-  import('./components/Vehicle/NewVehicleContainer')
-);
-
-const NewVehicleContainer = lazy(() =>
-  import('./components/Models/ModelsContainer')
-);
-
-const TradeInVehicleContainer = lazy(() =>
-  import('./components/Vehicle/TradeInVehicleContainer')
-);
+const ModelsContainer = lazy(() => import('./components/Models/ModelsContainer'));
+const NewVehiclesContainer = lazy(() => import('./components/Vehicles/NewVehiclesContainer'));
+const TradeInVehiclesContainer = lazy(() => import('./components/Vehicles/TradeInVehiclesContainer'));
+const AllNewVehiclesContainer = lazy(() => import('./components/Vehicles/AllNewVehiclesContainer'));
+const NewVehicleContainer = lazy(() => import('./components/Vehicle/NewVehicleContainer'));
+const TradeInVehicleContainer = lazy(() => import('./components/Vehicle/TradeInVehicleContainer'));
 
 const Preloader = () => (
   <div id="infscr-loading" style={{ height: '100vh', width: '100%' }}>
@@ -65,41 +42,17 @@ class App extends React.Component {
     }
 
     return (
-      <div className="crm-common-wrap" id="js-container-wrap">
+      <div className="crm-common-wrap" id="js-container-wrap">        
         <div className="container">
           <Switch>
             <Suspense fallback={<Preloader />}>
               {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
-              <Route
-                exact
-                path="/"
-                render={() => this.getMainPageComponent(mainPageType)}
-              />
-              <Route
-                exact
-                path="/catalog/:brandId?"
-                render={() => <ModelsContainer />}
-              />
-              <Route
-                exact
-                path="/catalog/:brandId/model/:modelId?"
-                render={() => <NewVehiclesContainer />}
-              />
-              <Route
-                exact
-                path="/catalog/:brandId/model/:modelId/vehicle/:vehicleId?"
-                render={() => <NewVehicleContainer />}
-              />
-              <Route
-                exact
-                path="/trade-in/"
-                render={() => <TradeInVehiclesContainer />}
-              />
-              <Route
-                exact
-                path="/trade-in/:brandId/model/:modelId/vehicle/:vehicleId?"
-                render={() => <TradeInVehicleContainer />}
-              />
+              <Route exact path="/" render={() => this.getMainPageComponent(mainPageType)} />
+              <Route exact path="/catalog/:brandId" render={() => <ModelsContainer />} />
+              <Route exact path="/catalog/:brandId/model/:modelId" render={() => <NewVehiclesContainer />} />
+              <Route exact path="/catalog/:brandId/model/:modelId/vehicle/:vehicleId" render={() => <NewVehicleContainer />} />
+              <Route exact path="/trade-in/" render={() => <TradeInVehiclesContainer />} />
+              <Route exact path="/trade-in/:brandId/model/:modelId/vehicle/:vehicleId" render={() => <TradeInVehicleContainer />} />
             </Suspense>
             <Route path="*" render={() => <div>404 Filenot found</div>} />
           </Switch>

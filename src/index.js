@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import OnlineShowroomApp from './App';
 import reportWebVitals from './reportWebVitals';
 import './scss/compiled.scss';
-import './scss/autocrm10_lexus/theme.scss';
 
 // Types of main page: listModelsByBrand, listAllNewVehicles, listTradeInVehicles
 
