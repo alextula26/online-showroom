@@ -12,6 +12,7 @@ export default (modelId, typeVehicles, query) => async (dispatch) => {
     const generalListColorsByModel = await API.getModelColor(modelId);
 
     const filterItems = {
+      modelId,
       modifications: getLisFilterItems(
         vehicles.items,
         CONST.vehicleProps.modification.prop,
@@ -27,7 +28,8 @@ export default (modelId, typeVehicles, query) => async (dispatch) => {
       maxPrice: getMaxPrice(vehicles.items, 'price'),
     };
 
-    dispatch(actions.setFilterItems({ filterItems }));
+    // dispatch(actions.setFilterModelId({ modelId }));
+    dispatch(actions.addFilterItems({ filterItems }));
     dispatch(actions.fetchNewVehicles({ vehicles }));
   } catch (e) {
     console.log(e);

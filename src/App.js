@@ -1,5 +1,7 @@
 import React, { Suspense, lazy } from 'react';
-import { withRouter, BrowserRouter, Switch, Route } from 'react-router-dom';
+import {
+  withRouter, BrowserRouter, Switch, Route,
+} from 'react-router-dom';
 import { compose } from 'redux';
 import { Provider, connect } from 'react-redux';
 import store from './redusers';
@@ -15,7 +17,7 @@ const TradeInVehicleContainer = lazy(() => import('./components/Vehicle/TradeInV
 
 const Preloader = () => (
   <div id="infscr-loading" style={{ height: '100vh', width: '100%' }}>
-    <div className="preloader"></div>
+    <div className="preloader" />
   </div>
 );
 
@@ -42,7 +44,7 @@ class App extends React.Component {
     }
 
     return (
-      <div className="crm-common-wrap" id="js-container-wrap">        
+      <div className="crm-common-wrap" id="js-container-wrap">
         <div className="container">
           <Switch>
             <Suspense fallback={<Preloader />}>
@@ -72,11 +74,13 @@ const actionCreators = {
 
 const AppContainer = compose(
   connect(mapStateToProps, actionCreators),
-  withRouter
+  withRouter,
 )(App);
 
 const OnlineShowroomApp = ({ mainPageType, theme }) => {
-  import(`./scss/${theme}/theme.scss`);
+  // import(`./scss/${theme}/theme.scss`);
+  console.log(theme);
+  import('./scss/autocrm10_lexus/theme.scss');
   return (
     <BrowserRouter>
       <Provider store={store}>

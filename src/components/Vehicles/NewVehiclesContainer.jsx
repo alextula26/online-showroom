@@ -33,7 +33,7 @@ class NewVehiclesContainer extends React.Component {
     return (
       <>
         <PageHeader header={header} classes="page-title" />
-        <VehiclesFilterForm modelId={model.id} />
+        <VehiclesFilterForm />
         <NewVehicles
           brand={brand}
           model={model}

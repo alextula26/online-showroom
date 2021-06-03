@@ -6,15 +6,31 @@ import * as thunkes from '../../thunkes';
 import SelectComponent from './FilterControl/SelectComponent';
 import ColorsComponent from './FilterControl/ColorsComponent';
 import RangeSliderComponent from './FilterControl/RangeSliderComponent';
+import CONST from '../../utils/const';
 
 class VehiclesFilterForm extends React.Component {
+  componentDidUpdate() {
+    const {
+      selectedItems, prices, modelId, status, stateFilter, fetchFilterVehicles,
+    } = this.props;
+
+    if (stateFilter === CONST.filterState.filteringByList) {
+      fetchFilterVehicles({
+        selected: selectedItems,
+        minPrice: prices.minPriceRange,
+        maxPrice: prices.maxPriceRange,
+        modelId,
+        status,
+      });
+    }
+  }
+
   render() {
     const {
-      modelId,
-      filters,
+      filtersList,
       selectedItems,
-      fetchFilterVehicles,
       setFilterPrice,
+      addSelectItemIdToSelected,
       fetchFilterVehiclesByPrice,
       prices: {
         minPrice, maxPrice, minPriceRange, maxPriceRange,
@@ -33,11 +49,10 @@ class VehiclesFilterForm extends React.Component {
                 <SelectComponent
                   id="modificationId"
                   label="Модификации"
-                  elements={filters.modifications}
+                  elements={filtersList.modifications}
                   filterName="modifications"
                   selectedItems={selectedItems}
-                  filter={fetchFilterVehicles}
-                  modelId={modelId}
+                  onChange={addSelectItemIdToSelected}
                 />
               </div>
 
@@ -45,11 +60,10 @@ class VehiclesFilterForm extends React.Component {
                 <SelectComponent
                   id="equipmentId"
                   label="Комплектации"
-                  elements={filters.equipments}
+                  elements={filtersList.equipments}
                   filterName="equipments"
                   selectedItems={selectedItems}
-                  filter={fetchFilterVehicles}
-                  modelId={modelId}
+                  onChange={addSelectItemIdToSelected}
                 />
               </div>
 
@@ -57,11 +71,10 @@ class VehiclesFilterForm extends React.Component {
                 <ColorsComponent
                   id="colorId"
                   label="Цвет"
-                  elements={filters.colors}
+                  elements={filtersList.colors}
                   filterName="colors"
                   selectedItems={selectedItems}
-                  filter={fetchFilterVehicles}
-                  modelId={modelId}
+                  onChange={addSelectItemIdToSelected}
                 />
               </div>
 
@@ -84,16 +97,20 @@ class VehiclesFilterForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  filters: state.filters.lists,
-  selectedItems: state.filters.selected,
   vehicles: state.newVehiclesPage.vehicles,
+  filtersList: state.filters.lists,
+  selectedItems: state.filters.selected,
   prices: state.filters.prices,
+  modelId: state.filters.modelId,
+  status: state.filters.status,
+  stateFilter: state.filters.stateFilter,
 });
 
 const actionCreators = ({
   fetchFilterVehicles: thunkes.fetchFilterVehicles,
   fetchFilterVehiclesByPrice: thunkes.fetchFilterVehiclesByPrice,
   setFilterPrice: actions.setFilterPrice,
+  addSelectItemIdToSelected: actions.addSelectItemIdToSelected,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);

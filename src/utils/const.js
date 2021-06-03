@@ -20,4 +20,10 @@ export default {
       name: 'color_name',
     },
   },
+  filterState: {
+    filteringDisabled: 'filteringDisabled',
+    filteringByList: 'filteringByList',
+    filteringByPrice: 'filteringByPrice',
+    filteringByStatus: 'filteringByStatus',
+  },
 };

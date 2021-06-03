@@ -1,9 +1,10 @@
 import CONST from '../utils/const';
 import * as actions from '../actions';
 import getVehicles from './vehicles';
-import {
+/* import {
   getQueryString, addSelectedFilterItem, getIdsFilterItems, getMinPrice, getMaxPrice,
-} from '../utils';
+} from '../utils'; */
+import { getQueryString, getIdsFilterItems } from '../utils';
 
 const filterNamesOfResponseProps = [
   [CONST.vehicleProps.modification.field, CONST.vehicleProps.modification.prop],
@@ -13,41 +14,33 @@ const filterNamesOfResponseProps = [
 
 export default (options) => async (dispatch) => {
   const {
-    modelId, filterName, selectedItemId, selectedItems, minPrice, maxPrice, status,
+    selected, minPrice, maxPrice, modelId, status,
   } = options;
 
-  console.log('minPrice', minPrice);
-  console.log('maxPrice', maxPrice);
-  console.log('status', status);
-
-  const selectedFilterItems = addSelectedFilterItem(selectedItems, selectedItemId, filterName);
-  const query = getQueryString(selectedFilterItems);
+  const query = getQueryString(selected);
 
   try {
     const vehicles = await getVehicles(modelId, CONST.vehiclesTypes.newVehicles, query);
 
-    const itemsForDisable = filterNamesOfResponseProps
-      .filter(([name]) => name !== filterName)
-      .reduce((acc, [name, prop]) => (
-        { ...acc, [name]: getIdsFilterItems(vehicles.items, prop) }
+    const filterItemsIds = filterNamesOfResponseProps
+      .filter(([field]) => field !== 'modifications')
+      .reduce((acc, [field, prop]) => (
+        { ...acc, [field]: getIdsFilterItems(vehicles.items, prop) }
       ), {});
 
-    const curentDisabledItems = {
-      currentItem: {
-        [filterName]: selectedItemId,
-      },
-      disabledItems: {
-        ...itemsForDisable,
-      },
-    };
+    console.log('selected', selected);
+    console.log('minPrice', minPrice);
+    console.log('maxPrice', maxPrice);
+    console.log('modelId', modelId);
+    console.log('status', status);
+    console.log('filterItemsIds', filterItemsIds);
+    console.log('vehicles', vehicles);
 
-    const minPriceRange = minPrice ?? getMinPrice(vehicles.items, 'price');
-    const maxPriceRange = maxPrice ?? getMaxPrice(vehicles.items, 'price');
-
+    // const minPriceRange = minPrice ?? getMinPrice(vehicles.items, 'price');
+    // const maxPriceRange = maxPrice ?? getMaxPrice(vehicles.items, 'price');
+    dispatch(actions.changeFilterState({ stateFilter: CONST.filterState.filteringDisabled }));
+    dispatch(actions.addFilterDisabledItems({ filterItemsIds }));
     dispatch(actions.fetchNewVehicles({ vehicles }));
-    dispatch(actions.updateFilterItems({
-      filterName, selectedItemId, curentDisabledItems, minPriceRange, maxPriceRange,
-    }));
   } catch (e) {
     console.log(e);
     throw e;

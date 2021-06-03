@@ -6,20 +6,10 @@ class SelectComponent extends React.Component {
   handleOnSelect = (selectedItemId) => {
     const {
       filterName,
-      selectedItems,
-      filter,
-      modelId,
+      onChange,
     } = this.props;
 
-    filter({
-      modelId,
-      filterName,
-      selectedItemId: Number(selectedItemId),
-      selectedItems,
-      minPrice: null,
-      maxPrice: null,
-      status: 'all',
-    });
+    onChange({ filterName, selectedItemId: Number(selectedItemId) });
   };
 
   render() {

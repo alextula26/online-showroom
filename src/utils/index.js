@@ -28,7 +28,9 @@ export const getQueryString = (filters) => {
     colors: (item) => `color[]=${item}`,
   };
 
-  const keys = Object.keys(filters);
+  const keys = Object.keys(filters).filter((item) => item !== 'modelId');
+
+  console.log('keys', keys);
 
   const query = keys
     .reduce((acc, key) => {

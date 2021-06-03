@@ -8,11 +8,10 @@ class ColorsComponent extends React.Component {
       filterName,
       selectedItems,
       filter,
-      modelId,
     } = this.props;
 
     filter({
-      modelId,
+      modelId: selectedItems.modelId,
       filterName,
       selectedItemId: Number(e.target.value),
       selectedItems,

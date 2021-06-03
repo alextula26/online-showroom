@@ -1,9 +1,10 @@
 import { handleActions } from 'redux-actions';
 import * as actions from '../actions';
 import { includes } from '../utils';
+import CONST from '../utils/const';
 
 const filtersReducer = handleActions({
-  [actions.setFilterItems](state, { payload: { filterItems } }) {
+  [actions.addFilterItems](state, { payload: { filterItems } }) {
     return {
       ...state,
       lists: {
@@ -18,6 +19,55 @@ const filtersReducer = handleActions({
         maxPrice: filterItems.maxPrice,
         minPriceRange: filterItems.minPrice,
         maxPriceRange: filterItems.maxPrice,
+      },
+      modelId: filterItems.modelId,
+    };
+  },
+
+  [actions.addSelectItemIdToSelected](state, { payload: { filterName, selectedItemId } }) {
+    return {
+      ...state,
+      stateFilter: CONST.filterState.filteringByList,
+      lists: {
+        ...state.lists,
+        [filterName]: state.lists[filterName].map((item) => (
+          item.id === selectedItemId ? { ...item, selected: !item.selected } : item
+        )),
+      },
+      selected: {
+        ...state.selected,
+        [filterName]: includes(state.selected[filterName], selectedItemId)
+          ? state.selected[filterName].filter((item) => item !== selectedItemId)
+          : [...state.selected[filterName], selectedItemId],
+      },
+    };
+  },
+
+  [actions.changeFilterState](state, { payload: { stateFilter } }) {
+    console.log(stateFilter);
+    return {
+      ...state,
+      stateFilter,
+    };
+  },
+
+  [actions.addFilterDisabledItems](state, { payload: { filterItemsIds } }) {
+    const namefilterItems = Object.keys(filterItemsIds);
+
+    const disabledFilterItems = namefilterItems.reduce((acc, name) => ({
+      ...acc,
+      [name]: state.lists[name].map((item) => (
+        {
+          ...item,
+          disabled: !includes(filterItemsIds[name], item.id),
+        })),
+    }), {});
+
+    return {
+      ...state,
+      lists: {
+        ...state.lists,
+        ...disabledFilterItems,
       },
     };
   },
@@ -72,7 +122,13 @@ const filtersReducer = handleActions({
     };
   },
 }, {
+  stateFilter: 'filteringDisabled', // filteringDisabled, filteringByList, filteringByPrice, filteringByStatus
   lists: {
+    modifications: [],
+    equipments: [],
+    colors: [],
+  },
+  selected: {
     modifications: [],
     equipments: [],
     colors: [],
@@ -83,12 +139,8 @@ const filtersReducer = handleActions({
     minPriceRange: null,
     maxPriceRange: null,
   },
+  modelId: null,
   status: 'all', // all, inStock, onWay
-  selected: {
-    modifications: [],
-    equipments: [],
-    colors: [],
-  },
 });
 
 export default filtersReducer;
