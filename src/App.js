@@ -77,10 +77,10 @@ const AppContainer = compose(
   withRouter,
 )(App);
 
-const OnlineShowroomApp = ({ mainPageType, theme }) => {
+const OnlineShowroomApp = ({ mainPageType }) => {
   // import(`./scss/${theme}/theme.scss`);
-  console.log(theme);
-  import('./scss/autocrm10_lexus/theme.scss');
+  // mport('./scss/autocrm10_lexus/theme.scss');
+  console.log('App');
   return (
     <BrowserRouter>
       <Provider store={store}>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 import * as thunkes from '../../thunkes';
+import { StateVehiclesFilterFormContext } from '../../context/state-vehicles-filter-form-context';
 import SelectComponent from './FilterControl/SelectComponent';
 import ColorsComponent from './FilterControl/ColorsComponent';
 import RangeSliderComponent from './FilterControl/RangeSliderComponent';
@@ -14,7 +15,7 @@ class VehiclesFilterForm extends React.Component {
       selectedItems, prices, modelId, status, stateFilter, currentFilterfield, fetchFilterVehicles,
     } = this.props;
 
-    if (stateFilter === CONST.filterState.filteringByList) {
+    if (stateFilter === CONST.filterState.filtering) {
       fetchFilterVehicles({
         selected: selectedItems,
         minPrice: prices.minPriceRange,
@@ -29,67 +30,65 @@ class VehiclesFilterForm extends React.Component {
   render() {
     const {
       filtersList,
-      setFilterPrice,
       addSelectItemIdToSelected,
-      fetchFilterVehiclesByPrice,
+      changeFilterState,
       prices: {
         minPrice, maxPrice, minPriceRange, maxPriceRange,
       },
     } = this.props;
 
     return (
-      <section className="filter">
-        <form
-          layout="vertical"
-        >
+      <StateVehiclesFilterFormContext.Provider value={{ changeFilterState }}>
+        <section className="filter">
+          <form
+            layout="vertical"
+          >
 
-          <div className="filter-group">
-            <div className="row">
-              <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
-                <SelectComponent
-                  id="modificationId"
-                  label="Модификации"
-                  elements={filtersList.modifications}
-                  filterName="modifications"
-                  onChange={addSelectItemIdToSelected}
-                />
-              </div>
+            <div className="filter-group">
+              <div className="row">
+                <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
+                  <SelectComponent
+                    id="modificationId"
+                    label="Модификации"
+                    elements={filtersList.modifications}
+                    filterName="modifications"
+                    onChange={addSelectItemIdToSelected}
+                  />
+                </div>
 
-              <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
-                <SelectComponent
-                  id="equipmentId"
-                  label="Комплектации"
-                  elements={filtersList.equipments}
-                  filterName="equipments"
-                  onChange={addSelectItemIdToSelected}
-                />
-              </div>
+                <div className="col-24 col-xl-12 col-xxl-6 css-form-free">
+                  <SelectComponent
+                    id="equipmentId"
+                    label="Комплектации"
+                    elements={filtersList.equipments}
+                    filterName="equipments"
+                    onChange={addSelectItemIdToSelected}
+                  />
+                </div>
 
-              <div className="col-24 col-xl-12">
-                <ColorsComponent
-                  id="colorId"
-                  label="Цвет"
-                  elements={filtersList.colors}
-                  filterName="colors"
-                  onChange={addSelectItemIdToSelected}
-                />
-              </div>
+                <div className="col-24 col-xl-12">
+                  <ColorsComponent
+                    id="colorId"
+                    label="Цвет"
+                    elements={filtersList.colors}
+                    filterName="colors"
+                    onChange={addSelectItemIdToSelected}
+                  />
+                </div>
 
-              <div className="col-24 col-xl-12 css-form-free">
-                <RangeSliderComponent
-                  minPrice={minPrice}
-                  maxPrice={maxPrice}
-                  minPriceRange={minPriceRange}
-                  maxPriceRange={maxPriceRange}
-                  setFilterPrice={setFilterPrice}
-                  fetchFilterVehiclesByPrice={fetchFilterVehiclesByPrice}
-                />
+                <div className="col-24 col-xl-12 css-form-free">
+                  <RangeSliderComponent
+                    minPrice={minPrice}
+                    maxPrice={maxPrice}
+                    minPriceRange={minPriceRange}
+                    maxPriceRange={maxPriceRange}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-      </section>
-
+          </form>
+        </section>
+      </StateVehiclesFilterFormContext.Provider>
     );
   }
 }
@@ -107,9 +106,8 @@ const mapStateToProps = (state) => ({
 
 const actionCreators = ({
   fetchFilterVehicles: thunkes.fetchFilterVehicles,
-  fetchFilterVehiclesByPrice: thunkes.fetchFilterVehiclesByPrice,
-  setFilterPrice: actions.setFilterPrice,
   addSelectItemIdToSelected: actions.addSelectItemIdToSelected,
+  changeFilterState: actions.changeFilterState,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);

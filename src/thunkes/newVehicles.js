@@ -28,7 +28,6 @@ export default (modelId, typeVehicles, query) => async (dispatch) => {
       maxPrice: getMaxPrice(vehicles.items, 'price'),
     };
 
-    // dispatch(actions.setFilterModelId({ modelId }));
     dispatch(actions.addFilterItems({ filterItems }));
     dispatch(actions.fetchNewVehicles({ vehicles }));
   } catch (e) {

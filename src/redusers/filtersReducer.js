@@ -27,7 +27,6 @@ const filtersReducer = handleActions({
   [actions.addSelectItemIdToSelected](state, { payload: { filterName, selectedItemId } }) {
     return {
       ...state,
-      stateFilter: CONST.filterState.filteringByList,
       currentFilterfield: filterName,
       lists: {
         ...state.lists,
@@ -85,46 +84,7 @@ const filtersReducer = handleActions({
     };
   },
 
-  /* [actions.updateFilterItems](state, {
-    payload: {
-      filterName, selectedItemId, curentDisabledItems, minPriceRange, maxPriceRange,
-    },
-  }) {
-    const nameDisabledItems = Object.keys(curentDisabledItems.disabledItems);
-
-    const disabledFilterItems = nameDisabledItems.reduce((acc, name) => (
-      {
-        ...acc,
-        [name]: state.lists[name].map((item) => (
-          {
-            ...item,
-            disabled: !includes(curentDisabledItems.disabledItems[name], item.id),
-          })),
-      }), {});
-
-    return {
-      ...state,
-      lists: {
-        ...state.lists,
-        [filterName]: state.lists[filterName].map((item) => (
-          item.id === selectedItemId ? { ...item, selected: !item.selected } : item)),
-        ...disabledFilterItems,
-      },
-      selected: {
-        ...state.selected,
-        [filterName]: includes(state.selected[filterName], selectedItemId)
-          ? state.selected[filterName].filter((item) => item !== selectedItemId)
-          : [...state.selected[filterName], selectedItemId],
-      },
-      prices: {
-        ...state.prices,
-        minPriceRange,
-        maxPriceRange,
-      },
-    };
-  }, */
-
-  [actions.setFilterPrice](state, { payload: { minPriceRange, maxPriceRange } }) {
+  [actions.addFilterPrice](state, { payload: { minPriceRange, maxPriceRange } }) {
     return {
       ...state,
       prices: {
@@ -135,7 +95,7 @@ const filtersReducer = handleActions({
     };
   },
 }, {
-  stateFilter: 'filteringDisabled', // filteringDisabled, filteringByList, filteringByPrice, filteringByStatus
+  stateFilter: CONST.filterState.filtered,
   currentFilterfield: null,
   lists: {
     modifications: [],

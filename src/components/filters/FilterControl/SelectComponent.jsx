@@ -1,15 +1,22 @@
 import React from 'react';
 import { Form, Dropdown } from 'react-bootstrap';
 import cn from 'classnames';
+import { StateVehiclesFilterFormContext } from '../../../context/state-vehicles-filter-form-context';
+import CONST from '../../../utils/const';
 
 class SelectComponent extends React.Component {
+  static contextType = StateVehiclesFilterFormContext;
+
   handleOnSelect = (selectedItemId) => {
     const {
       filterName,
       onChange,
     } = this.props;
 
+    const { changeFilterState } = this.context;
+
     onChange({ filterName, selectedItemId: Number(selectedItemId) });
+    changeFilterState({ stateFilter: CONST.filterState.filtering });
   };
 
   render() {
@@ -19,6 +26,7 @@ class SelectComponent extends React.Component {
     } = this.props;
 
     return (
+
       <Form.Group>
 
         <Form.Label className="control-label">{label}</Form.Label>

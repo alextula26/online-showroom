@@ -21,9 +21,7 @@ export default {
     },
   },
   filterState: {
-    filteringDisabled: 'filteringDisabled',
-    filteringByList: 'filteringByList',
-    filteringByPrice: 'filteringByPrice',
-    filteringByStatus: 'filteringByStatus',
+    filtering: 'filtering',
+    filtered: 'filtered',
   },
 };
