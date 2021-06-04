@@ -14,13 +14,8 @@ export const fetchAllNewVehicles = createAction('FETCH_ALL_NEW_VEHICLES');
 // export const fetchCharacteristics = createAction('FETCH_CHARACTERISTICS');
 
 // Action creators for filters
-
-export const setFilterModelId = createAction('SET_FILTER_MODEL_ID');
-
+export const changeFilterState = createAction('CHANGE_FILTER_STATE');
 export const addFilterItems = createAction('ADD_FILTER_ITEMS');
 export const addSelectItemIdToSelected = createAction('ADD_SELECT_ITEM_ID_TO_SELECTED');
-export const changeFilterState = createAction('CHANGE_FILTER_STATE');
 export const addFilterDisabledItems = createAction('ADD_FILTERDISABLED_ITEMS');
 export const addFilterPrice = createAction('ADD_FILTER_PRICE');
-
-// export const updateFilterItems = createAction('UPDATE_FILTER_ITEMS');

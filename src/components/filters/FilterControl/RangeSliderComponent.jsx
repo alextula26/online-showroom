@@ -2,16 +2,17 @@
 import React from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import ReactSlider from 'react-slider';
+import { StateVehiclesFilterFormContext } from '../../../context/state-vehicles-filter-form-context';
+import CONST from '../../../utils/const';
 
 class RangeSliderComponent extends React.Component {
-  handleOnChange = ([minPriceRange, maxPriceRange]) => {
-    const { setFilterPrice } = this.props;
-    setFilterPrice({ minPriceRange, maxPriceRange });
-  }
+  static contextType = StateVehiclesFilterFormContext;
 
   handleOnAfterChange = ([minPriceRange, maxPriceRange]) => {
-    const { fetchFilterVehiclesByPrice } = this.props;
-    fetchFilterVehiclesByPrice({ minPriceRange, maxPriceRange });
+    const { onAfterChange } = this.props;
+    const { changeFilterState } = this.context;
+    onAfterChange({ minPriceRange, maxPriceRange });
+    changeFilterState({ stateFilter: CONST.filterState.filtering });
   }
 
   render() {
@@ -50,7 +51,6 @@ class RangeSliderComponent extends React.Component {
           step={1000}
           minDistance={1000}
           onAfterChange={this.handleOnAfterChange}
-          onChange={this.handleOnChange}
           renderThumb={(props, state) => (
             <div {...props}><span>{state.valueNow}</span></div>
           )}

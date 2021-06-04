@@ -51,6 +51,17 @@ const filtersReducer = handleActions({
     };
   },
 
+  [actions.addFilterPrice](state, { payload: { minPriceRange, maxPriceRange } }) {
+    return {
+      ...state,
+      prices: {
+        ...state.prices,
+        minPriceRange,
+        maxPriceRange,
+      },
+    };
+  },
+
   [actions.addFilterDisabledItems](state, { payload: { vehicles, currentFilterfield } }) {
     const filterNamesOfResponseProps = [
       [CONST.vehicleProps.modification.field, CONST.vehicleProps.modification.prop],
@@ -80,17 +91,6 @@ const filtersReducer = handleActions({
       lists: {
         ...state.lists,
         ...disabledFilterItems,
-      },
-    };
-  },
-
-  [actions.addFilterPrice](state, { payload: { minPriceRange, maxPriceRange } }) {
-    return {
-      ...state,
-      prices: {
-        ...state.prices,
-        minPriceRange,
-        maxPriceRange,
       },
     };
   },

@@ -32,11 +32,13 @@ class VehiclesFilterForm extends React.Component {
       filtersList,
       addSelectItemIdToSelected,
       changeFilterState,
+      addFilterPrice,
       prices: {
         minPrice, maxPrice, minPriceRange, maxPriceRange,
       },
     } = this.props;
 
+    console.log(this.props);
     return (
       <StateVehiclesFilterFormContext.Provider value={{ changeFilterState }}>
         <section className="filter">
@@ -82,6 +84,7 @@ class VehiclesFilterForm extends React.Component {
                     maxPrice={maxPrice}
                     minPriceRange={minPriceRange}
                     maxPriceRange={maxPriceRange}
+                    onAfterChange={addFilterPrice}
                   />
                 </div>
               </div>
@@ -106,8 +109,10 @@ const mapStateToProps = (state) => ({
 
 const actionCreators = ({
   fetchFilterVehicles: thunkes.fetchFilterVehicles,
-  addSelectItemIdToSelected: actions.addSelectItemIdToSelected,
   changeFilterState: actions.changeFilterState,
+  addSelectItemIdToSelected: actions.addSelectItemIdToSelected,
+  addFilterPrice: actions.addFilterPrice,
+  // addFilterPrice: actions.addFilterPrice,
 });
 
 const ConnectedVehiclesFilterForm = connect(mapStateToProps, actionCreators)(VehiclesFilterForm);
