@@ -7,6 +7,7 @@ import * as thunkes from '../../thunkes';
 import { isEmpty } from '../../utils';
 import { getVisibleBrands, getVisibleModels } from '../../selectors';
 import Models from './Models';
+import Preloader from '../commons/Preloader';
 
 class ModelsContainer extends React.Component {
   componentDidMount() {
@@ -32,7 +33,7 @@ class ModelsContainer extends React.Component {
     const { models, brand } = this.props;
 
     if (isEmpty(models)) {
-      return null;
+      return <Preloader />;
     }
 
     return (
