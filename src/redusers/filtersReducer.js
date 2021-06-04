@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import * as actions from '../actions';
-import { includes } from '../utils';
+import { includes, getIdsFilterItems } from '../utils';
 import CONST from '../utils/const';
 
 const filtersReducer = handleActions({
@@ -28,6 +28,7 @@ const filtersReducer = handleActions({
     return {
       ...state,
       stateFilter: CONST.filterState.filteringByList,
+      currentFilterfield: filterName,
       lists: {
         ...state.lists,
         [filterName]: state.lists[filterName].map((item) => (
@@ -51,7 +52,19 @@ const filtersReducer = handleActions({
     };
   },
 
-  [actions.addFilterDisabledItems](state, { payload: { filterItemsIds } }) {
+  [actions.addFilterDisabledItems](state, { payload: { vehicles, currentFilterfield } }) {
+    const filterNamesOfResponseProps = [
+      [CONST.vehicleProps.modification.field, CONST.vehicleProps.modification.prop],
+      [CONST.vehicleProps.equipment.field, CONST.vehicleProps.equipment.prop],
+      [CONST.vehicleProps.color.field, CONST.vehicleProps.color.prop],
+    ];
+
+    const filterItemsIds = filterNamesOfResponseProps
+      .filter(([field]) => field !== currentFilterfield)
+      .reduce((acc, [field, prop]) => (
+        { ...acc, [field]: getIdsFilterItems(vehicles.items, prop) }
+      ), {});
+
     const namefilterItems = Object.keys(filterItemsIds);
 
     const disabledFilterItems = namefilterItems.reduce((acc, name) => ({
@@ -72,7 +85,7 @@ const filtersReducer = handleActions({
     };
   },
 
-  [actions.updateFilterItems](state, {
+  /* [actions.updateFilterItems](state, {
     payload: {
       filterName, selectedItemId, curentDisabledItems, minPriceRange, maxPriceRange,
     },
@@ -109,7 +122,7 @@ const filtersReducer = handleActions({
         maxPriceRange,
       },
     };
-  },
+  }, */
 
   [actions.setFilterPrice](state, { payload: { minPriceRange, maxPriceRange } }) {
     return {
@@ -123,6 +136,7 @@ const filtersReducer = handleActions({
   },
 }, {
   stateFilter: 'filteringDisabled', // filteringDisabled, filteringByList, filteringByPrice, filteringByStatus
+  currentFilterfield: null,
   lists: {
     modifications: [],
     equipments: [],

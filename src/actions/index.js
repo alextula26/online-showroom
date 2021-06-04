@@ -22,5 +22,5 @@ export const addSelectItemIdToSelected = createAction('ADD_SELECT_ITEM_ID_TO_SEL
 export const changeFilterState = createAction('CHANGE_FILTER_STATE');
 export const addFilterDisabledItems = createAction('ADD_FILTERDISABLED_ITEMS');
 
-export const updateFilterItems = createAction('UPDATE_FILTER_ITEMS');
+// export const updateFilterItems = createAction('UPDATE_FILTER_ITEMS');
 export const setFilterPrice = createAction('SET_FILTER_PRICE');

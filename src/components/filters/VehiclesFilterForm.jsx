@@ -11,7 +11,7 @@ import CONST from '../../utils/const';
 class VehiclesFilterForm extends React.Component {
   componentDidUpdate() {
     const {
-      selectedItems, prices, modelId, status, stateFilter, fetchFilterVehicles,
+      selectedItems, prices, modelId, status, stateFilter, currentFilterfield, fetchFilterVehicles,
     } = this.props;
 
     if (stateFilter === CONST.filterState.filteringByList) {
@@ -21,6 +21,7 @@ class VehiclesFilterForm extends React.Component {
         maxPrice: prices.maxPriceRange,
         modelId,
         status,
+        currentFilterfield,
       });
     }
   }
@@ -28,7 +29,6 @@ class VehiclesFilterForm extends React.Component {
   render() {
     const {
       filtersList,
-      selectedItems,
       setFilterPrice,
       addSelectItemIdToSelected,
       fetchFilterVehiclesByPrice,
@@ -51,7 +51,6 @@ class VehiclesFilterForm extends React.Component {
                   label="Модификации"
                   elements={filtersList.modifications}
                   filterName="modifications"
-                  selectedItems={selectedItems}
                   onChange={addSelectItemIdToSelected}
                 />
               </div>
@@ -62,7 +61,6 @@ class VehiclesFilterForm extends React.Component {
                   label="Комплектации"
                   elements={filtersList.equipments}
                   filterName="equipments"
-                  selectedItems={selectedItems}
                   onChange={addSelectItemIdToSelected}
                 />
               </div>
@@ -73,7 +71,6 @@ class VehiclesFilterForm extends React.Component {
                   label="Цвет"
                   elements={filtersList.colors}
                   filterName="colors"
-                  selectedItems={selectedItems}
                   onChange={addSelectItemIdToSelected}
                 />
               </div>
@@ -92,6 +89,7 @@ class VehiclesFilterForm extends React.Component {
           </div>
         </form>
       </section>
+
     );
   }
 }
@@ -104,6 +102,7 @@ const mapStateToProps = (state) => ({
   modelId: state.filters.modelId,
   status: state.filters.status,
   stateFilter: state.filters.stateFilter,
+  currentFilterfield: state.filters.currentFilterfield,
 });
 
 const actionCreators = ({
