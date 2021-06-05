@@ -38,7 +38,6 @@ class VehiclesFilterForm extends React.Component {
       },
     } = this.props;
 
-    console.log(this.props);
     return (
       <StateVehiclesFilterFormContext.Provider value={{ changeFilterState }}>
         <section className="filter">

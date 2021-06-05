@@ -21,24 +21,22 @@ export const merge = (object, other) => _.merge(object, other);
 
 export const includes = (array, index) => _.includes(array, index);
 
-export const getQueryString = (filters) => {
+export const getQueryString = (selectedFilters) => {
   const mappingOptions = {
     modifications: (item) => `modification[]=${item}`,
     equipments: (item) => `equipment[]=${item}`,
     colors: (item) => `color[]=${item}`,
   };
 
-  const keys = Object.keys(filters).filter((item) => item !== 'modelId');
-
-  console.log('keys', keys);
+  const keys = Object.keys(selectedFilters);
 
   const query = keys
     .reduce((acc, key) => {
-      if (isEmpty(filters[key])) {
+      if (isEmpty(selectedFilters[key])) {
         return acc;
       }
 
-      const queryItem = filters[key]
+      const queryItem = selectedFilters[key]
         .map((item) => mappingOptions[key](item))
         .join('&');
 

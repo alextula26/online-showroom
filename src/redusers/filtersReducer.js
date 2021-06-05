@@ -44,7 +44,6 @@ const filtersReducer = handleActions({
   },
 
   [actions.changeFilterState](state, { payload: { stateFilter } }) {
-    console.log(stateFilter);
     return {
       ...state,
       stateFilter,

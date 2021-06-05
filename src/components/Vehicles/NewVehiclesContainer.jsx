@@ -30,8 +30,6 @@ class NewVehiclesContainer extends React.Component {
 
     const header = `Автомобили ${brand.name} ${model.name} в наличии`;
 
-    console.log('NewVehiclesContainer', this.props);
-
     return (
       <>
         <PageHeader header={header} classes="page-title" />
