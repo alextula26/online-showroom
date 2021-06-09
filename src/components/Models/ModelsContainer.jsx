@@ -2,22 +2,25 @@ import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as thunkes from '../../thunkes';
-import { isEmpty } from '../../utils';
-import { getBrandsAndModels } from '../../selectors';
+import { getCurrentBrandId, isEqualBrandIds } from '../../utils';
+import { getModelsContainerData } from '../../selectors';
 import Models from './Models';
 import Preloader from '../commons/Preloader';
 
 const ModelsContainer = () => {
-  const { brands, models } = useSelector((state) => getBrandsAndModels(state));
-  const { brandId } = useParams();
-  const dispatch = useDispatch();
+  const {
+    brand,
+    models,
+    loading,
+  } = useSelector((state) => getModelsContainerData(state));
+  const { brandId: brandIdParams } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const [brand] = brands;
+  const brandIdState = brand.id;
+  const currentBrandId = getCurrentBrandId(brandIdParams, brandIdState);
 
-  const currentBrandId = Number(brandId) || brand.id;
-
-  if (brand.id !== currentBrandId) {
+  if (isEqualBrandIds(currentBrandId, brandIdState)) {
     history.push('/404');
   }
 
@@ -25,7 +28,7 @@ const ModelsContainer = () => {
     dispatch(thunkes.fetchModels(currentBrandId));
   }, [dispatch]);
 
-  if (isEmpty(models)) {
+  if (loading) {
     return <Preloader />;
   }
 
