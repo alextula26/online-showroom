@@ -3,11 +3,12 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as thunkes from '../../thunkes';
-import { isEmpty } from '../../utils';
+// import { isEmpty } from '../../utils';
 // import { getVehicles } from '../../selectors';
 import PageHeader from '../commons/PageHeader';
 import VehiclesFilterForm from '../filters/VehiclesFilterForm';
 import NewVehicles from './NewVehicles';
+import Preloader from '../commons/Preloader';
 
 class NewVehiclesContainer extends React.Component {
   componentDidMount() {
@@ -22,10 +23,15 @@ class NewVehiclesContainer extends React.Component {
   }
 
   render() {
-    const { brand, model, vehicles } = this.props;
+    const {
+      brand,
+      model,
+      vehicles,
+      loading,
+    } = this.props;
 
-    if (isEmpty(vehicles)) {
-      return null;
+    if (loading) {
+      return <Preloader />;
     }
 
     const header = `Автомобили ${brand.name} ${model.name} в наличии`;
@@ -49,6 +55,7 @@ const mapStateToProps = (state) => ({
   brand: state.newVehiclesPage.brand,
   model: state.newVehiclesPage.model,
   vehicles: state.newVehiclesPage.vehicles,
+  loading: state.newVehiclesPage.loading,
   filter: state.filters,
 });
 

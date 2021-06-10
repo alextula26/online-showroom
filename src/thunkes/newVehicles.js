@@ -30,8 +30,9 @@ export default (modelId, typeVehicles, query) => async (dispatch) => {
 
     dispatch(actions.addFilterItems({ filterItems }));
     dispatch(actions.fetchNewVehicles({ vehicles }));
+    dispatch(actions.changeVehiclesLoader({ loading: false }));
   } catch (e) {
-    console.log(e);
+    console.log('newVehicles thunk', e);
     throw e;
   }
 };

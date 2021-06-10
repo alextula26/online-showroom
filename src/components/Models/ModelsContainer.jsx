@@ -13,10 +13,11 @@ const ModelsContainer = () => {
     models,
     loading,
   } = useSelector((state) => getModelsContainerData(state));
-  const { brandId: brandIdParams } = useParams();
+  const params = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const { brandId: brandIdParams } = params;
   const brandIdState = brand.id;
   const currentBrandId = getCurrentBrandId(brandIdParams, brandIdState);
 
