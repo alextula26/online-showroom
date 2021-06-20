@@ -2,11 +2,18 @@ import React, { Suspense, lazy } from 'react';
 import {
   withRouter, BrowserRouter, Switch, Route,
 } from 'react-router-dom';
-import { compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider, connect } from 'react-redux';
-import store from './redusers';
+import thunkMiddleware from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import redusers from './redusers';
 import * as thunkes from './thunkes';
+import { helloSaga } from './sagas/helloSaga';
 import { isEmpty } from './utils';
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(redusers, applyMiddleware(thunkMiddleware, sagaMiddleware));
+sagaMiddleware.run(helloSaga);
 
 const ModelsContainer = lazy(() => import('./components/Models/ModelsContainer'));
 const NewVehiclesContainer = lazy(() => import('./components/Vehicles/NewVehiclesContainer'));
