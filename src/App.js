@@ -1,20 +1,17 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import {
-  withRouter, BrowserRouter, Switch, Route, Redirect,
+  BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider, connect } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider, useSelector, useDispatch } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import redusers from './redusers';
 import * as actions from './actions';
-// import * as thunkes from './thunkes';
 import { sagaWatcher } from './sagas';
 import { isEmpty } from './utils';
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(redusers, applyMiddleware(thunkMiddleware, sagaMiddleware));
-sagaMiddleware.run(sagaWatcher);
+import Preloader from './components/commons/Preloader';
+import NotFound from './components/commons/NotFound';
 
 const ModelsContainer = lazy(() => import('./components/Models/ModelsContainer'));
 const NewVehiclesContainer = lazy(() => import('./components/Vehicles/NewVehiclesContainer'));
@@ -23,81 +20,61 @@ const AllNewVehiclesContainer = lazy(() => import('./components/Vehicles/AllNewV
 const NewVehicleContainer = lazy(() => import('./components/Vehicle/NewVehicleContainer'));
 const TradeInVehicleContainer = lazy(() => import('./components/Vehicle/TradeInVehicleContainer'));
 
-const Preloader = () => (
-  <div id="infscr-loading" style={{ height: '100vh', width: '100%' }}>
-    <div className="preloader" />
-  </div>
-);
+const App = ({ mainPageType }) => {
+  const brands = useSelector((state) => state.brands.brands);
+  const dispatch = useDispatch();
 
-const NotFound = () => <div>404 Filenot found</div>;
+  useEffect(() => {
+    dispatch(actions.requestBrands());
+    dispatch(actions.helloSaga());
+  }, [dispatch]);
 
-class App extends React.Component {
-  componentDidMount() {
-    const { requestBrands, helloSaga } = this.props;
-    requestBrands();
-    helloSaga();
-  }
-
-  getMainPageComponent = (type) => {
-    const mainPageType = {
+  const getMainPageComponent = (type) => {
+    const mainPageTypeMapping = {
       listModelsByBrand: <ModelsContainer />,
       listAllNewVehicles: <AllNewVehiclesContainer />,
       listTradeInVehicles: <TradeInVehiclesContainer />,
     };
-    return mainPageType[type];
+    return mainPageTypeMapping[type];
   };
 
-  render() {
-    const { mainPageType, brands } = this.props;
-
-    if (isEmpty(brands)) {
-      return null;
-    }
-
-    return (
-      <div className="crm-common-wrap" id="js-container-wrap">
-        <div className="container">
-          <Switch>
-            <Suspense fallback={<Preloader />}>
-              {/* <Route exact path='/' render={() => <Redirect to={'models'} />} /> */}
-              <Route exact path="/" render={() => this.getMainPageComponent(mainPageType)} />
-              <Route exact path="/catalog/:brandId" render={() => <ModelsContainer />} />
-              <Route exact path="/catalog/:brandId/model/:modelId" render={() => <NewVehiclesContainer />} />
-              <Route exact path="/catalog/:brandId/model/:modelId/vehicle/:vehicleId" render={() => <NewVehicleContainer />} />
-              <Route exact path="/trade-in/" render={() => <TradeInVehiclesContainer />} />
-              <Route exact path="/trade-in/:brandId/model/:modelId/vehicle/:vehicleId" render={() => <TradeInVehicleContainer />} />
-              <Route exact path="/404" render={() => <NotFound />} />
-            </Suspense>
-            <Route path="*" render={() => <Redirect to="/404" />} />
-          </Switch>
-        </div>
-      </div>
-    );
+  if (isEmpty(brands)) {
+    return null;
   }
-}
 
-const mapStateToProps = (state) => ({
-  brands: state.brands.brands,
-});
-
-const actionCreators = {
-  requestBrands: actions.requestBrands,
-  helloSaga: actions.helloSaga,
+  return (
+    <div className="crm-common-wrap" id="js-container-wrap">
+      <div className="container">
+        <Switch>
+          <Suspense fallback={<Preloader />}>
+            <Route exact path="/" render={() => getMainPageComponent(mainPageType)} />
+            <Route exact path="/catalog/:brandId" render={() => <ModelsContainer />} />
+            <Route exact path="/catalog/:brandId/model/:modelId" render={() => <NewVehiclesContainer />} />
+            <Route exact path="/catalog/:brandId/model/:modelId/vehicle/:vehicleId" render={() => <NewVehicleContainer />} />
+            <Route exact path="/trade-in/" render={() => <TradeInVehiclesContainer />} />
+            <Route exact path="/trade-in/:brandId/model/:modelId/vehicle/:vehicleId" render={() => <TradeInVehicleContainer />} />
+            <Route exact path="/404" render={() => <NotFound />} />
+          </Suspense>
+          <Route path="*" render={() => <Redirect to="/404" />} />
+        </Switch>
+      </div>
+    </div>
+  );
 };
-
-const AppContainer = compose(
-  connect(mapStateToProps, actionCreators),
-  withRouter,
-)(App);
 
 const OnlineShowroomApp = ({ mainPageType }) => {
   // import(`./scss/${theme}/theme.scss`);
   // mport('./scss/autocrm10_lexus/theme.scss');
   console.log('App');
+
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(redusers, applyMiddleware(thunkMiddleware, sagaMiddleware));
+  sagaMiddleware.run(sagaWatcher);
+
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <AppContainer key="app" mainPageType={mainPageType} />
+        <App key="app" mainPageType={mainPageType} />
       </Provider>
     </BrowserRouter>
   );
