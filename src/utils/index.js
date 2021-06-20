@@ -21,6 +21,12 @@ export const merge = (object, other) => _.merge(object, other);
 
 export const includes = (array, index) => _.includes(array, index);
 
+export const getCurrentBrandId = (brandIdParams, brandIdState) => (
+  Number(brandIdParams) || Number(brandIdState)
+);
+
+export const isEqualBrandIds = (currentBrandId, brandIdState) => brandIdState !== currentBrandId;
+
 export const getQueryString = (selectedFilters) => {
   const mappingOptions = {
     modifications: (item) => `modification[]=${item}`,

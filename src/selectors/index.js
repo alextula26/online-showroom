@@ -1,11 +1,23 @@
 import { createSelector } from 'reselect';
 import { isEmpty, getStatusId } from '../utils';
 
-const getAllModels = (state) => state.modelsPage.models;
+const getAllBrands = (state) => state.brands.brands;
+const getVisibleBrands = createSelector(
+  getAllBrands,
+  (brands) => brands.filter((brand) => brand.vehicles > 0),
+);
 
-export const getVisibleModels = createSelector(
+const getAllModels = (state) => state.modelsPage.models;
+const getVisibleModels = createSelector(
   getAllModels,
   (models) => models.filter((model) => !model.is_hidden),
+);
+
+const getModelsLoading = (state) => state.modelsPage.loading;
+
+export const getModelsContainerData = createSelector(
+  [getVisibleBrands, getVisibleModels, getModelsLoading],
+  (brands, models, loading) => ({ brand: brands[0], models, loading }),
 );
 
 const getAllNewVehicles = (state) => state.newVehiclesPage.vehicles;
@@ -45,11 +57,4 @@ export const getVehicles = createSelector(
       items: vehicles.items.filter(({ price }) => price >= minPrice && price <= maxPrice),
     };
   },
-);
-
-const getAllBrands = (state) => state.brands.brands;
-
-export const getVisibleBrands = createSelector(
-  getAllBrands,
-  (brands) => brands.filter((brand) => brand.vehicles > 0),
 );

@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import {
-  withRouter, BrowserRouter, Switch, Route,
+  withRouter, BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -27,6 +27,8 @@ const Preloader = () => (
     <div className="preloader" />
   </div>
 );
+
+const NotFound = () => <div>404 Filenot found</div>;
 
 class App extends React.Component {
   componentDidMount() {
@@ -62,8 +64,9 @@ class App extends React.Component {
               <Route exact path="/catalog/:brandId/model/:modelId/vehicle/:vehicleId" render={() => <NewVehicleContainer />} />
               <Route exact path="/trade-in/" render={() => <TradeInVehiclesContainer />} />
               <Route exact path="/trade-in/:brandId/model/:modelId/vehicle/:vehicleId" render={() => <TradeInVehicleContainer />} />
+              <Route exact path="/404" render={() => <NotFound />} />
             </Suspense>
-            <Route path="*" render={() => <div>404 Filenot found</div>} />
+            <Route path="*" render={() => <Redirect to="/404" />} />
           </Switch>
         </div>
       </div>

@@ -10,6 +10,17 @@ const newVehiclesReducer = handleActions({
       brand: payload.vehicles.brand,
     };
   },
-}, { vehicles: [], model: {}, brand: {} });
+  [actions.changeVehiclesLoader](state, { payload }) {
+    return {
+      ...state,
+      loading: payload.loading,
+    };
+  },
+}, {
+  vehicles: [],
+  model: {},
+  brand: {},
+  loading: true,
+});
 
 export default newVehiclesReducer;

@@ -9,6 +9,12 @@ const modelsReduser = handleActions({
       brand: payload.models.brand,
     };
   },
-}, { models: [], brand: {} });
+  [actions.changeModelsLoader](state, { payload }) {
+    return {
+      ...state,
+      loading: payload.loading,
+    };
+  },
+}, { models: [], brand: {}, loading: true });
 
 export default modelsReduser;

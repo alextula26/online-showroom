@@ -11,11 +11,13 @@ export const fetchTradeInVehicles = createAction('FETCH_TRADEIN_VEHICLES');
 export const fetchTradeInVehicle = createAction('FETCH_TRADEIN_VEHICLE');
 export const fetchAllNewVehicles = createAction('FETCH_ALL_NEW_VEHICLES');
 
-// export const fetchCharacteristics = createAction('FETCH_CHARACTERISTICS');
-
 // Action creators for filters
 export const changeFilterState = createAction('CHANGE_FILTER_STATE');
 export const addFilterItems = createAction('ADD_FILTER_ITEMS');
 export const addSelectItemIdToSelected = createAction('ADD_SELECT_ITEM_ID_TO_SELECTED');
 export const addFilterDisabledItems = createAction('ADD_FILTERDISABLED_ITEMS');
 export const addFilterPrice = createAction('ADD_FILTER_PRICE');
+
+// Action creators for loaders
+export const changeModelsLoader = createAction('CHANGE_MODELS_LOADER');
+export const changeVehiclesLoader = createAction('CHANGE_VEHICLES_LOADER');
