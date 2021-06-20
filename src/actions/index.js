@@ -1,4 +1,7 @@
 import { createAction } from 'redux-actions';
+// Action creators for saga requests
+export const requestBrands = createAction('REQUEST_BRANDS');
+export const helloSaga = createAction('HELLO_SAGA');
 
 // Action creators for API requests
 export const fetchDealers = createAction('FETCH_DEALERS');

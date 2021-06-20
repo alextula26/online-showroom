@@ -7,13 +7,14 @@ import { Provider, connect } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import redusers from './redusers';
-import * as thunkes from './thunkes';
-import { helloSaga } from './sagas/helloSaga';
+import * as actions from './actions';
+// import * as thunkes from './thunkes';
+import { sagaWatcher } from './sagas';
 import { isEmpty } from './utils';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(redusers, applyMiddleware(thunkMiddleware, sagaMiddleware));
-sagaMiddleware.run(helloSaga);
+sagaMiddleware.run(sagaWatcher);
 
 const ModelsContainer = lazy(() => import('./components/Models/ModelsContainer'));
 const NewVehiclesContainer = lazy(() => import('./components/Vehicles/NewVehiclesContainer'));
@@ -32,8 +33,9 @@ const NotFound = () => <div>404 Filenot found</div>;
 
 class App extends React.Component {
   componentDidMount() {
-    const { fetchBrands } = this.props;
-    fetchBrands();
+    const { requestBrands, helloSaga } = this.props;
+    requestBrands();
+    helloSaga();
   }
 
   getMainPageComponent = (type) => {
@@ -79,7 +81,8 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  fetchBrands: thunkes.fetchBrands,
+  requestBrands: actions.requestBrands,
+  helloSaga: actions.helloSaga,
 };
 
 const AppContainer = compose(
