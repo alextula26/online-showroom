@@ -1,11 +1,9 @@
 import { takeEvery } from 'redux-saga/effects';
 import fetchBrands from './fetchBrands';
+import fetchModels from './fetchModels';
+import * as TYPES from '../actions/types';
 
-export function* hello() {
-  yield console.log('hello saga');
-}
-
-export function* sagaWatcher() {
-  yield takeEvery('REQUEST_BRANDS', fetchBrands);
-  yield takeEvery('HELLO_SAGA', hello);
+export default function* sagaWatcher() {
+  yield takeEvery(TYPES.REQUEST_BRANDS, fetchBrands);
+  yield takeEvery(TYPES.REQUEST_MODELS, fetchModels);
 }

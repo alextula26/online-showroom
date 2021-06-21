@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import * as thunkes from '../../thunkes';
+import * as actions from '../../actions';
 import { getCurrentBrandId, isEqualBrandIds } from '../../utils';
 import { getModelsContainerData } from '../../selectors';
 import Models from './Models';
@@ -26,7 +26,7 @@ const ModelsContainer = () => {
   }
 
   useEffect(() => {
-    dispatch(thunkes.fetchModels(currentBrandId));
+    dispatch(actions.requestModels(currentBrandId));
   }, [dispatch]);
 
   if (loading) {

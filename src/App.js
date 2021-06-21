@@ -8,7 +8,7 @@ import thunkMiddleware from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import redusers from './redusers';
 import * as actions from './actions';
-import { sagaWatcher } from './sagas';
+import sagaWatcher from './sagas';
 import { isEmpty } from './utils';
 import Preloader from './components/commons/Preloader';
 import NotFound from './components/commons/NotFound';
@@ -26,7 +26,6 @@ const App = ({ mainPageType }) => {
 
   useEffect(() => {
     dispatch(actions.requestBrands());
-    dispatch(actions.helloSaga());
   }, [dispatch]);
 
   const getMainPageComponent = (type) => {
