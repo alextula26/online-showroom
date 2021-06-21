@@ -26,7 +26,7 @@ const ModelsContainer = () => {
   }
 
   useEffect(() => {
-    dispatch(actions.requestModels(currentBrandId));
+    dispatch(actions.requestModels({ brandId: currentBrandId }));
   }, [dispatch]);
 
   if (loading) {

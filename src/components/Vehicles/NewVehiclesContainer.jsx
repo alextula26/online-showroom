@@ -2,7 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import * as thunkes from '../../thunkes';
+// import * as thunkes from '../../thunkes';
+import * as actions from '../../actions';
 // import { isEmpty } from '../../utils';
 // import { getVehicles } from '../../selectors';
 import PageHeader from '../commons/PageHeader';
@@ -12,9 +13,9 @@ import Preloader from '../commons/Preloader';
 
 class NewVehiclesContainer extends React.Component {
   componentDidMount() {
-    const { fetchNewVehicles } = this.props;
+    const { requestNewVehicles } = this.props;
     const modelId = this.getCurrentModelId();
-    fetchNewVehicles(modelId);
+    requestNewVehicles({ modelId });
   }
 
   getCurrentModelId() {
@@ -60,7 +61,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  fetchNewVehicles: thunkes.fetchNewVehicles,
+  requestNewVehicles: actions.requestNewVehicles,
 };
 
 export default compose(
