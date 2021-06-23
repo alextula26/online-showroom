@@ -2,16 +2,17 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import * as thunkes from '../../thunkes';
+// import * as thunkes from '../../thunkes';
+import * as actions from '../../actions';
 import NewVehicle from './NewVehicle';
 import { isEmpty } from '../../utils';
 import CONST from '../../utils/const';
 
 class NewVehicleContainer extends React.Component {
   componentDidMount() {
-    const { fetchVehicle } = this.props;
+    const { requestNewVehicle } = this.props;
     const vehicleId = this.getCurrentVehicleId();
-    fetchVehicle(vehicleId, CONST.vehiclesTypes.newVehicles);
+    requestNewVehicle({ vehicleId, typeVehicles: CONST.vehiclesTypes.newVehicles });
   }
 
   getCurrentVehicleId() {
@@ -37,7 +38,8 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = ({
-  fetchVehicle: thunkes.fetchVehicle,
+  // fetchVehicle: thunkes.fetchVehicle,
+  requestNewVehicle: actions.requestNewVehicle,
 });
 
 export default compose(

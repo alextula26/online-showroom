@@ -5,13 +5,14 @@ import * as TYPES from './types';
 export const requestBrands = createAction(TYPES.REQUEST_BRANDS);
 export const requestModels = createAction(TYPES.REQUEST_MODELS);
 export const requestNewVehicles = createAction(TYPES.REQUEST_NEW_VEHICLES);
+export const requestNewVehicle = createAction(TYPES.REQUEST_NEW_VEHICLE);
 
 // Action creators for API requests
 export const fetchDealers = createAction(TYPES.FETCH_DEALERS);
 export const fetchBrands = createAction(TYPES.FETCH_BRANDS);
 export const fetchModels = createAction(TYPES.FETCH_MODELS);
-// export const fetchBrandModels = createAction(TYPES.FETCH_BRAND_MODELS);
 export const fetchNewVehicles = createAction(TYPES.FETCH_NEW_VEHICLES);
+
 export const fetchNewVehicle = createAction(TYPES.FETCH_NEW_VEHICLE);
 export const fetchTradeInVehicles = createAction(TYPES.FETCH_TRADEIN_VEHICLES);
 export const fetchTradeInVehicle = createAction(TYPES.FETCH_TRADEIN_VEHICLE);
