@@ -13,11 +13,32 @@ const getVisibleModels = createSelector(
   (models) => models.filter((model) => !model.is_hidden),
 );
 
+const getBrandByVehicles = (state) => state.newVehiclesPage.brand;
+const getModelByVehicles = (state) => state.newVehiclesPage.model;
+const getAllVehiclesByModel = (state) => state.newVehiclesPage.vehicles;
+
 const getModelsLoading = (state) => state.modelsPage.loading;
+const getVehiclesLoading = (state) => state.newVehiclesPage.loading;
 
 export const getModelsContainerData = createSelector(
-  [getVisibleBrands, getVisibleModels, getModelsLoading],
+  [
+    getVisibleBrands,
+    getVisibleModels,
+    getModelsLoading,
+  ],
   (brands, models, loading) => ({ brand: brands[0], models, loading }),
+);
+
+export const getVehiclesContainerData = createSelector(
+  [
+    getBrandByVehicles,
+    getModelByVehicles,
+    getAllVehiclesByModel,
+    getVehiclesLoading,
+  ],
+  (brand, model, vehicles, loading) => ({
+    brand, model, vehicles, loading,
+  }),
 );
 
 const getAllNewVehicles = (state) => state.newVehiclesPage.vehicles;
