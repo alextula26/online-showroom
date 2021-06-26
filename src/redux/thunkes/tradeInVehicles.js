@@ -1,4 +1,4 @@
-import * as actions from '../actions';
+import * as actions from '../../actions';
 import getVehicles from './vehicles';
 
 export default (modelId, typeVehicles, query) => async (dispatch) => {

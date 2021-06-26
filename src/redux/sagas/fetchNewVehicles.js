@@ -1,10 +1,10 @@
 import { call, put } from 'redux-saga/effects';
-import * as actions from '../actions';
-import API from '../api';
-import CONST from '../utils/const';
+import * as actions from '../../actions';
+import API from '../../api';
+import CONST from '../../utils/const';
 import {
   getLisFilterItems, getColorsListFilter, getMinPrice, getMaxPrice,
-} from '../utils';
+} from '../../utils';
 import getVehicles from './vehicles';
 
 export default function* fetchNewVehicles({ payload }) {

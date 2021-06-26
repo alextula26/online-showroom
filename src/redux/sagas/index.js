@@ -3,7 +3,7 @@ import fetchBrands from './fetchBrands';
 import fetchModels from './fetchModels';
 import fetchNewVehicles from './fetchNewVehicles';
 import fetchNewVehicle from './fetchNewVehicle';
-import * as TYPES from '../actions/types';
+import * as TYPES from '../../actions/types';
 
 export default function* sagaWatcher() {
   yield takeEvery(TYPES.REQUEST_BRANDS, fetchBrands);

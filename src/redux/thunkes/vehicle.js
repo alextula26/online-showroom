@@ -1,6 +1,6 @@
-import CONST from '../utils/const';
-import * as actions from '../actions';
-import API from '../api';
+import CONST from '../../utils/const';
+import * as actions from '../../actions';
+import API from '../../api';
 
 export default (vehicleId, typeVehicles) => async (dispatch) => {
   const mappingTypeVehicles = {

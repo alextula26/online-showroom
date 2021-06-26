@@ -1,5 +1,5 @@
 // import CONST from '../utils/const';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 // import getVehicles from './vehicles';
 
 export default (options) => async (dispatch) => {

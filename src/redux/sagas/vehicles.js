@@ -1,5 +1,5 @@
-import CONST from '../utils/const';
-import API from '../api';
+import CONST from '../../utils/const';
+import API from '../../api';
 
 const mappingTypeVehicles = {
   [CONST.vehiclesTypes.newVehicles]: (modelId, query) => API.getNewVehicles(modelId, query),

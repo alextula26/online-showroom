@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
-import CONST from '../utils/const';
-import * as actions from '../actions';
-import API from '../api';
+import CONST from '../../utils/const';
+import * as actions from '../../actions';
+import API from '../../api';
 
 export default function* fetchNewVehicle({ payload }) {
   const mappingTypeVehicles = {

@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import * as actions from '../actions';
-import API from '../api';
+import * as actions from '../../actions';
+import API from '../../api';
 
 export default function* fetchBrands() {
   try {

@@ -1,11 +1,11 @@
-import CONST from '../utils/const';
-import * as actions from '../actions';
+import CONST from '../../utils/const';
+import * as actions from '../../actions';
 import getVehicles from './vehicles';
 import {
   getQueryString,
   // getMinPrice,
   // getMaxPrice
-} from '../utils';
+} from '../../utils';
 
 export default (options) => async (dispatch) => {
   const {

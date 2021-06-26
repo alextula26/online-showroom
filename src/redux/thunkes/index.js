@@ -1,4 +1,4 @@
-import CONST from '../utils/const';
+import CONST from '../../utils/const';
 import addDealers from './dealers';
 import addBrands from './brands';
 import addModels from './models';

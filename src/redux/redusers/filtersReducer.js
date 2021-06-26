@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
-import * as actions from '../actions';
-import { includes, getIdsFilterItems } from '../utils';
-import CONST from '../utils/const';
+import * as actions from '../../actions';
+import { includes, getIdsFilterItems } from '../../utils';
+import CONST from '../../utils/const';
 
 const filtersReducer = handleActions({
   [actions.addFilterItems](state, { payload: { filterItems } }) {

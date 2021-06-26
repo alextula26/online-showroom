@@ -1,9 +1,9 @@
-import CONST from '../utils/const';
-import API from '../api';
-import * as actions from '../actions';
+import CONST from '../../utils/const';
+import API from '../../api';
+import * as actions from '../../actions';
 import {
   getLisFilterItems, getColorsListFilter, getMinPrice, getMaxPrice,
-} from '../utils';
+} from '../../utils';
 import getVehicles from './vehicles';
 
 export default (modelId, typeVehicles, query) => async (dispatch) => {

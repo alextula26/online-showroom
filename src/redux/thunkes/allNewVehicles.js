@@ -1,4 +1,4 @@
-import API from '../api';
+import API from '../../api';
 import getVehicles from './vehicles';
 /* import CONST from '../utils/const';
 import * as actions from '../actions';

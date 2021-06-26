@@ -1,5 +1,5 @@
-import * as actions from '../actions';
-import API from '../api';
+import * as actions from '../../actions';
+import API from '../../api';
 
 export default () => async (dispatch) => {
   try {

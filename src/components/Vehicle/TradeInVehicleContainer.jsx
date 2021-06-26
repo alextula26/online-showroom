@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import * as thunkes from '../../thunkes';
+import * as thunkes from '../../redux/thunkes';
 import TradeInVehicle from './TradeInVehicle';
 import { isEmpty } from '../../utils';
 import CONST from '../../utils/const';

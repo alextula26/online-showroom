@@ -1,5 +1,5 @@
-import * as actions from '../actions';
-import API from '../api';
+import * as actions from '../../actions';
+import API from '../../api';
 
 export default (brandId) => async (dispatch) => {
   try {

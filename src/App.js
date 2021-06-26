@@ -2,13 +2,9 @@ import React, { Suspense, lazy, useEffect } from 'react';
 import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider, useSelector, useDispatch } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
-import createSagaMiddleware from 'redux-saga';
-import redusers from './redusers';
+import store from './redux';
 import * as actions from './actions';
-import sagaWatcher from './sagas';
 import { isEmpty } from './utils';
 import Preloader from './components/commons/Preloader';
 import NotFound from './components/commons/NotFound';
@@ -65,10 +61,6 @@ const OnlineShowroomApp = ({ mainPageType }) => {
   // import(`./scss/${theme}/theme.scss`);
   // mport('./scss/autocrm10_lexus/theme.scss');
   console.log('App');
-
-  const sagaMiddleware = createSagaMiddleware();
-  const store = createStore(redusers, applyMiddleware(thunkMiddleware, sagaMiddleware));
-  sagaMiddleware.run(sagaWatcher);
 
   return (
     <BrowserRouter>

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
-import * as thunkes from '../../thunkes';
+import * as thunkes from '../../redux/thunkes';
 import { StateVehiclesFilterFormContext } from '../../context/state-vehicles-filter-form-context';
 import SelectComponent from './FilterControl/SelectComponent';
 import ColorsComponent from './FilterControl/ColorsComponent';
