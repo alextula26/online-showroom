@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { isEmpty, getHtml, uniqueId } from '../../../utils';
+import { isEmpty, getHtml, uniqueId } from '../../../modules/utils';
 import VehicleEquipment from './VehicleEquipment';
 import VehicleAdditionalOptions from './VehicleAdditionalOptions';
 

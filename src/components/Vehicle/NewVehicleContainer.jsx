@@ -3,10 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 // import * as thunkes from '../../thunkes';
-import * as actions from '../../actions';
+import * as actions from '../../modules/redux/actions';
 import NewVehicle from './NewVehicle';
-import { isEmpty } from '../../utils';
-import CONST from '../../utils/const';
+import { isEmpty } from '../../modules/utils';
+import CONST from '../../modules/utils/const';
 
 class NewVehicleContainer extends React.Component {
   componentDidMount() {

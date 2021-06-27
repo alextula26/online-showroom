@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../actions';
-import { getVehiclesContainerData } from '../../selectors';
+import * as actions from '../../modules/redux/actions';
+import { getVehiclesContainerData } from '../../modules/selectors';
 import PageHeader from '../commons/PageHeader';
 import VehiclesFilterForm from '../filters/VehiclesFilterForm';
 import NewVehicles from './NewVehicles';

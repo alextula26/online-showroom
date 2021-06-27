@@ -1,5 +1,5 @@
 import React from 'react';
-import { isEmpty, getPriceCurrencyFormat } from '../../utils';
+import { isEmpty, getPriceCurrencyFormat } from '../../modules/utils';
 import VehicleCarousel from '../commons/parts/VehicleCarousel';
 import VehiclePrice from '../commons/parts/VehiclePrice';
 import VehicleSpecifications from '../commons/parts/VehicleSpecifications';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Collapse } from 'react-bootstrap';
 import cn from 'classnames';
-import { uniqueId, includes, getHtml } from '../../../utils';
+import { uniqueId, includes, getHtml } from '../../../modules/utils';
 
 const VehicleEquipment = ({ options }) => {
   const [indexes, setIndex] = useState([]);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { getPriceCurrencyFormat } from '../../../utils';
+import { getPriceCurrencyFormat } from '../../../modules/utils';
 
 const ModelPrice = ({ url, minPrice }) => (
   minPrice !== 0

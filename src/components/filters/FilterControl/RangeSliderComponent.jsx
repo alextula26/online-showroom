@@ -2,8 +2,8 @@
 import React from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import ReactSlider from 'react-slider';
-import { StateVehiclesFilterFormContext } from '../../../context/state-vehicles-filter-form-context';
-import CONST from '../../../utils/const';
+import { StateVehiclesFilterFormContext } from '../../../modules/context/state-vehicles-filter-form-context';
+import CONST from '../../../modules/utils/const';
 
 class RangeSliderComponent extends React.Component {
   static contextType = StateVehiclesFilterFormContext;

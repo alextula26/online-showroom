@@ -1,5 +1,5 @@
 import React from 'react';
-import { getPriceCurrencyFormat, isSpecialPrice } from '../../../utils';
+import { getPriceCurrencyFormat, isSpecialPrice } from '../../../modules/utils';
 
 const VehicleListDiscount = ({ price, specialPrice }) => {
   const finalPrice = price - specialPrice;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { hasKey } from '../../../utils';
+import { hasKey } from '../../../modules/utils';
 
 const More = ({ url, title, options }) => (
   <NavLink

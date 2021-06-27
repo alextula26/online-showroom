@@ -1,5 +1,5 @@
 import React from 'react';
-import { hasKey } from '../../../utils';
+import { hasKey } from '../../../modules/utils';
 
 const OrderCall = ({ title, options }) => (
   <span

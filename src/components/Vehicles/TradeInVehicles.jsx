@@ -1,5 +1,5 @@
 import React from 'react';
-import { isEmpty } from '../../utils';
+import { isEmpty } from '../../modules/utils';
 import VehicleListTitle from '../commons/parts/VehicleListTitle';
 import VehicleCarousel from '../commons/parts/VehicleCarousel';
 import VehicleListDiscount from '../commons/parts/VehicleListDiscount';

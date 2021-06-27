@@ -3,18 +3,18 @@ import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import { Provider, useSelector, useDispatch } from 'react-redux';
-import store from './redux';
-import * as actions from './actions';
-import { isEmpty } from './utils';
-import Preloader from './components/commons/Preloader';
-import NotFound from './components/commons/NotFound';
+import store from 'modules/redux';
+import * as actions from 'modules/redux/actions';
+import { isEmpty } from 'modules/utils';
+import Preloader from 'components/commons/Preloader';
+import NotFound from 'components/commons/NotFound';
 
-const ModelsContainer = lazy(() => import('./components/Models/ModelsContainer'));
-const NewVehiclesContainer = lazy(() => import('./components/Vehicles/NewVehiclesContainer'));
-const TradeInVehiclesContainer = lazy(() => import('./components/Vehicles/TradeInVehiclesContainer'));
-const AllNewVehiclesContainer = lazy(() => import('./components/Vehicles/AllNewVehiclesContainer'));
-const NewVehicleContainer = lazy(() => import('./components/Vehicle/NewVehicleContainer'));
-const TradeInVehicleContainer = lazy(() => import('./components/Vehicle/TradeInVehicleContainer'));
+const ModelsContainer = lazy(() => import('components/Models/ModelsContainer'));
+const NewVehiclesContainer = lazy(() => import('components/Vehicles/NewVehiclesContainer'));
+const TradeInVehiclesContainer = lazy(() => import('components/Vehicles/TradeInVehiclesContainer'));
+const AllNewVehiclesContainer = lazy(() => import('components/Vehicles/AllNewVehiclesContainer'));
+const NewVehicleContainer = lazy(() => import('components/Vehicle/NewVehicleContainer'));
+const TradeInVehicleContainer = lazy(() => import('components/Vehicle/TradeInVehicleContainer'));
 
 const App = ({ mainPageType }) => {
   const brands = useSelector((state) => state.brands.brands);

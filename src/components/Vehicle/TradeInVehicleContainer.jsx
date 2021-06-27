@@ -2,10 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import * as thunkes from '../../redux/thunkes';
+import * as thunkes from '../../modules/redux/thunkes';
 import TradeInVehicle from './TradeInVehicle';
-import { isEmpty } from '../../utils';
-import CONST from '../../utils/const';
+import { isEmpty } from '../../modules/utils';
+import CONST from '../../modules/utils/const';
 
 class TradeInVehicleContainer extends React.Component {
   componentDidMount() {

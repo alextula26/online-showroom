@@ -50,5 +50,6 @@ module.exports = {
       contextType: 'static public field',
       displayName: 'static public field',
     }],
+    eslint-disable no-underscore-dangle
   },
 };

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../actions';
-import { getCurrentBrandId, isEqualBrandIds } from '../../utils';
-import { getModelsContainerData } from '../../selectors';
+import * as actions from '../../modules/redux/actions';
+import { getCurrentBrandId, isEqualBrandIds } from '../../modules/utils';
+import { getModelsContainerData } from '../../modules/selectors';
 import Models from './Models';
 import Preloader from '../commons/Preloader';
 

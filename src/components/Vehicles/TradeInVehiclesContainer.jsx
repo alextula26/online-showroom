@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as thunkes from '../../redux/thunkes';
-import { isEmpty } from '../../utils';
+import * as thunkes from '../../modules/redux/thunkes';
+import { isEmpty } from '../../modules/utils';
 import PageHeader from '../commons/PageHeader';
 import TradeInVehicles from './TradeInVehicles';
 

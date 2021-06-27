@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, Dropdown } from 'react-bootstrap';
 import cn from 'classnames';
-import { StateVehiclesFilterFormContext } from '../../../context/state-vehicles-filter-form-context';
-import CONST from '../../../utils/const';
+import { StateVehiclesFilterFormContext } from '../../../modules/context/state-vehicles-filter-form-context';
+import CONST from '../../../modules/utils/const';
 
 class SelectComponent extends React.Component {
   static contextType = StateVehiclesFilterFormContext;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import * as actions from '../../actions';
-import * as thunkes from '../../redux/thunkes';
-import { StateVehiclesFilterFormContext } from '../../context/state-vehicles-filter-form-context';
+import * as actions from '../../modules/redux/actions';
+import * as thunkes from '../../modules/redux/thunkes';
+import { StateVehiclesFilterFormContext } from '../../modules/context/state-vehicles-filter-form-context';
 import SelectComponent from './FilterControl/SelectComponent';
 import ColorsComponent from './FilterControl/ColorsComponent';
 import RangeSliderComponent from './FilterControl/RangeSliderComponent';
-import CONST from '../../utils/const';
+import CONST from '../../modules/utils/const';
 
 class VehiclesFilterForm extends React.Component {
   componentDidUpdate() {
