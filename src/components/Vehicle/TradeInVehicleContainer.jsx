@@ -2,16 +2,16 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import * as thunkes from '../../modules/redux/thunkes';
+import * as actions from '../../modules/redux/actions';
 import TradeInVehicle from './TradeInVehicle';
 import { isEmpty } from '../../modules/utils';
 import CONST from '../../modules/utils/const';
 
 class TradeInVehicleContainer extends React.Component {
   componentDidMount() {
-    const { fetchVehicle } = this.props;
+    const { requestTradeInVehicle } = this.props;
     const vehicleId = this.getCurrentVehicleId();
-    fetchVehicle(vehicleId, CONST.vehiclesTypes.tradeInVehicles);
+    requestTradeInVehicle({ vehicleId, typeVehicles: CONST.vehiclesTypes.tradeInVehicles });
   }
 
   getCurrentVehicleId() {
@@ -37,7 +37,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = ({
-  fetchVehicle: thunkes.fetchVehicle,
+  requestTradeInVehicle: actions.requestTradeInVehicle,
 });
 
 export default compose(

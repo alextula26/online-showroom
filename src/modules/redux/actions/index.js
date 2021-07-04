@@ -6,6 +6,8 @@ export const requestBrands = createAction(TYPES.REQUEST_BRANDS);
 export const requestModels = createAction(TYPES.REQUEST_MODELS);
 export const requestNewVehicles = createAction(TYPES.REQUEST_NEW_VEHICLES);
 export const requestNewVehicle = createAction(TYPES.REQUEST_NEW_VEHICLE);
+export const requestTradeInVehicles = createAction(TYPES.REQUEST_TRADEIN_VEHICLES);
+export const requestTradeInVehicle = createAction(TYPES.REQUEST_TRADEIN_VEHICLE);
 
 // Action creators for API requests
 export const fetchDealers = createAction(TYPES.FETCH_DEALERS);

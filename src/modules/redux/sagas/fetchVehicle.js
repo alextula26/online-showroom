@@ -1,15 +1,16 @@
 import { call, put } from 'redux-saga/effects';
 import CONST from 'modules/utils/const';
-import * as actions from 'modules/redux/actions';
+import { addNewVehicle } from 'modules/redux/redusers/newVehicleSlice';
+import { addTradeInVehicle } from 'modules/redux/redusers/tradeInVehicleSlice';
 import API from 'modules/api';
 
-export default function* fetchNewVehicle({ payload }) {
+export default function* fetchVehicle({ payload }) {
   const mappingTypeVehicles = {
     [CONST.vehiclesTypes.newVehicles]: (vehicle) => (
-      put(actions.fetchNewVehicle({ vehicle }))
+      put(addNewVehicle({ vehicle }))
     ),
     [CONST.vehiclesTypes.tradeInVehicles]: (vehicle) => (
-      put(actions.fetchTradeInVehicle({ vehicle }))
+      put(addTradeInVehicle({ vehicle }))
     ),
   };
 

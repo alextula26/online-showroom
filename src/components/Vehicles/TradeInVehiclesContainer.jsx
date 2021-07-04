@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as thunkes from '../../modules/redux/thunkes';
+import * as actions from '../../modules/redux/actions';
 import { isEmpty } from '../../modules/utils';
 import PageHeader from '../commons/PageHeader';
 import TradeInVehicles from './TradeInVehicles';
 
 class TradeInVehiclesContainer extends React.Component {
   componentDidMount() {
-    const { fetchTradeInVehicles } = this.props;
-    fetchTradeInVehicles();
+    const { requestTradeInVehicles } = this.props;
+    requestTradeInVehicles();
   }
 
   render() {
@@ -36,7 +36,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  fetchTradeInVehicles: thunkes.fetchTradeInVehicles,
+  requestTradeInVehicles: actions.requestTradeInVehicles,
 };
 
 export default connect(mapStateToProps, actionCreators)(TradeInVehiclesContainer);

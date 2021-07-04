@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import * as actions from 'modules/redux/actions';
+import { addNewVehicles, changeVehiclesLoader } from 'modules/redux/redusers/newVehiclesSlice';
 import API from 'modules/api';
 import CONST from 'modules/utils/const';
 import {
@@ -30,8 +31,8 @@ export default function* fetchNewVehicles({ payload }) {
     };
 
     yield put(actions.addFilterItems({ filterItems }));
-    yield put(actions.fetchNewVehicles({ vehicles }));
-    yield put(actions.changeVehiclesLoader({ loading: false }));
+    yield put(addNewVehicles({ vehicles }));
+    yield put(changeVehiclesLoader({ loading: false }));
   } catch (e) {
     console.log('newVehicles saga', e);
     throw e;

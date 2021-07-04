@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import * as actions from 'modules/redux/actions';
 
 const allNewVehiclesReducer = handleActions({
-  [actions.fetchTradeInVehicles](state, { payload }) {
+  [actions.fetchAllNewVehicles](state, { payload }) {
     return {
       ...state,
       allNewVehicles: payload.allNewVehicles,
