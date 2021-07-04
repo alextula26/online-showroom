@@ -1,16 +1,16 @@
-/* eslint-disable no-underscore-dangle */
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import redusers from 'modules/redux/redusers';
+import reducer from 'modules/redux/redusers';
 import sagaWatcher from 'modules/redux/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  redusers,
-  composeEnhancers(applyMiddleware(thunkMiddleware, sagaMiddleware)),
-);
+const store = configureStore({
+  reducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ thunk: false })
+    .concat(sagaMiddleware),
+  devTools: process.env.NODE_ENV !== 'production',
+});
+
 sagaMiddleware.run(sagaWatcher);
 
 export default store;
