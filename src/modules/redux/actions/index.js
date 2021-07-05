@@ -30,3 +30,4 @@ export const addFilterPrice = createAction(TYPES.ADD_FILTER_PRICE);
 // Action creators for loaders
 export const changeModelsLoader = createAction(TYPES.CHANGE_MODELS_LOADER);
 export const changeVehiclesLoader = createAction(TYPES.CHANGE_VEHICLES_LOADER);
+export const changeTradeInVehiclesLoader = createAction(TYPES.CHANGE_TRADEIN_VEHICLES_LOADER);

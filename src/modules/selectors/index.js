@@ -15,10 +15,12 @@ const getVisibleModels = createSelector(
 
 const getBrandByVehicles = (state) => state.newVehiclesPage.brand;
 const getModelByVehicles = (state) => state.newVehiclesPage.model;
-const getAllVehiclesByModel = (state) => state.newVehiclesPage.vehicles;
+const getAllNewVehiclesByModel = (state) => state.newVehiclesPage.vehicles;
+const getAllTradeInVehiclesByModel = (state) => state.tradeInVehiclesPage.tradeInVehicles;
 
 const getModelsLoading = (state) => state.modelsPage.loading;
 const getVehiclesLoading = (state) => state.newVehiclesPage.loading;
+const getTradeInVehiclesLoading = (state) => state.tradeInVehiclesPage.loading;
 
 export const getModelsContainerData = createSelector(
   [
@@ -33,13 +35,25 @@ export const getVehiclesContainerData = createSelector(
   [
     getBrandByVehicles,
     getModelByVehicles,
-    getAllVehiclesByModel,
+    getAllNewVehiclesByModel,
     getVehiclesLoading,
   ],
   (brand, model, vehicles, loading) => ({
     brand, model, vehicles, loading,
   }),
 );
+
+export const getTradeInVehiclesContainerData = createSelector(
+  [
+    getAllTradeInVehiclesByModel,
+    getTradeInVehiclesLoading,
+  ],
+  (tradeInVehicles, loading) => ({
+    vehicles: tradeInVehicles, loading,
+  }),
+);
+
+// const getAllVehiclesByModel = (state) => state.newVehiclesPage.vehicles;
 
 const getAllNewVehicles = (state) => state.newVehiclesPage.vehicles;
 const minPriceOfVehicles = (state) => state.filters.minPrice;
