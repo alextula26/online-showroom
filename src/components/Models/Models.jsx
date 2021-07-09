@@ -25,7 +25,7 @@ class Models extends React.Component {
 
     return (
       <>
-        <h1> Автомобили {brand.name} в наличии</h1>
+        <h1>Автомобили {brand.name} в наличии</h1>
         <section className="filter" style={{ marginBottom: '30px' }}>
           <div className="filter-footer-action mt-10">
             <NavLink
