@@ -5,4 +5,4 @@ services:
         ports: 
             - 3000:3000   
         volumes: 
-            - ~/projects/online-showroom/src:/online-showroom/src
+            - ~/projects/online-showroom/src:/online-showroom/src     
