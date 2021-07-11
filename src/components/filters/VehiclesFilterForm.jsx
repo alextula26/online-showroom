@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../modules/redux/actions';
-import * as thunkes from '../../modules/redux/thunkes';
 import { StateVehiclesFilterFormContext } from '../../modules/context/state-vehicles-filter-form-context';
 import SelectComponent from './FilterControl/SelectComponent';
 import ColorsComponent from './FilterControl/ColorsComponent';
@@ -107,7 +106,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = ({
-  fetchFilterVehicles: thunkes.fetchFilterVehicles,
+  // fetchFilterVehicles: thunkes.fetchFilterVehicles,
   changeFilterState: actions.changeFilterState,
   addSelectItemIdToSelected: actions.addSelectItemIdToSelected,
   addFilterPrice: actions.addFilterPrice,

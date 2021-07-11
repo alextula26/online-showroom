@@ -5,6 +5,7 @@ import fetchModels from './fetchModels';
 import fetchNewVehicles from './fetchNewVehicles';
 import fetchVehicle from './fetchVehicle';
 import fetchTradeInVehicles from './fetchTradeInVehicles';
+import fetchAllNewVehicles from './fetchAllNewVehicles';
 
 export default function* sagaWatcher() {
   yield takeEvery(TYPES.REQUEST_BRANDS, fetchBrands);
@@ -13,4 +14,5 @@ export default function* sagaWatcher() {
   yield takeEvery(TYPES.REQUEST_NEW_VEHICLE, fetchVehicle);
   yield takeEvery(TYPES.REQUEST_TRADEIN_VEHICLES, fetchTradeInVehicles);
   yield takeEvery(TYPES.REQUEST_TRADEIN_VEHICLE, fetchVehicle);
+  yield takeEvery(TYPES.REQUEST_ALL_NEW_VEHICLES, fetchAllNewVehicles);
 }

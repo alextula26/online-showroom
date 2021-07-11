@@ -1,16 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as thunkes from '../../modules/redux/thunkes';
+import * as actions from '../../modules/redux/actions';
 import { isEmpty } from '../../modules/utils';
 import AllNewVehicles from './AllNewVehicles';
 
 class AllNewVehiclesContainer extends React.Component {
   componentDidMount() {
-    const { brands, fetchAllNewVehicles } = this.props;
-    fetchAllNewVehicles(brands);
-    /* const { fetchNewVehicles } = this.props;
-    const modelId = this.getCurrentModelId();
-    fetchNewVehicles(modelId); */
+    const { brands, requestAllNewVehicles } = this.props;
+    requestAllNewVehicles(brands, 'fetchAllNewVehicles', 'AllNewVehiclesContainer');
   }
 
   render() {
@@ -29,7 +26,7 @@ class AllNewVehiclesContainer extends React.Component {
 }
 
 const actionCreators = {
-  fetchAllNewVehicles: thunkes.fetchAllNewVehicles,
+  requestAllNewVehicles: actions.requestAllNewVehicles,
 };
 
 const mapStateToProps = (state) => ({

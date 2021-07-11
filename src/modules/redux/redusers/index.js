@@ -7,9 +7,8 @@ import newVehiclesReducer from './newVehiclesSlice';
 import newVehicleReducer from './newVehicleSlice';
 import tradeInVehiclesReducer from './tradeInVehiclesSlice';
 import tradeInVehicleReducer from './tradeInVehicleSlice';
-
-import allNewVehiclesReducer from './allNewVehiclesReducer';
-import filtersReducer from './filtersReducer';
+import allNewVehiclesReducer from './allNewVehiclesSlice';
+import filtersReducer from './filtersSlice';
 
 const redusers = combineReducers({
   dealers: dealersReduser,
